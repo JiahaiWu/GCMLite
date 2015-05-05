@@ -12,7 +12,7 @@ using IDCM.Core;
 using System.Collections.Concurrent;
 using System.Data;
 
-namespace IDCM.DataTansfer
+namespace IDCM.DataTransfer
 {
     class ExcelDataImporter
     {

@@ -8,7 +8,7 @@ using IDCM.Core;
 using System.Data;
 using System.Threading;
 
-namespace IDCM.DataTansfer
+namespace IDCM.DataTransfer
 {
     class XMLDataImporter
     {

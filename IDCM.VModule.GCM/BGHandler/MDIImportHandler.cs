@@ -1,24 +1,23 @@
-﻿using IDCM.Base.AbsInterfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using IDCM.Core;
-using IDCM.DataTransfer;
+using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
-using System.Data;
+using IDCM.Base.Utils;
+using Newtonsoft.Json;
+using IDCM.DataTransfer;
 
 namespace IDCM.BGHandler
 {
-    public class XMLImportHandler : AbsBGHandler
+    class MDIImportHandler : AbsBGHandler
     {
-        public XMLImportHandler(CTableCache ctcache, string fpath, ref Dictionary<string, string> dataMapping)
+        public MDIImportHandler(CTableCache ctcache, string fpath)
         {
-            this.xlsPath = System.IO.Path.GetFullPath(fpath);
-            this.dataMapping = dataMapping;
             this.ctcache = ctcache;
-            
+            this.mdiPath = System.IO.Path.GetFullPath(fpath);
         }
         /// <summary>
         /// 后台任务执行方法的主体部分，异步执行代码段！
@@ -31,14 +30,14 @@ namespace IDCM.BGHandler
             try
             {
                 DCMPublisher.noteJobProgress(0);
-                res = XMLDataImporter.parseXMLData(ctcache, xlsPath, ref dataMapping);
+                res = MDIDataImporter.parseMDIData(ctcache, mdiPath);
             }
             catch (Exception ex)
             {
                 log.Error("XML文件导入失败！", ex);
                 DCMPublisher.noteSimpleMsg("ERROR: XML文件导入失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
             }
-            return new object[] { res, xlsPath };
+            return new object[] { res, mdiPath };
         }
 
         /// <summary>
@@ -62,8 +61,8 @@ namespace IDCM.BGHandler
         {
             base.addHandler(nextHandler);
         }
-        private string xlsPath = null;
-        private Dictionary<string, string> dataMapping = null;
         private CTableCache ctcache;
+        
+        private string mdiPath = null;
     }
 }

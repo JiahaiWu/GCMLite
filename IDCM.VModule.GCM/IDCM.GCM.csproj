@@ -91,11 +91,12 @@
     <Compile Include="Core\CustomColDefGetter.cs" />
     <Compile Include="Core\DataExportNoter.cs" />
     <Compile Include="Core\DataImportChecker.cs" />
-    <Compile Include="Core\GCMDataDumper.cs" />
+    <Compile Include="DataTransfer\LocalDataDumper.cs" />
     <Compile Include="Core\GCMTableCache.cs" />
-    <Compile Include="DataTansfer\ExcelDataImporter.cs" />
-    <Compile Include="DataTansfer\ExcelExporter.cs" />
-    <Compile Include="DataTansfer\XMLDataImporter.cs" />
+    <Compile Include="DataTransfer\ExcelDataImporter.cs" />
+    <Compile Include="DataTransfer\ExcelExporter.cs" />
+    <Compile Include="DataTransfer\MDIDataImporter.cs" />
+    <Compile Include="DataTransfer\XMLDataImporter.cs" />
     <Compile Include="Forms\AttrMapOptionDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +129,7 @@
     <Compile Include="ViewManager\AsyncServInvoker.cs" />
     <Compile Include="ViewManager\GCMServManager.cs" />
     <Compile Include="ViewManager\LocalServManager.cs" />
+    <Compile Include="BGHandler\MDIImportHandler.cs" />
     <EmbeddedResource Include="Forms\AttrMapOptionDlg.resx">
       <DependentUpon>AttrMapOptionDlg.cs</DependentUpon>
     </EmbeddedResource>

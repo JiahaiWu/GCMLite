@@ -13,7 +13,7 @@ using IDCM.Base;
 using System.Windows.Forms;
 using System.Data;
 
-namespace IDCM.DataTansfer
+namespace IDCM.DataTransfer
 {
     class ExcelExporter
     {

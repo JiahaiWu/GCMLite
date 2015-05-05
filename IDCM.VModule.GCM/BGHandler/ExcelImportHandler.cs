@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
 using System.Windows.Forms;
-using IDCM.DataTansfer;
+using IDCM.DataTransfer;
 using System.Data;
 using IDCM.Core;
 

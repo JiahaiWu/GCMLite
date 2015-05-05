@@ -10,6 +10,9 @@ using IDCM.Forms;
 using System.IO;
 using System.Configuration;
 using IDCM.Base;
+using Newtonsoft.Json;
+using IDCM.Base.Utils;
+using IDCM.MsgDriver;
 
 namespace IDCM.Core
 {
@@ -41,7 +44,7 @@ namespace IDCM.Core
             catch (Exception ex)
             {
                 log.Error("Excel文件导入失败！ ", ex);
-                MessageBox.Show("ERROR: Excel文件导入失败！ " + ex.Message);
+                DCMPublisher.noteSimpleMsg("Excel: XML文件导入失败！ " + ex.Message + "\n" + ex.ToString());
             }
             return false;
         }
@@ -54,13 +57,13 @@ namespace IDCM.Core
         {
             if (fpath == null || fpath.Length < 1)
                 return false;
-            string fullPaht = System.IO.Path.GetFullPath(fpath);
+            string fullPath = System.IO.Path.GetFullPath(fpath);
             try
             {
                 XmlDocument xDoc = new XmlDocument();
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
-                using (XmlReader xRead = XmlReader.Create(fullPaht))
+                using (XmlReader xRead = XmlReader.Create(fullPath))
                 {
                     xDoc.Load(xRead);
                     return fetchXMLMappingInfo(xDoc, ref dataMapping) && dataMapping.Count > 0;
@@ -69,10 +72,32 @@ namespace IDCM.Core
             catch (Exception ex)
             {
                 log.Error("ERROR: XML文件导入失败！ ", ex);
-                MessageBox.Show("ERROR: XML文件导入失败！ " + ex.Message + "\n" + ex.ToString());
+                DCMPublisher.noteSimpleMsg("ERROR: XML文件导入失败！ " + ex.Message + "\n" + ex.ToString());
             }
             return false;
         }
+        internal static bool checkForMDIImport(string fpath)
+        {
+            if (fpath == null || fpath.Length < 1)
+                return false;
+            string fullPath = System.IO.Path.GetFullPath(fpath);
+            try
+            {
+                ///////////////////////////////////////////////////////////////
+                //String jsonStr = FileUtil.readAsUTF8Text(fullPath);
+                //var obj = JsonConvert.DeserializeObjectAsync(jsonStr);
+                //暂时不用
+                ///////////////////////////////////////////////////////////////
+                return true;
+            }
+            catch (Exception ex)
+            {
+                log.Error("ERROR: MDI文件导入失败！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: MDI文件导入失败！ " + ex.Message + "\n" + ex.ToString());
+            }
+            return false;
+        }
+
         private static bool fetchXMLMappingInfo(XmlDocument xDoc, ref Dictionary<string, string> dataMapping)
         {
             XmlNodeList strainChildNodes = xDoc.DocumentElement.ChildNodes;

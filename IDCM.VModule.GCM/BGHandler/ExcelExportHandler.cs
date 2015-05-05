@@ -8,7 +8,7 @@ using IDCM.Core;
 using IDCM.MsgDriver;
 using System.Windows.Forms;
 using System.ComponentModel;
-using IDCM.DataTansfer;
+using IDCM.DataTransfer;
 using System.Data;
 
 namespace IDCM.BGHandler

@@ -9,12 +9,13 @@ using System.Text.RegularExpressions;
 using IDCM.Base.Utils;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using IDCM.Core;
 
-namespace IDCM.Core
+namespace IDCM.DataTransfer
 {
-    class GCMDataDumper
+    class LocalDataDumper
     {
-        public GCMDataDumper()
+        public LocalDataDumper()
         {
             this.packVersion = SysConstants.default_pack_version;
             loadLastDumpPath();
@@ -23,7 +24,7 @@ namespace IDCM.Core
          * 基于DataGridView表单，生成内部数据对象
          * @auther JiahaiWu 2014-03-19
          **************************************************************/
-        public GCMDataDumper build(CTableCache ctcache,bool withExported = true)
+        public LocalDataDumper build(CTableCache ctcache,bool withExported = true)
         {
             List<Dictionary<string,string>> dgvpo = new List<Dictionary<string,string>>();
             for (int i = 0; i < ctcache.getRowCount(); i++)

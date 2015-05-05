@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDCM.VModule.GCM.ViewManager
+namespace IDCM.ViewManager
 {
     class ABCServManager
     {

@@ -19,8 +19,9 @@ using DCMControlLib;
 using System.Diagnostics;
 using IDCM.Core;
 using IDCM.BGHandlerManager;
+using IDCM.DataTransfer;
 
-namespace IDCM.VModule.GCM.ViewManager
+namespace IDCM.ViewManager
 {
     class LocalServManager
     {
@@ -52,12 +53,13 @@ namespace IDCM.VModule.GCM.ViewManager
             }
             if (fpath.ToLower().EndsWith(".mdi"))
             {
-                //if (DataImportChecker.checkForXMLImport(fpath, ref dataMapping))
-                //{
-                //    eih = new XMLImportHandler(ctcache, fpath, ref dataMapping);
-                //}
+                if (DataImportChecker.checkForMDIImport(fpath))
+                {
+                    eih = new MDIImportHandler(ctcache, fpath);
+                }
             }
-            BGWorkerInvoker.pushHandler(eih);
+            if(eih!=null)
+                BGWorkerInvoker.pushHandler(eih);
         }
         /// <summary>
         /// 导出数据文档
@@ -115,7 +117,7 @@ namespace IDCM.VModule.GCM.ViewManager
 
         public string doExitDump()
         {
-            GCMDataDumper dumper = new GCMDataDumper();
+            LocalDataDumper dumper = new LocalDataDumper();
             string dumppath = dumper.build(ctcache).dump();
             return dumppath;
         }

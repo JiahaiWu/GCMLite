@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IDCM.Base.AbsInterfaces;
 using IDCM.Base.ComPO;
 
-namespace IDCM.VModule.GCM.ViewManager
+namespace IDCM.ViewManager
 {
     public class AsyncServInvoker:IMsgListener
     {

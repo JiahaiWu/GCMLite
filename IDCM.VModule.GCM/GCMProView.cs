@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IDCM.VModule.GCM.ViewManager;
+using IDCM.ViewManager;
 using IDCM.Base;
 using IDCM.Base.Utils;
 using System.Configuration;
