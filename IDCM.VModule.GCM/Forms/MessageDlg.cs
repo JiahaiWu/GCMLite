@@ -19,11 +19,9 @@ namespace IDCM.Forms
             this.msg=dmsg;
             timestamp = DateTime.Now.Ticks;
 
-            //this.wtimer = new System.Windows.Forms.Timer();
-            this.wtimer = new System.Timers.Timer();
+            this.wtimer = new System.Windows.Forms.Timer();
             wtimer.Interval = wtick;
-            //wtimer.Tick += OnTipTimerTick;
-            wtimer.Elapsed += OnTipTimerTick;
+            wtimer.Tick += OnTipTimerTick;
             wtimer.Start();
         }
 
@@ -80,8 +78,7 @@ namespace IDCM.Forms
         private string msg = null;
         private long timestamp = 0L;
         public static readonly int wtick = 500;
-        //private System.Windows.Forms.Timer wtimer = null;
-        private System.Timers.Timer wtimer = null;
+        private System.Windows.Forms.Timer wtimer = null;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 

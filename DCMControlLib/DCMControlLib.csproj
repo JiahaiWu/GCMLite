@@ -89,6 +89,9 @@
     <Compile Include="refer\DCMPopupTmpl.Designer.cs">
       <DependentUpon>DCMPopupTmpl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tree\DCMTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>

@@ -86,6 +86,7 @@
     <Compile Include="ComponentUtil\ControlUtil.cs" />
     <Compile Include="ComponentUtil\DGVAsyncUtil.cs" />
     <Compile Include="ComponentUtil\ProcessUtil.cs" />
+    <Compile Include="ComPO\SignVModel.cs" />
     <Compile Include="Core\CTableCache.cs" />
     <Compile Include="Core\CustomColDef.cs" />
     <Compile Include="Core\CustomColDefGetter.cs" />
@@ -267,9 +268,7 @@
   <ItemGroup>
     <None Include="Resources\uploading2_cut1.gif" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ComPO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\abc.png" />
   </ItemGroup>

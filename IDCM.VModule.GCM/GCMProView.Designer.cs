@@ -40,7 +40,19 @@
             this.dcmDataGridView_local = new DCMControlLib.DCMDataGridView();
             this.tabPageEx_GCM = new DCMControlLib.GCM.TabPageEx();
             this.splitContainer_GCM = new System.Windows.Forms.SplitContainer();
+            this.panel_GCM_start = new System.Windows.Forms.Panel();
+            this.pictureBox_Signhelp = new System.Windows.Forms.PictureBox();
+            this.button_cancel = new System.Windows.Forms.Button();
+            this.checkBox_remember = new System.Windows.Forms.CheckBox();
+            this.button_confirm = new System.Windows.Forms.Button();
+            this.textBox_pwd = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_ccinfoId = new System.Windows.Forms.TextBox();
+            this.label_user = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.splitContainer_GCMData = new System.Windows.Forms.SplitContainer();
             this.dcmDataGridView_gcm = new DCMControlLib.DCMDataGridView();
+            this.dcmTreeView_gcm = new DCMControlLib.Tree.DCMTreeView();
             this.tabPage_ABC = new DCMControlLib.GCM.TabPageEx();
             this.splitContainer_abc = new System.Windows.Forms.SplitContainer();
             this.abcBrowser_abc = new DCMControlLib.GCM.ABCBrowser();
@@ -54,7 +66,15 @@
             this.tabPageEx_GCM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_GCM)).BeginInit();
             this.splitContainer_GCM.Panel1.SuspendLayout();
+            this.splitContainer_GCM.Panel2.SuspendLayout();
             this.splitContainer_GCM.SuspendLayout();
+            this.panel_GCM_start.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Signhelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer_GCMData)).BeginInit();
+            this.splitContainer_GCMData.Panel1.SuspendLayout();
+            this.splitContainer_GCMData.Panel2.SuspendLayout();
+            this.splitContainer_GCMData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dcmDataGridView_gcm)).BeginInit();
             this.tabPage_ABC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_abc)).BeginInit();
@@ -78,7 +98,7 @@
             this.gcmTabControl_GCM.ItemSize = new System.Drawing.Size(150, 30);
             this.gcmTabControl_GCM.Location = new System.Drawing.Point(0, 0);
             this.gcmTabControl_GCM.Name = "gcmTabControl_GCM";
-            this.gcmTabControl_GCM.SelectedIndex = 0;
+            this.gcmTabControl_GCM.SelectedIndex = 1;
             this.gcmTabControl_GCM.Size = new System.Drawing.Size(716, 513);
             this.gcmTabControl_GCM.TabGradient.ColorEnd = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(223)))), ((int)(((byte)(246)))));
             this.gcmTabControl_GCM.TabGradient.ColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(67)))), ((int)(((byte)(164)))));
@@ -87,6 +107,7 @@
             this.gcmTabControl_GCM.TabGradient.TabPageTextColor = System.Drawing.Color.DimGray;
             this.gcmTabControl_GCM.TabIndex = 0;
             this.gcmTabControl_GCM.UpDownStyle = DCMControlLib.GCM.GCMTabControl.UpDown32Style.Default;
+            this.gcmTabControl_GCM.SelectedIndexChanging += new System.EventHandler<DCMControlLib.GCM.SelectedIndexChangingEventArgs>(this.gcmTabControl_GCM_SelectedIndexChanging);
             // 
             // tabPageEx_Local
             // 
@@ -169,11 +190,156 @@
             // 
             // splitContainer_GCM.Panel1
             // 
-            this.splitContainer_GCM.Panel1.Controls.Add(this.dcmDataGridView_gcm);
-            this.splitContainer_GCM.Panel2Collapsed = true;
+            this.splitContainer_GCM.Panel1.Controls.Add(this.panel_GCM_start);
+            this.splitContainer_GCM.Panel1.Controls.Add(this.pictureBox1);
+            // 
+            // splitContainer_GCM.Panel2
+            // 
+            this.splitContainer_GCM.Panel2.Controls.Add(this.splitContainer_GCMData);
             this.splitContainer_GCM.Size = new System.Drawing.Size(714, 476);
-            this.splitContainer_GCM.SplitterDistance = 475;
+            this.splitContainer_GCM.SplitterDistance = 228;
             this.splitContainer_GCM.TabIndex = 0;
+            // 
+            // panel_GCM_start
+            // 
+            this.panel_GCM_start.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel_GCM_start.BackColor = System.Drawing.Color.Transparent;
+            this.panel_GCM_start.Controls.Add(this.pictureBox_Signhelp);
+            this.panel_GCM_start.Controls.Add(this.button_cancel);
+            this.panel_GCM_start.Controls.Add(this.checkBox_remember);
+            this.panel_GCM_start.Controls.Add(this.button_confirm);
+            this.panel_GCM_start.Controls.Add(this.textBox_pwd);
+            this.panel_GCM_start.Controls.Add(this.label1);
+            this.panel_GCM_start.Controls.Add(this.textBox_ccinfoId);
+            this.panel_GCM_start.Controls.Add(this.label_user);
+            this.panel_GCM_start.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel_GCM_start.Location = new System.Drawing.Point(-139, 313);
+            this.panel_GCM_start.Margin = new System.Windows.Forms.Padding(0);
+            this.panel_GCM_start.Name = "panel_GCM_start";
+            this.panel_GCM_start.Size = new System.Drawing.Size(480, 80);
+            this.panel_GCM_start.TabIndex = 3;
+            // 
+            // pictureBox_Signhelp
+            // 
+            this.pictureBox_Signhelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_Signhelp.Image = global::IDCM.Properties.Resources.help;
+            this.pictureBox_Signhelp.Location = new System.Drawing.Point(294, 19);
+            this.pictureBox_Signhelp.Name = "pictureBox_Signhelp";
+            this.pictureBox_Signhelp.Size = new System.Drawing.Size(21, 21);
+            this.pictureBox_Signhelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Signhelp.TabIndex = 11;
+            this.pictureBox_Signhelp.TabStop = false;
+            // 
+            // button_cancel
+            // 
+            this.button_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_cancel.BackColor = System.Drawing.Color.Transparent;
+            this.button_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button_cancel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button_cancel.Location = new System.Drawing.Point(396, 15);
+            this.button_cancel.Name = "button_cancel";
+            this.button_cancel.Size = new System.Drawing.Size(75, 23);
+            this.button_cancel.TabIndex = 9;
+            this.button_cancel.Text = "Cancel";
+            this.button_cancel.UseVisualStyleBackColor = false;
+            // 
+            // checkBox_remember
+            // 
+            this.checkBox_remember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_remember.AutoSize = true;
+            this.checkBox_remember.Checked = true;
+            this.checkBox_remember.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_remember.Location = new System.Drawing.Point(295, 48);
+            this.checkBox_remember.Name = "checkBox_remember";
+            this.checkBox_remember.Size = new System.Drawing.Size(82, 18);
+            this.checkBox_remember.TabIndex = 7;
+            this.checkBox_remember.Text = "Remember";
+            this.checkBox_remember.UseVisualStyleBackColor = true;
+            // 
+            // button_confirm
+            // 
+            this.button_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_confirm.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_confirm.Location = new System.Drawing.Point(397, 45);
+            this.button_confirm.Name = "button_confirm";
+            this.button_confirm.Size = new System.Drawing.Size(75, 23);
+            this.button_confirm.TabIndex = 6;
+            this.button_confirm.Text = "Confirm";
+            this.button_confirm.UseVisualStyleBackColor = true;
+            // 
+            // textBox_pwd
+            // 
+            this.textBox_pwd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_pwd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_pwd.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.textBox_pwd.Location = new System.Drawing.Point(110, 46);
+            this.textBox_pwd.Name = "textBox_pwd";
+            this.textBox_pwd.ShortcutsEnabled = false;
+            this.textBox_pwd.Size = new System.Drawing.Size(177, 23);
+            this.textBox_pwd.TabIndex = 5;
+            this.textBox_pwd.Tag = "Optional Password For GCM View ";
+            this.textBox_pwd.UseSystemPasswordChar = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 14);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "GCM Password:";
+            // 
+            // textBox_ccinfoId
+            // 
+            this.textBox_ccinfoId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_ccinfoId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_ccinfoId.Location = new System.Drawing.Point(112, 18);
+            this.textBox_ccinfoId.Name = "textBox_ccinfoId";
+            this.textBox_ccinfoId.Size = new System.Drawing.Size(175, 23);
+            this.textBox_ccinfoId.TabIndex = 3;
+            // 
+            // label_user
+            // 
+            this.label_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_user.AutoSize = true;
+            this.label_user.Location = new System.Drawing.Point(31, 22);
+            this.label_user.Name = "label_user";
+            this.label_user.Size = new System.Drawing.Size(77, 14);
+            this.label_user.TabIndex = 2;
+            this.label_user.Text = "CCInfo ID:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::IDCM.Properties.Resources.initView;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(228, 476);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // splitContainer_GCMData
+            // 
+            this.splitContainer_GCMData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer_GCMData.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer_GCMData.Name = "splitContainer_GCMData";
+            // 
+            // splitContainer_GCMData.Panel1
+            // 
+            this.splitContainer_GCMData.Panel1.Controls.Add(this.dcmDataGridView_gcm);
+            // 
+            // splitContainer_GCMData.Panel2
+            // 
+            this.splitContainer_GCMData.Panel2.Controls.Add(this.dcmTreeView_gcm);
+            this.splitContainer_GCMData.Size = new System.Drawing.Size(482, 476);
+            this.splitContainer_GCMData.SplitterDistance = 266;
+            this.splitContainer_GCMData.TabIndex = 0;
             // 
             // dcmDataGridView_gcm
             // 
@@ -182,7 +348,7 @@
             this.dcmDataGridView_gcm.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -196,7 +362,7 @@
             this.dcmDataGridView_gcm.Name = "dcmDataGridView_gcm";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 10F);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -207,8 +373,16 @@
             this.dcmDataGridView_gcm.RowTemplate.Height = 23;
             this.dcmDataGridView_gcm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dcmDataGridView_gcm.ShowEditingIcon = false;
-            this.dcmDataGridView_gcm.Size = new System.Drawing.Size(714, 476);
+            this.dcmDataGridView_gcm.Size = new System.Drawing.Size(266, 476);
             this.dcmDataGridView_gcm.TabIndex = 0;
+            // 
+            // dcmTreeView_gcm
+            // 
+            this.dcmTreeView_gcm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dcmTreeView_gcm.Location = new System.Drawing.Point(0, 0);
+            this.dcmTreeView_gcm.Name = "dcmTreeView_gcm";
+            this.dcmTreeView_gcm.Size = new System.Drawing.Size(212, 476);
+            this.dcmTreeView_gcm.TabIndex = 0;
             // 
             // tabPage_ABC
             // 
@@ -268,8 +442,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dcmDataGridView_local)).EndInit();
             this.tabPageEx_GCM.ResumeLayout(false);
             this.splitContainer_GCM.Panel1.ResumeLayout(false);
+            this.splitContainer_GCM.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_GCM)).EndInit();
             this.splitContainer_GCM.ResumeLayout(false);
+            this.panel_GCM_start.ResumeLayout(false);
+            this.panel_GCM_start.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Signhelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.splitContainer_GCMData.Panel1.ResumeLayout(false);
+            this.splitContainer_GCMData.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer_GCMData)).EndInit();
+            this.splitContainer_GCMData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dcmDataGridView_gcm)).EndInit();
             this.tabPage_ABC.ResumeLayout(false);
             this.splitContainer_abc.Panel1.ResumeLayout(false);
@@ -292,5 +475,17 @@
         private DCMControlLib.DCMDataGridView dcmDataGridView_local;
         private DCMControlLib.DCMDataGridView dcmDataGridView_gcm;
         private DCMControlLib.GCM.ABCBrowser abcBrowser_abc;
+        private System.Windows.Forms.SplitContainer splitContainer_GCMData;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel_GCM_start;
+        private System.Windows.Forms.PictureBox pictureBox_Signhelp;
+        private System.Windows.Forms.Button button_cancel;
+        private System.Windows.Forms.CheckBox checkBox_remember;
+        private System.Windows.Forms.Button button_confirm;
+        private System.Windows.Forms.TextBox textBox_pwd;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox_ccinfoId;
+        private System.Windows.Forms.Label label_user;
+        private DCMControlLib.Tree.DCMTreeView dcmTreeView_gcm;
     }
 }

@@ -16,6 +16,8 @@ using IDCM.ComponentUtil;
 using IDCM.Core;
 using DCMControlLib;
 using IDCM.BGHandlerManager;
+using System.Collections.Concurrent;
+using IDCM.ComPO;
 
 namespace IDCM.VModule.GCM
 {
@@ -31,7 +33,7 @@ namespace IDCM.VModule.GCM
             InitializeComponent();
             InitializeMsgDriver();
             InitializeGCMPro();
-            startDataRender();
+            startLocalDataRender();
         }
         private void InitializeMsgDriver()
         {
@@ -47,6 +49,12 @@ namespace IDCM.VModule.GCM
             servInvoker.OnLocalDataExported += OnLocalDataExported;
             servInvoker.OnLocalDataImported += OnLocalDataImported;
             servInvoker.OnSimpleMsgTip+=OnSimpleMsgTip;
+            //初始化提示消息中转池
+            simpleTipQueue = new ConcurrentQueue<string>();
+            this.tipMonitor = new System.Windows.Forms.Timer();
+            tipMonitor.Interval = 50;
+            tipMonitor.Tick += OnTipMonitorTick;
+            tipMonitor.Start();
         }
         /// <summary>
         /// 初始化流程
@@ -68,6 +76,9 @@ namespace IDCM.VModule.GCM
                 this.dcmDataGridView_local.DragEnter += dataGridView_items_DragEnter;
                 this.dcmDataGridView_local.DragDrop += dataGridView_items_DragDrop;
                 this.IsInited = true;
+                //加载GCM发布数据表的字段配置
+                SignVModel svmodel = new SignVModel(panel_GCM_start.Controls);
+                gtcache = new GCMTableCache(svmodel, dcmDataGridView_gcm, dcmTreeView_gcm);
                 ////////////////////////////////////////////////////
                 //设置初始化的页签
                 gcmTabControl_GCM.SelectedIndex = 0;
@@ -107,7 +118,7 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        private void startDataRender()
+        private void startLocalDataRender()
         {
             log.Debug("startDataRender(...)");
             DataExportNoter.loadHistorySIds(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note);
@@ -124,7 +135,23 @@ namespace IDCM.VModule.GCM
 
         private void OnSimpleMsgTip(object msgTag, params object[] vals)
         {
-            new IDCM.Forms.MessageDlg(msgTag.ToString()).Show();
+            simpleTipQueue.Enqueue(msgTag.ToString());
+        }
+        private void OnTipMonitorTick(object sender, EventArgs e)
+        {
+            string msg = null;
+            if (!simpleTipQueue.IsEmpty && simpleTipQueue.TryDequeue(out msg))
+            {
+                new IDCM.Forms.MessageDlg(msg).Show();
+                if (simpleTipQueue.Count > 20)
+                {
+                    new IDCM.Forms.MessageDlg(simpleTipQueue.Last()).Show();
+                    while (!simpleTipQueue.IsEmpty)
+                    {
+                        simpleTipQueue.TryDequeue(out msg);
+                    }
+                }
+            }
         }
         private void OnGCMDataLoaded(object msgTag, params object[] vals)
         {
@@ -232,6 +259,32 @@ namespace IDCM.VModule.GCM
             this.Enabled = false;
             return localServManager.doExitDump();
         }
+        private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
+        {
+            if (e.TabPageIndex == 1)
+            {
+                if (gtcache.signed())
+                {
+                    startGCMDataRender();
+                }
+                else
+                {
+                    showLoginDlg();
+                }
+            }
+        }
+
+        private void showLoginDlg()
+        {
+            splitContainer_GCM.Panel1Collapsed = false;
+            splitContainer_GCM.Panel2Collapsed = true;
+        }
+
+        private void startGCMDataRender()
+        {
+            splitContainer_GCM.Panel1Collapsed = true;
+            splitContainer_GCM.Panel2Collapsed = false;
+        }
         public AsyncServInvoker ServInvoker
         {
             get
@@ -242,9 +295,13 @@ namespace IDCM.VModule.GCM
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private AsyncServInvoker servInvoker = null;
         private CTableCache ctcache = null;
+        private GCMTableCache gtcache = null;
         private volatile bool IsInited = false;
         private GCMServManager gcmServManager = null;
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
+        private ConcurrentQueue<string> simpleTipQueue = null;
+        private System.Windows.Forms.Timer tipMonitor = null;
+
     }
 }
