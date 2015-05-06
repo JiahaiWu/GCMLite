@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDCM.Base.ComPO
+namespace IDCM.ComPO
 {
     public class AuthInfo
     {

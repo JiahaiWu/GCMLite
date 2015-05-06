@@ -18,6 +18,7 @@ using DCMControlLib;
 using IDCM.BGHandlerManager;
 using System.Collections.Concurrent;
 using IDCM.ComPO;
+using IDCM.DataTransfer;
 
 namespace IDCM.VModule.GCM
 {
@@ -34,6 +35,7 @@ namespace IDCM.VModule.GCM
             InitializeMsgDriver();
             InitializeGCMPro();
             startLocalDataRender();
+            startGCMSiteRender();
         }
         private void InitializeMsgDriver()
         {
@@ -45,16 +47,11 @@ namespace IDCM.VModule.GCM
             msgObs.bind(servInvoker);
             ////////////////////////////////////////////////////
             //绑定消息事件处理方法
-            servInvoker.OnGCMDataLoaded += OnGCMDataLoaded;
+            servInvoker.OnGCMUserSigned += OnGCMUserSigned;
             servInvoker.OnLocalDataExported += OnLocalDataExported;
             servInvoker.OnLocalDataImported += OnLocalDataImported;
             servInvoker.OnSimpleMsgTip+=OnSimpleMsgTip;
-            //初始化提示消息中转池
-            simpleTipQueue = new ConcurrentQueue<string>();
-            this.tipMonitor = new System.Windows.Forms.Timer();
-            tipMonitor.Interval = 50;
-            tipMonitor.Tick += OnTipMonitorTick;
-            tipMonitor.Start();
+            servInvoker.OnGCMItemDetailRender += OnGCMItemDetailRender;
         }
         /// <summary>
         /// 初始化流程
@@ -76,9 +73,10 @@ namespace IDCM.VModule.GCM
                 this.dcmDataGridView_local.DragEnter += dataGridView_items_DragEnter;
                 this.dcmDataGridView_local.DragDrop += dataGridView_items_DragDrop;
                 this.IsInited = true;
-                //加载GCM发布数据表的字段配置
-                SignVModel svmodel = new SignVModel(panel_GCM_start.Controls);
-                gtcache = new GCMTableCache(svmodel, dcmDataGridView_gcm, dcmTreeView_gcm);
+                //加载GCM发布数据表
+                gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember,dcmDataGridView_gcm, dcmTreeView_gcm);
+                gcmServManager = new GCMServManager(gtcache);
+                this.dcmDataGridView_gcm.CellClick+=dataGridView_gcm_CellClicked;
                 ////////////////////////////////////////////////////
                 //设置初始化的页签
                 gcmTabControl_GCM.SelectedIndex = 0;
@@ -132,29 +130,60 @@ namespace IDCM.VModule.GCM
                 }
             }
         }
-
-        private void OnSimpleMsgTip(object msgTag, params object[] vals)
+        public void startGCMSiteRender()
         {
-            simpleTipQueue.Enqueue(msgTag.ToString());
-        }
-        private void OnTipMonitorTick(object sender, EventArgs e)
-        {
-            string msg = null;
-            if (!simpleTipQueue.IsEmpty && simpleTipQueue.TryDequeue(out msg))
+            log.Debug("startGCMSiteRender(...)");
+            string name = ConfigurationManager.AppSettings.Get(SysConstants.LUID);
+            if (name != null && name.Length > 0)
             {
-                new IDCM.Forms.MessageDlg(msg).Show();
-                if (simpleTipQueue.Count > 20)
+                gtcache.UserName = name;
+                string pwd = ConfigurationManager.AppSettings.Get(SysConstants.LPWD);
+                if (pwd != null && pwd.Length > 0)
                 {
-                    new IDCM.Forms.MessageDlg(simpleTipQueue.Last()).Show();
-                    while (!simpleTipQueue.IsEmpty)
-                    {
-                        simpleTipQueue.TryDequeue(out msg);
-                    }
+                    gtcache.Password = Base64DESEncrypt.CreateInstance(name).Decrypt(pwd);
+                    gtcache.RememberLogin = true;
                 }
             }
         }
-        private void OnGCMDataLoaded(object msgTag, params object[] vals)
+        private void OnSimpleMsgTip(object msgTag, params object[] vals)
         {
+            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                new IDCM.Forms.MessageDlg(msgTag.ToString()).Show();
+            }));
+        }
+        private void OnGCMItemDetailRender(object msgTag, params object[] vals)
+        {
+            ControlAsyncUtil.SyncInvoke(dcmDataGridView_gcm, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                int index = 0;
+                if(vals!=null && vals.Length>0 && vals[0].GetType().Equals(typeof(int)))
+                    index= (int)vals[0];
+                gcmServManager.showGCMDataDetail(index);
+            }));
+        }
+        private void OnGCMUserSigned(object msgTag, params object[] vals)
+        {
+            if (gcmServManager.Signed)
+            {
+                showGCMDataDlg();
+                if (gcmServManager.UserName != null && gcmServManager.UserName.Length>0)
+                {
+                    ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
+                    if (gtcache.RememberLogin && gcmServManager.Password != null)
+                    {
+                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, Base64DESEncrypt.CreateInstance(gcmServManager.UserName).Encrypt(gcmServManager.Password), SysConstants.defaultCfgPath);
+                    }
+                    else
+                    {
+                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD,"", SysConstants.defaultCfgPath);
+                    }
+                }
+            }
+            else
+            {
+                showLoginDlg();
+            }
         }
         private void OnLocalDataExported(object msgTag, params object[] vals)
         {
@@ -186,7 +215,10 @@ namespace IDCM.VModule.GCM
             //暂不考虑已导出和未导出的问题
             //////////////////////////////////////////////////////////////////////
         }
-
+        private void dataGridView_gcm_CellClicked(object sender, DataGridViewCellEventArgs e)
+        {
+            gcmServManager.showGCMDataDetail(e.RowIndex);
+        }
         /// <summary>
         /// 拖拽事件运行时的鼠标状态切换方法
         /// </summary>
@@ -263,9 +295,9 @@ namespace IDCM.VModule.GCM
         {
             if (e.TabPageIndex == 1)
             {
-                if (gtcache.signed())
+                if (gcmServManager.Signed)
                 {
-                    startGCMDataRender();
+                    showGCMDataDlg();
                 }
                 else
                 {
@@ -276,15 +308,56 @@ namespace IDCM.VModule.GCM
 
         private void showLoginDlg()
         {
-            splitContainer_GCM.Panel1Collapsed = false;
-            splitContainer_GCM.Panel2Collapsed = true;
+            ControlAsyncUtil.SyncInvoke(splitContainer_GCM, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                splitContainer_GCM.Panel1Collapsed = false;
+                splitContainer_GCM.Panel2Collapsed = true;
+                if (textBox_ccinfoId.Text.Length < 1)
+                    textBox_ccinfoId.Focus();
+                else
+                    textBox_pwd.Focus();
+            }));
         }
 
-        private void startGCMDataRender()
+        private void showGCMDataDlg()
         {
-            splitContainer_GCM.Panel1Collapsed = true;
-            splitContainer_GCM.Panel2Collapsed = false;
+            ControlAsyncUtil.SyncInvoke(splitContainer_GCM, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                gcmServManager.refreshGCMDataset();
+                splitContainer_GCM.Panel1Collapsed = true;
+                splitContainer_GCM.Panel2Collapsed = false;
+            }));
         }
+
+
+        private void button_cancel_Click(object sender, EventArgs e)
+        {
+            this.Select(true, false);
+        }
+
+        private void pictureBox_Signhelp_Click(object sender, EventArgs e)
+        {
+            HelpDocRequester.requestHelpDoc(HelpDocConstants.StartViewTag);
+        }
+
+        private void button_confirm_Click(object sender, EventArgs e)
+        {
+            if (this.textBox_pwd.Text.Length <1 || this.textBox_ccinfoId.Text.Length < 1)
+            {
+                MessageBox.Show("The 'CCInfo Id' and 'GCM Password' should not be empty.");
+                return;
+            }
+            try
+            {
+                this.panel_GCM_start.Enabled = false;
+                gcmServManager.connnectGCM();
+            }
+            finally
+            {
+                this.panel_GCM_start.Enabled = true;
+            }
+        }
+
         public AsyncServInvoker ServInvoker
         {
             get
@@ -300,8 +373,6 @@ namespace IDCM.VModule.GCM
         private GCMServManager gcmServManager = null;
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
-        private ConcurrentQueue<string> simpleTipQueue = null;
-        private System.Windows.Forms.Timer tipMonitor = null;
 
     }
 }

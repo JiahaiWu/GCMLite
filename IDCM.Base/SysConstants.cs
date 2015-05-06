@@ -54,27 +54,20 @@ namespace IDCM.Base
         /// </summary>
         public const string XMLImportUri = "XMLImportUri";
 
-
         /// <summary>
         /// 探索XML节点稳定性，游标，代表探索的当前位置，初始是0，代表从0开始
         /// </summary>
-        public static string Cursor = "Cursor";
+        public const string Cursor = "Cursor";
         /// <summary>
         /// 探索XML节点稳定性，深度，代表探索深度，如果在当前深度下，XML比较稳定则不会继续向下探索
         /// </summary>
-        public static string DetectDepth = "DetectDepth";
+        public const string DetectDepth = "DetectDepth";
         /// <summary>
         /// 探索XML节点稳定性，增长系数，如果在DetectDepth深度下，探索过程中出现strain节点下的attr节点增加的情况，会触发 DetectDepth * DetectDepth，使探索深度翻倍
         /// </summary>
-        public static string GrowthFactor = "GrowthFactor";
-        /// <summary>
-        /// 菌种号字段标识
-        /// </summary>
-        public static string StrainNumber = "StrainNumber";
-
-        
+        public const string GrowthFactor = "GrowthFactor";
         #endregion
-
+        public static int SessionValidMilliSeconds = 600000;
         /// <summary>
         /// 内部默认的字符编码
         /// </summary>

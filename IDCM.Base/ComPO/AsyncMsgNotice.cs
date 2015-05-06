@@ -11,10 +11,11 @@ namespace IDCM.Base.ComPO
     /// </summary>
     public class AsyncMsgNotice
     {
-        public static readonly AsyncMsgNotice GCMDataLoaded = new AsyncMsgNotice(MsgNoticeType.GCMDataLoaded, "GCM Data Loaded");
+        public static readonly AsyncMsgNotice GCMUserSigned = new AsyncMsgNotice(MsgNoticeType.GCMUserSigned, "GCM User Signed");
         public static readonly AsyncMsgNotice LocalDataImported = new AsyncMsgNotice(MsgNoticeType.LocalDataImported, "Local Data Imported");
         public static readonly AsyncMsgNotice LocalDataExported = new AsyncMsgNotice(MsgNoticeType.LocalDataExported, "Local Data Exported");
-
+        public static readonly AsyncMsgNotice GCMDataLoaded = new AsyncMsgNotice(MsgNoticeType.GCMDataLoaded, "GCM Data Loaded");
+        public static readonly AsyncMsgNotice GCMItemDetailRender = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "GCM Item Detail Render");
         
         /// <summary>
         /// For iterator 
@@ -23,9 +24,11 @@ namespace IDCM.Base.ComPO
         {
             get
             {
-                yield return GCMDataLoaded;
+                yield return GCMUserSigned;
                 yield return LocalDataImported;
                 yield return LocalDataExported;
+                yield return GCMDataLoaded;
+                yield return GCMItemDetailRender;
             }
         }
         private readonly string msgTag;
@@ -62,8 +65,10 @@ namespace IDCM.Base.ComPO
     /// </summary>
     public enum MsgNoticeType
     {
-        GCMDataLoaded = 0,
+        GCMUserSigned = 0,
         LocalDataImported = 1,
-        LocalDataExported=2
+        LocalDataExported=2,
+        GCMDataLoaded=3,
+        GCMItemDetailRender=4,
     }
 }

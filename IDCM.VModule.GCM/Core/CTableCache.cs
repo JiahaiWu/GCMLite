@@ -88,7 +88,7 @@ namespace IDCM.Core
             }
             return map;
         }
-        internal int getKeyIndex()
+        internal int getKeyColIndex()
         {
             DataGridViewColumnCollection dgvcc = dgv.Columns;
             foreach (DataGridViewColumn dgvc in dgvcc)

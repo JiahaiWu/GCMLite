@@ -1736,8 +1736,7 @@ namespace DCMControlLib.GCM
                         break;
                 }
             }
-
-            return true;
+            return base.ProcessCmdKey(ref msg,keyData);
         }
 
         protected override bool ProcessMnemonic(char charCode)
