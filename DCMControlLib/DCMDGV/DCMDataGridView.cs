@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace DCMControlLib
 {
@@ -41,6 +42,16 @@ namespace DCMControlLib
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             this.RowPostPaint += OnRowPostPaint;
             this.KeyDown += OnPasteDetect;
+            this.ColumnAdded += OnColumnsUpdated;
+            this.ColumnRemoved += OnColumnsUpdated;
+            this.ColumnDisplayIndexChanged += OnColumnsUpdated;
+            this.ColumnNameChanged += OnColumnsUpdated;
+            this.ColumnHeaderCellChanged += OnColumnsUpdated;
+            this.ColumnDataPropertyNameChanged += OnColumnsUpdated;
+            this.ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
+            this._customHeaderView = true;
+            this.ocMenu = new Pop.OptionalContextMenu();
+            ocMenu.OptionMenuChanged += OnOptionMenuChanged;
         }
         /// <summary>
         /// 设置Datagridview显示编号
@@ -56,7 +67,11 @@ namespace DCMControlLib
                 this.RowHeadersDefaultCellStyle.ForeColor,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
-
+        private void OnColumnsUpdated(object sender, DataGridViewColumnEventArgs e)
+        {
+            if(ocMenu!=null && !ocMenu.Visible)
+                ocMenu.clear();
+        }
         /// <summary>
         /// 绑定剪贴板复制Ctrl+C、行插入 Ctrl+Insert 等快捷键处理
         /// </summary>
@@ -133,5 +148,36 @@ namespace DCMControlLib
                 }
             }
         }
+        private void OnColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (ocMenu.Count < 1)
+                {
+                    foreach (DataGridViewColumn dgvc in this.Columns)
+                    {
+                        ocMenu.addMenu(dgvc.HeaderText, dgvc.Visible);
+                    }
+                }
+                ocMenu.Show(this, new Point(e.X, e.Y));
+            }
+        }
+
+        [Description("Determines whether the DataGridView header visible can be customs by pop-up context menu.")]
+        [DefaultValue(true)]
+        [Browsable(true)]
+        public bool IsCustomHeaderView
+        {
+            get { return _customHeaderView; }
+            set
+            {
+                if (!value.Equals(_customHeaderView))
+                {
+                    _customHeaderView = value;
+                }
+            }
+        }
+        private volatile bool _customHeaderView = true;
+        private Pop.OptionalContextMenu ocMenu = null;
     }
 }

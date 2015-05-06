@@ -70,6 +70,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Form1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Pop\OptionalContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="refer\DCMComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -123,7 +126,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blank.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
