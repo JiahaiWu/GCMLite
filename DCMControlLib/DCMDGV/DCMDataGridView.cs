@@ -13,30 +13,39 @@ namespace DCMControlLib
         public DCMDataGridView()
             : base()
         {
-            this.AllowUserToAddRows = false;
-            this.AllowUserToDeleteRows = false;
-            this.AllowUserToResizeRows = true;
-            //this.EnableHeadersVisualStyles = false;
-            //this.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.EditMode = DataGridViewEditMode.EditOnKeystroke;
-            //this.ShowEditingIcon = false;
-            //this.Location = new System.Drawing.Point(0, 0);
-            //this.Size = new System.Drawing.Size(250, 125);
-            
-            //used to attach event-handlers to the events of the editing control(nice name!)
-            //dgv.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(Mydgv_EditingControlShowing);
-            // not implemented here, but I still like the name DataGridViewEditingControlShowingEventHandler :o) LOL
-            //this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.ColumnHeadersDefaultCellStyle.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
-            this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            /////////////////////////////////////////////////////////////////////////////////////////
+            //this.AllowUserToAddRows = false;
+            //this.AllowUserToDeleteRows = false;
+            //this.AllowUserToResizeRows = true;
+            ////this.EnableHeadersVisualStyles = false;
+            //this.MultiSelect = true;
+            //this.AllowUserToResizeColumns = true;
+            //this.AllowUserToOrderColumns = true;
+            //this.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+            //this.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            //this.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders);
 
-            this.RowHeadersWidth = 60;
-            //this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.RowHeadersDefaultCellStyle.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
-            this.RowHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.RowHeadersDefaultCellStyle.BackColor = Color.LightGray;
-            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            ////this.ShowEditingIcon = false;
+            ////this.Location = new System.Drawing.Point(0, 0);
+            ////this.Size = new System.Drawing.Size(250, 125);
+            
+            ////used to attach event-handlers to the events of the editing control(nice name!)
+            ////dgv.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(Mydgv_EditingControlShowing);
+            //// not implemented here, but I still like the name DataGridViewEditingControlShowingEventHandler :o) LOL
+            ////this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            ////this.ColumnHeadersDefaultCellStyle.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+            ////this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ////this.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+
+            ////this.RowHeadersWidth = 60;
+            ////this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            ////this.RowHeadersDefaultCellStyle.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+            ////this.RowHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ////this.RowHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            //this.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            //@note 废弃的样式设定
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
 
             this.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithAutoHeaderText;
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////

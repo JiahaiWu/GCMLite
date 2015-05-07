@@ -75,7 +75,8 @@ namespace IDCM.VModule.GCM
                 this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
                 this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
                 this.dcmDataGridView_local.IsDefaultPasteAble = false;
-                
+                this.dcmDataGridView_local.AllowUserToOrderColumns = true;
+
                 this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
                 this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
                 this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
@@ -232,7 +233,11 @@ namespace IDCM.VModule.GCM
                 if(dcmDataGridView_local.CurrentRow!=null)
                 {
                     Point plocation=dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
-                    cellContextMenu_local.Show(dcmDataGridView_local, new Point(MousePosition.X -plocation.X, MousePosition.Y-plocation.Y));
+                    int eY = MousePosition.Y - plocation.Y;
+                    if (eY > this.dcmDataGridView_local.ColumnHeadersHeight)
+                    {
+                        cellContextMenu_local.Show(dcmDataGridView_local, new Point(MousePosition.X - plocation.X, MousePosition.Y - plocation.Y));
+                    }
                 }
             }
         }

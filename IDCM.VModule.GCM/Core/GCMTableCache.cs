@@ -81,7 +81,7 @@ namespace IDCM.Core
             ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
             {
                 dgv_overview.Rows.InsertRange(dgvrIdx, dgvr);
-                keyIndexs.Add(valMap[keyName], dgvrIdx);
+                keyIndexs[valMap[keyName]]= dgvrIdx;
                 foreach (KeyValuePair<string, string> entry in valMap)
                 {
                     //if itemDGV not contains Column of entry.key

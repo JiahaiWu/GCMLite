@@ -32,10 +32,14 @@ namespace IDCM.Core
                 dgvc.HeaderText = ccd.Alias;
                 dgvc.Visible = ccd.IsRequire;
                 dgvc.Tag = ccd.IsUnique;
+                dgvc.SortMode = DataGridViewColumnSortMode.Automatic;
                 dgv.Columns.Add(dgvc);
             }
+            dgv.AllowUserToOrderColumns = true;
+            dgv.Invalidate();
+            dgv.Update();
+
             dataTable = new DataTable();
-            
             foreach (CustomColDef ccd in ccds)
             {
                 DataColumn col = new DataColumn();
