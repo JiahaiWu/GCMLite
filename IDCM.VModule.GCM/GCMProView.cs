@@ -528,5 +528,70 @@ namespace IDCM.VModule.GCM
         private GCMServManager gcmServManager = null;
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
+
+        public void addDataRow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void delDataRow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void publishData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void pullData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void findData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void saveData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void tryQuit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void filterToRecvData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void clearAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void openFindDialog()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void findNext()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void findPrev()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void saveData(bool p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

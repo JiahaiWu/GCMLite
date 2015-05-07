@@ -100,8 +100,8 @@ namespace IDCM.ViewManager
         internal event IDCMAsyncRequest OnSimpleMsgAlert;
         internal event IDCMAsyncRequest OnSimpleMsgTrace;
 
-        internal event IDCMAsyncRequest OnBottomSatusChange;
-        internal event IDCMAsyncRequest OnProgressChange;
+        public event IDCMAsyncRequest OnBottomSatusChange;
+        public event IDCMAsyncRequest OnProgressChange;
         internal event IDCMAsyncRequest OnGCMUserSigned;
         internal event IDCMAsyncRequest OnLocalDataExported;
         internal event IDCMAsyncRequest OnLocalDataImported;
