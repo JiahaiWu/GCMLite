@@ -107,12 +107,30 @@ namespace IDCM.ViewManager
                 }
             }
         }
+
         /// <summary>
         /// 校验数据文档
         /// </summary>
         /// <param name="fpath"></param>
         public void checkData(DataGridView dgv)
         {
+        }
+        public void checkData(DataGridViewSelectedRowCollection selectedRows)
+        {
+        }
+        public void checkData(params DataGridViewRow[] selectedRows)
+        {
+        }
+
+
+        internal void publishLocalRowsToGCM(params DataGridViewRow[] selectedRows)
+        {
+            
+        }
+
+        internal void publishLocalRowsToGCM(DataGridViewSelectedRowCollection selectedRows)
+        {
+            throw new NotImplementedException();
         }
 
         public string doExitDump()

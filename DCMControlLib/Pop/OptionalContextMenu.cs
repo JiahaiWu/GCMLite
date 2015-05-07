@@ -48,6 +48,8 @@ namespace DCMControlLib.Pop
             {
                 MenuItem mi = sender as MenuItem;
                 mi.Checked = !mi.Checked;
+                if(OptionMenuChanged!=null)
+                    OptionMenuChanged(mi, new MenuItemEventArgs(mi));
             }
         }
         public void addMenu(string name,bool isChoosed)
@@ -80,12 +82,33 @@ namespace DCMControlLib.Pop
                 return isShown;
             } 
         }
-        private volatile bool isShown = false;
-
+        
         public int Count { 
             get{
                 return MenuItems.Count;
             }
         }
+        public delegate void MenuItemEventHandler(object sender, MenuItemEventArgs e);
+        public event MenuItemEventHandler OptionMenuChanged;
+        private volatile bool isShown = false;
+
+    }
+    public class MenuItemEventArgs : EventArgs
+    {
+        public MenuItemEventArgs()
+        {
+        }
+        public MenuItemEventArgs(MenuItem mi)
+        {
+            item = mi;
+        }
+        public MenuItem MenuItem
+        {
+            get
+            {
+                return item;
+            }
+        }
+        private MenuItem item;
     }
 }

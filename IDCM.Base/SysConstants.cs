@@ -53,7 +53,15 @@ namespace IDCM.Base
         /// GCM菌种保藏记录批量导入请求资源地址
         /// </summary>
         public const string XMLImportUri = "XMLImportUri";
-
+        /// <summary>
+        /// ABC菌名关联文献信息搜索请求资源地址
+        /// </summary>
+        public const string ABCSearchUri = "ABCSearchUri";
+        /// <summary>
+        /// ABC菌号关联文献信息查询请求资源地址
+        /// </summary>
+        public const string ABCQueryUri = "ABCQueryUri";
+        
         /// <summary>
         /// 探索XML节点稳定性，游标，代表探索的当前位置，初始是0，代表从0开始
         /// </summary>

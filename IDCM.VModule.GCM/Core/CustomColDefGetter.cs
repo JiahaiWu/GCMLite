@@ -25,17 +25,17 @@ namespace IDCM.Core
                     Directory.CreateDirectory(cacheDir);
                 string hisCfg = cacheDir + SysConstants.tableDefNote;
                 string userCfg = ConfigurationManager.AppSettings[SysConstants.CTableDef];
+                if (File.Exists(userCfg))
+                {
+                    FileStream fs = new FileStream(userCfg, FileMode.Open);
+                    srcHashCode = HashUtil.md5HexCode(fs);
+                    fs.Close();
+                }
                 if (File.Exists(hisCfg))
                 {
                     string[] lines = FileUtil.readAsUTF8Text(hisCfg).Split(new char[] { '\n', '\r' });
-                    string hisCode = lines.Length > 0 && lines[0].Length > 0 ? lines[0].Substring(1).Trim() : null;
-                    if (File.Exists(userCfg))
-                    {
-                        FileStream fs= new FileStream(userCfg, FileMode.Open);
-                        srcHashCode = HashUtil.md5HexCode(fs);
-                        fs.Close();
-                    }
-                    if (srcHashCode == null || srcHashCode.Equals(hisCode))
+                    lastSrcHashCode = lines.Length > 0 && lines[0].Length > 0 ? lines[0].Substring(1).Trim() : null;
+                    if (srcHashCode == null || srcHashCode.Equals(lastSrcHashCode))
                     {
                         ccds = CustomColDef.parseCustomTableDef(lines);
                     }
@@ -43,13 +43,7 @@ namespace IDCM.Core
                 if(ccds==null)
                 {
                     ccds = CustomColDef.getCustomTableDef(userCfg);
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("#").Append(srcHashCode).AppendLine().AppendLine(">>Def");
-                    foreach (CustomColDef ccd in ccds)
-                    {
-                        sb.AppendLine(ccd.ToString());
-                    }
-                    FileUtil.writeToUTF8File(hisCfg, sb.ToString());
+                    lastSrcHashCode = srcHashCode;
                 }
             }
             catch (Exception ex)
@@ -67,6 +61,25 @@ namespace IDCM.Core
             return ccdCache!=null?ccdCache.Values:null;
         }
 
+        public static bool saveUpdatedHistCfg()
+        {
+            if(dirtyStatus)
+            {
+                dirtyStatus=true;
+                string cacheDir = SysConstants.initEnvDir + SysConstants.cacheDir;
+                if (!File.Exists(cacheDir))
+                    Directory.CreateDirectory(cacheDir);
+                string hisCfg = cacheDir + SysConstants.tableDefNote;
+                StringBuilder sb = new StringBuilder();
+                sb.Append("#").Append(lastSrcHashCode).AppendLine().AppendLine(">>Def");
+                foreach (CustomColDef ccd in ccdCache.Values)
+                {
+                    sb.AppendLine(ccd.ToString());
+                }
+                return FileUtil.writeToUTF8File(hisCfg, sb.ToString());
+            }
+            return false;
+        }
         public static ICollection<String> getCustomCols()
         {
             List<string> attrs = new List<string>();
@@ -86,6 +99,21 @@ namespace IDCM.Core
             ccdCache.TryGetValue(attr, out coldef);
             return coldef;
         }
+        internal static void updateCustomColDef(string attr, bool isRequired)
+        {
+            CustomColDef ccd = null;
+            if (ccdCache.TryGetValue(attr,out ccd))
+            {
+                if(ccd.IsRequire != isRequired)
+                {
+                    ccd.IsRequire = isRequired;
+                    dirtyStatus = true;
+                }
+                saveUpdatedHistCfg();
+            }
+        }
+        private volatile static bool dirtyStatus = false;
+        private static string lastSrcHashCode=null;
         private static Dictionary<string,CustomColDef> ccdCache = null;
     }
 }

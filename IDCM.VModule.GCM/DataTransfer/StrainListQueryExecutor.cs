@@ -19,7 +19,7 @@ namespace IDCM.DataTransfer
             if (authInfo != null && currentPage >= 0)
             {
                 string signInUri = ConfigurationManager.AppSettings[SysConstants.StrainListUri];
-                string url = string.Format(signInUri, new object[] { authInfo.Jsessionid, currentPage, strainnumber, strainname });
+                string url = string.Format(signInUri, new object[] { authInfo.Jsessionid, currentPage, System.Uri.EscapeDataString(strainnumber), System.Uri.EscapeDataString(strainname) });
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 log.Info("StrainListQueryExecutor Request Url=" + url);
                 request.Method = "POST";

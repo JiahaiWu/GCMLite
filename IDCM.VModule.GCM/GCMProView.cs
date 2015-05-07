@@ -70,19 +70,29 @@ namespace IDCM.VModule.GCM
                 localServManager = new LocalServManager(ctcache);
                 this.dcmDataGridView_local.AllowDrop = true;
                 this.dcmDataGridView_local.CellValueChanged += dataGridView_local_CellValueChanged;
-                this.dcmDataGridView_local.DragEnter += dataGridView_items_DragEnter;
-                this.dcmDataGridView_local.DragDrop += dataGridView_items_DragDrop;
-                this.IsInited = true;
+                this.dcmDataGridView_local.DragEnter += dataGridView_local_items_DragEnter;
+                this.dcmDataGridView_local.DragDrop += dataGridView_local_items_DragDrop;
+                this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
+                this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
+                this.dcmDataGridView_local.IsDefaultPasteAble = false;
+                
+                this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
+                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
+                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
+                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
+                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
+                this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
                 //加载GCM发布数据表
                 gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember,dcmDataGridView_gcm, dcmTreeView_gcm);
                 gcmServManager = new GCMServManager(gtcache);
                 this.dcmDataGridView_gcm.CellClick+=dataGridView_gcm_CellClicked;
+                //加载ABC WebKit
+                abcServManager = new ABCServManager(abcBrowser_abc);
                 ////////////////////////////////////////////////////
                 //设置初始化的页签
-                gcmTabControl_GCM.SelectedIndex = 0;
+                gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
                 ////////////////////////////////////////////////////
-                //设置当前控件生效与否
-                this.Enabled = this.IsInited;
+                this.IsInited = true;
             }
             catch (IDCMException ex)
             {
@@ -92,7 +102,146 @@ namespace IDCM.VModule.GCM
             }
             finally
             {
+                this.Enabled = this.IsInited;
                 this.Visible = this.Enabled;
+            }
+        }
+
+        private void OnLocalSubmitClick(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection selectedRows = dcmDataGridView_local.SelectedRows;
+            if (selectedRows != null && selectedRows.Count > 0)
+            {
+                if (gcmServManager.Signed)
+                {
+                    localServManager.publishLocalRowsToGCM(selectedRows);
+                }
+                else
+                {
+                    MessageBox.Show("请登录GCM后再提交。");
+                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
+                }
+            }else if (dcmDataGridView_local.CurrentCell != null)
+            {
+                if (gcmServManager.Signed)
+                {
+                    localServManager.publishLocalRowsToGCM(dcmDataGridView_local.CurrentRow);
+                }
+                else
+                {
+                    MessageBox.Show("请登录GCM后再提交。");
+                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
+                }
+            }
+        }
+        private void OnLocalSearchClick(object sender, EventArgs e)
+        {
+            if (dcmDataGridView_local.CurrentRow != null)
+            {
+                DataGridViewCellCollection dgvcc = dcmDataGridView_local.CurrentRow.Cells;
+                string strainId = dgvcc[ctcache.getKeyColIndex()].FormattedValue.ToString();
+                if(abcServManager.linkTo(strainId))
+                    gcmTabControl_GCM.SelectedIndex = tabPage_ABC.TabIndex;
+            }
+        }
+
+        private void OnLocalCopyClick(object sender, EventArgs e)
+        {
+            DataObject d = this.dcmDataGridView_local.GetClipboardContent();
+            Clipboard.SetDataObject(d);
+        }
+
+        private void OnLocalPasteClick(object sender, EventArgs e)
+        {
+            try
+            {
+                string s = Clipboard.GetText();
+                string[] lines = s.Split('\n');
+                int iFail = 0, iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
+                int iCol = this.dcmDataGridView_local.CurrentCell.ColumnIndex;
+                DataGridViewCell oCell;
+                foreach (string line in lines)
+                {
+                    if (iRow < this.dcmDataGridView_local.RowCount && line.Length > 0)
+                    {
+                        string[] sCells = line.Split('\t');
+                        for (int i = 0; i < sCells.GetLength(0); ++i)
+                        {
+                            if (iCol + i < this.dcmDataGridView_local.ColumnCount)
+                            {
+                                oCell = this.dcmDataGridView_local[iCol + i, iRow];
+                                if (!oCell.ReadOnly)
+                                {
+                                    if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
+                                    {
+                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
+                                        oCell.Style.BackColor = Color.Tomato;
+                                    }
+                                    else
+                                        iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
+                                }
+                            }
+                            else
+                            { break; }
+                        }
+                        iRow++;
+                    }
+                    else
+                    { break; }
+                    if (iFail > 0)
+                        MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("The data you pasted is in the wrong format for the cell");
+                return;
+            }
+        }
+
+        private void OnLocalKeyDownDetect(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                OnLocalPasteClick(sender, e);
+            }
+            if (e.Control && e.KeyCode == Keys.Insert)
+            {
+                int iRow = 0;
+                if (this.dcmDataGridView_local.CurrentCell != null)
+                {
+                    iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
+                    if (iRow < 0)
+                        iRow = 0;
+                    if (iRow < this.dcmDataGridView_local.RowCount)
+                        iRow = this.dcmDataGridView_local.RowCount;
+                }
+                else
+                {
+                    iRow = this.dcmDataGridView_local.RowCount;
+                }
+                this.dcmDataGridView_local.Rows.Insert(iRow, 1);
+            }
+        }
+
+
+        private void dataGridView_local_CustomContextMenuDetect(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if(dcmDataGridView_local.CurrentRow!=null)
+                {
+                    Point plocation=dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
+                    cellContextMenu_local.Show(dcmDataGridView_local, new Point(MousePosition.X -plocation.X, MousePosition.Y-plocation.Y));
+                }
+            }
+        }
+
+        private void dataGridView_local_columns_StateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (e.Column != null && e.StateChanged.Equals(DataGridViewElementStates.Visible))
+            {
+                CustomColDefGetter.updateCustomColDef(e.Column.Name, e.Column.Visible);
             }
         }
 
@@ -224,7 +373,7 @@ namespace IDCM.VModule.GCM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridView_items_DragEnter(object sender, DragEventArgs e)
+        private void dataGridView_local_items_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -240,7 +389,7 @@ namespace IDCM.VModule.GCM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridView_items_DragDrop(object sender, DragEventArgs e)
+        private void dataGridView_local_items_DragDrop(object sender, DragEventArgs e)
         {
             String[] recvs = (String[])e.Data.GetData(DataFormats.FileDrop, false);
             e.Effect = DragDropEffects.None;
@@ -366,6 +515,7 @@ namespace IDCM.VModule.GCM
             }
         }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        private ContextMenu cellContextMenu_local = null;
         private AsyncServInvoker servInvoker = null;
         private CTableCache ctcache = null;
         private GCMTableCache gtcache = null;
@@ -373,6 +523,5 @@ namespace IDCM.VModule.GCM
         private GCMServManager gcmServManager = null;
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
-
     }
 }

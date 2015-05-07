@@ -48,7 +48,7 @@ namespace IDCM.DataTransfer
             if (username != null && password != null)
             {
                 string signInUri = ConfigurationManager.AppSettings[SysConstants.SignInUri];
-                string url = string.Format(signInUri, new string[] { username, password });
+                string url = string.Format(signInUri, new string[] { System.Uri.EscapeDataString(username), System.Uri.EscapeDataString(password) });
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 log.Info("SignInExecutor Request Url=" + url);
                 request.Method = "POST";

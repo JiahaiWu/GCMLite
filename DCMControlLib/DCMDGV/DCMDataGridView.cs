@@ -41,17 +41,41 @@ namespace DCMControlLib
             this.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithAutoHeaderText;
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             this.RowPostPaint += OnRowPostPaint;
-            this.KeyDown += OnPasteDetect;
+            
+
             this.ColumnAdded += OnColumnsUpdated;
             this.ColumnRemoved += OnColumnsUpdated;
             this.ColumnDisplayIndexChanged += OnColumnsUpdated;
             this.ColumnNameChanged += OnColumnsUpdated;
             this.ColumnHeaderCellChanged += OnColumnsUpdated;
             this.ColumnDataPropertyNameChanged += OnColumnsUpdated;
-            this.ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
+            this.ColumnStateChanged += OnColumnStateChanged;
+            
+            
             this._customHeaderView = true;
             this.ocMenu = new Pop.OptionalContextMenu();
+            this.ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             ocMenu.OptionMenuChanged += OnOptionMenuChanged;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////
+            this._pasteAble = false;
+            this.cellCopyMenu = new ContextMenu();
+            this.cellCopyMenu.MenuItems.Add(new MenuItem("Copy", OnCopyClick));
+            this.cellCopyMenu.MenuItems.Add(new MenuItem("Paste", OnPasteClick));
+            this.KeyDown += OnKeyDownDetect;
+            this.CellMouseClick += OnCellMouseClick;
+        }
+
+
+
+        private void OnColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (ocMenu != null && !ocMenu.Visible)
+                ocMenu.clear();
+        }
+
+        private void OnOptionMenuChanged(object sender, DCMControlLib.Pop.MenuItemEventArgs e)
+        {
+            this.Columns[e.MenuItem.Text].Visible = e.MenuItem.Checked;
         }
         /// <summary>
         /// 设置Datagridview显示编号
@@ -72,32 +96,80 @@ namespace DCMControlLib
             if(ocMenu!=null && !ocMenu.Visible)
                 ocMenu.clear();
         }
+        private void OnCopyClick(object sender, EventArgs e)
+        {
+            DataObject d = this.GetClipboardContent();
+            Clipboard.SetDataObject(d);
+        }
+        /// <summary>
+        /// 从剪贴板粘贴文本型数据记录到目标区域
+        /// This will be moved to the util class so it can service any paste into a DGV
+        /// </summary>
+        private void OnPasteClick(object sender, EventArgs e)
+        {
+            try
+            {
+                string s = Clipboard.GetText();
+                string[] lines = s.Split('\n');
+                int iFail = 0, iRow = this.CurrentCell.RowIndex;
+                int iCol = this.CurrentCell.ColumnIndex;
+                DataGridViewCell oCell;
+                foreach (string line in lines)
+                {
+                    if (iRow < this.RowCount && line.Length > 0)
+                    {
+                        string[] sCells = line.Split('\t');
+                        for (int i = 0; i < sCells.GetLength(0); ++i)
+                        {
+                            if (iCol + i < this.ColumnCount)
+                            {
+                                oCell = this[iCol + i, iRow];
+                                if (!oCell.ReadOnly)
+                                {
+                                    if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
+                                    {
+                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
+                                        oCell.Style.BackColor = Color.Tomato;
+                                    }
+                                    else
+                                        iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
+                                }
+                            }
+                            else
+                            { break; }
+                        }
+                        iRow++;
+                    }
+                    else
+                    { break; }
+                    if (iFail > 0)
+                        MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("The data you pasted is in the wrong format for the cell");
+                return;
+            }
+        }
+
         /// <summary>
         /// 绑定剪贴板复制Ctrl+C、行插入 Ctrl+Insert 等快捷键处理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnPasteDetect(object sender, KeyEventArgs e)
+        private void OnKeyDownDetect(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.C)
             {
-                DataObject d = this.GetClipboardContent();
-                Clipboard.SetDataObject(d);
+                OnCopyClick(sender, e);
             }
-            if (e.Control && e.KeyCode == Keys.Insert)
+            if (_pasteAble)
             {
-                int iRow=0;
-                if(this.CurrentCell!=null)
+                if (e.Control && e.KeyCode == Keys.V)
                 {
-                    iRow= this.CurrentCell.RowIndex;
-                    if (iRow < 0)
-                        iRow = 0;
-                    if (iRow < this.RowCount)
-                        iRow = this.RowCount;
-                }else{
-                    iRow=this.RowCount;
+                    OnPasteClick(sender, e);
                 }
-                this.Rows.Insert(iRow, 1);
             }
             if(e.KeyCode==Keys.Tab)
             {
@@ -152,14 +224,27 @@ namespace DCMControlLib
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (ocMenu.Count < 1)
+                if (_customHeaderView && ocMenu!=null)
                 {
-                    foreach (DataGridViewColumn dgvc in this.Columns)
+                    if (ocMenu.Count < 1)
                     {
-                        ocMenu.addMenu(dgvc.HeaderText, dgvc.Visible);
+                        foreach (DataGridViewColumn dgvc in this.Columns)
+                        {
+                            ocMenu.addMenu(dgvc.HeaderText, dgvc.Visible);
+                        }
                     }
+                    ocMenu.Show(this, new Point(e.X, e.Y));
                 }
-                ocMenu.Show(this, new Point(e.X, e.Y));
+            }
+        }
+        private void OnCellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (_pasteAble && cellCopyMenu!=null)
+                {
+                    cellCopyMenu.Show(this, new Point(e.X, e.Y));
+                }
             }
         }
 
@@ -177,7 +262,24 @@ namespace DCMControlLib
                 }
             }
         }
+
+        [Description("Determines whether the DataGridView Cell Copy and paste supported by inner pop-up context menu.")]
+        [DefaultValue(false)]
+        [Browsable(true)]
+        public bool IsDefaultPasteAble
+        {
+            get { return _pasteAble; }
+            set
+            {
+                if (!value.Equals(_pasteAble))
+                {
+                    _pasteAble = value;
+                }
+            }
+        }
         private volatile bool _customHeaderView = true;
+        private volatile bool _pasteAble = true;
         private Pop.OptionalContextMenu ocMenu = null;
+        private ContextMenu cellCopyMenu = null;
     }
 }

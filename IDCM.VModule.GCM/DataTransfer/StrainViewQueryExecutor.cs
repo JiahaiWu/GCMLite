@@ -19,7 +19,7 @@ namespace IDCM.DataTransfer
             if (authInfo != null && id != null)
             {
                 string signInUri = ConfigurationManager.AppSettings[SysConstants.StrainViewUri];
-                string url = string.Format(signInUri, new string[] { authInfo.Jsessionid, id });
+                string url = string.Format(signInUri, new string[] { authInfo.Jsessionid, System.Uri.EscapeDataString(id) });
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 //log.Info("StrainViewQueryExecutor Request Url=" + url);
                 request.Method = "POST";
