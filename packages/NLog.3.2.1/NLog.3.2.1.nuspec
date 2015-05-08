@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NLog</id>
-    <version>3.2.0.0</version>
+    <version>3.2.1</version>
     <title>NLog</title>
     <authors>Kim Christensen</authors>
     <owners>Kim Christensen</owners>
@@ -15,6 +15,5 @@ This package installs NLog.dll with includes core logging functionality.
 For your main project also need to install "NLog Configuration" package.</description>
     <summary>NLog - Advanced .NET and Silverlight Logging</summary>
     <language>en-US</language>
-    <tags>logging log tracing logfiles</tags>
   </metadata>
 </package>

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NLog.Schema</id>
-    <version>3.2.0.0</version>
+    <version>3.2.1</version>
     <title>NLog Schema for Intellisense(TM)</title>
     <authors>Kim Christensen</authors>
     <owners>Kim Christensen</owners>

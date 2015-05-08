@@ -280,7 +280,10 @@ namespace IDCM.VModule.GCM
                 string lastdumpPath = FileUtil.readAsUTF8Text(lastDump).Trim();
                 if (lastdumpPath.Length > 0 && File.Exists(lastdumpPath))
                 {
+#if DEBUG
+#else
                     localServManager.importData(lastdumpPath);
+#endif
                 }
             }
         }
