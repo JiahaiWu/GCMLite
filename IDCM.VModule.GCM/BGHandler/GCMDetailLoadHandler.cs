@@ -28,15 +28,22 @@ namespace IDCM.BGHandler
         public override Object doWork(bool cancel, List<Object> args)
         {
             bool res = false;
-            DCMPublisher.noteJobProgress(0);
-            string sid = null;
-            if (gtcache.overViewRowIndexValid(rowIndex) && !gtcache.overViewFocusRecently(rowIndex))
-            {
-                sid = gtcache.getSIDByRowIdx(rowIndex);
-                if (sid != null && sid.Length > 0)
+            try{
+                DCMPublisher.noteJobProgress(0);
+                string sid = null;
+                if (gtcache.overViewRowIndexValid(rowIndex) && !gtcache.overViewFocusRecently(rowIndex))
                 {
-                    res = GCMItemsLoader.loadDetailViewData(gtcache, sid,authInfo);
+                    sid = gtcache.getSIDByRowIdx(rowIndex);
+                    if (sid != null && sid.Length > 0)
+                    {
+                        res = GCMItemsLoader.loadDetailViewData(gtcache, sid,authInfo);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.Info("ERROR: GCM细览数据查询失败！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: GCM 细览数据查询失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Tip);
             }
             return new object[] { res };
         }

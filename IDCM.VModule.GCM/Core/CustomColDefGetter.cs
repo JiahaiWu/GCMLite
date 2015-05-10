@@ -42,11 +42,13 @@ namespace IDCM.Core
                 }
                 if(ccds==null)
                 {
+                    if (!File.Exists(userCfg))
+                        throw new IDCMException("缺少数据表配置文件！ @path="+ userCfg);
                     ccds = CustomColDef.getCustomTableDef(userCfg);
                     lastSrcHashCode = srcHashCode;
                 }
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
                 throw new IDCMException("数据表配置文件读取异常", ex);
             }

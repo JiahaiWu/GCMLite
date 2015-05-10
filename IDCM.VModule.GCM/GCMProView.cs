@@ -30,8 +30,13 @@ namespace IDCM.VModule.GCM
     {
         public GCMProView()
         {
-            checkWorkSpace();
             InitializeComponent();
+            this.Load+=GCMProView_Load;
+        }
+
+        private void GCMProView_Load(object sender, EventArgs e)
+        {
+            checkWorkSpace();
             InitializeMsgDriver();
             InitializeGCMPro();
             startLocalDataRender();
@@ -52,6 +57,8 @@ namespace IDCM.VModule.GCM
             servInvoker.OnLocalDataImported += OnLocalDataImported;
             servInvoker.OnSimpleMsgTip+=OnSimpleMsgTip;
             servInvoker.OnGCMItemDetailRender += OnGCMItemDetailRender;
+            servInvoker.OnBottomSatusChange += OnBottomSatusChange;
+            servInvoker.OnProgressChange += OnProgressChange;
         }
         /// <summary>
         /// 初始化流程
@@ -92,6 +99,7 @@ namespace IDCM.VModule.GCM
                 ////////////////////////////////////////////////////
                 //设置初始化的页签
                 gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
+                opCond= OpConditionType.Local_View;
                 ////////////////////////////////////////////////////
                 this.IsInited = true;
             }
@@ -262,11 +270,8 @@ namespace IDCM.VModule.GCM
             }
             if (ProcessUtil.checkDuplicateProcess() != null)
             {
-#if DEBUG
-#else
                 MessageBox.Show("当前工作空间下工作进程已存在，确认退出当前实例。", "Notice", MessageBoxButtons.OK);
                 Application.Exit();
-#endif
             }
         }
 
@@ -342,6 +347,26 @@ namespace IDCM.VModule.GCM
                 showLoginDlg();
             }
         }
+        private void OnBottomSatusChange(object msgTag, params object[] vals)
+        {
+            if (GCMStatusChanged != null)
+            {
+                GCMStatusChanged((msgTag != null) ? msgTag.ToString() : "Ready");
+            }
+        }
+        private void OnProgressChange(object msgTag, params object[] vals)
+        {
+            if (GCMProgressInvoke != null)
+            {
+                if (msgTag.GetType().Equals(typeof(bool)))
+                {
+                    GCMProgressInvoke((bool)msgTag);
+                }
+            }
+        }
+
+        
+
         private void OnLocalDataExported(object msgTag, params object[] vals)
         {
             MsgDriver.DCMPublisher.noteSimpleMsg("本地数据导出完成");
@@ -428,11 +453,11 @@ namespace IDCM.VModule.GCM
                 localServManager.importData(fpath);
             }
         }
-        public void exportData()
+        public void exportLocalData()
         {
             localServManager.exportData(this.dcmDataGridView_local);
         }
-        public void checkData()
+        public void checkLocalData()
         {
             localServManager.checkData(this.dcmDataGridView_local);
         }
@@ -450,7 +475,7 @@ namespace IDCM.VModule.GCM
         }
         private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
         {
-            if (e.TabPageIndex == 1)
+            if (e.TabPageIndex == tabPageEx_GCM.TabIndex)
             {
                 if (gcmServManager.Signed)
                 {
@@ -461,6 +486,10 @@ namespace IDCM.VModule.GCM
                     showLoginDlg();
                 }
             }
+            else if (e.TabPageIndex == tabPage_ABC.TabIndex)
+                notifyOpConditions(OpConditionType.ABC_View);
+            else
+                notifyOpConditions(OpConditionType.Local_View);
         }
 
         private void showLoginDlg()
@@ -474,6 +503,7 @@ namespace IDCM.VModule.GCM
                 else
                     textBox_pwd.Focus();
             }));
+            notifyOpConditions(OpConditionType.GCM_Login);
         }
 
         private void showGCMDataDlg()
@@ -484,6 +514,7 @@ namespace IDCM.VModule.GCM
                 splitContainer_GCM.Panel1Collapsed = true;
                 splitContainer_GCM.Panel2Collapsed = false;
             }));
+            notifyOpConditions(OpConditionType.GCM_View);
         }
 
 
@@ -522,32 +553,24 @@ namespace IDCM.VModule.GCM
                 return servInvoker;
             }
         }
-        private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
-        private ContextMenu cellContextMenu_local = null;
-        private AsyncServInvoker servInvoker = null;
-        private CTableCache ctcache = null;
-        private GCMTableCache gtcache = null;
-        private volatile bool IsInited = false;
-        private GCMServManager gcmServManager = null;
-        private LocalServManager localServManager = null;
-        private ABCServManager abcServManager = null;
 
-        public void addDataRow()
+
+        public void addLocalDataRow()
         {
             throw new NotImplementedException();
         }
 
-        public void delDataRow()
+        public void delLocalDataRow()
         {
             throw new NotImplementedException();
         }
 
-        public void publishData()
+        public void publishLocalData()
         {
             throw new NotImplementedException();
         }
 
-        public void pullData()
+        public void pullGCMData()
         {
             throw new NotImplementedException();
         }
@@ -557,22 +580,17 @@ namespace IDCM.VModule.GCM
             throw new NotImplementedException();
         }
 
-        public void saveData()
-        {
-            throw new NotImplementedException();
-        }
-
         public void tryQuit()
         {
             throw new NotImplementedException();
         }
 
-        public void filterToRecvData()
+        public void filterToRecvLocalData()
         {
             throw new NotImplementedException();
         }
 
-        public void clearAll()
+        public void clearAllLocalData()
         {
             throw new NotImplementedException();
         }
@@ -592,9 +610,59 @@ namespace IDCM.VModule.GCM
             throw new NotImplementedException();
         }
 
-        public void saveData(bool p)
+        public void saveLocalData(bool useDefaultPath = true)
         {
             throw new NotImplementedException();
+        }
+        public OpConditionType OpConditions
+        {
+            get
+            {
+                if (opCond.Equals(OpConditionType.Local_View)||opCond.Equals(OpConditionType.Local_Processing))
+                    return RunningHandlerNoter.checkForIdle() ? opCond : OpConditionType.Local_Processing;
+                else
+                    return opCond;
+            }
+        }
+        private void notifyOpConditions(OpConditionType opType)
+        {
+            if (opCond != opType)
+            {
+                opCond = opType;
+                ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        if (GCMOpConditionChanged != null)
+                            GCMOpConditionChanged(OpConditions);
+                    }));
+            }
+        }
+        private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        private ContextMenu cellContextMenu_local = null;
+        private AsyncServInvoker servInvoker = null;
+        private CTableCache ctcache = null;
+        private GCMTableCache gtcache = null;
+        private volatile bool IsInited = false;
+        private GCMServManager gcmServManager = null;
+        private LocalServManager localServManager = null;
+        private ABCServManager abcServManager = null;
+        private OpConditionType opCond = OpConditionType.UnKnown;
+
+        public event GCMStatusHandler GCMStatusChanged;
+        public event GCMProgressHandler GCMProgressInvoke;
+        public event GCMOpConditionHandler GCMOpConditionChanged;
+        //异步消息事件委托形式化声明
+        public delegate void GCMOpConditionHandler(OpConditionType opType);
+        public delegate void GCMProgressHandler(bool running);
+        public delegate void GCMStatusHandler(string status);
+
+        public enum OpConditionType
+        {
+            Local_View=0,
+            Local_Processing=1,
+            GCM_Login=2,
+            GCM_View=3,
+            ABC_View=4,
+            UnKnown=5
         }
     }
 }

@@ -27,8 +27,17 @@ namespace IDCM.BGHandler
         public override Object doWork(bool cancel, List<Object> args)
         {
             bool res = false;
-            DCMPublisher.noteJobProgress(0);
-            res = GCMItemsLoader.loadOverViewData(gtcache, authInfo);
+            
+            try
+            {
+                DCMPublisher.noteJobProgress(0);
+                res = GCMItemsLoader.loadOverViewData(gtcache, authInfo);
+            }
+            catch (Exception ex)
+            {
+                log.Info("ERROR: GCM 概览数据查询失败！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: GCM 概览数据查询失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Tip);
+            }
             return new object[] { res };
         }
         /// <summary>

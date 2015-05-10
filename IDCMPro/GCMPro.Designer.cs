@@ -59,8 +59,8 @@
             this.toolStripButton_import = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
-            this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
+            this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -344,20 +344,21 @@
             this.toolStripButton_add.Text = "toolStripButton1";
             this.toolStripButton_add.Click += new System.EventHandler(this.toolStripButton_add_Click);
             // 
-            // gcmProView_lite
-            // 
-            this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcmProView_lite.Location = new System.Drawing.Point(0, 55);
-            this.gcmProView_lite.Name = "gcmProView_lite";
-            this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);
-            this.gcmProView_lite.TabIndex = 3;
-            // 
             // toolStripLabel_OfficialNotice
             // 
             this.toolStripLabel_OfficialNotice.ForeColor = System.Drawing.Color.Blue;
             this.toolStripLabel_OfficialNotice.Name = "toolStripLabel_OfficialNotice";
             this.toolStripLabel_OfficialNotice.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.toolStripLabel_OfficialNotice.Size = new System.Drawing.Size(4, 28);
+            // 
+            // gcmProView_lite
+            // 
+            this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcmProView_lite.Enabled = false;
+            this.gcmProView_lite.Location = new System.Drawing.Point(0, 55);
+            this.gcmProView_lite.Name = "gcmProView_lite";
+            this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);
+            this.gcmProView_lite.TabIndex = 3;
             // 
             // GCMPro
             // 
@@ -372,6 +373,7 @@
             this.MainMenuStrip = this.menuStrip_gcmlite;
             this.Name = "GCMPro";
             this.Text = "GCMPro";
+            this.Load += new System.EventHandler(this.GCMPro_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip_gcmlite.ResumeLayout(false);
