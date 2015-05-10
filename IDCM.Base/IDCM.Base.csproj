@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AbsInterfaces\AbsBGHandler.cs" />
     <Compile Include="ComPO\ExportType.cs" />
+    <Compile Include="Utils\ProcessUtil.cs" />
     <Compile Include="Utils\Base64CShared.cs" />
     <Compile Include="Utils\Base64DESEncrypt.cs" />
     <Compile Include="Utils\Base64SharedI.cs" />

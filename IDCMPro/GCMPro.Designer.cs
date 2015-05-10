@@ -125,18 +125,21 @@
             this.openAltOToolStripMenuItem.Name = "openAltOToolStripMenuItem";
             this.openAltOToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.openAltOToolStripMenuItem.Text = "Open (Alt+O)";
+            this.openAltOToolStripMenuItem.Click += new System.EventHandler(this.openAltOToolStripMenuItem_Click);
             // 
             // saveAltSToolStripMenuItem
             // 
             this.saveAltSToolStripMenuItem.Name = "saveAltSToolStripMenuItem";
             this.saveAltSToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveAltSToolStripMenuItem.Text = "Save (Alt+S)";
+            this.saveAltSToolStripMenuItem.Click += new System.EventHandler(this.saveAltSToolStripMenuItem_Click);
             // 
             // quitAltQToolStripMenuItem
             // 
             this.quitAltQToolStripMenuItem.Name = "quitAltQToolStripMenuItem";
             this.quitAltQToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.quitAltQToolStripMenuItem.Text = "Quit(Alt+Q)";
+            this.quitAltQToolStripMenuItem.Click += new System.EventHandler(this.quitAltQToolStripMenuItem_Click);
             // 
             // toolStripMenuItem_tool
             // 
@@ -155,30 +158,35 @@
             this.validationAltVToolStripMenuItem.Name = "validationAltVToolStripMenuItem";
             this.validationAltVToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.validationAltVToolStripMenuItem.Text = "Validation(Alt+V)";
+            this.validationAltVToolStripMenuItem.Click += new System.EventHandler(this.validationAltVToolStripMenuItem_Click);
             // 
             // filterAltRToolStripMenuItem
             // 
             this.filterAltRToolStripMenuItem.Name = "filterAltRToolStripMenuItem";
             this.filterAltRToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.filterAltRToolStripMenuItem.Text = "Filter(Alt+R)";
+            this.filterAltRToolStripMenuItem.Click += new System.EventHandler(this.filterAltRToolStripMenuItem_Click);
             // 
             // exportAltEToolStripMenuItem
             // 
             this.exportAltEToolStripMenuItem.Name = "exportAltEToolStripMenuItem";
             this.exportAltEToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.exportAltEToolStripMenuItem.Text = "Export(Alt+E)";
+            this.exportAltEToolStripMenuItem.Click += new System.EventHandler(this.exportAltEToolStripMenuItem_Click);
             // 
             // searchAltFToolStripMenuItem
             // 
             this.searchAltFToolStripMenuItem.Name = "searchAltFToolStripMenuItem";
             this.searchAltFToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.searchAltFToolStripMenuItem.Text = "Search(Alt+F)";
+            this.searchAltFToolStripMenuItem.Click += new System.EventHandler(this.searchAltFToolStripMenuItem_Click);
             // 
             // clearAllAltCToolStripMenuItem
             // 
             this.clearAllAltCToolStripMenuItem.Name = "clearAllAltCToolStripMenuItem";
             this.clearAllAltCToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.clearAllAltCToolStripMenuItem.Text = "Clear All(Alt+C)";
+            this.clearAllAltCToolStripMenuItem.Click += new System.EventHandler(this.clearAllAltCToolStripMenuItem_Click);
             // 
             // configurationCToolStripMenuItem
             // 
@@ -200,12 +208,14 @@
             this.webSupportAltHToolStripMenuItem.Name = "webSupportAltHToolStripMenuItem";
             this.webSupportAltHToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.webSupportAltHToolStripMenuItem.Text = "Web Support(Alt+H)";
+            this.webSupportAltHToolStripMenuItem.Click += new System.EventHandler(this.webSupportAltHToolStripMenuItem_Click);
             // 
             // aboutGCMLiteAltAToolStripMenuItem
             // 
             this.aboutGCMLiteAltAToolStripMenuItem.Name = "aboutGCMLiteAltAToolStripMenuItem";
             this.aboutGCMLiteAltAToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.aboutGCMLiteAltAToolStripMenuItem.Text = "About GCMLite(Alt+A)";
+            this.aboutGCMLiteAltAToolStripMenuItem.Click += new System.EventHandler(this.aboutGCMLiteAltAToolStripMenuItem_Click);
             // 
             // toolStrip_gcmlite
             // 

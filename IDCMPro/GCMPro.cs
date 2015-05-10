@@ -11,6 +11,7 @@ using IDCM.VModule.GCM;
 using System.IO;
 using IDCM.Base;
 using IDCM.Base.Utils;
+using IDCM.DataTransfer;
 
 namespace IDCM
 {
@@ -25,8 +26,26 @@ namespace IDCM
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作
+        /// </summary>
+        public void checkWorkSpace()
+        {
+            log.Debug("checkWorkSpace(...)");
+            if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
+            {
+                Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
+            }
+            if (ProcessUtil.checkDuplicateProcess() != null)
+            {
+                MessageBox.Show("当前工作空间下工作进程已存在，确认退出当前实例。", "Notice", MessageBoxButtons.OK);
+                Application.Exit();
+            }
+        }
+
         private void GCMPro_Load(object sender, EventArgs e)
         {
+            checkWorkSpace();
             this.FormClosed += GCMPro_FormClosed;
             gcmProView_lite.GCMStatusChanged += ServInvoker_OnBottomSatusChange;
             gcmProView_lite.GCMProgressInvoke += ServInvoker_OnProgressChange;
@@ -189,7 +208,7 @@ namespace IDCM
 
         private void toolStripButton_search_Click(object sender, EventArgs e)
         {
-            gcmProView_lite.findData();
+            gcmProView_lite.frontFindData();
         }
 
         private void toolStripTextBox_search_Click(object sender, EventArgs e)
@@ -204,7 +223,58 @@ namespace IDCM
 
         private void openWebHelpDocument()
         {
-            throw new NotImplementedException();
+            gcmProView_lite.requestHelpDoc();
+        }
+
+        private void openAltOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.openImportDocument();
+        }
+
+        private void saveAltSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.saveLocalData(false);
+        }
+
+        private void quitAltQToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void validationAltVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.checkLocalData();
+        }
+
+        private void filterAltRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.filterToRecvLocalData();
+        }
+
+        private void exportAltEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.exportLocalData();
+        }
+
+        private void searchAltFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.frontFindData();
+        }
+
+        private void clearAllAltCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.clearAllLocalData();
+        }
+
+        private void webSupportAltHToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openWebHelpDocument();
+        }
+
+        private void aboutGCMLiteAltAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //AboutDlg aboutDlg = new AboutDlg();
+            //aboutDlg.ShowDialog();
         }
         /******************************************************************
          * 键盘事件处理方法
@@ -220,7 +290,8 @@ namespace IDCM
                 case Keys.Alt | Keys.S:
                     gcmProView_lite.saveLocalData();break;
                 case Keys.Alt | Keys.Q:
-                    gcmProView_lite.tryQuit();break;
+                    this.Close();
+                    break;
                 case Keys.Alt | Keys.V:
                     gcmProView_lite.checkLocalData();break;
                 case Keys.Alt | Keys.R:
@@ -230,7 +301,7 @@ namespace IDCM
                 case Keys.Alt | Keys.C:
                     gcmProView_lite.clearAllLocalData();break;
                 case Keys.Alt | Keys.F:
-                    gcmProView_lite.findData();break;
+                    gcmProView_lite.frontFindData();break;
                 case Keys.Alt | Keys.H:
                     openWebHelpDocument();break;
                 case Keys.Alt | Keys.A:
@@ -239,13 +310,13 @@ namespace IDCM
                     gcmProView_lite.checkLocalData();
                     break;
                 case Keys.Control | Keys.F:
-                    gcmProView_lite.openFindDialog();
+                    gcmProView_lite.frontFindData();
                     break;
                 case Keys.Control | Keys.N:
-                    gcmProView_lite.findNext();
+                    gcmProView_lite.frontFindNext();
                     break;
                 case Keys.Control | Keys.P:
-                    gcmProView_lite.findPrev();
+                    gcmProView_lite.frontFindPrev();
                     break;
                 case Keys.Control | Keys.S://Ctrl+S按键处理
                     gcmProView_lite.saveLocalData(true);
@@ -261,5 +332,7 @@ namespace IDCM
             throw new NotImplementedException();
         }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
+
     }
 }

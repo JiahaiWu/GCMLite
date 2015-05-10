@@ -19,6 +19,7 @@ using IDCM.BGHandlerManager;
 using System.Collections.Concurrent;
 using IDCM.ComPO;
 using IDCM.DataTransfer;
+using IDCM.Forms;
 
 namespace IDCM.VModule.GCM
 {
@@ -36,7 +37,6 @@ namespace IDCM.VModule.GCM
 
         private void GCMProView_Load(object sender, EventArgs e)
         {
-            checkWorkSpace();
             InitializeMsgDriver();
             InitializeGCMPro();
             startLocalDataRender();
@@ -71,37 +71,46 @@ namespace IDCM.VModule.GCM
                 //////////////////////////////////////////////////////
                 //加载本地数据表的字段配置
                 ICollection<CustomColDef> ccds = CustomColDefGetter.getCustomTableDef();
-                ctcache = new CTableCache(dcmDataGridView_local,ccds,ccds.First().Attr);
-                ////////////////////////////////////////////////////
-                //设定本地数据表属性及事件处理方法
-                localServManager = new LocalServManager(ctcache);
-                this.dcmDataGridView_local.AllowDrop = true;
-                this.dcmDataGridView_local.CellValueChanged += dataGridView_local_CellValueChanged;
-                this.dcmDataGridView_local.DragEnter += dataGridView_local_items_DragEnter;
-                this.dcmDataGridView_local.DragDrop += dataGridView_local_items_DragDrop;
-                this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
-                this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
-                this.dcmDataGridView_local.IsDefaultPasteAble = false;
-                this.dcmDataGridView_local.AllowUserToOrderColumns = true;
+                if (ccds != null && ccds.Count > 0)
+                {
+                    ctcache = new CTableCache(dcmDataGridView_local, ccds, ccds.First().Attr);
+                    ////////////////////////////////////////////////////
+                    //设定本地数据表属性及事件处理方法
+                    localServManager = new LocalServManager(ctcache);
+                    this.dcmDataGridView_local.AllowDrop = true;
+                    this.dcmDataGridView_local.CellValueChanged += dataGridView_local_CellValueChanged;
+                    this.dcmDataGridView_local.DragEnter += dataGridView_local_items_DragEnter;
+                    this.dcmDataGridView_local.DragDrop += dataGridView_local_items_DragDrop;
+                    this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
+                    this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
+                    this.dcmDataGridView_local.IsDefaultPasteAble = false;
+                    this.dcmDataGridView_local.AllowUserToOrderColumns = true;
 
-                this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
-                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
-                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
-                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
-                this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
-                this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
-                //加载GCM发布数据表
-                gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember,dcmDataGridView_gcm, dcmTreeView_gcm);
-                gcmServManager = new GCMServManager(gtcache);
-                this.dcmDataGridView_gcm.CellClick+=dataGridView_gcm_CellClicked;
-                //加载ABC WebKit
-                abcServManager = new ABCServManager(abcBrowser_abc);
-                ////////////////////////////////////////////////////
-                //设置初始化的页签
-                gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
-                opCond= OpConditionType.Local_View;
-                ////////////////////////////////////////////////////
-                this.IsInited = true;
+                    this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
+                    this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
+                    localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
+                    localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
+                    localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
+                    //加载GCM发布数据表
+                    gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember, dcmDataGridView_gcm, dcmTreeView_gcm);
+                    gcmServManager = new GCMServManager(gtcache);
+                    this.dcmDataGridView_gcm.CellClick += dataGridView_gcm_CellClicked;
+                    gcmFrontFindDlg = new GCMFrontFindDlg(dcmDataGridView_gcm);
+                    gcmFrontFindDlg.setCellHit += new GCMFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
+                    gcmFrontFindDlg.cancelCellHit += new GCMFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
+                    //加载ABC WebKit
+                    abcServManager = new ABCServManager(abcBrowser_abc);
+                    ////////////////////////////////////////////////////
+                    //设置初始化的页签
+                    gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
+                    opCond = OpConditionType.Local_View;
+                    ////////////////////////////////////////////////////
+                    this.IsInited = true;
+                }
             }
             catch (IDCMException ex)
             {
@@ -114,6 +123,30 @@ namespace IDCM.VModule.GCM
                 this.Enabled = this.IsInited;
                 this.Visible = this.Enabled;
             }
+        }
+
+        private void setDGVCellHit(DataGridViewCell cell)
+        {
+            if (cell.Visible == false)
+                return;
+            cell.DataGridView.EndEdit();
+            int colCount = DGVUtil.getTextColumnCount(cell.DataGridView);
+            DataGridViewCell rightCell = cell.DataGridView.Rows[cell.RowIndex].Cells[colCount - 1];
+            while (rightCell.Visible == false && rightCell.ColumnIndex > -1)
+            {
+                rightCell = rightCell.OwningRow.Cells[rightCell.ColumnIndex - 1];
+            }
+            cell.DataGridView.CurrentCell = rightCell;
+            cell.DataGridView.CurrentCell = cell;
+            cell.Selected = true;
+            cell.DataGridView.BeginEdit(true);
+        }
+        private void cancelDGVCellHit(DataGridViewCell cell)
+        {
+            if (cell.Visible == false)
+                return;
+            cell.DataGridView.EndEdit();
+            cell.Selected = false;
         }
 
         private void OnLocalSubmitClick(object sender, EventArgs e)
@@ -258,22 +291,6 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        /// <summary>
-        /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作
-        /// </summary>
-        public void checkWorkSpace()
-        {
-            log.Debug("checkWorkSpace(...)");
-            if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
-            {
-                Directory.CreateDirectory(SysConstants.initEnvDir +SysConstants.cacheDir);
-            }
-            if (ProcessUtil.checkDuplicateProcess() != null)
-            {
-                MessageBox.Show("当前工作空间下工作进程已存在，确认退出当前实例。", "Notice", MessageBoxButtons.OK);
-                Application.Exit();
-            }
-        }
 
         private void startLocalDataRender()
         {
@@ -546,23 +563,24 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        public AsyncServInvoker ServInvoker
-        {
-            get
-            {
-                return servInvoker;
-            }
-        }
-
-
         public void addLocalDataRow()
         {
-            throw new NotImplementedException();
+            dcmDataGridView_local.Rows.Add();
         }
 
         public void delLocalDataRow()
         {
-            throw new NotImplementedException();
+            if (dcmDataGridView_local.SelectedRows != null)
+            {
+                foreach(DataGridViewRow dgvr in dcmDataGridView_local.SelectedRows)
+                {
+                    dcmDataGridView_local.Rows.Remove(dgvr);
+                }
+                
+            }else if (dcmDataGridView_local.CurrentRow != null)
+            {
+                dcmDataGridView_local.Rows.RemoveAt(dcmDataGridView_local.CurrentRow.Index);
+            }
         }
 
         public void publishLocalData()
@@ -574,15 +592,46 @@ namespace IDCM.VModule.GCM
         {
             throw new NotImplementedException();
         }
-
-        public void findData()
+        public void requestHelpDoc()
         {
-            throw new NotImplementedException();
+            HelpDocRequester.requestHelpDoc();
         }
-
-        public void tryQuit()
+        public void frontFindData()
         {
-            throw new NotImplementedException();
+            if (opCond.Equals(OpConditionType.Local_View) || opCond.Equals(OpConditionType.Local_Processing))
+            {
+                localFrontFindDlg.BringToFront();
+                localFrontFindDlg.Visible = true;
+                localFrontFindDlg.Show();
+            }
+            else if (opCond.Equals(OpConditionType.GCM_View))
+            {
+                gcmFrontFindDlg.BringToFront();
+                gcmFrontFindDlg.Visible = true;
+                gcmFrontFindDlg.Show();
+            }
+        }
+        public void frontFindNext()
+        {
+            if (opCond.Equals(OpConditionType.Local_View) || opCond.Equals(OpConditionType.Local_Processing))
+            {
+                localFrontFindDlg.findDown();
+            }
+            else if (opCond.Equals(OpConditionType.GCM_View))
+            {
+                gcmFrontFindDlg.findDown();
+            }
+        }
+        public void frontFindPrev()
+        {
+            if (opCond.Equals(OpConditionType.Local_View) || opCond.Equals(OpConditionType.Local_Processing))
+            {
+                localFrontFindDlg.findRev();
+            }
+            else if (opCond.Equals(OpConditionType.GCM_View))
+            {
+                gcmFrontFindDlg.findRev();
+            }
         }
 
         public void filterToRecvLocalData()
@@ -592,27 +641,27 @@ namespace IDCM.VModule.GCM
 
         public void clearAllLocalData()
         {
-            throw new NotImplementedException();
-        }
-
-        public void openFindDialog()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void findNext()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void findPrev()
-        {
-            throw new NotImplementedException();
+            if(opCond.Equals(OpConditionType.Local_View))
+            {
+                this.dcmDataGridView_local.Rows.Clear();
+            }
         }
 
         public void saveLocalData(bool useDefaultPath = true)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (!File.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
+                {
+                    Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
+                }
+                string dumppath = doExitDump();
+                FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
+            }
+            catch (Exception ex)
+            {
+                log.Error("退出操作执行失败！ ", ex);
+            }
         }
         public OpConditionType OpConditions
         {
@@ -638,6 +687,8 @@ namespace IDCM.VModule.GCM
         }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private ContextMenu cellContextMenu_local = null;
+        private LocalFrontFindDlg localFrontFindDlg = null;
+        private GCMFrontFindDlg gcmFrontFindDlg = null;
         private AsyncServInvoker servInvoker = null;
         private CTableCache ctcache = null;
         private GCMTableCache gtcache = null;

@@ -88,6 +88,7 @@
     <Compile Include="BGHandler\XMLImportHandler.cs" />
     <Compile Include="ComponentUtil\ControlAsyncUtil.cs" />
     <Compile Include="ComponentUtil\ControlUtil.cs" />
+    <Compile Include="ComponentUtil\DGVUtil.cs" />
     <Compile Include="ComponentUtil\ProcessUtil.cs" />
     <Compile Include="ComPO\AuthInfo.cs" />
     <Compile Include="ComPO\HelpDocConstants.cs" />
@@ -121,6 +122,18 @@
     <Compile Include="Forms\ExportTypeDlg.Designer.cs">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GCMFrontFindDlg.cs" >
+	<SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GCMFrontFindDlg.Designer.cs" >
+	<DependentUpon>GCMFrontFindDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LocalFrontFindDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LocalFrontFindDlg.Designer.cs">
+      <DependentUpon>LocalFrontFindDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MessageDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +160,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExportTypeDlg.resx">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GCMFrontFindDlg.resx" >
+	 <DependentUpon>GCMFrontFindDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LocalFrontFindDlg.resx">
+      <DependentUpon>LocalFrontFindDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageDlg.resx">
       <DependentUpon>MessageDlg.cs</DependentUpon>

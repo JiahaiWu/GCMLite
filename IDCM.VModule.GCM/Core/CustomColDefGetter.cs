@@ -24,7 +24,7 @@ namespace IDCM.Core
                 if (!File.Exists(cacheDir))
                     Directory.CreateDirectory(cacheDir);
                 string hisCfg = cacheDir + SysConstants.tableDefNote;
-                string userCfg = ConfigurationManager.AppSettings[SysConstants.CTableDef];
+                string userCfg = Path.GetDirectoryName(SysConstants.exePath) + Path.DirectorySeparatorChar + ConfigurationManager.AppSettings[SysConstants.CTableDef];
                 if (File.Exists(userCfg))
                 {
                     FileStream fs = new FileStream(userCfg, FileMode.Open);
@@ -42,10 +42,20 @@ namespace IDCM.Core
                 }
                 if(ccds==null)
                 {
+#if DEBUG
+                    if (!userCfg.Contains("IDE"))
+                    {
+                        if (!File.Exists(userCfg))
+                            throw new IDCMException("缺少数据表配置文件！ @path=" + userCfg);
+                        ccds = CustomColDef.getCustomTableDef(userCfg);
+                        lastSrcHashCode = srcHashCode;
+                    }
+#else
                     if (!File.Exists(userCfg))
                         throw new IDCMException("缺少数据表配置文件！ @path="+ userCfg);
                     ccds = CustomColDef.getCustomTableDef(userCfg);
                     lastSrcHashCode = srcHashCode;
+#endif
                 }
             }
             catch (IOException ex)
