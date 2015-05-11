@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GCMPub_Validation"
+    targetNamespace="http://tempuri.org/GCMPub_Validation.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/GCMPub_Validation.xsd"
+    xmlns:mstns="http://tempuri.org/GCMPub_Validation.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:simpleType name="date-or-empty">
+    <xs:union memberTypes="xs:date">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value=""/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:element name="strains" >
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="strain" minOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="strain">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="strain_number" type="xs:string"  />
+        <xs:element name="other_collection_numbers" type="xs:string" minOccurs="0" />
+        <xs:element name="genus_name" type="xs:string"  />
+        <xs:element name="species_epithet" type="xs:string" minOccurs="0" />
+        <xs:element name="subspecies_name" type="xs:string" minOccurs="0" />
+        <xs:element name="variety_name" type="xs:string" minOccurs="0" />
+        <xs:element name="author" type="xs:string" minOccurs="0" />
+
+        <xs:element name="organism_type" >
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Antibody" />
+              <xs:enumeration value="Archaea" />
+              <xs:enumeration value="Bacteria" />
+              <xs:enumeration value="Fungi" />
+              <xs:enumeration value="Microalgae" />
+              <xs:enumeration value="Phage" />
+              <xs:enumeration value="Virus" />
+              <xs:enumeration value="Yeast" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+
+        <xs:element name="history_of_deposit" type="xs:string" minOccurs="0" />
+
+        <xs:element name="date_of_isolation" minOccurs="0" type="date-or-empty">
+        </xs:element>
+        <xs:element name="isolated_from" type="xs:string" minOccurs="0" />
+        <xs:element name="geographic_origin" type="xs:string" minOccurs="0" />
+
+        <xs:element name="status" minOccurs="0" >
+          <xs:simpleType>
+            <xs:restriction base="xs:string" >
+              <xs:enumeration value="Type" />
+              <xs:enumeration value="No" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+
+        <xs:element name="type_strain" type="xs:string" minOccurs="0" />
+        <xs:element name="optimum_temperature_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="maximum_temperature_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="minimum_temperature_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="medium" type="xs:string" minOccurs="0" />
+        <xs:element name="application" type="xs:string" minOccurs="0" />
+        <xs:element name="literature" type="xs:string" minOccurs="0" />
+        <xs:element name="soursurl" type="xs:string" minOccurs="0" />
+        <xs:element name="accession_number" type="xs:string" minOccurs="0" />
+        <xs:element name="sequence_type" type="xs:string" minOccurs="0" />
+        <xs:element name="sequence_name" type="xs:string" minOccurs="0" />
+        <xs:element name="description" type="xs:string" minOccurs="0" />
+        <xs:element name="sequence" type="xs:string" minOccurs="0" />
+        <xs:element name="length" type="xs:string" minOccurs="0" />
+        <xs:element name="primer" type="xs:string" minOccurs="0" />
+        <xs:element name="sequencing_method" type="xs:string" minOccurs="0" />
+        <xs:element name="sequencing_time" type="xs:string" minOccurs="0" />
+        <xs:element name="sequencing_image" type="xs:string" minOccurs="0" />
+        <xs:element name="medium_number" type="xs:string" minOccurs="0" />
+        <xs:element name="medium_name" type="xs:string" minOccurs="0" />
+        <xs:element name="composition" type="xs:string" minOccurs="0" />
+        <xs:element name="collection" type="xs:string" minOccurs="0" />
+        <xs:element name="heat_resistance" type="xs:string" minOccurs="0" />
+        <xs:element name="altitude" type="xs:string" minOccurs="0" />
+        <xs:element name="humidity_for_environment" type="xs:string" minOccurs="0" />
+        <xs:element name="ethanol_conditions" type="xs:string" minOccurs="0" />
+        <xs:element name="tolerances_and_sensitivities" type="xs:string" minOccurs="0" />
+        <xs:element name="conditions_for_fruiting_or_sporulation" type="xs:string" minOccurs="0" />
+        <xs:element name="ph_for_environment" type="xs:string" minOccurs="0" />
+        <xs:element name="biotransformations" type="xs:string" minOccurs="0" />
+        <xs:element name="single_compounds_tested" type="xs:string" minOccurs="0" />
+        <xs:element name="enzymes_produced" type="xs:string" minOccurs="0" />
+        <xs:element name="fine_structure_data" type="xs:string" minOccurs="0" />
+        <xs:element name="osmophily_and_xerophily" type="xs:string" minOccurs="0" />
+        <xs:element name="oxygen_relationship" type="xs:string" minOccurs="0" />
+        <xs:element name="light_conditions" type="xs:string" minOccurs="0" />
+        <xs:element name="deficiencies" type="xs:string" minOccurs="0" />
+        <xs:element name="date_of_accession" type="date-or-empty" minOccurs="0" />
+        <xs:element name="form_of_supply" type="xs:string" minOccurs="0" />
+        <xs:element name="conditions_of_water_activity" type="xs:string" minOccurs="0" />
+        <xs:element name="cell_contents" type="xs:string" minOccurs="0" />
+        <xs:element name="phenotype" type="xs:string" minOccurs="0" />
+        <xs:element name="deposited_by" type="xs:string" minOccurs="0" />
+        <xs:element name="minimum_growth_ph" type="xs:string" minOccurs="0" />
+        <xs:element name="cellshape" type="xs:string" minOccurs="0" />
+        <xs:element name="maximum_growth_ph" type="xs:string" minOccurs="0" />
+        <xs:element name="toxicity_to_other_organisms" type="xs:string" minOccurs="0" />
+        <xs:element name="restriction_for_destribute" type="xs:string" minOccurs="0" />
+        <xs:element name="maximum_growthtemperature" type="xs:string" minOccurs="0" />
+        <xs:element name="hybridization_with_other_strains" type="xs:string" minOccurs="0" />
+        <xs:element name="rehydration_fluid" type="xs:string" minOccurs="0" />
+        <xs:element name="temperature_of_hybridization" type="xs:string" minOccurs="0" />
+        <xs:element name="strainid" type="xs:string" minOccurs="0" />
+        <xs:element name="serovar" type="xs:string" minOccurs="0" />
+        <xs:element name="latitude" type="xs:string" minOccurs="0" />
+        <xs:element name="optimum_minimum_maximum_sugar_concentrations" type="xs:string" minOccurs="0" />
+        <xs:element name="internal_check_of_identity_at_collection" type="xs:string" minOccurs="0" />
+        <xs:element name="region" type="xs:string" minOccurs="0" />
+        <xs:element name="herbarium_no" type="xs:string" minOccurs="0" />
+        <xs:element name="motileby" type="xs:string" minOccurs="0" />
+        <xs:element name="genotype" type="xs:string" minOccurs="0" />
+        <xs:element name="teleomorph_name" type="xs:string" minOccurs="0" />
+        <xs:element name="taxonomyid" type="xs:string" minOccurs="0" />
+        <xs:element name="carbon_sources_that_have_been_tested_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="record_type" type="xs:string" minOccurs="0" />
+        <xs:element name="optimum_minimum_maximum_nacl_concentration" type="xs:string" minOccurs="0" />
+        <xs:element name="country_of_export" type="xs:string" minOccurs="0" />
+        <xs:element name="minimum_growth_temperatue" type="xs:string" minOccurs="0" />
+        <xs:element name="plasmid" type="xs:string" minOccurs="0" />
+        <xs:element name="date_of_collection" type="date-or-empty" minOccurs="0" />
+        <xs:element name="special_form_name" type="xs:string" minOccurs="0" />
+        <xs:element name="decomposition_and_deteriorating_capacities" type="xs:string" minOccurs="0" />
+        <xs:element name="metabolites_produced" type="xs:string" minOccurs="0" />
+        <xs:element name="date_of_update" type="date-or-empty" minOccurs="0" />
+        <xs:element name="mutants" type="xs:string" minOccurs="0" />
+        <xs:element name="history" type="xs:string" minOccurs="0" />
+        <xs:element name="conditions_for_germination" type="xs:string" minOccurs="0" />
+
+        <xs:element name="bio_hazard_level" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="1" />
+              <xs:enumeration value="2" />
+              <xs:enumeration value="3" />
+              <xs:enumeration value="4" />
+              <xs:enumeration value="" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+
+        <xs:element name="mating_type" type="xs:string" minOccurs="0" />
+        <xs:element name="motile" type="xs:string" minOccurs="0" />
+        <xs:element name="name_at_accept" type="xs:string" minOccurs="0" />
+        <xs:element name="method_by_which_mutation_was_induced" type="xs:string" minOccurs="0" />
+        <xs:element name="optimal_growth_temperatue" type="xs:string" minOccurs="0" />
+        <xs:element name="optimal_growth_ph" type="xs:string" minOccurs="0" />
+        <xs:element name="collection_method" type="xs:string" minOccurs="0" />
+        <xs:element name="race" type="xs:string" minOccurs="0" />
+        <xs:element name="remarks_on_restrictions" type="xs:string" minOccurs="0" />
+        <xs:element name="type_of_dna_or_rna" type="xs:string" minOccurs="0" />
+        <xs:element name="temperature_relationships_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="animal_quarantine_no" type="xs:string" minOccurs="0" />
+        <xs:element name="longitude" type="xs:string" minOccurs="0" />
+        <xs:element name="isolated_by" type="xs:string" minOccurs="0" />
+        <xs:element name="antagonistic_activities_against_other_organisms" type="xs:string" minOccurs="0" />
+        <xs:element name="nutritional_requirements_and_growth_factors_required" type="xs:string" minOccurs="0" />
+        <xs:element name="sexual_reproduction" type="xs:string" minOccurs="0" />
+        <xs:element name="temperatue_for_environment" type="xs:string" minOccurs="0" />
+        <xs:element name="killer_properties_of_yeast" type="xs:string" minOccurs="0" />
+        <xs:element name="plant_quarantine_no" type="xs:string" minOccurs="0" />
+        <xs:element name="misapplied_name" type="xs:string" minOccurs="0" />
+        <xs:element name="depth" type="xs:string" minOccurs="0" />
+        <xs:element name="country" type="xs:string" minOccurs="0" />
+        <xs:element name="habitat" type="xs:string" minOccurs="0" />
+        <xs:element name="hybrids" type="xs:string" minOccurs="0" />
+        <xs:element name="mta" type="xs:string" minOccurs="0" />
+        <xs:element name="sexual_behaviour" type="xs:string" minOccurs="0" />
+        <xs:element name="identified_by" type="xs:string" minOccurs="0" />
+        <xs:element name="sexual_state" type="xs:string" minOccurs="0" />
+        <xs:element name="method_of_isolation" type="xs:string" minOccurs="0" />
+        <xs:element name="sporeforming" type="xs:string" minOccurs="0" />
+        <xs:element name="state" type="xs:string" minOccurs="0" />
+        <xs:element name="cellsize" type="xs:string" minOccurs="0" />
+        <xs:element name="gc_content_of_dna" type="xs:string" minOccurs="0" />
+        <xs:element name="wall_constituents" type="xs:string" minOccurs="0" />
+        <xs:element name="anamorph_name" type="xs:string" minOccurs="0" />
+        <xs:element name="conditions_for_growth_in_liquid_media" type="xs:string" minOccurs="0" />
+        <xs:element name="staining_reactions" type="xs:string" minOccurs="0" />
+        <xs:element name="number_of_nuclei" type="xs:string" minOccurs="0" />
+        <xs:element name="collected_by" type="xs:string" minOccurs="0" />
+        <xs:element name="substrate" type="xs:string" minOccurs="0" />
+        <xs:element name="symbiosis" type="xs:string" minOccurs="0" />
+        <xs:element name="date_of_identification" type="date-or-empty" minOccurs="0" />
+        <xs:element name="former_name" type="xs:string" minOccurs="0" />
+        <xs:element name="source_of_isolation" type="xs:string" minOccurs="0" />
+        <xs:element name="conditions_for_growth_and_maintenance_on_solid_media" type="xs:string" minOccurs="0" />
+        <xs:element name="nitrogen_sources_that_have_been_tested_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="hybridization_strain_number" type="xs:string" minOccurs="0" />
+        <xs:element name="pigment_production_and_autofluorescence" type="xs:string" minOccurs="0" />
+        <xs:element name="allergenicity" type="xs:string" minOccurs="0" />
+        <xs:element name="percentage" type="xs:string" minOccurs="0" />
+        <xs:element name="coenzyme-q_system" type="xs:string" minOccurs="0" />
+        <xs:element name="mycoparasitism" type="xs:string" minOccurs="0" />
+        <xs:element name="date_of_deposition" type="date-or-empty" minOccurs="0" />
+        <xs:element name="salinity_requirements_for_growth" type="xs:string" minOccurs="0" />
+        <xs:element name="mode_of_preservation_storage" type="xs:string" minOccurs="0" />
+        <xs:element name="group" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
