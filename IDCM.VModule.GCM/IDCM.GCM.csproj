@@ -102,6 +102,7 @@
     <Compile Include="DataTransfer\GCMItemsLoader.cs" />
     <Compile Include="DataTransfer\GCMSignExecutor.cs" />
     <Compile Include="DataTransfer\HelpDocRequester.cs" />
+    <Compile Include="DataTransfer\JSONListExporter.cs" />
     <Compile Include="DataTransfer\LocalDataDumper.cs" />
     <Compile Include="Core\GCMTableCache.cs" />
     <Compile Include="DataTransfer\ExcelDataImporter.cs" />
@@ -109,7 +110,9 @@
     <Compile Include="DataTransfer\MDIDataImporter.cs" />
     <Compile Include="DataTransfer\StrainListQueryExecutor.cs" />
     <Compile Include="DataTransfer\StrainViewQueryExecutor.cs" />
+    <Compile Include="DataTransfer\TextExporter.cs" />
     <Compile Include="DataTransfer\XMLDataImporter.cs" />
+    <Compile Include="DataTransfer\XMLExporter.cs" />
     <Compile Include="Forms\AttrMapOptionDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,11 +125,11 @@
     <Compile Include="Forms\ExportTypeDlg.Designer.cs">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GCMFrontFindDlg.cs" >
-	<SubType>Form</SubType>
+    <Compile Include="Forms\GCMFrontFindDlg.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GCMFrontFindDlg.Designer.cs" >
-	<DependentUpon>GCMFrontFindDlg.cs</DependentUpon>
+    <Compile Include="Forms\GCMFrontFindDlg.Designer.cs">
+      <DependentUpon>GCMFrontFindDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LocalFrontFindDlg.cs">
       <SubType>Form</SubType>
@@ -161,8 +164,8 @@
     <EmbeddedResource Include="Forms\ExportTypeDlg.resx">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GCMFrontFindDlg.resx" >
-	 <DependentUpon>GCMFrontFindDlg.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\GCMFrontFindDlg.resx">
+      <DependentUpon>GCMFrontFindDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LocalFrontFindDlg.resx">
       <DependentUpon>LocalFrontFindDlg.cs</DependentUpon>

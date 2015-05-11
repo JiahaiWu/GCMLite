@@ -67,7 +67,7 @@ namespace IDCM.ViewManager
         /// <param name="fpath"></param>
         public void exportData(DataGridView dgv)
         {
-            DataGridViewSelectedRowCollection selectedRows = dgv.SelectedRows;
+            int[] selectedRowIdxs = fetchSelectRowIdxs(dgv);
             ExportTypeDlg exportDlg = new ExportTypeDlg();
             if (exportDlg.ShowDialog() == DialogResult.OK)
             {
@@ -79,20 +79,20 @@ namespace IDCM.ViewManager
                     switch (etype)
                     {
                         case ExportType.Excel:
-                            handler = new ExcelExportHandler(ctcache, epath);
+                            handler = selectedRowIdxs == null ? new ExcelExportHandler(ctcache, epath) : new ExcelExportHandler(ctcache, epath,selectedRowIdxs);
                             break;
-                        //case ExportType.JSONList:
-                        //    handler = new JSONListExportHandler(ctableCache.DTable, epath, selectedRows);
-                        //    break;
-                        //case ExportType.TSV:
-                        //    handler = new TextExportHandler(ctableCache.DTable, epath, selectedRows,"\t");
-                        //    break;
-                        //case ExportType.CSV:
-                        //    handler = new TextExportHandler(ctableCache.DTable, epath, selectedRows,",");
-                        //    break;
-                        //case ExportType.XML:
-                        //    handler = new XMLExportHandler(ctableCache.DTable, epath, selectedRows);
-                        //    break;
+                        case ExportType.JSONList:
+                            handler = selectedRowIdxs == null ? new JSONListExportHandler(ctcache, epath):new JSONListExportHandler(ctcache, epath,selectedRowIdxs);
+                            break;
+                        case ExportType.TSV:
+                            handler = selectedRowIdxs == null ? new TextExportHandler(ctcache, epath, "\t"):new TextExportHandler(ctcache, epath, selectedRowIdxs,"\t");
+                            break;
+                        case ExportType.CSV:
+                            handler = selectedRowIdxs == null ? new TextExportHandler(ctcache, epath, ","):new TextExportHandler(ctcache, epath,selectedRowIdxs, ",");
+                            break;
+                        case ExportType.XML:
+                            handler = selectedRowIdxs == null ? new XMLExportHandler(ctcache, epath) : new XMLExportHandler(ctcache, epath,selectedRowIdxs);
+                            break;
                         default:
                             MessageBox.Show("Unsupport export type!");
                             break;
@@ -106,6 +106,22 @@ namespace IDCM.ViewManager
                     log.Info("数据导出失败，错误信息：", ex);
                 }
             }
+        }
+
+        private int[] fetchSelectRowIdxs(DataGridView dgv)
+        {
+            DataGridViewSelectedRowCollection selectedRows=dgv.SelectedRows;
+            if (selectedRows != null && selectedRows.Count > 0)
+            {
+                int[] sridxs = new int[selectedRows.Count];
+                int idx = 0;
+                foreach (DataGridViewRow dgvr in selectedRows)
+                {
+                    sridxs[idx] = dgvr.Index;
+                }
+                return sridxs;
+            }
+            return null;
         }
 
         /// <summary>
