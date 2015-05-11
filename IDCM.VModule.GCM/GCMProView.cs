@@ -156,7 +156,7 @@ namespace IDCM.VModule.GCM
             {
                 if (gcmServManager.Signed)
                 {
-                    localServManager.publishLocalRowsToGCM(selectedRows);
+                    localServManager.publishLocalDataToGCM(selectedRows);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace IDCM.VModule.GCM
             {
                 if (gcmServManager.Signed)
                 {
-                    localServManager.publishLocalRowsToGCM(dcmDataGridView_local.CurrentRow);
+                    localServManager.publishLocalDataToGCM(dcmDataGridView_local.CurrentRow);
                 }
                 else
                 {
@@ -476,7 +476,7 @@ namespace IDCM.VModule.GCM
         }
         public void checkLocalData()
         {
-            localServManager.checkData(this.dcmDataGridView_local);
+            localServManager.checkLocalData();
         }
         public string doExitDump()
         {

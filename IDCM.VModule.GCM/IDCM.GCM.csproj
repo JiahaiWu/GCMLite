@@ -83,6 +83,8 @@
     <Compile Include="BGHandler\GCMDataLoadHandler.cs" />
     <Compile Include="BGHandler\GCMDetailLoadHandler.cs" />
     <Compile Include="BGHandler\JSONListExportHandler.cs" />
+    <Compile Include="BGHandler\LocalDataCheckHandler.cs" />
+    <Compile Include="BGHandler\LocalDataPubHandler.cs" />
     <Compile Include="BGHandler\TextExportHandler.cs" />
     <Compile Include="BGHandler\XMLExportHandler.cs" />
     <Compile Include="BGHandler\XMLImportHandler.cs" />
@@ -97,8 +99,11 @@
     <Compile Include="Core\CTableCache.cs" />
     <Compile Include="Core\CustomColDef.cs" />
     <Compile Include="Core\CustomColDefGetter.cs" />
+    <Compile Include="Core\CustomColValidator.cs" />
+    <Compile Include="Core\DataExportChecker.cs" />
     <Compile Include="Core\DataExportNoter.cs" />
     <Compile Include="Core\DataImportChecker.cs" />
+    <Compile Include="Core\LocalDataChecker.cs" />
     <Compile Include="DataTransfer\GCMItemsLoader.cs" />
     <Compile Include="DataTransfer\GCMSignExecutor.cs" />
     <Compile Include="DataTransfer\HelpDocRequester.cs" />
@@ -208,6 +213,10 @@
     <ProjectReference Include="..\DCMControlLib\DCMControlLib.csproj">
       <Project>{f280276f-8d7c-41ad-b62f-6e9f34693222}</Project>
       <Name>DCMControlLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DCMEx\DCMEx.csproj">
+      <Project>{40fc25de-108d-44b8-b18b-322b2a9a206b}</Project>
+      <Name>DCMEx</Name>
     </ProjectReference>
     <ProjectReference Include="..\IDCM.Base\IDCM.Base.csproj">
       <Project>{1b2dd284-7d56-4ac8-be7c-ff34a807d55e}</Project>

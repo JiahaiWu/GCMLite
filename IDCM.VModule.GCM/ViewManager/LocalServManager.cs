@@ -128,25 +128,37 @@ namespace IDCM.ViewManager
         /// 校验数据文档
         /// </summary>
         /// <param name="fpath"></param>
-        public void checkData(DataGridView dgv)
+        public void checkLocalData()
         {
+            AbsBGHandler checkHandler = new LocalDataCheckHandler(ctcache);
+            BGWorkerInvoker.pushHandler(checkHandler);
         }
-        public void checkData(DataGridViewSelectedRowCollection selectedRows)
+        public void checkLocalData(DataGridViewSelectedRowCollection selectedRows)
         {
+            AbsBGHandler checkHandler = new LocalDataCheckHandler(ctcache, selectedRows);
+            BGWorkerInvoker.pushHandler(checkHandler);
         }
         public void checkData(params DataGridViewRow[] selectedRows)
         {
+            AbsBGHandler checkHandler = new LocalDataCheckHandler(ctcache, selectedRows);
+            BGWorkerInvoker.pushHandler(checkHandler);
         }
 
-
-        internal void publishLocalRowsToGCM(params DataGridViewRow[] selectedRows)
+        internal void publishLocalDataToGCM()
         {
-            
+            AbsBGHandler checkHandler = new LocalDataPubHandler(ctcache);
+            BGWorkerInvoker.pushHandler(checkHandler);
+        }
+        internal void publishLocalDataToGCM(params DataGridViewRow[] selectedRows)
+        {
+            AbsBGHandler checkHandler = new LocalDataPubHandler(ctcache, selectedRows);
+            BGWorkerInvoker.pushHandler(checkHandler);
         }
 
-        internal void publishLocalRowsToGCM(DataGridViewSelectedRowCollection selectedRows)
+        internal void publishLocalDataToGCM(DataGridViewSelectedRowCollection selectedRows)
         {
-            throw new NotImplementedException();
+            AbsBGHandler checkHandler = new LocalDataPubHandler(ctcache, selectedRows);
+            BGWorkerInvoker.pushHandler(checkHandler);
         }
 
         public string doExitDump()

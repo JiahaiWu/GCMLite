@@ -147,6 +147,17 @@ namespace IDCM.Core
             }
             return null;
         }
+        internal DataGridViewRow getDGVRow(int ridx)
+        {
+            if (ridx > -1 && ridx < dgv.RowCount)
+            {
+                DataGridViewRow dgvr = dgv.Rows[ridx];
+                if (dgvr.IsNewRow)
+                    return null;
+                return dgvr;
+            }
+            return null;
+        }
         /// <summary>
         /// 整体数据更新共享锁对象
         /// </summary>
