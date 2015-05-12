@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CTableConfig>
-  <version value="0.1.0"></version>
-  <keyFiled value="strain_number"></keyFiled>
+  <version>0.1.0</version>
+  <keyFiled>strain_number</keyFiled>
   <description>
     <![CDATA[
     #############################################################
@@ -11,57 +11,59 @@
     # @Description:
     # 字段名称	必须非空	必须唯一	校验表达式	别名	默认值
     # 对应于
-    # attr	Require	Unique	restrict	Alias	defaultVal
+    # attr	Require	Unique	Restrict	Alias	DefaultVal
     # attr 字段名称不支持制表符、换行符，由fields节点下的直接孩子节点名描述。
     # Unique和Require仅支持True,False两个选项，默认为False。
-    # restrict 校验表达式以正则表达式为基础，扩展其在数值、日期等个方面的匹配范式，逻辑组合关系允许 ["AND" | "OR"] ["NOT"] 三种。具体表达式规则参考相关说明文档。
+    # Restrict 校验表达式以正则表达式为基础，扩展其在数值、日期等个方面的匹配范式，逻辑组合关系允许 ["AND" | "OR"] ["NOT"] 三种。具体表达式规则参考相关说明文档。
     # Alias 别名不支持制表符、换行符,默认的别名同Attr名称一致。
-    # defaultVal 默认值设定需符和校验表达式，默认的均为空值。
-    # 未正确设置keyNode的情况下，请注意第一个字段默认为主键字段名称，且必须为非空值。
-    # 本文档请使用UTF-8字符集编码。
+    # DefaultVal 默认值设定需符和校验表达式，默认的均为空值。
+    # @Notice
+    # 1.未正确设置keyNode的情况下，请注意第一个字段默认为主键字段名称，且必须为非空值。
+    # 2.Enable为可选的附加属性，默认值为True。
+    # 3.配置文档使用UTF-8字符集编码。
     # @see http://gcm.wfcc.info/GCMDIhelp
     ###############################################################
     ]]>
   </description>
-  <fileds>
+  <fields>
     <strain_number Alias="StrainNumber">
       <Require>true</Require>
       <Unique>true</Unique>
-      <restrict>REGEX:(\w+)(.*)</restrict>
-      <defaultVal></defaultVal>
-      <Visible>true</Visible>
+      <Restrict>REGEX:(\w+)(.*)</Restrict>
+      <DefaultVal></DefaultVal>
+      <Enable>true</Enable>
     </strain_number>
     <other_collection_numbers>
       <Require>false</Require>
-      <Visible>true</Visible>
+      <Enable>true</Enable>
     </other_collection_numbers>
     <name>
       <Require>false</Require>
     </name>
     <genus_name>
       <Require>true</Require>
-      <Visible>true</Visible>
+      <Enable>true</Enable>
     </genus_name>
     <species_name>
       <Require>false</Require>
-      <Visible>true</Visible>
+      <Enable>true</Enable>
     </species_name>
     <variety_name>
       <Require>true</Require>
     </variety_name>
     <subspecies_name>
       <Require>false</Require>
-      <Visible>true</Visible>
+      <Enable>true</Enable>
     </subspecies_name>
     <organism_type>
       <Require>true</Require>
-      <Visible>true</Visible>
-      <restrict>REGEX:[(Antibody)|(Archaea)|(Bacteria)|(Fungi)|(Microalgae)|(Phage)|(Virus)|(Yeast)]</restrict>
+      <Enable>true</Enable>
+      <Restrict>REGEX:[(Antibody)|(Archaea)|(Bacteria)|(Fungi)|(Microalgae)|(Phage)|(Virus)|(Yeast)]</Restrict>
     </organism_type>
     <date_of_Isolation>
       <Require>false</Require>
-      <Visible>true</Visible>
-      <restrict>DATE:</restrict>
+      <Enable>true</Enable>
+      <Restrict>DATE:</Restrict>
     </date_of_Isolation>
     <history_of_deposit>
       <Require>false</Require>
@@ -74,23 +76,23 @@
     </geographic_origin>
     <status>
       <Require>false</Require>
-      <restrict>REGEX:(Type)|(No)</restrict>
+      <Restrict>REGEX:(Type)|(No)</Restrict>
     </status>
     <type_strain>
       <Require>false</Require>
     </type_strain>
     <optimum_temperature_for_growth>
       <Require>false</Require>
-      <Visible>true</Visible>
-      <restrict>NUMBER:</restrict>
+      <Enable>true</Enable>
+      <Restrict>NUMBER:</Restrict>
     </optimum_temperature_for_growth>
     <maximum_temperature_for_growth>
       <Require>false</Require>
-      <restrict>NUMBER:</restrict>
+      <Restrict>NUMBER:</Restrict>
     </maximum_temperature_for_growth>
     <minimum_temperature_for_growth>
       <Require>false</Require>
-      <restrict>NUMBER:</restrict>
+      <Restrict>NUMBER:</Restrict>
     </minimum_temperature_for_growth>
     <literature>
       <Require>false</Require>
@@ -100,266 +102,389 @@
     </author>
     <application>
       <Require>false</Require>
+      <Enable>false</Enable>
     </application>
     <permission>
       <Require>false</Require>
+      <Enable>false</Enable>
     </permission>
     <user_id>
       <Require>false</Require>
+      <Enable>false</Enable>
     </user_id>
     <medium_id>
       <Require>false</Require>
+      <Enable>false</Enable>
     </medium_id>
     <bacteria_id>
       <Require>false</Require>
+      <Enable>false</Enable>
     </bacteria_id>
     <showdate>
       <Require>false</Require>
-      <restrict>DATE:</restrict>
+      <Restrict>DATE:</Restrict>
+      <Enable>false</Enable>
     </showdate>
     <soursurl>
       <Require>false</Require>
+      <Enable>false</Enable>
     </soursurl>
     <genbanktype>
       <Require>false</Require>
+      <Enable>false</Enable>
     </genbanktype>
     <othername>
       <Require>false</Require>
+      <Enable>false</Enable>
     </othername>
     <heat_resistance>
+      <Enable>false</Enable>
     </heat_resistance>
     <altitude>
+      <Enable>false</Enable>
     </altitude>
     <humidity_for_environment>
+      <Enable>false</Enable>
     </humidity_for_environment>
     <ethanol_conditions>
+      <Enable>false</Enable>
     </ethanol_conditions>
     <tolerances_and_sensitivities>
+      <Enable>false</Enable>
     </tolerances_and_sensitivities>
     <conditions_for_fruiting_or_sporulation>
+      <Enable>false</Enable>
     </conditions_for_fruiting_or_sporulation>
     <ph_for_environment>
+      <Enable>false</Enable>
     </ph_for_environment>
     <biotransformations>
+      <Enable>false</Enable>
     </biotransformations>
     <single_compounds_tested>
+      <Enable>false</Enable>
     </single_compounds_tested>
     <enzymes_produced>
+      <Enable>false</Enable>
     </enzymes_produced>
     <fine_structure_data>
+      <Enable>false</Enable>
     </fine_structure_data>
     <osmophily_and_xerophily>
+      <Enable>false</Enable>
     </osmophily_and_xerophily>
     <oxygen_relationship>
+      <Enable>false</Enable>
     </oxygen_relationship>
     <light_conditions>
+      <Enable>false</Enable>
     </light_conditions>
     <deficiencies>
+      <Enable>false</Enable>
     </deficiencies>
     <date_of_accession>
-      <restrict>DATE:</restrict>
+      <Restrict>DATE:</Restrict>
+      <Enable>false</Enable>
     </date_of_accession>
     <form_of_supply>
+      <Enable>false</Enable>
     </form_of_supply>
     <conditions_of_water_activity>
+      <Enable>false</Enable>
     </conditions_of_water_activity>
     <cell_contents>
+      <Enable>false</Enable>
     </cell_contents>
     <phenotype>
+      <Enable>false</Enable>
     </phenotype>
     <deposited_by>
+      <Enable>false</Enable>
     </deposited_by>
     <minimum_growth_ph>
+      <Enable>false</Enable>
     </minimum_growth_ph>
     <cellshape>
+      <Enable>false</Enable>
     </cellshape>
     <maximum_growth_ph>
+      <Enable>false</Enable>
     </maximum_growth_ph>
     <toxicity_to_other_organisms>
+      <Enable>false</Enable>
     </toxicity_to_other_organisms>
-    <restriction_for_destribute>
-    </restriction_for_destribute>
+    <Restriction_for_destribute>
+      <Enable>false</Enable>
+    </Restriction_for_destribute>
     <maximum_growthtemperature>
+      <Enable>false</Enable>
     </maximum_growthtemperature>
     <hybridization_with_other_strains>
+      <Enable>false</Enable>
     </hybridization_with_other_strains>
     <rehydration_fluid>
+      <Enable>false</Enable>
     </rehydration_fluid>
     <temperature_of_hybridization>
+      <Enable>false</Enable>
     </temperature_of_hybridization>
     <strainid>
+      <Enable>false</Enable>
     </strainid>
     <serovar>
+      <Enable>false</Enable>
     </serovar>
     <latitude>
+      <Enable>false</Enable>
     </latitude>
     <optimum_minimum_maximum_sugar_concentrations>
+      <Enable>false</Enable>
     </optimum_minimum_maximum_sugar_concentrations>
     <internal_check_of_identity_at_collection>
+      <Enable>false</Enable>
     </internal_check_of_identity_at_collection>
     <region>
+      <Enable>false</Enable>
     </region>
     <herbarium_no>
+      <Enable>false</Enable>
     </herbarium_no>
     <motileby>
+      <Enable>false</Enable>
     </motileby>
     <genotype>
+      <Enable>false</Enable>
     </genotype>
     <teleomorph_name>
+      <Enable>false</Enable>
     </teleomorph_name>
     <taxonomyid>
+      <Enable>false</Enable>
     </taxonomyid>
     <carbon_sources_that_have_been_tested_for_growth>
+      <Enable>false</Enable>
     </carbon_sources_that_have_been_tested_for_growth>
     <record_type>
+      <Enable>false</Enable>
     </record_type>
     <optimum_minimum_maximum_nacl_concentration>
+      <Enable>false</Enable>
     </optimum_minimum_maximum_nacl_concentration>
     <country_of_export>
+      <Enable>false</Enable>
     </country_of_export>
     <minimum_growth_temperatue>
+      <Enable>false</Enable>
     </minimum_growth_temperatue>
     <plasmid>
+      <Enable>false</Enable>
     </plasmid>
     <date_of_collection>
-      <restrict>DATE:</restrict>
+      <Restrict>DATE:</Restrict>
+      <Enable>false</Enable>
     </date_of_collection>
     <special_form_name>
+      <Enable>false</Enable>
     </special_form_name>
     <decomposition_and_deteriorating_capacities>
+      <Enable>false</Enable>
     </decomposition_and_deteriorating_capacities>
     <metabolites_produced>
+      <Enable>false</Enable>
     </metabolites_produced>
     <date_of_update>
-      <restrict>DATE:</restrict>
+      <Restrict>DATE:</Restrict>
+      <Enable>false</Enable>
     </date_of_update>
     <mutants>
+      <Enable>false</Enable>
     </mutants>
     <history>
+      <Enable>false</Enable>
     </history>
     <conditions_for_germination>
+      <Enable>false</Enable>
     </conditions_for_germination>
     <bio_hazard_level>
       <Require>false</Require>
-      <restrict>REGEX:[1-4] AND NUMBER:</restrict>
+      <Restrict>REGEX:[1-4] AND NUMBER:</Restrict>
+      <Enable>false</Enable>
     </bio_hazard_level>
     <mating_type>
+      <Enable>false</Enable>
     </mating_type>
     <motile>
+      <Enable>false</Enable>
     </motile>
     <name_at_accept>
+      <Enable>false</Enable>
     </name_at_accept>
     <method_by_which_mutation_was_induced>
+      <Enable>false</Enable>
     </method_by_which_mutation_was_induced>
     <optimal_growth_temperatue>
+      <Enable>false</Enable>
     </optimal_growth_temperatue>
     <optimal_growth_ph>
+      <Enable>false</Enable>
     </optimal_growth_ph>
     <pathogenicity>
+      <Enable>false</Enable>
     </pathogenicity>
     <collection_method>
+      <Enable>false</Enable>
     </collection_method>
     <race>
+      <Enable>false</Enable>
     </race>
-    <remarks_on_restrictions>
-    </remarks_on_restrictions>
+    <remarks_on_Restrictions>
+      <Enable>false</Enable>
+    </remarks_on_Restrictions>
     <type_of_dna_or_rna>
+      <Enable>false</Enable>
     </type_of_dna_or_rna>
     <temperature_relationships_for_growth>
+      <Enable>false</Enable>
     </temperature_relationships_for_growth>
     <animal_quarantine_no>
+      <Enable>false</Enable>
     </animal_quarantine_no>
     <longitude>
+      <Enable>false</Enable>
     </longitude>
     <isolated_by>
+      <Enable>false</Enable>
     </isolated_by>
     <antagonistic_activities_against_other_organisms>
+      <Enable>false</Enable>
     </antagonistic_activities_against_other_organisms>
     <nutritional_requirements_and_growth_factors_required>
+      <Enable>false</Enable>
     </nutritional_requirements_and_growth_factors_required>
     <sexual_reproduction>
+      <Enable>false</Enable>
     </sexual_reproduction>
     <temperatue_for_environment>
+      <Enable>false</Enable>
     </temperatue_for_environment>
     <killer_properties_of_yeast>
+      <Enable>false</Enable>
     </killer_properties_of_yeast>
     <plant_quarantine_no>
+      <Enable>false</Enable>
     </plant_quarantine_no>
     <misapplied_name>
+      <Enable>false</Enable>
     </misapplied_name>
     <depth>
+      <Enable>false</Enable>
     </depth>
     <country>
+      <Enable>false</Enable>
     </country>
     <habitat>
+      <Enable>false</Enable>
     </habitat>
     <hybrids>
+      <Enable>false</Enable>
     </hybrids>
     <mta>
+      <Enable>false</Enable>
     </mta>
     <sexual_behaviour>
+      <Enable>false</Enable>
     </sexual_behaviour>
     <identified_by>
+      <Enable>false</Enable>
     </identified_by>
     <sexual_state>
+      <Enable>false</Enable>
     </sexual_state>
     <method_of_isolation>
+      <Enable>false</Enable>
     </method_of_isolation>
     <sporeforming>
+      <Enable>false</Enable>
     </sporeforming>
     <state>
+      <Enable>false</Enable>
     </state>
     <cellsize>
+      <Enable>false</Enable>
     </cellsize>
     <gc_content_of_dna>
+      <Enable>false</Enable>
     </gc_content_of_dna>
     <wall_constituents>
+      <Enable>false</Enable>
     </wall_constituents>
     <anamorph_name>
+      <Enable>false</Enable>
     </anamorph_name>
     <conditions_for_growth_in_liquid_media>
+      <Enable>false</Enable>
     </conditions_for_growth_in_liquid_media>
     <staining_reactions>
+      <Enable>false</Enable>
     </staining_reactions>
     <number_of_nuclei>
+      <Enable>false</Enable>
     </number_of_nuclei>
     <collected_by>
+      <Enable>false</Enable>
     </collected_by>
     <substrate>
+      <Enable>false</Enable>
     </substrate>
     <symbiosis>
+      <Enable>false</Enable>
     </symbiosis>
     <date_of_identification>
-      <restrict>DATE:</restrict>
+      <Restrict>DATE:</Restrict>
+      <Enable>false</Enable>
     </date_of_identification>
     <former_name>
+      <Enable>false</Enable>
     </former_name>
     <source_of_isolation>
+      <Enable>false</Enable>
     </source_of_isolation>
     <conditions_for_growth_and_maintenance_on_solid_media>
+      <Enable>false</Enable>
     </conditions_for_growth_and_maintenance_on_solid_media>
     <nitrogen_sources_that_have_been_tested_for_growth>
+      <Enable>false</Enable>
     </nitrogen_sources_that_have_been_tested_for_growth>
     <hybridization_strain_number>
+      <Enable>false</Enable>
     </hybridization_strain_number>
     <pigment_production_and_autofluorescence>
+      <Enable>false</Enable>
     </pigment_production_and_autofluorescence>
     <allergenicity>
+      <Enable>false</Enable>
     </allergenicity>
     <percentage>
+      <Enable>false</Enable>
     </percentage>
     <coenzyme_q_system>
+      <Enable>false</Enable>
     </coenzyme_q_system>
     <mycoparasitism>
+      <Enable>false</Enable>
     </mycoparasitism>
     <date_of_deposition>
-      <restrict>DATE:</restrict>
+      <Restrict>DATE:</Restrict>
+      <Enable>false</Enable>
     </date_of_deposition>
     <salinity_requirements_for_growth>
+      <Enable>false</Enable>
     </salinity_requirements_for_growth>
     <mode_of_preservation_storage>
+      <Enable>false</Enable>
     </mode_of_preservation_storage>
     <group>
+      <Enable>false</Enable>
     </group>
-  </fileds>
+  </fields>
 </CTableConfig>

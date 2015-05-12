@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 using System.IO;
 using IDCM.Base.Utils;
 using IDCM.Base;
+using System.Xml;
 
 namespace IDCM.Core
 {
     /// <summary>
     /// IDCM Custom Table Definition
-    /// @Date 2014-09-20
+    /// @Date 2015-04-20
     /// @author JiahaiWu 
     /// @Description:
     /// 字段名称	必须非空	必须唯一	校验表达式	别名	默认值
     /// 对应于
-    /// attr	isRequire	isUnique	restrict	Alias	defaultVal
-    /// 使用制表符\t作为分隔字符。
-    /// 以#号开头行为注释行。
-    /// 以>>Def Ver 标识表属性定义重置起点及版本定义。
-    /// 以方括号[]包含标识分组，括号内字符串表示分组名称。
-    ///
-    /// attr 字段名称不支持制表符、换行符。
-    /// isUnique和IsRequire仅支持True,False两个选项，默认为False。
-    /// restrict 校验表达式以正则表达式为基础，扩展其在数值、日期、文件路径四个方面的匹配范式。具体表达式可由["REGEX:" regex_expr | "DATE:" date_expr | "NUMBER:" number_expr | "PATH:" path_expr] 四种部分进行逻辑组合，逻辑组合关系允许 ["AND" | "OR"] ["NOT"] 三种。
-    /// Alias 别名不支持制表符、换行符。
-    /// defaultVal 默认值设定需符和校验表达式，默认的均为空值。
-    /// 本文档请使用UTF-8字符集编码。
+    /// attr	Require	Unique	Restrict	Alias	DefaultVal
+    /// attr 字段名称不支持制表符、换行符，由fields节点下的直接孩子节点名描述。
+    /// Unique和Require仅支持True,False两个选项，默认为False。
+    /// Restrict 校验表达式以正则表达式为基础，扩展其在数值、日期等个方面的匹配范式，逻辑组合关系允许 ["AND" | "OR"] ["NOT"] 三种。具体表达式规则参考相关说明文档。
+    /// Alias 别名不支持制表符、换行符,默认的别名同Attr名称一致。
+    /// DefaultVal 默认值设定需符和校验表达式，默认的均为空值。
+    /// @Notice
+    /// 1.未正确设置keyNode的情况下，请注意第一个字段默认为主键字段名称，且必须为非空值。
+    /// 2.Enable为可选的附加属性，默认值为True。
+    /// 3.配置文档使用UTF-8字符集编码。
     /// @see http://gcm.wfcc.info/GCMDIhelp
     /// </summary>
     public class CustomColDef
@@ -53,6 +52,10 @@ namespace IDCM.Core
         /// </summary>
         public bool IsRequire { get; set; }
         /// <summary>
+        /// 是否启用的可见字段
+        /// </summary>
+        public bool IsEnable { get; set; }
+        /// <summary>
         /// 默认值
         /// </summary>
         public string DefaultVal { get; set; }
@@ -61,14 +64,17 @@ namespace IDCM.Core
         /// </summary>
         public int Corder { get; set; }
 
-
         internal static List<CustomColDef> getCustomTableDef(string settingPath)
         {
-            List<CustomColDef> ctcds = new List<CustomColDef>();
             if (File.Exists(settingPath))
             {
-                string[] lines = FileUtil.readAsUTF8Text(settingPath).Split(new char[] { '\n', '\r' });
-                return parseCustomTableDef(lines);
+                XmlDocument xmlDoc = new XmlDocument();
+                using (FileStream fs = new FileStream(settingPath, FileMode.Open, FileAccess.Read))
+                {
+                    xmlDoc.Load(fs);
+                    XmlNode sxnode = xmlDoc.SelectSingleNode("/CTableConfig/fields");
+                    return getCustomTableDef(sxnode);
+                }
             }
             else
             {
@@ -76,57 +82,109 @@ namespace IDCM.Core
                 throw new IDCMException("The setting file note exist! @Path=" + settingPath);
             }
         }
-        internal static List<CustomColDef> parseCustomTableDef(string[] lines)
+        internal static List<CustomColDef> getCustomTableDef(XmlNode sxnode)
         {
+            if (sxnode == null)
+                return null;
             List<CustomColDef> ctcds = new List<CustomColDef>();
-            foreach (string line in lines)
+            foreach (XmlNode attrNode in sxnode.ChildNodes)
             {
-                if (line.Length < 1 || line.StartsWith("#"))
-                    continue;
-                if (line.StartsWith("[") && line.TrimEnd().EndsWith("]"))
-                    continue;
-                if (line.StartsWith(">>Def"))
+                CustomColDef ccd = parseCustomTableDef(attrNode);
+                if (ccd != null)
                 {
-                    if (line.Length > 9)
-                    {
-                        string ver = line.Substring(9).Trim();
-                    }
-                    ctcds.Clear();
-                    continue;
-                }
-                CustomColDef ctcd = formatSettingLine(line);
-                if (ctcd != null && ctcd.Attr.Length>0)
-                {
-                    ctcds.Add(ctcd);
-                    //set default col order for ctcd attr
-                    ctcd.Corder = ctcds.Count;
+                    ccd.Corder = ctcds.Count;
+                    ctcds.Add(ccd);
                 }
             }
             return ctcds;
         }
-        internal static CustomColDef formatSettingLine(string line)
+        private static CustomColDef parseCustomTableDef(XmlNode attrNode)
         {
-            string[] vals = line.Split(splitChars);
-            if (vals.Length > 0)
+            if (attrNode != null)
             {
-                CustomColDef ctcd = new CustomColDef();
-                ctcd.Attr =vals[0];
-                ctcd.IsRequire = vals.Length > 1 ? Convert.ToBoolean(vals[1]) : false;
-                ctcd.IsUnique = vals.Length > 2 ? Convert.ToBoolean(vals[2]) : false;
-                ctcd.Restrict = vals.Length > 3? vals[3] : "";
-                ctcd.Alias = vals.Length > 4 ? vals[4] : "";
-                ctcd.Alias = ctcd.Alias.Length > 0 ? ctcd.Alias : ctcd.Attr;
-                ctcd.DefaultVal = vals.Length > 5 ? vals[5] : "";
-                return ctcd;
+                CustomColDef ccd = new CustomColDef();
+                ccd.Attr = attrNode.Name;
+                XmlAttribute aliasAttr = attrNode.Attributes["Alias"];
+                if (aliasAttr != null && aliasAttr.Value.Length > 0)
+                    ccd.Alias = aliasAttr.Value;
+                else
+                    ccd.Alias = ccd.Attr;
+                foreach (XmlNode subNode in attrNode.ChildNodes)
+                {
+                    if (subNode.Name.Equals("Restrict"))
+                    {
+                        ccd.Restrict = subNode.InnerText;
+                        continue;
+                    }
+                    if (subNode.Name.Equals("Unique"))
+                    {
+                        bool btag=false;
+                        Boolean.TryParse(subNode.InnerText, out btag);
+                        ccd.IsUnique = btag;
+                        continue;
+                    }
+                    if (subNode.Name.Equals("Require"))
+                    {
+                        bool btag = false;
+                        Boolean.TryParse(subNode.InnerText, out btag);
+                        ccd.IsRequire = btag;
+                        continue;
+                    }
+                    if (subNode.Name.Equals("Enable"))
+                    {
+                        bool btag = true;
+                        Boolean.TryParse(subNode.InnerText, out btag);
+                        ccd.IsEnable = btag;
+                        continue;
+                    }
+                    if (subNode.Name.Equals("DefaultVal"))
+                    {
+                        ccd.DefaultVal = subNode.InnerText;
+                        continue;
+                    }
+                }
+                return ccd;
             }
             return null;
         }
+        public XmlElement toXmlElement(XmlDocument xmlDoc)
+        {
+            XmlElement field = xmlDoc.CreateElement(Attr);
+            if (Alias != null)
+            {
+                XmlAttribute aliasAttr = xmlDoc.CreateAttribute("Alias");
+                aliasAttr.Value = Alias;
+                field.Attributes.Append(aliasAttr);
+            }
+            XmlElement require = xmlDoc.CreateElement("Require");
+            require.InnerText = IsRequire.ToString();
+            field.AppendChild(require);
+            XmlElement unique = xmlDoc.CreateElement("Unique");
+            unique.InnerText = IsUnique.ToString();
+            field.AppendChild(unique);
+            if (Restrict != null)
+            {
+                XmlElement restrict = xmlDoc.CreateElement("Restrict");
+                restrict.InnerText = Restrict.ToString();
+                field.AppendChild(restrict);
+            }
+            if (DefaultVal != null)
+            {
+                XmlElement defaultVal = xmlDoc.CreateElement("DefaultVal");
+                defaultVal.InnerText = DefaultVal;
+                field.AppendChild(defaultVal);
+            }
+            XmlElement enable = xmlDoc.CreateElement("Enable");
+            enable.InnerText = IsEnable.ToString();
+            field.AppendChild(enable);
+            return field;
+        }
         public override string ToString()
         {
-            return Attr + splitChars[0] + IsRequire + splitChars[0] + IsUnique + splitChars[0]
-                + Restrict + splitChars[0] + Alias + splitChars[0] + (DefaultVal == null ? "" : DefaultVal);
+            return Attr + splitChar + IsRequire + splitChar + IsUnique + splitChar
+                + Restrict + splitChar + Alias + splitChar + (DefaultVal == null ? "" : DefaultVal);
         }
-        private static readonly char[] splitChars =new char[] {'\t' };
+        private static readonly char splitChar ='\t';
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

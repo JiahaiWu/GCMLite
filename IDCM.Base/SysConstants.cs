@@ -11,7 +11,7 @@ namespace IDCM.Base
     {
         #region Keys of AppSettings
         public const string cacheDir = "/GCMPro/cache/";
-        public const string tableDefNote = "tableDef.ini";
+        public const string tableDefNote = "tableDef.xml";
         public const string export_note = "export.ini";
         public const string exit_note = "exit.ini";
         public const string default_pack_version = "0.1";

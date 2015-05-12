@@ -7,6 +7,7 @@ using IDCM.Base;
 using System.IO;
 using System.Configuration;
 using IDCM.Base.Utils;
+using System.Xml;
 
 namespace IDCM.Core
 {
@@ -33,11 +34,18 @@ namespace IDCM.Core
                 }
                 if (File.Exists(hisCfg))
                 {
-                    string[] lines = FileUtil.readAsUTF8Text(hisCfg).Split(new char[] { '\n', '\r' });
-                    lastSrcHashCode = lines.Length > 0 && lines[0].Length > 0 ? lines[0].Substring(1).Trim() : null;
-                    if (srcHashCode == null || srcHashCode.Equals(lastSrcHashCode))
+                    XmlDocument xmlDoc = new XmlDocument();
+                    using (FileStream xfs = new FileStream(hisCfg, FileMode.Open, FileAccess.Read))
                     {
-                        ccds = CustomColDef.parseCustomTableDef(lines);
+                        xmlDoc.Load(xfs);
+                        XmlNode lastSrcNode = xmlDoc.SelectSingleNode("/CTableConfig/lastHashCode");
+                        XmlNode sxnode = xmlDoc.SelectSingleNode("/CTableConfig/fields");
+                        lastSrcHashCode = lastSrcNode != null && lastSrcNode.InnerText.Length > 0 ? lastSrcNode.InnerText.Trim() : null;
+                        if (sxnode!=null && srcHashCode == null || srcHashCode.Equals(lastSrcHashCode))
+                        {
+                            ccds = CustomColDef.getCustomTableDef(sxnode);
+                            setKeyColDef(xmlDoc,ccds);
+                        }
                     }
                 }
                 if(ccds==null)
@@ -48,6 +56,7 @@ namespace IDCM.Core
                         if (!File.Exists(userCfg))
                             throw new IDCMException("缺少数据表配置文件！ @path=" + userCfg);
                         ccds = CustomColDef.getCustomTableDef(userCfg);
+                        setKeyColDef(userCfg,ccds);
                         lastSrcHashCode = srcHashCode;
                     }
 #else
@@ -73,21 +82,59 @@ namespace IDCM.Core
             return ccdCache!=null?ccdCache.Values:null;
         }
 
+        private static void setKeyColDef(XmlDocument xmlDoc, List<CustomColDef> ccds)
+        {
+            primaryKeyNode = ccds.First();
+            XmlNode keynode = xmlDoc.SelectSingleNode("/CTableConfig/keyFiled");
+            if (keynode != null)
+            {
+                foreach (CustomColDef ccd in ccds)
+                {
+                    if(ccd.Attr.Equals(keynode.InnerText))
+                    {
+                        primaryKeyNode = ccd;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private static void setKeyColDef(string userCfg, List<CustomColDef> ccds)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            using (FileStream xfs = new FileStream(userCfg, FileMode.Open, FileAccess.Read))
+            {
+                xmlDoc.Load(xfs);
+                setKeyColDef(xmlDoc, ccds);
+            }
+        }
+
         public static bool saveUpdatedHistCfg()
         {
             if(dirtyStatus)
             {
-                dirtyStatus=true;
+                dirtyStatus=false;
                 string cacheDir = SysConstants.initEnvDir + SysConstants.cacheDir;
                 if (!File.Exists(cacheDir))
                     Directory.CreateDirectory(cacheDir);
                 string hisCfg = cacheDir + SysConstants.tableDefNote;
                 StringBuilder sb = new StringBuilder();
-                sb.Append("#").Append(lastSrcHashCode).AppendLine().AppendLine(">>Def");
-                foreach (CustomColDef ccd in ccdCache.Values)
+                XmlDocument xmlDoc = new XmlDocument();
+                sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                sb.AppendLine("<CTableConfig>");
+                XmlElement lastHashCode = xmlDoc.CreateElement("lastHashCode");
+                XmlElement keyFiled = xmlDoc.CreateElement("keyFiled");
+                XmlElement fields = xmlDoc.CreateElement("fields");
+                lastHashCode.InnerText = lastSrcHashCode;
+                keyFiled.InnerText = primaryKeyNode.Attr;
+                foreach(CustomColDef ccd in ccdCache.Values)
                 {
-                    sb.AppendLine(ccd.ToString());
+                    fields.AppendChild(ccd.toXmlElement(xmlDoc));
                 }
+                sb.AppendLine(lastHashCode.OuterXml);
+                sb.AppendLine(keyFiled.OuterXml);
+                sb.AppendLine(fields.OuterXml);
+                sb.AppendLine("</CTableConfig>");
                 return FileUtil.writeToUTF8File(hisCfg, sb.ToString());
             }
             return false;
@@ -111,21 +158,30 @@ namespace IDCM.Core
             ccdCache.TryGetValue(attr, out coldef);
             return coldef;
         }
-        internal static void updateCustomColDef(string attr, bool isRequired)
+        internal static void updateCustomColDef(string attr, bool isEnable)
         {
             CustomColDef ccd = null;
             if (ccdCache.TryGetValue(attr,out ccd))
             {
-                if(ccd.IsRequire != isRequired)
+                if (ccd.IsEnable != isEnable)
                 {
-                    ccd.IsRequire = isRequired;
+                    ccd.IsEnable = isEnable;
                     dirtyStatus = true;
                 }
-                saveUpdatedHistCfg();
+            }
+        }
+        public static string KeyName
+        {
+            get
+            {
+                return primaryKeyNode.Attr;
             }
         }
         private volatile static bool dirtyStatus = false;
         private static string lastSrcHashCode=null;
+        private static CustomColDef primaryKeyNode = null;
         private static Dictionary<string,CustomColDef> ccdCache = null;
+
+        
     }
 }

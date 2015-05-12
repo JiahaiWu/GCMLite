@@ -73,7 +73,7 @@ namespace IDCM.VModule.GCM
                 ICollection<CustomColDef> ccds = CustomColDefGetter.getCustomTableDef();
                 if (ccds != null && ccds.Count > 0)
                 {
-                    ctcache = new CTableCache(dcmDataGridView_local, ccds, ccds.First().Attr);
+                    ctcache = new CTableCache(dcmDataGridView_local,ccds);
                     ////////////////////////////////////////////////////
                     //设定本地数据表属性及事件处理方法
                     localServManager = new LocalServManager(ctcache);
@@ -480,6 +480,7 @@ namespace IDCM.VModule.GCM
         }
         public string doExitDump()
         {
+            CustomColDefGetter.saveUpdatedHistCfg();
             if (!RunningHandlerNoter.checkForIdle())
             {
                 if (MessageBox.Show("仍有后台任务正在执行中，是否强制退出？", "确认信息", MessageBoxButtons.OKCancel) == DialogResult.OK)

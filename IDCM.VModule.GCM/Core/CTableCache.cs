@@ -21,8 +21,7 @@ namespace IDCM.Core
         /// </summary>
         /// <param name="dgv"></param>
         /// <param name="ccds"></param>
-        /// <param name="keyName"></param>
-        public CTableCache(DataGridView dgv,ICollection<CustomColDef> ccds,string keyName)
+        public CTableCache(DataGridView dgv,ICollection<CustomColDef> ccds)
         {
             this.dgv = dgv;
             foreach (CustomColDef ccd in ccds)
@@ -30,7 +29,7 @@ namespace IDCM.Core
                 DCMTextDGVColumn dgvc = new DCMTextDGVColumn();
                 dgvc.Name = ccd.Attr;
                 dgvc.HeaderText = ccd.Alias;
-                dgvc.Visible = ccd.IsRequire;
+                dgvc.Visible = ccd.IsEnable;
                 dgvc.Tag = ccd.IsUnique;
                 dgvc.SortMode = DataGridViewColumnSortMode.Automatic;
                 dgv.Columns.Add(dgvc);
@@ -52,13 +51,12 @@ namespace IDCM.Core
             }
             //////////////////////////////////////////
             keyIndexs = new Dictionary<string, int>();
-            this.keyName = keyName;
         }
 
         internal void addRow(Dictionary<string, string> mapvalues)
         {
             string value = null;
-            if (mapvalues.TryGetValue(keyName,out value))
+            if (mapvalues.TryGetValue(KeyName, out value))
             {
                 int idx = -1;
                 if (!keyIndexs.TryGetValue(value, out idx) || idx<0)
@@ -97,7 +95,7 @@ namespace IDCM.Core
             DataGridViewColumnCollection dgvcc = dgv.Columns;
             foreach (DataGridViewColumn dgvc in dgvcc)
             {
-                if (dgvc.Name.Equals(keyName))
+                if (dgvc.Name.Equals(KeyName))
                    return dgvc.Index;
             }
             return 0;
@@ -158,14 +156,17 @@ namespace IDCM.Core
             }
             return null;
         }
+        internal string KeyName
+        {
+            get
+            {
+                return CustomColDefGetter.KeyName;
+            }
+        }
         /// <summary>
         /// 整体数据更新共享锁对象
         /// </summary>
         public readonly object GSyncRoot=new object();
-        /// <summary>
-        /// 主键名称标记
-        /// </summary>
-        private string keyName = "";
         /// <summary>
         /// 主键映射表缓存表设定
         /// </summary>
