@@ -96,6 +96,7 @@
     <Compile Include="ComPO\HelpDocConstants.cs" />
     <Compile Include="ComPO\StrainListPage.cs" />
     <Compile Include="ComPO\StrainView.cs" />
+    <Compile Include="ComPO\XMLImportStrainsRes.cs" />
     <Compile Include="Core\CTableCache.cs" />
     <Compile Include="Core\CustomColDef.cs" />
     <Compile Include="Core\CustomColDefGetter.cs" />
@@ -103,8 +104,10 @@
     <Compile Include="Core\DataExportChecker.cs" />
     <Compile Include="Core\DataExportNoter.cs" />
     <Compile Include="Core\DataImportChecker.cs" />
+    <Compile Include="Core\GCMDataChecker.cs" />
     <Compile Include="Core\LocalDataChecker.cs" />
     <Compile Include="DataTransfer\GCMItemsLoader.cs" />
+    <Compile Include="DataTransfer\GCMPubExecutor.cs" />
     <Compile Include="DataTransfer\GCMSignExecutor.cs" />
     <Compile Include="DataTransfer\HelpDocRequester.cs" />
     <Compile Include="DataTransfer\JSONListExporter.cs" />

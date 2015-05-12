@@ -20,6 +20,7 @@ using System.Diagnostics;
 using IDCM.Core;
 using IDCM.BGHandlerManager;
 using IDCM.DataTransfer;
+using IDCM.ComPO;
 
 namespace IDCM.ViewManager
 {
@@ -144,20 +145,20 @@ namespace IDCM.ViewManager
             BGWorkerInvoker.pushHandler(checkHandler);
         }
 
-        internal void publishLocalDataToGCM()
+        internal void publishLocalDataToGCM(AuthInfo authInfo)
         {
-            AbsBGHandler checkHandler = new LocalDataPubHandler(ctcache);
+            AbsBGHandler checkHandler = new LocalDataPubHandler(authInfo,ctcache);
             BGWorkerInvoker.pushHandler(checkHandler);
         }
-        internal void publishLocalDataToGCM(params DataGridViewRow[] selectedRows)
+        internal void publishLocalDataToGCM(AuthInfo authInfo,params DataGridViewRow[] selectedRows)
         {
-            AbsBGHandler checkHandler = new LocalDataPubHandler(ctcache, selectedRows);
+            AbsBGHandler checkHandler = new LocalDataPubHandler(authInfo, ctcache, selectedRows);
             BGWorkerInvoker.pushHandler(checkHandler);
         }
 
-        internal void publishLocalDataToGCM(DataGridViewSelectedRowCollection selectedRows)
+        internal void publishLocalDataToGCM(AuthInfo authInfo,DataGridViewSelectedRowCollection selectedRows)
         {
-            AbsBGHandler checkHandler = new LocalDataPubHandler(ctcache, selectedRows);
+            AbsBGHandler checkHandler = new LocalDataPubHandler(authInfo, ctcache, selectedRows);
             BGWorkerInvoker.pushHandler(checkHandler);
         }
 

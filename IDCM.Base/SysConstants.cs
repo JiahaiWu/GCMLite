@@ -22,6 +22,7 @@ namespace IDCM.Base
         /// GCM上传XML格式模板文档
         /// </summary>
         public const string GCMUploadTemplate = "GCMUploadTemplate";
+        public const string GCMUploadSchema = "GCMUploadSchema";
         public const string LastWorkSpace = "LWS";
         public const string LUID = "LUID";
         public const string LPWD = "LPWD";

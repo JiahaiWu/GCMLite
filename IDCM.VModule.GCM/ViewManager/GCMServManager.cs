@@ -96,7 +96,10 @@ namespace IDCM.ViewManager
                 return Signed ? authInfo.Password:null;
             }
         }
-
+        internal AuthInfo getAuthInfo()
+        {
+            return this.authInfo;
+        }
         internal void refreshGCMDataset()
         {
             GCMDataLoadHandler gdlh = new GCMDataLoadHandler(gtcache,authInfo);

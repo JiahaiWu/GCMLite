@@ -16,6 +16,10 @@ namespace IDCM.Base.ComPO
         public static readonly AsyncMsgNotice LocalDataExported = new AsyncMsgNotice(MsgNoticeType.LocalDataExported, "Local Data Exported");
         public static readonly AsyncMsgNotice GCMDataLoaded = new AsyncMsgNotice(MsgNoticeType.GCMDataLoaded, "GCM Data Loaded");
         public static readonly AsyncMsgNotice GCMItemDetailRender = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "GCM Item Detail Render");
+        public static readonly AsyncMsgNotice LocalDataPublished = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "Local Data Published");
+        public static readonly AsyncMsgNotice LocalDataChecked = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "Local Data Checked");
+
+        
         
         /// <summary>
         /// For iterator 
@@ -29,6 +33,8 @@ namespace IDCM.Base.ComPO
                 yield return LocalDataExported;
                 yield return GCMDataLoaded;
                 yield return GCMItemDetailRender;
+                yield return LocalDataPublished;
+                yield return LocalDataChecked;
             }
         }
         private readonly string msgTag;
@@ -70,5 +76,7 @@ namespace IDCM.Base.ComPO
         LocalDataExported=2,
         GCMDataLoaded=3,
         GCMItemDetailRender=4,
+        LocalDataPublished=5,
+        LocalDataChecked=6,
     }
 }

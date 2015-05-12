@@ -156,7 +156,7 @@ namespace IDCM.VModule.GCM
             {
                 if (gcmServManager.Signed)
                 {
-                    localServManager.publishLocalDataToGCM(selectedRows);
+                    localServManager.publishLocalDataToGCM(gcmServManager.getAuthInfo(),selectedRows);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace IDCM.VModule.GCM
             {
                 if (gcmServManager.Signed)
                 {
-                    localServManager.publishLocalDataToGCM(dcmDataGridView_local.CurrentRow);
+                    localServManager.publishLocalDataToGCM(gcmServManager.getAuthInfo(),dcmDataGridView_local.CurrentRow);
                 }
                 else
                 {

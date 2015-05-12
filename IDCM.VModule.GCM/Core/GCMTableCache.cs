@@ -249,8 +249,5 @@ namespace IDCM.Core
         private CheckBox checkBox_remember;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
-
-
-
     }
 }
