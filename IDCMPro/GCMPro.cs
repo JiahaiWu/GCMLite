@@ -25,6 +25,7 @@ namespace IDCM
         public GCMPro()
         {
             InitializeComponent();
+            this.toolStripStatusLabel_status.Text = GlobalTextRes.Text(this.toolStripStatusLabel_status.Text);
         }
         /// <summary>
         /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作

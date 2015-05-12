@@ -50,6 +50,12 @@
   <ItemGroup>
     <Compile Include="AbsInterfaces\AbsBGHandler.cs" />
     <Compile Include="ComPO\ExportType.cs" />
+    <Compile Include="GlobalTextRes.cs" />
+    <Compile Include="TextResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ProcessUtil.cs" />
     <Compile Include="Utils\Base64CShared.cs" />
     <Compile Include="Utils\Base64DESEncrypt.cs" />
@@ -79,6 +85,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TextResources.en.resx" />
+    <EmbeddedResource Include="TextResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TextResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextResources.zh-CN.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -115,14 +115,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DCMControlLib.GCM\DCMControlLib.GCM.csproj">
-      <Project>{e4d4bdff-c909-4828-b231-356cbf16a9d0}</Project>
-      <Name>DCMControlLib.GCM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DCMControlLib\DCMControlLib.csproj">
-      <Project>{f280276f-8d7c-41ad-b62f-6e9f34693222}</Project>
-      <Name>DCMControlLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IDCM.Base\IDCM.Base.csproj">
       <Project>{1b2dd284-7d56-4ac8-be7c-ff34a807d55e}</Project>
       <Name>IDCM.Base</Name>

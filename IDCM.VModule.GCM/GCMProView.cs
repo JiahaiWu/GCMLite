@@ -368,7 +368,7 @@ namespace IDCM.VModule.GCM
         {
             if (GCMStatusChanged != null)
             {
-                GCMStatusChanged((msgTag != null) ? msgTag.ToString() : "Ready");
+                GCMStatusChanged((msgTag != null) ? msgTag.ToString() : GlobalTextRes.Text("Ready"));
             }
         }
         private void OnProgressChange(object msgTag, params object[] vals)
