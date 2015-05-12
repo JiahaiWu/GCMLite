@@ -90,6 +90,7 @@
     </EmbeddedResource>
     <Content Include="003_05.ico" />
     <Content Include="CTableConfig.xml" />
+    <Content Include="GCMPub_Template.xml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

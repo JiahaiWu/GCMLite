@@ -24,9 +24,9 @@ namespace IDCM.Forms
         /// <param name="xlscols"></param>
         /// <param name="dbList"></param>
         /// <param name="mapping"></param>
-        public void setInitCols(List<string> xlscols,ICollection<string> dbList,ref Dictionary<string,string> mapping)
+        public void setInitCols(ICollection<string> xlscols, ICollection<string> dbList, ref Dictionary<string, string> mapping)
         {
-            this.srcCols = xlscols;
+            this.srcCols = xlscols.ToList();
             this.destCols = dbList.ToList();
             this.mapping = mapping;
             computeSimilarMapping();

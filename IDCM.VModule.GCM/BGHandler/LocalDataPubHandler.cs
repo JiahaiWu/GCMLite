@@ -8,6 +8,8 @@ using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
 using IDCM.Core;
 using IDCM.DataTransfer;
+using System.IO;
+using IDCM.Base;
 
 namespace IDCM.BGHandler
 {
@@ -47,12 +49,50 @@ namespace IDCM.BGHandler
             try
             {
                 DCMPublisher.noteJobProgress(0);
+                ///////////////////////////////////////////////////////////////////////////////////
+                //Checking
                 if (selectedRows != null)
                     res = LocalDataChecker.checkForExport(ctcache, selectedRows);
                 else
                     res = LocalDataChecker.checkForExport(ctcache);
-                DataExportChecker exporter = new DataExportChecker();
+                if(!res)
+                    return new object[] { res };
+                ///////////////////////////////////////////////////////////////////////////////////
+                //mapping & export
+                string xmldata = null;
+                Dictionary<string, string> dataMapping = new Dictionary<string, string>();
+                if (DataExportChecker.checkForGCMPubXMLExport(ref dataMapping))
+                {
+                    XMLExporter exporter = new XMLExporter();
+                    using (MemoryStream xmlStream = new MemoryStream())
+                    {
+                        if (selectedRows != null)
+                        {
+                            int[] ridxs = new int[selectedRows.Count];
+                            int cc=0;
+                            foreach (object obj in selectedRows)
+                            {
+                                DataGridViewRow dgvr = (DataGridViewRow)obj;
+                                ridxs[cc] =dgvr.Index;
+                                cc++;
+                            }
+                            res = exporter.exportGCMXML(ctcache, xmlStream, dataMapping, ridxs);
+                        }
+                        else
+                            res = exporter.exportGCMXML(ctcache, xmlStream, dataMapping);
+                        if (res)
+                        {
+                            xmldata = SysConstants.defaultEncoding.GetString(xmlStream.ToArray());
+                        }
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////
+                //validation
 
+                ////////////////////////////////////////////////////////////////////////////////////
+                //publish
+                
+                ////////////////////////////////////////////////////////////////////////////////////
             }
             catch (Exception ex)
             {
