@@ -68,6 +68,7 @@ namespace DCMEx.Matchers
             }
             head++;
             //////////////////////////////////////////////////////////////////////////////////////////////
+            //MatchLoopStart:
             while (head < expEnd)
             {
                 ch = expChars[head];
@@ -83,7 +84,13 @@ namespace DCMEx.Matchers
                         break;
                     case (char)DelimitToken.SubEx: //结尾界定符标志
                         if (!preDetectConnectiveLogicMatchers(ref lSymbol, ref pMode, ref head, ref beg))
-                            throw new DCMExException("Synax error in matching the closing colon Tag!");
+                        {
+                            if (!detectEnd(head))
+                            {
+                                throw new DCMExException("Synax error in matching the closing colon Tag!");
+                            }
+                            goto MatchLoopFinish;
+                        }
                         break;
                     case (char)DelimitToken.leftBrace: //条件子句快进
                         if (detectPairedBrace(head, out beg))
@@ -103,14 +110,32 @@ namespace DCMEx.Matchers
                 }
                 ++head;
             }
+            MatchLoopFinish:
             //////////////////////////////////////////////////////////////////////////////////////////////
             //如果留有逻辑表达式序列，缓存截取到的验证逻辑对象
             if (cursor <= expEnd && cursor <= head)
             {
                 setLogicMatchers(lSymbol, pMode, cursor, head);
-                cursor = head;
+                cursor = head+1;
             }
             //////////////////////////////////////////////////////////////////////////////////////////////
+        }
+
+        private bool detectEnd(int head)
+        {
+            char ch;
+            while (head < expEnd)
+            {
+                ch = expChars[head];
+                if (ch.Equals((char)DelimitToken.EndLine) || ch.Equals((char)DelimitToken.NewLine) || ch.Equals((char)DelimitToken.WhiteSpace))
+                {
+                    ++head;
+                    continue;
+                }
+                else
+                    return false;
+            }
+            return true;
         }
 
         private bool preDetectConnectiveLogicMatchers(ref LogicSymbol lSymbol, ref PatternMode pMode, ref int head, ref int beg)

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CTableConfig>
   <version value="0.1.0"></version>
-  <key value="strain_number"></key>
+  <keyFiled value="strain_number"></keyFiled>
   <description>
     <![CDATA[
     #############################################################
@@ -12,12 +12,12 @@
     # 字段名称	必须非空	必须唯一	校验表达式	别名	默认值
     # 对应于
     # attr	Require	Unique	restrict	Alias	defaultVal
-    # attr 字段名称不支持制表符、换行符。
+    # attr 字段名称不支持制表符、换行符，由fields节点下的直接孩子节点名描述。
     # Unique和Require仅支持True,False两个选项，默认为False。
-    # restrict 校验表达式以正则表达式为基础，扩展其在数值、日期、文件路径四个方面的匹配范式。具体表达式可由["REGEX:" regex_expr | "DATE:" date_expr | "NUMBER:" number_expr | "PATH:" path_expr] 四种部分进行逻辑组合，逻辑组合关系允许 ["AND" | "OR"] ["NOT"] 三种。
-    # Alias 别名不支持制表符、换行符。
+    # restrict 校验表达式以正则表达式为基础，扩展其在数值、日期等个方面的匹配范式，逻辑组合关系允许 ["AND" | "OR"] ["NOT"] 三种。具体表达式规则参考相关说明文档。
+    # Alias 别名不支持制表符、换行符,默认的别名同Attr名称一致。
     # defaultVal 默认值设定需符和校验表达式，默认的均为空值。
-    # 需注意第一个字段默认为主键字段名称，且必须为非空值。
+    # 未正确设置keyNode的情况下，请注意第一个字段默认为主键字段名称，且必须为非空值。
     # 本文档请使用UTF-8字符集编码。
     # @see http://gcm.wfcc.info/GCMDIhelp
     ###############################################################
@@ -27,88 +27,104 @@
     <strain_number Alias="StrainNumber">
       <Require>true</Require>
       <Unique>true</Unique>
-      <restrict>\w+ \d+</restrict>
+      <restrict>REGEX:(\w+)(.*)</restrict>
       <defaultVal></defaultVal>
       <Visible>true</Visible>
     </strain_number>
     <other_collection_numbers>
-      <Require>true</Require>
+      <Require>false</Require>
+      <Visible>true</Visible>
     </other_collection_numbers>
     <name>
-      <Require>true</Require>
+      <Require>false</Require>
     </name>
     <genus_name>
       <Require>true</Require>
+      <Visible>true</Visible>
     </genus_name>
     <species_name>
-      <Require>true</Require>
+      <Require>false</Require>
+      <Visible>true</Visible>
     </species_name>
     <variety_name>
       <Require>true</Require>
     </variety_name>
     <subspecies_name>
-      <Require>true</Require>
+      <Require>false</Require>
+      <Visible>true</Visible>
     </subspecies_name>
     <organism_type>
       <Require>true</Require>
+      <Visible>true</Visible>
+      <restrict>REGEX:[(Antibody)|(Archaea)|(Bacteria)|(Fungi)|(Microalgae)|(Phage)|(Virus)|(Yeast)]</restrict>
     </organism_type>
     <date_of_Isolation>
-      <Require>true</Require>
+      <Require>false</Require>
+      <Visible>true</Visible>
+      <restrict>DATE:</restrict>
     </date_of_Isolation>
     <history_of_deposit>
-      <Require>true</Require>
+      <Require>false</Require>
     </history_of_deposit>
     <isolated_from>
-      <Require>true</Require>
+      <Require>false</Require>
     </isolated_from>
     <geographic_origin>
-      <Require>true</Require>
+      <Require>false</Require>
     </geographic_origin>
     <status>
-      <Require>true</Require>
+      <Require>false</Require>
+      <restrict>REGEX:(Type)|(No)</restrict>
     </status>
     <type_strain>
-      <Require>true</Require>
+      <Require>false</Require>
     </type_strain>
     <optimum_temperature_for_growth>
-      <Require>true</Require>
+      <Require>false</Require>
+      <Visible>true</Visible>
+      <restrict>NUMBER:</restrict>
     </optimum_temperature_for_growth>
     <maximum_temperature_for_growth>
+      <Require>false</Require>
+      <restrict>NUMBER:</restrict>
     </maximum_temperature_for_growth>
     <minimum_temperature_for_growth>
+      <Require>false</Require>
+      <restrict>NUMBER:</restrict>
     </minimum_temperature_for_growth>
     <literature>
-      <Require>true</Require>
+      <Require>false</Require>
     </literature>
     <author>
-      <Require>true</Require>
+      <Require>false</Require>
     </author>
     <application>
-      <Require>true</Require>
+      <Require>false</Require>
     </application>
     <permission>
-      <Require>true</Require>
+      <Require>false</Require>
     </permission>
     <user_id>
-      <Require>true</Require>
+      <Require>false</Require>
     </user_id>
     <medium_id>
-      <Require>true</Require>
+      <Require>false</Require>
     </medium_id>
     <bacteria_id>
-      <Require>true</Require>
+      <Require>false</Require>
     </bacteria_id>
     <showdate>
-      <Require>true</Require>
+      <Require>false</Require>
+      <restrict>DATE:</restrict>
     </showdate>
     <soursurl>
-      <Require>true</Require>
+      <Require>false</Require>
     </soursurl>
     <genbanktype>
-      <Require>true</Require>
+      <Require>false</Require>
     </genbanktype>
     <othername>
-      <Require>true</Require>
+      <Require>false</Require>
     </othername>
     <heat_resistance>
     </heat_resistance>
@@ -141,6 +157,7 @@
     <deficiencies>
     </deficiencies>
     <date_of_accession>
+      <restrict>DATE:</restrict>
     </date_of_accession>
     <form_of_supply>
     </form_of_supply>
@@ -205,6 +222,7 @@
     <plasmid>
     </plasmid>
     <date_of_collection>
+      <restrict>DATE:</restrict>
     </date_of_collection>
     <special_form_name>
     </special_form_name>
@@ -213,6 +231,7 @@
     <metabolites_produced>
     </metabolites_produced>
     <date_of_update>
+      <restrict>DATE:</restrict>
     </date_of_update>
     <mutants>
     </mutants>
@@ -221,6 +240,8 @@
     <conditions_for_germination>
     </conditions_for_germination>
     <bio_hazard_level>
+      <Require>false</Require>
+      <restrict>REGEX:[1-4] AND NUMBER:</restrict>
     </bio_hazard_level>
     <mating_type>
     </mating_type>
@@ -309,6 +330,7 @@
     <symbiosis>
     </symbiosis>
     <date_of_identification>
+      <restrict>DATE:</restrict>
     </date_of_identification>
     <former_name>
     </former_name>
@@ -331,15 +353,11 @@
     <mycoparasitism>
     </mycoparasitism>
     <date_of_deposition>
+      <restrict>DATE:</restrict>
     </date_of_deposition>
     <salinity_requirements_for_growth>
     </salinity_requirements_for_growth>
     <mode_of_preservation_storage>
-      <Require>false</Require>
-      <Unique>false</Unique>
-      <restrict></restrict>
-      <defaultVal></defaultVal>
-      <Visible>false</Visible>
     </mode_of_preservation_storage>
     <group>
     </group>
