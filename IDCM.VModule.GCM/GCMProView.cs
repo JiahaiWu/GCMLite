@@ -86,7 +86,6 @@ namespace IDCM.VModule.GCM
                     //设定本地数据表属性及事件处理方法
                     localServManager = new LocalServManager(ctcache);
                     this.dcmDataGridView_local.AllowDrop = true;
-                    this.dcmDataGridView_local.CellValueChanged += dataGridView_local_CellValueChanged;
                     this.dcmDataGridView_local.DragEnter += dataGridView_local_items_DragEnter;
                     this.dcmDataGridView_local.DragDrop += dataGridView_local_items_DragDrop;
                     this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
@@ -143,8 +142,8 @@ namespace IDCM.VModule.GCM
                     DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
                     if (dgvc != null && dgvc.Visible)
                     {
-                        CustomColDefGetter.updateCustomColRestrict(dgvc.Name, isRequire, isUnique, restrict);
-                        MsgDriver.DCMPublisher.noteSimpleMsg("字段约束条件属性更新成功");
+                        CustomColDefGetter.updateCustomColCond(dgvc.Name, isRequire, isUnique, restrict);
+                        MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
                     }
                 }));
             }
@@ -408,34 +407,13 @@ namespace IDCM.VModule.GCM
 
         private void OnLocalDataExported(object msgTag, params object[] vals)
         {
-            MsgDriver.DCMPublisher.noteSimpleMsg("本地数据导出完成");
+            MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data exported success"));
         }
         private void OnLocalDataImported(object msgTag, params object[] vals)
         {
-            MsgDriver.DCMPublisher.noteSimpleMsg("本地数据导入完成");
+            MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data import success"));
         }
 
-
-        /// <summary>
-        /// 单元格的值改变后，执行更新或插入操作
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView_local_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            //////////////////////////////////////////////////////////////////
-            //if (e.ColumnIndex > 0 && e.RowIndex>0 && this.IsInited)
-            //{
-            //    DataGridViewRow dgvr = dcmDataGridView_local.Rows[e.RowIndex];
-            //    DataGridViewCell statusCell = dgvr.Cells[SysConstants.dgvc_status];
-            //    if (statusCell != null)
-            //    {
-            //        statusCell.Value = "";
-            //    }
-            //}
-            //暂不考虑已导出和未导出的问题
-            //////////////////////////////////////////////////////////////////////
-        }
         private void dataGridView_gcm_CellClicked(object sender, DataGridViewCellEventArgs e)
         {
             gcmServManager.showGCMDataDetail(e.RowIndex);
@@ -690,7 +668,7 @@ namespace IDCM.VModule.GCM
 
         public void filterToRecvLocalData()
         {
-            throw new NotImplementedException();
+            localServManager.filterToRecvLocalData();
         }
 
         public void clearAllLocalData()

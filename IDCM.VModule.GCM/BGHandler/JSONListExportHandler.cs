@@ -36,11 +36,19 @@ namespace IDCM.BGHandler
             try
             {
                 DCMPublisher.noteJobProgress(0);
-                JSONListExporter exporter = new JSONListExporter();
-                if (selectedRows != null)
-                    res = exporter.exportJSONList(ctableCache, xlsPath, selectedRows);
+                if (LocalDataChecker.checkForExport(ctableCache, 10))
+                {
+                    JSONListExporter exporter = new JSONListExporter();
+                    if (selectedRows != null)
+                        res = exporter.exportJSONList(ctableCache, xlsPath, selectedRows);
+                    else
+                        res = exporter.exportJSONList(ctableCache, xlsPath);
+                }
                 else
-                    res = exporter.exportJSONList(ctableCache, xlsPath);
+                {
+                    log.Info(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!");
+                    DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!", Base.ComPO.DCMMsgType.Alert);
+                }
             }
             catch (Exception ex)
             {

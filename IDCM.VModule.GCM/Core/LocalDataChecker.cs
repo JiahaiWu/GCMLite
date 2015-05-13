@@ -32,6 +32,7 @@ namespace IDCM.Core
                 }
                 if (errorCount > maxErrorCount)
                     break;
+                ridx++;
             }
             return errorCount <1;
         }
@@ -88,6 +89,55 @@ namespace IDCM.Core
             return errorCount < 1;
         }
 
+        internal static bool tryRecover(CTableCache ctcache, ICollection selectedRows)
+        {
+            Dictionary<int, CustomColValidator> checkers = new Dictionary<int, CustomColValidator>();
+            foreach (KeyValuePair<string, int> pair in ctcache.getIAttrMapping())
+            {
+                checkers[pair.Value] = new CustomColValidator(CustomColDefGetter.getCustomColDef(pair.Key));
+            }
+            foreach (object obj in selectedRows)
+            {
+                DataGridViewRow dgvr = (DataGridViewRow)obj;
+                if (!dgvr.IsNewRow)
+                {
+                    lock (ctcache.GSyncRoot)
+                    {
+                        if (checkForValid(dgvr, checkers))
+                            ControlAsyncUtil.SyncInvoke(dgvr.DataGridView, new ControlAsyncUtil.InvokeHandler(delegate()
+                            {
+                                dgvr.DataGridView.Rows.Remove(dgvr);
+                            }));
+                    }
+                }
+            }
+            return true;
+        }
+
+        internal static bool tryRecover(CTableCache ctcache)
+        {
+            Dictionary<int, CustomColValidator> checkers = new Dictionary<int, CustomColValidator>();
+            foreach (KeyValuePair<string, int> pair in ctcache.getIAttrMapping())
+            {
+                checkers[pair.Value] = new CustomColValidator(CustomColDefGetter.getCustomColDef(pair.Key));
+            }
+            int ridx = 0;
+            while (ridx < ctcache.getRowCount())
+            {
+                lock (ctcache.GSyncRoot)
+                {
+                    DataGridViewRow dgvr = ctcache.getDGVRow(ridx);
+                    if (checkForValid(dgvr, checkers))
+                        ControlAsyncUtil.SyncInvoke(dgvr.DataGridView, new ControlAsyncUtil.InvokeHandler(delegate()
+                        {
+                            dgvr.DataGridView.Rows.Remove(dgvr);
+                        }));
+                    else
+                        ridx++;
+                }
+            }
+            return true;
+        }
 
         public static int checkForExport(DataGridViewRow dgvr, Dictionary<int, CustomColValidator> checkers)
         {
@@ -109,6 +159,18 @@ namespace IDCM.Core
                     ++errorCount;
             }
             return errorCount;
+        }
+        public static bool checkForValid(DataGridViewRow dgvr, Dictionary<int, CustomColValidator> checkers)
+        {
+            foreach (KeyValuePair<int, CustomColValidator> chPair in checkers)
+            {
+                DataGridViewCell dgvc = dgvr.Cells[chPair.Key];
+                string cellValue = DGVUtil.getCellValue(dgvc);
+                bool isValid = chPair.Value.checkValid(cellValue);
+                if (!isValid)
+                    return false;
+            }
+            return true;
         }
     }
 

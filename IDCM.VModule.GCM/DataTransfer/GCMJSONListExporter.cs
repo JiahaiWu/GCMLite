@@ -39,6 +39,7 @@ namespace IDCM.DataTransfer
                                 strbuilder.Length = 0;
                             }
                         }
+                        ridx++;
                     }
                     if (strbuilder.Length > 0)
                     {

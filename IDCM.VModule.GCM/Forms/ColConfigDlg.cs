@@ -14,6 +14,12 @@ namespace IDCM.Forms
         public ColConfigDlg(int cursor, string aliasName, bool isRequire, bool isUnique, string restrict)
         {
             InitializeComponent();
+            this.label1.Text = IDCM.Base.GlobalTextRes.Text("Column Name")+":";
+            this.label4.Text = IDCM.Base.GlobalTextRes.Text("Restrict Expression")+":";
+            this.checkBox_NotEmpty.Text = IDCM.Base.GlobalTextRes.Text("Not Empty");
+            this.checkBox_unique.Text = IDCM.Base.GlobalTextRes.Text("Unique");
+            this.Text = IDCM.Base.GlobalTextRes.Text("Column Config Dialog");
+            //////////////////////////////////////////////
             this.cursor = cursor;
             this.label_ColName.Text = aliasName;
             this.checkBox_NotEmpty.Checked = isRequire;

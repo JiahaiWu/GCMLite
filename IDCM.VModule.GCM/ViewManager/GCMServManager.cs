@@ -56,7 +56,7 @@ namespace IDCM.ViewManager
                 {
                     if (authInfo != null && authInfo.Username != null && authInfo.Password != null)
                     {
-                        DCMPublisher.noteSimpleMsg("正在连接GCM ...", DCMMsgType.Status);
+                        DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Connecting to GCM") + " ...", DCMMsgType.Status);
                         AuthInfo auth = GCMSignExecutor.SignIn(authInfo.Username, authInfo.Password, authInfo.autoLogin);
                         authInfo.LoginFlag = auth.LoginFlag;
                         authInfo.Jsessionid = auth.Jsessionid;

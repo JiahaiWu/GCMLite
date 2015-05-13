@@ -139,6 +139,11 @@ namespace IDCM.ViewManager
             AbsBGHandler checkHandler = new LocalDataCheckHandler(ctcache, selectedRows);
             BGWorkerInvoker.pushHandler(checkHandler);
         }
+        internal void filterToRecvLocalData()
+        {
+            AbsBGHandler checkHandler = new LocalDataFilterToRecvHandler(ctcache);
+            BGWorkerInvoker.pushHandler(checkHandler);
+        }
         public void checkData(params DataGridViewRow[] selectedRows)
         {
             AbsBGHandler checkHandler = new LocalDataCheckHandler(ctcache, selectedRows);

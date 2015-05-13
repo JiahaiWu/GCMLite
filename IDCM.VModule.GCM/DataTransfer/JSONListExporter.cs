@@ -60,8 +60,8 @@ namespace IDCM.DataTransfer
         {
             try
             {
-                StringBuilder strbuilder = new StringBuilder();
                 int count = 0;
+                StringBuilder strbuilder = new StringBuilder();
                 using (FileStream fs = new FileStream(filepath, FileMode.Create))
                 {
                     Dictionary<string, int> maps = ctableCache.getIAttrMapping();

@@ -170,7 +170,7 @@ namespace IDCM.Core
                 }
             }
         }
-        public static void updateCustomColRestrict(string attr, bool isRequire, bool isUnique, string restrict)
+        public static void updateCustomColCond(string attr, bool isRequire, bool isUnique, string restrict)
         {
             CustomColDef ccd = null;
             if (ccdCache.TryGetValue(attr, out ccd))

@@ -36,11 +36,19 @@ namespace IDCM.BGHandler
             bool res = false;
             try{
                 DCMPublisher.noteJobProgress(0);
-                ExcelExporter exporter = new ExcelExporter();
-                if (selectedRows != null)
-                    res = exporter.exportExcel(ctcache, xlsPath, selectedRows);
+                if (LocalDataChecker.checkForExport(ctcache, 10))
+                {
+                    ExcelExporter exporter = new ExcelExporter();
+                    if (selectedRows != null)
+                        res = exporter.exportExcel(ctcache, xlsPath, selectedRows);
+                    else
+                        res = exporter.exportExcel(ctcache, xlsPath);
+                }
                 else
-                    res = exporter.exportExcel(ctcache, xlsPath);
+                {
+                    log.Info(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!");
+                    DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!", Base.ComPO.DCMMsgType.Alert);
+                }
             }
             catch (Exception ex)
             {

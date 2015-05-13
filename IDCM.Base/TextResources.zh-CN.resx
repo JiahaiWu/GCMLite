@@ -342,4 +342,37 @@
   <data name="Remember" xml:space="preserve">
     <value>记住密码</value>
   </data>
+  <data name="Column restrictions updated" xml:space="preserve">
+    <value>字段约束条件属性更新成功</value>
+  </data>
+  <data name="Connecting to GCM" xml:space="preserve">
+    <value>正在连接GCM</value>
+  </data>
+  <data name="Local data exported success" xml:space="preserve">
+    <value>本地数据导出完成</value>
+  </data>
+  <data name="Local data import success" xml:space="preserve">
+    <value>本地数据导入完成</value>
+  </data>
+  <data name="Column Config Dialog" xml:space="preserve">
+    <value>字段属性配置对话框</value>
+  </data>
+  <data name="Column Name" xml:space="preserve">
+    <value>字段名称</value>
+  </data>
+  <data name="Not Empty" xml:space="preserve">
+    <value>非空值</value>
+  </data>
+  <data name="Restrict Expression" xml:space="preserve">
+    <value>检验表达式</value>
+  </data>
+  <data name="Unique" xml:space="preserve">
+    <value>值唯一</value>
+  </data>
+  <data name="Data filter failed" xml:space="preserve">
+    <value>数据过滤性修复失败</value>
+  </data>
+  <data name="Data filter success" xml:space="preserve">
+    <value>数据过滤性修复完成</value>
+  </data>
 </root>

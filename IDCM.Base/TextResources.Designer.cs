@@ -70,11 +70,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 ABC 引用查询 的本地化字符串。
+        /// </summary>
+        internal static string ABC_Browser1 {
+            get {
+                return ResourceManager.GetString("ABC Browser1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关于 GCMLite(Alt+A) 的本地化字符串。
         /// </summary>
         internal static string About_GCMLite_Alt_A_ {
             get {
                 return ResourceManager.GetString("About GCMLite(Alt+A)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关于 GCMLite(Alt+A) 的本地化字符串。
+        /// </summary>
+        internal static string About_GCMLite_Alt_A_1 {
+            get {
+                return ResourceManager.GetString("About GCMLite(Alt+A)1", resourceCulture);
             }
         }
         
@@ -88,11 +106,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 应用视图启动失败 的本地化字符串。
+        /// </summary>
+        internal static string Application_View_Initialize_Failed1 {
+            get {
+                return ResourceManager.GetString("Application View Initialize Failed1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 属性映射对话框 的本地化字符串。
         /// </summary>
         internal static string AttrMappingOptionDlg {
             get {
                 return ResourceManager.GetString("AttrMappingOptionDlg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 属性映射对话框 的本地化字符串。
+        /// </summary>
+        internal static string AttrMappingOptionDlg1 {
+            get {
+                return ResourceManager.GetString("AttrMappingOptionDlg1", resourceCulture);
             }
         }
         
@@ -106,11 +142,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        internal static string Cancel1 {
+            get {
+                return ResourceManager.GetString("Cancel1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 CCInfo 账号 的本地化字符串。
         /// </summary>
         internal static string CCInfo_ID {
             get {
                 return ResourceManager.GetString("CCInfo ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 CCInfo 账号 的本地化字符串。
+        /// </summary>
+        internal static string CCInfo_ID1 {
+            get {
+                return ResourceManager.GetString("CCInfo ID1", resourceCulture);
             }
         }
         
@@ -124,11 +178,56 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 清空所有(Alt+C) 的本地化字符串。
+        /// </summary>
+        internal static string Clear_All_Alt_C_1 {
+            get {
+                return ResourceManager.GetString("Clear All(Alt+C)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段属性配置对话框 的本地化字符串。
+        /// </summary>
+        internal static string Column_Config_Dialog {
+            get {
+                return ResourceManager.GetString("Column Config Dialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段名称 的本地化字符串。
+        /// </summary>
+        internal static string Column_Name {
+            get {
+                return ResourceManager.GetString("Column Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段约束条件属性更新成功 的本地化字符串。
+        /// </summary>
+        internal static string Column_restrictions_updated {
+            get {
+                return ResourceManager.GetString("Column restrictions updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 配置 的本地化字符串。
         /// </summary>
         internal static string Configuration {
             get {
                 return ResourceManager.GetString("Configuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 配置 的本地化字符串。
+        /// </summary>
+        internal static string Configuration1 {
+            get {
+                return ResourceManager.GetString("Configuration1", resourceCulture);
             }
         }
         
@@ -151,11 +250,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 确认信息 的本地化字符串。
+        /// </summary>
+        internal static string Confirm_Message1 {
+            get {
+                return ResourceManager.GetString("Confirm Message1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确认 的本地化字符串。
+        /// </summary>
+        internal static string Confirm1 {
+            get {
+                return ResourceManager.GetString("Confirm1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 连接到GCM失败。 的本地化字符串。
         /// </summary>
         internal static string Connect_GCM_failed {
             get {
                 return ResourceManager.GetString("Connect GCM failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接到GCM失败。 的本地化字符串。
+        /// </summary>
+        internal static string Connect_GCM_failed1 {
+            get {
+                return ResourceManager.GetString("Connect GCM failed1", resourceCulture);
             }
         }
         
@@ -169,11 +295,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 已建立连接 的本地化字符串。
+        /// </summary>
+        internal static string Connected1 {
+            get {
+                return ResourceManager.GetString("Connected1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在连接GCM 的本地化字符串。
+        /// </summary>
+        internal static string Connecting_to_GCM {
+            get {
+                return ResourceManager.GetString("Connecting to GCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自定义映射匹配 的本地化字符串。
         /// </summary>
         internal static string Custom_Mapping {
             get {
                 return ResourceManager.GetString("Custom Mapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自定义映射匹配 的本地化字符串。
+        /// </summary>
+        internal static string Custom_Mapping1 {
+            get {
+                return ResourceManager.GetString("Custom Mapping1", resourceCulture);
             }
         }
         
@@ -187,11 +340,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 数据校验失败 的本地化字符串。
+        /// </summary>
+        internal static string Data_Check_failed1 {
+            get {
+                return ResourceManager.GetString("Data Check failed1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 数据校验完成 的本地化字符串。
         /// </summary>
         internal static string Data_Check_success {
             get {
                 return ResourceManager.GetString("Data Check success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据校验完成 的本地化字符串。
+        /// </summary>
+        internal static string Data_Check_success1 {
+            get {
+                return ResourceManager.GetString("Data Check success1", resourceCulture);
             }
         }
         
@@ -214,11 +385,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 数据导出失败，错误信息 的本地化字符串。
+        /// </summary>
+        internal static string Data_export_failed_with_error_info1 {
+            get {
+                return ResourceManager.GetString("Data export failed with error info1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据导出失败。 的本地化字符串。
+        /// </summary>
+        internal static string Data_export_failed1 {
+            get {
+                return ResourceManager.GetString("Data export failed1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 数据提交发布失败 的本地化字符串。
         /// </summary>
         internal static string Data_publish_failed {
             get {
                 return ResourceManager.GetString("Data publish failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据提交发布失败 的本地化字符串。
+        /// </summary>
+        internal static string Data_publish_failed1 {
+            get {
+                return ResourceManager.GetString("Data publish failed1", resourceCulture);
             }
         }
         
@@ -232,11 +430,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 数据提交发布成功 的本地化字符串。
+        /// </summary>
+        internal static string Data_publish_success1 {
+            get {
+                return ResourceManager.GetString("Data publish success1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未连接 的本地化字符串。
         /// </summary>
         internal static string Disconnected {
             get {
                 return ResourceManager.GetString("Disconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未连接 的本地化字符串。
+        /// </summary>
+        internal static string Disconnected1 {
+            get {
+                return ResourceManager.GetString("Disconnected1", resourceCulture);
             }
         }
         
@@ -250,11 +466,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 精确匹配 的本地化字符串。
+        /// </summary>
+        internal static string Exact_Match1 {
+            get {
+                return ResourceManager.GetString("Exact Match1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 退出操作执行失败 的本地化字符串。
         /// </summary>
         internal static string Exit_operation_execute_failed {
             get {
                 return ResourceManager.GetString("Exit operation execute failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 退出操作执行失败 的本地化字符串。
+        /// </summary>
+        internal static string Exit_operation_execute_failed1 {
+            get {
+                return ResourceManager.GetString("Exit operation execute failed1", resourceCulture);
             }
         }
         
@@ -268,11 +502,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 导出(Alt+E) 的本地化字符串。
+        /// </summary>
+        internal static string Export_Alt_E_1 {
+            get {
+                return ResourceManager.GetString("Export(Alt+E)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 导出失败 的本地化字符串。
         /// </summary>
         internal static string Export_failed {
             get {
                 return ResourceManager.GetString("Export failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导出失败 的本地化字符串。
+        /// </summary>
+        internal static string Export_failed1 {
+            get {
+                return ResourceManager.GetString("Export failed1", resourceCulture);
             }
         }
         
@@ -286,11 +538,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 导出菌树 的本地化字符串。
+        /// </summary>
+        internal static string export_strain_tree1 {
+            get {
+                return ResourceManager.GetString("export strain tree1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 导出完成 的本地化字符串。
         /// </summary>
         internal static string Export_success {
             get {
                 return ResourceManager.GetString("Export success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导出完成 的本地化字符串。
+        /// </summary>
+        internal static string Export_success1 {
+            get {
+                return ResourceManager.GetString("Export success1", resourceCulture);
             }
         }
         
@@ -304,11 +574,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 GCMXML文件导出及上传失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_export_and_publish_the_XML_document_for_GCM1 {
+            get {
+                return ResourceManager.GetString("Failed to export and publish the XML document for GCM1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Excel文件导入失败 的本地化字符串。
         /// </summary>
         internal static string Failed_to_Export_excel_file {
             get {
                 return ResourceManager.GetString("Failed to Export excel file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Excel文件导入失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_Export_excel_file1 {
+            get {
+                return ResourceManager.GetString("Failed to Export excel file1", resourceCulture);
             }
         }
         
@@ -322,11 +610,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 JSON文件导出失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_export_JSON_File1 {
+            get {
+                return ResourceManager.GetString("Failed to export JSON File1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 文本文件导出失败 的本地化字符串。
         /// </summary>
         internal static string Failed_to_export_text_file {
             get {
                 return ResourceManager.GetString("Failed to export text file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文本文件导出失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_export_text_file1 {
+            get {
+                return ResourceManager.GetString("Failed to export text file1", resourceCulture);
             }
         }
         
@@ -340,11 +646,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 XML文件导出失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_export_XML_document1 {
+            get {
+                return ResourceManager.GetString("Failed to export XML document1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 导入存档文件失败 的本地化字符串。
         /// </summary>
         internal static string Failed_to_import_dump_file {
             get {
                 return ResourceManager.GetString("Failed to import dump file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导入存档文件失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_import_dump_file1 {
+            get {
+                return ResourceManager.GetString("Failed to import dump file1", resourceCulture);
             }
         }
         
@@ -358,11 +682,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Excel文件导入失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_import_excel_file1 {
+            get {
+                return ResourceManager.GetString("Failed to import excel file1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 XML文件导入失败 的本地化字符串。
         /// </summary>
         internal static string Failed_to_import_XML_document {
             get {
                 return ResourceManager.GetString("Failed to import XML document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 XML文件导入失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_import_XML_document1 {
+            get {
+                return ResourceManager.GetString("Failed to import XML document1", resourceCulture);
             }
         }
         
@@ -376,11 +718,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 GCM细览数据查询失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_query_the_detail_of_GCM_data1 {
+            get {
+                return ResourceManager.GetString("Failed to query the detail of GCM data1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 GCM 概览数据查询失败 的本地化字符串。
         /// </summary>
         internal static string Failed_to_query_the_overview_of_GCM_data {
             get {
                 return ResourceManager.GetString("Failed to query the overview of GCM data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 GCM 概览数据查询失败 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_query_the_overview_of_GCM_data1 {
+            get {
+                return ResourceManager.GetString("Failed to query the overview of GCM data1", resourceCulture);
             }
         }
         
@@ -394,11 +754,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 严重错误 的本地化字符串。
+        /// </summary>
+        internal static string FATAL1 {
+            get {
+                return ResourceManager.GetString("FATAL1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 文件 的本地化字符串。
         /// </summary>
         internal static string File {
             get {
                 return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文件 的本地化字符串。
+        /// </summary>
+        internal static string File1 {
+            get {
+                return ResourceManager.GetString("File1", resourceCulture);
             }
         }
         
@@ -412,11 +790,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 过滤式修复(Alt+R) 的本地化字符串。
+        /// </summary>
+        internal static string Filter_Alt_R_1 {
+            get {
+                return ResourceManager.GetString("Filter(Alt+R)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 向下查询 的本地化字符串。
         /// </summary>
         internal static string Find_Down {
             get {
                 return ResourceManager.GetString("Find Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 向下查询 的本地化字符串。
+        /// </summary>
+        internal static string Find_Down1 {
+            get {
+                return ResourceManager.GetString("Find Down1", resourceCulture);
             }
         }
         
@@ -430,11 +826,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 向上查询 的本地化字符串。
+        /// </summary>
+        internal static string Find_Up1 {
+            get {
+                return ResourceManager.GetString("Find Up1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 前端查找 的本地化字符串。
         /// </summary>
         internal static string Front_Find {
             get {
                 return ResourceManager.GetString("Front Find", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 前端查找 的本地化字符串。
+        /// </summary>
+        internal static string Front_Find1 {
+            get {
+                return ResourceManager.GetString("Front Find1", resourceCulture);
             }
         }
         
@@ -448,11 +862,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 GCM 密码 的本地化字符串。
+        /// </summary>
+        internal static string GCM_Password1 {
+            get {
+                return ResourceManager.GetString("GCM Password1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 GCM 发布数据 的本地化字符串。
         /// </summary>
         internal static string GCM_Publish {
             get {
                 return ResourceManager.GetString("GCM Publish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 GCM 发布数据 的本地化字符串。
+        /// </summary>
+        internal static string GCM_Publish1 {
+            get {
+                return ResourceManager.GetString("GCM Publish1", resourceCulture);
             }
         }
         
@@ -466,11 +898,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 帮助 的本地化字符串。
+        /// </summary>
+        internal static string Help1 {
+            get {
+                return ResourceManager.GetString("Help1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 异常退出 的本地化字符串。
         /// </summary>
         internal static string It_s_Crash {
             get {
                 return ResourceManager.GetString("It\'s Crash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 异常退出 的本地化字符串。
+        /// </summary>
+        internal static string It_s_Crash1 {
+            get {
+                return ResourceManager.GetString("It\'s Crash1", resourceCulture);
             }
         }
         
@@ -484,11 +934,47 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 已达结尾，遍历结束。 的本地化字符串。
+        /// </summary>
+        internal static string It_s_reached_the_end__and_traverse_over_1 {
+            get {
+                return ResourceManager.GetString("It\'s reached the end, and traverse over.1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地数据导出完成 的本地化字符串。
+        /// </summary>
+        internal static string Local_data_exported_success {
+            get {
+                return ResourceManager.GetString("Local data exported success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地数据导入完成 的本地化字符串。
+        /// </summary>
+        internal static string Local_data_import_success {
+            get {
+                return ResourceManager.GetString("Local data import success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 本地数据验证失败 的本地化字符串。
         /// </summary>
         internal static string Local_data_validation_did_not_pass {
             get {
                 return ResourceManager.GetString("Local data validation did not pass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地数据验证失败 的本地化字符串。
+        /// </summary>
+        internal static string Local_data_validation_did_not_pass1 {
+            get {
+                return ResourceManager.GetString("Local data validation did not pass1", resourceCulture);
             }
         }
         
@@ -502,11 +988,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 本地数据管理 的本地化字符串。
+        /// </summary>
+        internal static string Local_DataSet1 {
+            get {
+                return ResourceManager.GetString("Local DataSet1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 匹配大小写 的本地化字符串。
         /// </summary>
         internal static string Match_Case {
             get {
                 return ResourceManager.GetString("Match Case", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 匹配大小写 的本地化字符串。
+        /// </summary>
+        internal static string Match_Case1 {
+            get {
+                return ResourceManager.GetString("Match Case1", resourceCulture);
             }
         }
         
@@ -520,11 +1024,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 完整匹配 的本地化字符串。
+        /// </summary>
+        internal static string Match_Fully1 {
+            get {
+                return ResourceManager.GetString("Match Fully1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 非空值 的本地化字符串。
+        /// </summary>
+        internal static string Not_Empty {
+            get {
+                return ResourceManager.GetString("Not Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 提醒 的本地化字符串。
         /// </summary>
         internal static string Notice {
             get {
                 return ResourceManager.GetString("Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提醒 的本地化字符串。
+        /// </summary>
+        internal static string Notice1 {
+            get {
+                return ResourceManager.GetString("Notice1", resourceCulture);
             }
         }
         
@@ -538,11 +1069,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 GCMLite 应用程序退出。 的本地化字符串。
+        /// </summary>
+        internal static string On_GCMLite_application_exiting_1 {
+            get {
+                return ResourceManager.GetString("On GCMLite application exiting.1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 主程序已退出。 的本地化字符串。
         /// </summary>
         internal static string On_Main_Manager_exited_ {
             get {
                 return ResourceManager.GetString("On Main Manager exited.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 主程序已退出。 的本地化字符串。
+        /// </summary>
+        internal static string On_Main_Manager_exited_1 {
+            get {
+                return ResourceManager.GetString("On Main Manager exited.1", resourceCulture);
             }
         }
         
@@ -556,11 +1105,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 打开 (Alt+O) 的本地化字符串。
+        /// </summary>
+        internal static string Open__Alt_O_1 {
+            get {
+                return ResourceManager.GetString("Open (Alt+O)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 请登录GCM后再提交。 的本地化字符串。
         /// </summary>
         internal static string Please_Login_before_submitting_to_GCM_ {
             get {
                 return ResourceManager.GetString("Please Login before submitting to GCM.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请登录GCM后再提交。 的本地化字符串。
+        /// </summary>
+        internal static string Please_Login_before_submitting_to_GCM_1 {
+            get {
+                return ResourceManager.GetString("Please Login before submitting to GCM.1", resourceCulture);
             }
         }
         
@@ -574,11 +1141,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 退出(Alt+Q) 的本地化字符串。
+        /// </summary>
+        internal static string Quit_Alt_Q_1 {
+            get {
+                return ResourceManager.GetString("Quit(Alt+Q)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 就绪 的本地化字符串。
         /// </summary>
         internal static string Ready {
             get {
                 return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 就绪 的本地化字符串。
+        /// </summary>
+        internal static string Ready1 {
+            get {
+                return ResourceManager.GetString("Ready1", resourceCulture);
             }
         }
         
@@ -592,11 +1177,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 记住密码 的本地化字符串。
+        /// </summary>
+        internal static string Remember1 {
+            get {
+                return ResourceManager.GetString("Remember1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 重置 的本地化字符串。
         /// </summary>
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重置 的本地化字符串。
+        /// </summary>
+        internal static string Reset1 {
+            get {
+                return ResourceManager.GetString("Reset1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检验表达式 的本地化字符串。
+        /// </summary>
+        internal static string Restrict_Expression {
+            get {
+                return ResourceManager.GetString("Restrict Expression", resourceCulture);
             }
         }
         
@@ -610,11 +1222,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 存档 (Alt+S) 的本地化字符串。
+        /// </summary>
+        internal static string Save__Alt_S_1 {
+            get {
+                return ResourceManager.GetString("Save (Alt+S)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 保存路径 的本地化字符串。
         /// </summary>
         internal static string SavePath {
             get {
                 return ResourceManager.GetString("SavePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存路径 的本地化字符串。
+        /// </summary>
+        internal static string SavePath1 {
+            get {
+                return ResourceManager.GetString("SavePath1", resourceCulture);
             }
         }
         
@@ -637,11 +1267,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 查找(Alt+F) 的本地化字符串。
+        /// </summary>
+        internal static string Search_Alt_F_1 {
+            get {
+                return ResourceManager.GetString("Search(Alt+F)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查找 的本地化字符串。
+        /// </summary>
+        internal static string Search1 {
+            get {
+                return ResourceManager.GetString("Search1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 选择导出文件类型 的本地化字符串。
         /// </summary>
         internal static string Select_File_Type_For_Export {
             get {
                 return ResourceManager.GetString("Select File Type For Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择导出文件类型 的本地化字符串。
+        /// </summary>
+        internal static string Select_File_Type_For_Export1 {
+            get {
+                return ResourceManager.GetString("Select File Type For Export1", resourceCulture);
             }
         }
         
@@ -655,11 +1312,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 模糊匹配 的本地化字符串。
+        /// </summary>
+        internal static string Similarity_Match1 {
+            get {
+                return ResourceManager.GetString("Similarity Match1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 用户名和密码值不能为空 的本地化字符串。
         /// </summary>
         internal static string The__CCInfo_Id__and__GCM_Password__should_not_be_empty_ {
             get {
                 return ResourceManager.GetString("The \'CCInfo Id\' and \'GCM Password\' should not be empty.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户名和密码值不能为空 的本地化字符串。
+        /// </summary>
+        internal static string The__CCInfo_Id__and__GCM_Password__should_not_be_empty_1 {
+            get {
+                return ResourceManager.GetString("The \'CCInfo Id\' and \'GCM Password\' should not be empty.1", resourceCulture);
             }
         }
         
@@ -673,11 +1348,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 粘贴到表格单元的数据格式错误 的本地化字符串。
+        /// </summary>
+        internal static string The_data_you_pasted_is_in_the_wrong_format_for_the_cell1 {
+            get {
+                return ResourceManager.GetString("The data you pasted is in the wrong format for the cell1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 保存文件路径有误 的本地化字符串。
         /// </summary>
         internal static string The_save_file_path_should_be_available_ {
             get {
                 return ResourceManager.GetString("The save file path should be available.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存文件路径有误 的本地化字符串。
+        /// </summary>
+        internal static string The_save_file_path_should_be_available_1 {
+            get {
+                return ResourceManager.GetString("The save file path should be available.1", resourceCulture);
             }
         }
         
@@ -691,11 +1384,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 仍有后台任务正在执行中，是否强制退出？ 的本地化字符串。
+        /// </summary>
+        internal static string There_are_background_tasks_are_executing__force_quit_or_not1 {
+            get {
+                return ResourceManager.GetString("There are background tasks are executing, force quit or not1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 工具 的本地化字符串。
         /// </summary>
         internal static string Tool {
             get {
                 return ResourceManager.GetString("Tool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 工具 的本地化字符串。
+        /// </summary>
+        internal static string Tool1 {
+            get {
+                return ResourceManager.GetString("Tool1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 值唯一 的本地化字符串。
+        /// </summary>
+        internal static string Unique {
+            get {
+                return ResourceManager.GetString("Unique", resourceCulture);
             }
         }
         
@@ -709,11 +1429,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 不支持的导出格式 的本地化字符串。
+        /// </summary>
+        internal static string Unsupport_export_type1 {
+            get {
+                return ResourceManager.GetString("Unsupport export type1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 验证(Alt+V) 的本地化字符串。
         /// </summary>
         internal static string Validation_Alt_V_ {
             get {
                 return ResourceManager.GetString("Validation(Alt+V)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 验证(Alt+V) 的本地化字符串。
+        /// </summary>
+        internal static string Validation_Alt_V_1 {
+            get {
+                return ResourceManager.GetString("Validation(Alt+V)1", resourceCulture);
             }
         }
         
@@ -727,12 +1465,31 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 在线技术支持(Alt+H) 的本地化字符串。
+        /// </summary>
+        internal static string Web_Support_Alt_H_1 {
+            get {
+                return ResourceManager.GetString("Web Support(Alt+H)1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 当前工作空间下工作进程已存在，选择确认退出当前实例。 的本地化字符串。
         /// </summary>
         internal static string Work_process_existing_under_this_work_space__Choose_confirm_and_exit_this_instance_ {
             get {
                 return ResourceManager.GetString("Work process existing under this work space. Choose confirm and exit this instanc" +
                         "e.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前工作空间下工作进程已存在，选择确认退出当前实例。 的本地化字符串。
+        /// </summary>
+        internal static string Work_process_existing_under_this_work_space__Choose_confirm_and_exit_this_instance_1 {
+            get {
+                return ResourceManager.GetString("Work process existing under this work space. Choose confirm and exit this instanc" +
+                        "e.1", resourceCulture);
             }
         }
     }

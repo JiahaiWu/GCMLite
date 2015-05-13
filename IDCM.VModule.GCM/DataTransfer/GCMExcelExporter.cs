@@ -54,6 +54,7 @@ namespace IDCM.DataTransfer
                             throw new NotImplementedException();
                         }
                     }
+                    ridx++;
                 }
                 using (FileStream fs = File.Create(fpath))
                 {

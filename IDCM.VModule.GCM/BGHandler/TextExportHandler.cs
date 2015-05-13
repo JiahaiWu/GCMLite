@@ -37,11 +37,19 @@ namespace IDCM.BGHandler
             try
             {
                 DCMPublisher.noteJobProgress(0);
-                TextExporter exporter = new TextExporter();
-                if (selectedRows != null)
-                    res = exporter.exportText(ctableCache, textPath, selectedRows, spliter);
+                if (LocalDataChecker.checkForExport(ctableCache, 10))
+                {
+                    TextExporter exporter = new TextExporter();
+                    if (selectedRows != null)
+                        res = exporter.exportText(ctableCache, textPath, selectedRows, spliter);
+                    else
+                        res = exporter.exportText(ctableCache, textPath, spliter);
+                }
                 else
-                    res = exporter.exportText(ctableCache, textPath, spliter);
+                {
+                    log.Info(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!");
+                    DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!", Base.ComPO.DCMMsgType.Alert);
+                }
             }
             catch (Exception ex)
             {
