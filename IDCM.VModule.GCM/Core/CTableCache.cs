@@ -16,6 +16,8 @@ namespace IDCM.Core
 {
     public class CTableCache
     {
+        #region Constructor&Destructor
+
         /// <summary>
         /// 本地数据表记录的缓存管理类的构造方法
         /// </summary>
@@ -52,6 +54,9 @@ namespace IDCM.Core
             //////////////////////////////////////////
             keyIndexs = new Dictionary<string, int>();
         }
+        #endregion
+
+        #region Methods
 
         internal void addRow(Dictionary<string, string> mapvalues)
         {
@@ -156,6 +161,10 @@ namespace IDCM.Core
             }
             return null;
         }
+        #endregion
+
+        #region Members
+
         internal string KeyName
         {
             get
@@ -179,5 +188,7 @@ namespace IDCM.Core
         /// 数据表视图
         /// </summary>
         private DataGridView dgv;
+        #endregion
+
     }
 }

@@ -14,6 +14,8 @@ namespace IDCM.DataTransfer
 {
     class GCMSignExecutor
     {
+        #region Methods
+
         public static bool SignOff(AuthInfo authInfo = null, int timeout = 10000)
         {
             if (authInfo != null)
@@ -91,6 +93,7 @@ namespace IDCM.DataTransfer
         {
             return jsonStr.ToLower().Contains("true");
         }
+        #endregion
 
         private class AInfo
         {

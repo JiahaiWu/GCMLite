@@ -10,11 +10,15 @@ namespace IDCM.ViewManager
 {
     public class AsyncServInvoker:IMsgListener
     {
+        #region Constructor&Destructor
         public AsyncServInvoker()
         {
             this.OnSimpleMsgAlert += _OnSimpleMsgAlert;
             this.OnSimpleMsgTrace += _OnSimpleMsgTrace;
         }
+        #endregion
+
+        #region Methods
         #region GCM Pro 异步消息事务分发处理
         /// <summary>
         /// 消息事件分发处理
@@ -93,7 +97,12 @@ namespace IDCM.ViewManager
                     break;
             }
         }
+        #endregion
 
+
+        #endregion
+
+        #region Events&Handlings
         //定义数据源加载完成事件
 
         internal event IDCMAsyncRequest OnSimpleMsgTip;
@@ -106,7 +115,6 @@ namespace IDCM.ViewManager
         internal event IDCMAsyncRequest OnLocalDataExported;
         internal event IDCMAsyncRequest OnLocalDataImported;
         internal event IDCMAsyncRequest OnGCMItemDetailRender;
-        #endregion
         #region 默认的消息事件处理行为定义
         private void _OnSimpleMsgAlert(object msgTag, params object[] vals)
         {
@@ -118,9 +126,12 @@ namespace IDCM.ViewManager
             log.Info(msgTag.ToString());
         }
         #endregion
+        #endregion
 
+        #region Members
         //异步消息事件委托形式化声明
         public delegate void IDCMAsyncRequest(object msgTag, params object[] vals);
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        #endregion
     }
 }

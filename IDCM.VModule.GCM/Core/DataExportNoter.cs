@@ -10,6 +10,8 @@ namespace IDCM.Core
 {
     class DataExportNoter
     {
+        #region Methods
+
         /// <summary>
         /// 加载历史导出样本ID记录
         /// </summary>
@@ -78,7 +80,12 @@ namespace IDCM.Core
                 return true;
             return false;
         }
+        #endregion
+
+        #region Members
+
         private static ParameterizedThreadStart paramedThreadStart = new ParameterizedThreadStart(dumpToFile);
         private static HashSet<String> sampleIds = new HashSet<string>();
+        #endregion
     }
 }

@@ -14,6 +14,7 @@ namespace IDCM.Forms
 {
     public partial class AttrMapOptionDlg : Form
     {
+        #region Constructor&Destructor
         public AttrMapOptionDlg()
         {
             InitializeComponent();
@@ -24,6 +25,10 @@ namespace IDCM.Forms
             this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
             this.Text = IDCM.Base.GlobalTextRes.Text("AttrMappingOptionDlg");
         }
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// 设置初始化映射源和映射目标字符串集合，并指定有效映射返回字典的引用对象
         /// </summary>
@@ -97,6 +102,25 @@ namespace IDCM.Forms
             }
             radioButton_exact.Checked = true;
         }
+        /// <summary>
+        /// 获取未匹配的目标字符串集合
+        /// </summary>
+        /// <returns></returns>
+        private string[] unboundDestCols()
+        {
+            List<string> res = new List<string>();
+            HashSet<string> dests = new HashSet<string>(mapping.Values);
+            foreach (string col in destCols)
+            {
+                if (!dests.Contains(col))
+                    res.Add(col);
+            }
+            return res.ToArray();
+        }
+        #endregion
+
+        #region Events&Handlings
+
         /// <summary>
         /// 取消操作事件处理并关闭窗口
         /// </summary>
@@ -198,23 +222,13 @@ namespace IDCM.Forms
                 mapping[dataGridView_map.Rows[rowIndex].Cells[0].Value.ToString()] = stext;
             }
         }
-        /// <summary>
-        /// 获取未匹配的目标字符串集合
-        /// </summary>
-        /// <returns></returns>
-        private string[] unboundDestCols()
-        {
-            List<string> res = new List<string>();
-            HashSet<string> dests=new HashSet<string>(mapping.Values);
-            foreach (string col in destCols)
-            {
-                if (!dests.Contains(col))
-                    res.Add(col);
-            }
-            return res.ToArray();
-        }
+        #endregion
+
+        #region Members
+
         private List<string> srcCols = null;
         private List<string> destCols = null;
         private Dictionary<string, string> mapping = null;
+        #endregion
     }
 }

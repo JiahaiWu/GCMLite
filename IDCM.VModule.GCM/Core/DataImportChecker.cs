@@ -18,6 +18,7 @@ namespace IDCM.Core
 {
     class DataImportChecker
     {
+        #region Methods
 
         /// <summary>
         /// 解析指定的Excel文档，验证数据转换的属性映射条件.
@@ -184,6 +185,8 @@ namespace IDCM.Core
                 return true;
             return false;
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

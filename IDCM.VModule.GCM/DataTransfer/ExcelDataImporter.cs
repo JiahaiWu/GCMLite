@@ -16,6 +16,8 @@ namespace IDCM.DataTransfer
 {
     class ExcelDataImporter
     {
+        #region Methods
+
         /// <summary>
         /// 解析指定的Excel文档，执行数据转换.
         /// 本方法调用对类功能予以线程包装，用于异步调用如何方法。
@@ -103,6 +105,7 @@ namespace IDCM.DataTransfer
                 }
             }
         }
+        #endregion
 
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }

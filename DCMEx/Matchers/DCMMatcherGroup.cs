@@ -8,12 +8,17 @@ namespace DCMEx.Matchers
 {
     class DCMMatcherGroup : IMatcher
     {
+        #region Members
+
         private List<KeyValuePair<LogicSymbol, IMatcher>> logicMatchers = new List<KeyValuePair<LogicSymbol, IMatcher>>();
         List<string> groups = null;
         private readonly char[] expChars;
         private int cursor;
         private readonly int expFrom;
         private readonly int expEnd;
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// 初始化构造函数
@@ -418,5 +423,6 @@ namespace DCMEx.Matchers
         {
             return groups == null ? null : groups.ToArray();
         }
+        #endregion
     }
 }

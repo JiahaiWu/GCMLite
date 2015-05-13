@@ -10,6 +10,8 @@ namespace IDCM.Core
 {
     class LocalDataChecker
     {
+        #region Methods
+        
         /// <summary>
         /// 检查可见表单数据的内容有效性
         /// </summary>
@@ -172,6 +174,8 @@ namespace IDCM.Core
             }
             return true;
         }
+        #endregion
+
     }
 
     

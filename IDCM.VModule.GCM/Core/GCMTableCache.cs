@@ -15,6 +15,8 @@ namespace IDCM.Core
 {
     internal class GCMTableCache
     {
+        #region Constructor&Destructor
+
         public GCMTableCache(TextBox textBox_ccinfoId, TextBox textBox_pwd, CheckBox checkBox_remember, DCMControlLib.DCMDataGridView dgv_overview, DCMControlLib.Tree.DCMTreeView tree_detail)
         {
             this.textBox_ccinfoId = textBox_ccinfoId;
@@ -25,6 +27,10 @@ namespace IDCM.Core
             keyIndexs = new Dictionary<string, int>();
             keyName = "id";
         }
+        #endregion
+
+        #region Property
+
         internal string UserName
         {
             get{
@@ -57,6 +63,10 @@ namespace IDCM.Core
                 this.checkBox_remember.Checked = value;
             }
         }
+        #endregion
+
+        #region Methods
+
         internal void addOverViewRow(Dictionary<string, string> valMap)
         {
             if (!dgv_overview.Columns.Contains(keyName))
@@ -228,6 +238,9 @@ namespace IDCM.Core
                 }
             }));
         }
+        #endregion
+
+        #region Members
 
         /// <summary>
         /// 整体数据更新共享锁对象
@@ -257,6 +270,6 @@ namespace IDCM.Core
         private TextBox textBox_pwd;
         private CheckBox checkBox_remember;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
-
+        #endregion
     }
 }

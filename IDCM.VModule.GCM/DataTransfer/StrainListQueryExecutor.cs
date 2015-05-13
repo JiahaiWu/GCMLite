@@ -14,6 +14,8 @@ namespace IDCM.DataTransfer
 {
     class StrainListQueryExecutor
     {
+        #region Methods
+
         public static StrainListPage strainListQuery(int currentPage, string strainnumber = "", string strainname = "", AuthInfo authInfo = null, int timeout = 10000)
         {
             if (authInfo != null && currentPage >= 0)
@@ -52,6 +54,8 @@ namespace IDCM.DataTransfer
             StrainListPage slp = JsonConvert.DeserializeObject<StrainListPage>(jsonStr);
             return slp;
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

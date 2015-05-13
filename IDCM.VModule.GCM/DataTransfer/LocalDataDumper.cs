@@ -15,11 +15,15 @@ namespace IDCM.DataTransfer
 {
     class LocalDataDumper
     {
+        #region Constructor&Destructor
         public LocalDataDumper()
         {
             this.packVersion = SysConstants.default_pack_version;
             loadLastDumpPath();
         }
+        #endregion
+
+        #region Methods
         /**************************************************************
          * 基于DataGridView表单，生成内部数据对象
          * @auther JiahaiWu 2014-03-19
@@ -117,8 +121,12 @@ namespace IDCM.DataTransfer
                 }
             }
         }
+        #endregion
+
+        #region Members
         protected List<Dictionary<string,string>> proInfo;
         private string packVersion;
         private string lastDumpPath = null;
+        #endregion
     }
 }

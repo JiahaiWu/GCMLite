@@ -79,7 +79,6 @@
     <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Utils\HashUtil.cs" />
     <Compile Include="Utils\HttpRequestUtil.cs" />
-    <Compile Include="Utils\SQLiteUtil.cs" />
     <Compile Include="Utils\StringSimilarity.cs" />
     <Compile Include="Utils\StringUtil.cs" />
   </ItemGroup>

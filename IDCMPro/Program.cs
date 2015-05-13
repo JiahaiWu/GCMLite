@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using IDCM.AppContext;
 using IDCM.Base.Utils;
 /********************************
- * IDCM GCM Pro
+ * GCMLite
  * Specific Data Admin For Global Catalogue of Microorganisms (GCM) Data Intergration
  * Based from Individual Data Center of Microbial resources (IDCM)
  * 
@@ -36,9 +36,7 @@ namespace IDCM
         ///   1）.Net framework 4.0
         ///   2）Nlog
         ///   3）NPOI
-        ///   4) SQLite
-        ///   5) Dapper
-        ///   6) Newtonsoft.Json
+        ///   4) Newtonsoft.Json
         /// 注意：
         /// 无效参数请求将被忽略处理，参数选项开关大小写敏感。
         /// 
@@ -72,6 +70,7 @@ namespace IDCM
             }
         }
 
+        #region Methods
         /// <summary>
         /// 控制台请求参数初筛
         /// 说明：
@@ -115,10 +114,16 @@ namespace IDCM
                 }
             }
         }
+        #endregion
 
+        #region Constants
         private const string CMD_RESET = "reset";
+        #endregion
+
+        #region Members
         private static string[] prepareAbleCmds = new string[] { CMD_RESET };
 
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        #endregion
     }
 }

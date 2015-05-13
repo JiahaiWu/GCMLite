@@ -8,6 +8,8 @@ namespace IDCM.BGHandlerManager
 {
     internal class HandleRunStatus
     {
+        #region Members
+     
         /// <summary>
         /// 空闲状态
         /// </summary>
@@ -25,6 +27,31 @@ namespace IDCM.BGHandlerManager
         /// </summary>
         public static readonly HandleRunStatus Unknown = new HandleRunStatus("Unknown", 3);
 
+        private readonly string name;
+        private readonly double value;
+        #endregion
+
+        #region Constructor&Destructor
+
+        HandleRunStatus(string name, int value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+        #endregion
+
+        #region Property
+        public string Name { get { return name; } }
+
+        public double Value { get { return value; } }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return name;
+        }
+
         /// <summary>
         /// For iterator 
         /// </summary>
@@ -38,23 +65,6 @@ namespace IDCM.BGHandlerManager
                 yield return Unknown;
             }
         }
-
-        private readonly string name;
-        private readonly double value;
-
-        HandleRunStatus(string name, int value)
-        {
-            this.name = name;
-            this.value = value;
-        }
-
-        public string Name { get { return name; } }
-
-        public double Value { get { return value; } }
-
-        public override string ToString()
-        {
-            return name;
-        }
+        #endregion
     }
 }

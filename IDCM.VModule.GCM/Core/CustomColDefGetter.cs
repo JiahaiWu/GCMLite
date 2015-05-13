@@ -13,6 +13,8 @@ namespace IDCM.Core
 {
     public class CustomColDefGetter
     {
+        #region Methods
+
         public static ICollection<CustomColDef> getCustomTableDef()
         {
             if (ccdCache != null)
@@ -193,6 +195,10 @@ namespace IDCM.Core
                 saveUpdatedHistCfg();
             }
         }
+        #endregion
+
+        #region Property
+
         public static string KeyName
         {
             get
@@ -200,14 +206,14 @@ namespace IDCM.Core
                 return primaryKeyNode.Attr;
             }
         }
+        #endregion
+        
+        #region Members
+
         private volatile static bool dirtyStatus = false;
         private static string lastSrcHashCode=null;
         private static CustomColDef primaryKeyNode = null;
         private static Dictionary<string,CustomColDef> ccdCache = null;
-
-        internal static void updateCustomColRestrict(string p, bool isRequire, bool isUnique, string restrict)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

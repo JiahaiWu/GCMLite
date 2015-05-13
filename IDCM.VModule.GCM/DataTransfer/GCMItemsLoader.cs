@@ -15,6 +15,8 @@ namespace IDCM.DataTransfer
     /// </summary>
     class GCMItemsLoader
     {
+        #region Methods
+
         /// <summary>
         /// 分多次发送网络请求，获取strain信息，将strain数据添加到DataGridView中
         /// 说明：
@@ -76,5 +78,6 @@ namespace IDCM.DataTransfer
             gtcache.resetTree(sv,sid);
             return true;
         }
+        #endregion
     }
 }

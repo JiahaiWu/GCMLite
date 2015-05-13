@@ -19,6 +19,7 @@ namespace IDCM.ViewManager
 {
     class GCMServManager
     {
+        #region Constructor&Destructor
         public GCMServManager(GCMTableCache gtcache)
         {
             this.gtcache = gtcache;
@@ -28,6 +29,9 @@ namespace IDCM.ViewManager
             signMonitor.Start();
             authInfo = new AuthInfo();
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// 用于外部请求式的GCM连接调用方法
         /// </summary>
@@ -73,32 +77,7 @@ namespace IDCM.ViewManager
                 DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"), DCMMsgType.Status);
             }
         }
-        internal bool Signed
-        {
-            get
-            {
-                if (authInfo == null || !authInfo.LoginFlag)
-                    return false;
-                long elapsedTicks = DateTime.Now.Ticks - authInfo.Timestamp;
-                TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-                return elapsedSpan.TotalMilliseconds < SysConstants.SessionValidMilliSeconds;
-            }
-        }
-        public string UserName
-        {
-            get
-            {
-                return Signed ? authInfo.Username:null;
-            }
-        }
 
-        public string Password 
-        { 
-            get 
-            {
-                return Signed ? authInfo.Password:null;
-            }
-        }
         internal AuthInfo getAuthInfo()
         {
             return this.authInfo;
@@ -175,6 +154,38 @@ namespace IDCM.ViewManager
             }
             return null;
         }
+        #endregion
+
+        #region Property
+        internal bool Signed
+        {
+            get
+            {
+                if (authInfo == null || !authInfo.LoginFlag)
+                    return false;
+                long elapsedTicks = DateTime.Now.Ticks - authInfo.Timestamp;
+                TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+                return elapsedSpan.TotalMilliseconds < SysConstants.SessionValidMilliSeconds;
+            }
+        }
+        public string UserName
+        {
+            get
+            {
+                return Signed ? authInfo.Username : null;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return Signed ? authInfo.Password : null;
+            }
+        }
+        #endregion
+
+        #region Members
         private GCMTableCache gtcache;
         /// <summary>
         /// SignIn hold Monitor
@@ -185,5 +196,6 @@ namespace IDCM.ViewManager
         /// </summary>
         private readonly AuthInfo authInfo;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        #endregion
     }
 }

@@ -12,6 +12,8 @@ namespace IDCM.DataTransfer
 {
     class GCMJSONListExporter
     {
+        #region Methods
+
         public bool exportJSONList(GCMTableCache gtCache, string filepath)
         {
             try
@@ -117,6 +119,8 @@ namespace IDCM.DataTransfer
             }
             return JsonConvert.SerializeObject(dict);
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

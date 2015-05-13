@@ -14,6 +14,7 @@ namespace IDCM.DataTransfer
 {
     class StrainViewQueryExecutor
     {
+        #region Methods
         public static StrainView strainViewQuery(string id, AuthInfo authInfo = null, int timeout = 10000)
         {
             if (authInfo != null && id != null)
@@ -52,6 +53,8 @@ namespace IDCM.DataTransfer
             StrainView sv = JsonConvert.DeserializeObject<StrainView>(jsonStr);
             return sv;
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

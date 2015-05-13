@@ -11,6 +11,8 @@ namespace IDCM.DataTransfer
 {
     class XMLExporter
     {
+        #region Methods
+
         /// <summary>
         /// 根据历史查询条件导出目标文本数据集
         /// <returns></returns>
@@ -230,6 +232,8 @@ namespace IDCM.DataTransfer
             }
             return true;
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();  
     }
 }

@@ -15,6 +15,8 @@ namespace IDCM.DataTransfer
 {
     class GCMExcelExporter
     {
+        #region Methods
+
         public bool exportExcel(GCMTableCache gtcache, string fpath, bool exportDetail=false)
         {
             try
@@ -183,6 +185,8 @@ namespace IDCM.DataTransfer
             }
             return rtn;
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

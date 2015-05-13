@@ -23,6 +23,7 @@ namespace IDCM
     /// </summary>
     public partial class GCMPro : Form
     {
+        #region Constructor&Destructor
         public GCMPro()
         {
             InitializeComponent();
@@ -42,10 +43,13 @@ namespace IDCM
             this.webSupportAltHToolStripMenuItem.Text = GlobalTextRes.Text("Web Support(Alt+H)");
             this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作
         /// </summary>
-        public void checkWorkSpace()
+        private void checkWorkSpace()
         {
             log.Debug("checkWorkSpace(...)");
             if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
@@ -59,7 +63,70 @@ namespace IDCM
                 Application.Exit();
             }
         }
+        /******************************************************************
+         * 键盘事件处理方法
+         * @auther JiahaiWu 2014-03-17
+         ******************************************************************/
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Alt | Keys.O://Alt+O按键处理
+                    gcmProView_lite.openImportDocument();
+                    break;
+                case Keys.Alt | Keys.S:
+                    gcmProView_lite.saveLocalData(); break;
+                case Keys.Alt | Keys.Q:
+                    this.Close();
+                    break;
+                case Keys.Alt | Keys.V:
+                    gcmProView_lite.checkLocalData(); break;
+                case Keys.Alt | Keys.R:
+                    gcmProView_lite.filterToRecvLocalData(); break;
+                case Keys.Alt | Keys.E:
+                    gcmProView_lite.exportLocalData(); break;
+                case Keys.Alt | Keys.C:
+                    gcmProView_lite.clearAllLocalData(); break;
+                case Keys.Alt | Keys.F:
+                    gcmProView_lite.frontFindData(); break;
+                case Keys.Alt | Keys.H:
+                    openWebHelpDocument(); break;
+                case Keys.Alt | Keys.A:
+                    openAboutUsDlg(); break;
+                case Keys.Control | Keys.D1://Ctrl+1按键处理
+                    gcmProView_lite.checkLocalData();
+                    break;
+                case Keys.Control | Keys.F:
+                    gcmProView_lite.frontFindData();
+                    break;
+                case Keys.Control | Keys.N:
+                    gcmProView_lite.frontFindNext();
+                    break;
+                case Keys.Control | Keys.P:
+                    gcmProView_lite.frontFindPrev();
+                    break;
+                case Keys.Control | Keys.S://Ctrl+S按键处理
+                    gcmProView_lite.saveLocalData(true);
+                    break;
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+            return true;
+        }
 
+        private void openAboutUsDlg()
+        {
+            AboutDlg aboutDlg = new AboutDlg();
+            aboutDlg.ShowDialog();
+        }
+        #endregion
+
+        #region Events&Handlings
+        /// <summary>
+        /// 初始界面加载后事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GCMPro_Load(object sender, EventArgs e)
         {
             checkWorkSpace();
@@ -70,6 +137,10 @@ namespace IDCM
 
             GCMLite_GCMOpConditionChanging(gcmProView_lite.OpConditions);
         }
+        /// <summary>
+        /// 界面控件状态触发更新事件的处理方法
+        /// </summary>
+        /// <param name="opType"></param>
         private void GCMLite_GCMOpConditionChanging(GCMProView.OpConditionType opType)
         {
             switch (opType)
@@ -292,62 +363,10 @@ namespace IDCM
         {
             openAboutUsDlg();
         }
-        /******************************************************************
-         * 键盘事件处理方法
-         * @auther JiahaiWu 2014-03-17
-         ******************************************************************/
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.Alt|Keys.O://Alt+O按键处理
-                    gcmProView_lite.openImportDocument();
-                    break;
-                case Keys.Alt | Keys.S:
-                    gcmProView_lite.saveLocalData();break;
-                case Keys.Alt | Keys.Q:
-                    this.Close();
-                    break;
-                case Keys.Alt | Keys.V:
-                    gcmProView_lite.checkLocalData();break;
-                case Keys.Alt | Keys.R:
-                    gcmProView_lite.filterToRecvLocalData();break;
-                case Keys.Alt | Keys.E:
-                    gcmProView_lite.exportLocalData();break;
-                case Keys.Alt | Keys.C:
-                    gcmProView_lite.clearAllLocalData();break;
-                case Keys.Alt | Keys.F:
-                    gcmProView_lite.frontFindData();break;
-                case Keys.Alt | Keys.H:
-                    openWebHelpDocument();break;
-                case Keys.Alt | Keys.A:
-                    openAboutUsDlg();break;
-                case Keys.Control | Keys.D1://Ctrl+1按键处理
-                    gcmProView_lite.checkLocalData();
-                    break;
-                case Keys.Control | Keys.F:
-                    gcmProView_lite.frontFindData();
-                    break;
-                case Keys.Control | Keys.N:
-                    gcmProView_lite.frontFindNext();
-                    break;
-                case Keys.Control | Keys.P:
-                    gcmProView_lite.frontFindPrev();
-                    break;
-                case Keys.Control | Keys.S://Ctrl+S按键处理
-                    gcmProView_lite.saveLocalData(true);
-                    break;
-                default:
-                    return base.ProcessCmdKey(ref msg, keyData);
-            }
-            return true;
-        }
+        #endregion
 
-        private void openAboutUsDlg()
-        {
-            AboutDlg aboutDlg = new AboutDlg();
-            aboutDlg.ShowDialog();
-        }
+        #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        #endregion
     }
 }

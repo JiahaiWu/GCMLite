@@ -28,6 +28,7 @@ namespace IDCM.AppContext
     /// </summary>
     class IDCMAppContext : ApplicationContext
     {
+        #region Constructor&Destructor
         /// <summary>
         /// 初始化应用程序上下文环境，并触发程序主界面启动的事件过程。
         /// 说明：
@@ -37,7 +38,7 @@ namespace IDCM.AppContext
         /// 对于长驻线程任务实现应当注册到RunningHandlerNoter实例中，以标志当前线程任务具有事务保护性。
         /// 由此实现的程序完全退出机制不受单一用户界面的关闭影响，强化事务完整性和数据操作完整性。
         /// 在诸项事务队列完成之后，才能有效退出。
-        /// 4. 任务轮询监视器monitor的监听时间默认为2s。
+        /// 4. 任务轮询监视器monitor的监听时间默认为0.5s。
         /// @author JiahaiWu 2014-12
         /// </summary>
         public IDCMAppContext(Dictionary<string, string> preSetttings=null)
@@ -58,6 +59,9 @@ namespace IDCM.AppContext
                 handleMonitor.Start();
             }
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// 命令行参数预处理
         /// </summary>
@@ -72,6 +76,9 @@ namespace IDCM.AppContext
                 }
             }
         }
+        #region Methods
+
+        #region Events&Handlings
         /// <summary>
         /// 应用程序常规退出触发事件处理
         /// </summary>
@@ -105,7 +112,9 @@ namespace IDCM.AppContext
                 this.Dispose();
             }
         }
+        #endregion
 
+        #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -114,5 +123,6 @@ namespace IDCM.AppContext
         private static System.Timers.Timer handleMonitor = new System.Timers.Timer();
         private static volatile bool appInited = false;
         private static GCMPro mainManger = null;
+        #endregion
     }
 }

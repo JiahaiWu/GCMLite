@@ -7,6 +7,7 @@ namespace IDCM.Core
 {
     class CustomColValidator
     {
+        #region Constructor&Destructor
         internal CustomColValidator(CustomColDef ccd)
         {
             isRequire = ccd.IsRequire;
@@ -22,6 +23,9 @@ namespace IDCM.Core
                 validDesc += "Value of " + ccd.Alias + " should be match the expression:"+ccd.Restrict+".\n";
             }
         }
+        #endregion
+
+        #region Methods
         public bool checkValid(string cellValue)
         {
             bool isValid = true;
@@ -46,6 +50,9 @@ namespace IDCM.Core
         {
             return validDesc;
         }
+        #endregion
+
+        #region Members
         private string validDesc = "";
         private DCMEx.DCMEx restrict;
         /// <summary>
@@ -53,5 +60,6 @@ namespace IDCM.Core
         /// </summary>
         private bool isRequire;
         private HashSet<string> sets = null;
+        #endregion
     }
 }

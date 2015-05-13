@@ -29,6 +29,7 @@ namespace IDCM.VModule.GCM
     /// </summary>
     public partial class GCMProView : UserControl
     {
+        #region Constructor&Destructor
         public GCMProView()
         {
             InitializeComponent();
@@ -42,6 +43,13 @@ namespace IDCM.VModule.GCM
             this.tabPageEx_Local.Text = GlobalTextRes.Text("Local DataSet");
             this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
         }
+        #endregion
+
+        #region Events&Handlings
+
+        public event GCMStatusHandler GCMStatusChanged;
+        public event GCMProgressHandler GCMProgressInvoke;
+        public event GCMOpConditionHandler GCMOpConditionChanged;
 
         private void GCMProView_Load(object sender, EventArgs e)
         {
@@ -50,89 +58,6 @@ namespace IDCM.VModule.GCM
             startLocalDataRender();
             startGCMSiteRender();
         }
-        private void InitializeMsgDriver()
-        {
-            log.Debug("InitializeMsgDriver(...)");
-            //////////////////////////////////////////////////////
-            //初始化消息池
-            servInvoker = new AsyncServInvoker();
-            Base.AbsInterfaces.IMsgObserver msgObs = MsgDriver.DCMPublisher.initDefaultMsgObserver();
-            msgObs.bind(servInvoker);
-            ////////////////////////////////////////////////////
-            //绑定消息事件处理方法
-            servInvoker.OnGCMUserSigned += OnGCMUserSigned;
-            servInvoker.OnLocalDataExported += OnLocalDataExported;
-            servInvoker.OnLocalDataImported += OnLocalDataImported;
-            servInvoker.OnSimpleMsgTip+=OnSimpleMsgTip;
-            servInvoker.OnGCMItemDetailRender += OnGCMItemDetailRender;
-            servInvoker.OnBottomSatusChange += OnBottomSatusChange;
-            servInvoker.OnProgressChange += OnProgressChange;
-        }
-        /// <summary>
-        /// 初始化流程
-        /// </summary>
-        private void InitializeGCMPro()
-        {
-            log.Debug("InitializeGCMPro(...)");
-            try
-            {
-                //////////////////////////////////////////////////////
-                //加载本地数据表的字段配置
-                ICollection<CustomColDef> ccds = CustomColDefGetter.getCustomTableDef();
-                if (ccds != null && ccds.Count > 0)
-                {
-                    ctcache = new CTableCache(dcmDataGridView_local,ccds);
-                    ////////////////////////////////////////////////////
-                    //设定本地数据表属性及事件处理方法
-                    localServManager = new LocalServManager(ctcache);
-                    this.dcmDataGridView_local.AllowDrop = true;
-                    this.dcmDataGridView_local.DragEnter += dataGridView_local_items_DragEnter;
-                    this.dcmDataGridView_local.DragDrop += dataGridView_local_items_DragDrop;
-                    this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
-                    this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
-                    this.dcmDataGridView_local.IsDefaultPasteAble = false;
-                    this.dcmDataGridView_local.AllowUserToOrderColumns = true;
-
-                    this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
-                    this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
-                    this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
-                    localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
-                    localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
-                    localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
-                    //加载GCM发布数据表
-                    gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember, dcmDataGridView_gcm, dcmTreeView_gcm);
-                    gcmServManager = new GCMServManager(gtcache);
-                    this.dcmDataGridView_gcm.CellClick += dataGridView_gcm_CellClicked;
-                    gcmFrontFindDlg = new GCMFrontFindDlg(dcmDataGridView_gcm);
-                    gcmFrontFindDlg.setCellHit += new GCMFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
-                    gcmFrontFindDlg.cancelCellHit += new GCMFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
-                    //加载ABC WebKit
-                    abcServManager = new ABCServManager(abcBrowser_abc);
-                    ////////////////////////////////////////////////////
-                    //设置初始化的页签
-                    gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
-                    opCond = OpConditionType.Local_View;
-                    ////////////////////////////////////////////////////
-                    this.IsInited = true;
-                }
-            }
-            catch (IDCMException ex)
-            {
-                this.IsInited = false;
-                log.Error(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "!", ex);
-                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "! @Message=" + ex.Message + " \n" + ex.ToString());
-            }
-            finally
-            {
-                this.Enabled = this.IsInited;
-                this.Visible = this.Enabled;
-            }
-        }
-
         private void colConfiger_ColConfigChanged(int cursor, bool isRequire, bool isUnique, string restrict)
         {
             if (cursor > -1)
@@ -153,43 +78,18 @@ namespace IDCM.VModule.GCM
         {
             if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
             {
-                if(e.ColumnIndex>-1)
+                if (e.ColumnIndex > -1)
                 {
-                    CustomColDef ccd =CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
+                    CustomColDef ccd = CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
                     if (ccd != null && ccd.IsEnable)
                     {
-                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex,ccd.Alias, ccd.IsRequire, ccd.IsUnique, ccd.Restrict);
+                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd.Alias, ccd.IsRequire, ccd.IsUnique, ccd.Restrict);
                         colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
-                        colConfiger.Show(this.FindForm(),new Point(MousePosition.X, MousePosition.Y));
+                        colConfiger.Show(this.FindForm(), new Point(MousePosition.X, MousePosition.Y));
                     }
                 }
             }
         }
-
-        private void setDGVCellHit(DataGridViewCell cell)
-        {
-            if (cell.Visible == false)
-                return;
-            cell.DataGridView.EndEdit();
-            int colCount = DGVUtil.getTextColumnCount(cell.DataGridView);
-            DataGridViewCell rightCell = cell.DataGridView.Rows[cell.RowIndex].Cells[colCount - 1];
-            while (rightCell.Visible == false && rightCell.ColumnIndex > -1)
-            {
-                rightCell = rightCell.OwningRow.Cells[rightCell.ColumnIndex - 1];
-            }
-            cell.DataGridView.CurrentCell = rightCell;
-            cell.DataGridView.CurrentCell = cell;
-            cell.Selected = true;
-            cell.DataGridView.BeginEdit(true);
-        }
-        private void cancelDGVCellHit(DataGridViewCell cell)
-        {
-            if (cell.Visible == false)
-                return;
-            cell.DataGridView.EndEdit();
-            cell.Selected = false;
-        }
-
         private void OnLocalSubmitClick(object sender, EventArgs e)
         {
             publishLocalData();
@@ -200,7 +100,7 @@ namespace IDCM.VModule.GCM
             {
                 DataGridViewCellCollection dgvcc = dcmDataGridView_local.CurrentRow.Cells;
                 string strainId = dgvcc[ctcache.getKeyColIndex()].FormattedValue.ToString();
-                if(abcServManager.linkTo(strainId))
+                if (abcServManager.linkTo(strainId))
                     gcmTabControl_GCM.SelectedIndex = tabPage_ABC.TabIndex;
             }
         }
@@ -292,9 +192,9 @@ namespace IDCM.VModule.GCM
         {
             if (e.Button == MouseButtons.Right)
             {
-                if(dcmDataGridView_local.CurrentRow!=null)
+                if (dcmDataGridView_local.CurrentRow != null)
                 {
-                    Point plocation=dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
+                    Point plocation = dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
                     int eY = MousePosition.Y - plocation.Y;
                     if (eY > this.dcmDataGridView_local.ColumnHeadersHeight)
                     {
@@ -311,40 +211,6 @@ namespace IDCM.VModule.GCM
                 CustomColDefGetter.updateCustomColDef(e.Column.Name, e.Column.Visible);
             }
         }
-
-
-        private void startLocalDataRender()
-        {
-            log.Debug("startDataRender(...)");
-            DataExportNoter.loadHistorySIds(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note);
-            string lastDump = SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note;
-            if (File.Exists(lastDump))
-            {
-                string lastdumpPath = FileUtil.readAsUTF8Text(lastDump).Trim();
-                if (lastdumpPath.Length > 0 && File.Exists(lastdumpPath))
-                {
-#if DEBUG
-#else
-                    localServManager.importData(lastdumpPath);
-#endif
-                }
-            }
-        }
-        public void startGCMSiteRender()
-        {
-            log.Debug("startGCMSiteRender(...)");
-            string name = ConfigurationManager.AppSettings.Get(SysConstants.LUID);
-            if (name != null && name.Length > 0)
-            {
-                gtcache.UserName = name;
-                string pwd = ConfigurationManager.AppSettings.Get(SysConstants.LPWD);
-                if (pwd != null && pwd.Length > 0)
-                {
-                    gtcache.Password = Base64DESEncrypt.CreateInstance(name).Decrypt(pwd);
-                    gtcache.RememberLogin = true;
-                }
-            }
-        }
         private void OnSimpleMsgTip(object msgTag, params object[] vals)
         {
             ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
@@ -357,8 +223,8 @@ namespace IDCM.VModule.GCM
             ControlAsyncUtil.SyncInvoke(dcmDataGridView_gcm, new ControlAsyncUtil.InvokeHandler(delegate()
             {
                 int index = 0;
-                if(vals!=null && vals.Length>0 && vals[0].GetType().Equals(typeof(int)))
-                    index= (int)vals[0];
+                if (vals != null && vals.Length > 0 && vals[0].GetType().Equals(typeof(int)))
+                    index = (int)vals[0];
                 gcmServManager.showGCMDataDetail(index);
             }));
         }
@@ -367,7 +233,7 @@ namespace IDCM.VModule.GCM
             if (gcmServManager.Signed)
             {
                 showGCMDataDlg();
-                if (gcmServManager.UserName != null && gcmServManager.UserName.Length>0)
+                if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
                 {
                     ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
                     if (gtcache.RememberLogin && gcmServManager.Password != null)
@@ -376,7 +242,7 @@ namespace IDCM.VModule.GCM
                     }
                     else
                     {
-                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD,"", SysConstants.defaultCfgPath);
+                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, "", SysConstants.defaultCfgPath);
                     }
                 }
             }
@@ -403,7 +269,25 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        
+        private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
+        {
+            if (e.TabPageIndex == tabPageEx_GCM.TabIndex)
+            {
+                if (gcmServManager.Signed)
+                {
+                    showGCMDataDlg();
+                }
+                else
+                {
+                    showLoginDlg();
+                }
+            }
+            else if (e.TabPageIndex == tabPage_ABC.TabIndex)
+                notifyOpConditions(OpConditionType.ABC_View);
+            else
+                notifyOpConditions(OpConditionType.Local_View);
+        }
+
 
         private void OnLocalDataExported(object msgTag, params object[] vals)
         {
@@ -456,7 +340,186 @@ namespace IDCM.VModule.GCM
                 }
             }
         }
+        private void button_cancel_Click(object sender, EventArgs e)
+        {
+            this.Select(true, false);
+        }
 
+        private void pictureBox_Signhelp_Click(object sender, EventArgs e)
+        {
+            HelpDocRequester.requestHelpDoc(HelpDocConstants.StartViewTag);
+        }
+
+        private void button_confirm_Click(object sender, EventArgs e)
+        {
+            if (this.textBox_pwd.Text.Length < 1 || this.textBox_ccinfoId.Text.Length < 1)
+            {
+                MessageBox.Show(GlobalTextRes.Text("The 'CCInfo Id' and 'GCM Password' should not be empty."));
+                return;
+            }
+            try
+            {
+                this.panel_GCM_start.Enabled = false;
+                gcmServManager.connnectGCM();
+            }
+            finally
+            {
+                this.panel_GCM_start.Enabled = true;
+            }
+        }
+
+        private void splitContainer_GCM_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Point reNewPoint = new Point(this.splitContainer_GCM.Panel1.Width / 2 - this.panel_GCM_start.Width / 2, (int)(this.splitContainer_GCM.Panel1.Height * 0.82 - this.panel_GCM_start.Height));
+            this.panel_GCM_start.Location = reNewPoint;
+        }
+        #endregion
+
+        #region Methods
+        private void InitializeMsgDriver()
+        {
+            log.Debug("InitializeMsgDriver(...)");
+            //////////////////////////////////////////////////////
+            //初始化消息池
+            servInvoker = new AsyncServInvoker();
+            Base.AbsInterfaces.IMsgObserver msgObs = MsgDriver.DCMPublisher.initDefaultMsgObserver();
+            msgObs.bind(servInvoker);
+            ////////////////////////////////////////////////////
+            //绑定消息事件处理方法
+            servInvoker.OnGCMUserSigned += OnGCMUserSigned;
+            servInvoker.OnLocalDataExported += OnLocalDataExported;
+            servInvoker.OnLocalDataImported += OnLocalDataImported;
+            servInvoker.OnSimpleMsgTip+=OnSimpleMsgTip;
+            servInvoker.OnGCMItemDetailRender += OnGCMItemDetailRender;
+            servInvoker.OnBottomSatusChange += OnBottomSatusChange;
+            servInvoker.OnProgressChange += OnProgressChange;
+        }
+        /// <summary>
+        /// 初始化流程
+        /// </summary>
+        private void InitializeGCMPro()
+        {
+            log.Debug("InitializeGCMPro(...)");
+            try
+            {
+                //////////////////////////////////////////////////////
+                //加载本地数据表的字段配置
+                ICollection<CustomColDef> ccds = CustomColDefGetter.getCustomTableDef();
+                if (ccds != null && ccds.Count > 0)
+                {
+                    ctcache = new CTableCache(dcmDataGridView_local,ccds);
+                    ////////////////////////////////////////////////////
+                    //设定本地数据表属性及事件处理方法
+                    localServManager = new LocalServManager(ctcache);
+                    this.dcmDataGridView_local.AllowDrop = true;
+                    this.dcmDataGridView_local.DragEnter += dataGridView_local_items_DragEnter;
+                    this.dcmDataGridView_local.DragDrop += dataGridView_local_items_DragDrop;
+                    this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
+                    this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
+                    this.dcmDataGridView_local.IsDefaultPasteAble = false;
+                    this.dcmDataGridView_local.AllowUserToOrderColumns = true;
+
+                    this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
+                    this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
+                    this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
+                    localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
+                    localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
+                    localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
+                    //加载GCM发布数据表
+                    gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember, dcmDataGridView_gcm, dcmTreeView_gcm);
+                    gcmServManager = new GCMServManager(gtcache);
+                    this.dcmDataGridView_gcm.CellClick += dataGridView_gcm_CellClicked;
+                    gcmFrontFindDlg = new GCMFrontFindDlg(dcmDataGridView_gcm);
+                    gcmFrontFindDlg.setCellHit += new GCMFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
+                    gcmFrontFindDlg.cancelCellHit += new GCMFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
+                    //加载ABC WebKit
+                    abcServManager = new ABCServManager(abcBrowser_abc);
+                    ////////////////////////////////////////////////////
+                    //设置初始化的页签
+                    gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
+                    opCond = OpConditionType.Local_View;
+                    ////////////////////////////////////////////////////
+                    this.IsInited = true;
+                }
+            }
+            catch (IDCMException ex)
+            {
+                this.IsInited = false;
+                log.Error(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "!", ex);
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "! @Message=" + ex.Message + " \n" + ex.ToString());
+            }
+            finally
+            {
+                this.Enabled = this.IsInited;
+                this.Visible = this.Enabled;
+            }
+        }
+        
+        
+
+        private void setDGVCellHit(DataGridViewCell cell)
+        {
+            if (cell.Visible == false)
+                return;
+            cell.DataGridView.EndEdit();
+            int colCount = DGVUtil.getTextColumnCount(cell.DataGridView);
+            DataGridViewCell rightCell = cell.DataGridView.Rows[cell.RowIndex].Cells[colCount - 1];
+            while (rightCell.Visible == false && rightCell.ColumnIndex > -1)
+            {
+                rightCell = rightCell.OwningRow.Cells[rightCell.ColumnIndex - 1];
+            }
+            cell.DataGridView.CurrentCell = rightCell;
+            cell.DataGridView.CurrentCell = cell;
+            cell.Selected = true;
+            cell.DataGridView.BeginEdit(true);
+        }
+        private void cancelDGVCellHit(DataGridViewCell cell)
+        {
+            if (cell.Visible == false)
+                return;
+            cell.DataGridView.EndEdit();
+            cell.Selected = false;
+        }
+        
+        
+
+        private void startLocalDataRender()
+        {
+            log.Debug("startDataRender(...)");
+            DataExportNoter.loadHistorySIds(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note);
+            string lastDump = SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note;
+            if (File.Exists(lastDump))
+            {
+                string lastdumpPath = FileUtil.readAsUTF8Text(lastDump).Trim();
+                if (lastdumpPath.Length > 0 && File.Exists(lastdumpPath))
+                {
+#if DEBUG
+#else
+                    localServManager.importData(lastdumpPath);
+#endif
+                }
+            }
+        }
+        public void startGCMSiteRender()
+        {
+            log.Debug("startGCMSiteRender(...)");
+            string name = ConfigurationManager.AppSettings.Get(SysConstants.LUID);
+            if (name != null && name.Length > 0)
+            {
+                gtcache.UserName = name;
+                string pwd = ConfigurationManager.AppSettings.Get(SysConstants.LPWD);
+                if (pwd != null && pwd.Length > 0)
+                {
+                    gtcache.Password = Base64DESEncrypt.CreateInstance(name).Decrypt(pwd);
+                    gtcache.RememberLogin = true;
+                }
+            }
+        }
+        
         /// <summary>
         /// 导入符合特定的文档格式的表单内容
         /// </summary>
@@ -492,24 +555,7 @@ namespace IDCM.VModule.GCM
             this.Enabled = false;
             return localServManager.doExitDump();
         }
-        private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
-        {
-            if (e.TabPageIndex == tabPageEx_GCM.TabIndex)
-            {
-                if (gcmServManager.Signed)
-                {
-                    showGCMDataDlg();
-                }
-                else
-                {
-                    showLoginDlg();
-                }
-            }
-            else if (e.TabPageIndex == tabPage_ABC.TabIndex)
-                notifyOpConditions(OpConditionType.ABC_View);
-            else
-                notifyOpConditions(OpConditionType.Local_View);
-        }
+
 
         private void showLoginDlg()
         {
@@ -535,41 +581,7 @@ namespace IDCM.VModule.GCM
             }));
             notifyOpConditions(OpConditionType.GCM_View);
         }
-
-
-        private void button_cancel_Click(object sender, EventArgs e)
-        {
-            this.Select(true, false);
-        }
-
-        private void pictureBox_Signhelp_Click(object sender, EventArgs e)
-        {
-            HelpDocRequester.requestHelpDoc(HelpDocConstants.StartViewTag);
-        }
-
-        private void button_confirm_Click(object sender, EventArgs e)
-        {
-            if (this.textBox_pwd.Text.Length <1 || this.textBox_ccinfoId.Text.Length < 1)
-            {
-                MessageBox.Show(GlobalTextRes.Text("The 'CCInfo Id' and 'GCM Password' should not be empty."));
-                return;
-            }
-            try
-            {
-                this.panel_GCM_start.Enabled = false;
-                gcmServManager.connnectGCM();
-            }
-            finally
-            {
-                this.panel_GCM_start.Enabled = true;
-            }
-        }
-
-        private void splitContainer_GCM_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Point reNewPoint=new Point(this.splitContainer_GCM.Panel1.Width/2-this.panel_GCM_start.Width/2,(int)(this.splitContainer_GCM.Panel1.Height*0.82-this.panel_GCM_start.Height));
-            this.panel_GCM_start.Location = reNewPoint;
-        }
+        
 
         public void addLocalDataRow()
         {
@@ -695,6 +707,21 @@ namespace IDCM.VModule.GCM
                 log.Error(GlobalTextRes.Text("Exit operation execute failed")+"！ ", ex);
             }
         }
+        private void notifyOpConditions(OpConditionType opType)
+        {
+            if (opCond != opType)
+            {
+                opCond = opType;
+                ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+                {
+                    if (GCMOpConditionChanged != null)
+                        GCMOpConditionChanged(OpConditions);
+                }));
+            }
+        }
+        #endregion
+
+        #region Property
         public OpConditionType OpConditions
         {
             get
@@ -705,18 +732,9 @@ namespace IDCM.VModule.GCM
                     return opCond;
             }
         }
-        private void notifyOpConditions(OpConditionType opType)
-        {
-            if (opCond != opType)
-            {
-                opCond = opType;
-                ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
-                    {
-                        if (GCMOpConditionChanged != null)
-                            GCMOpConditionChanged(OpConditions);
-                    }));
-            }
-        }
+        #endregion
+
+        #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private ContextMenu cellContextMenu_local = null;
         private LocalFrontFindDlg localFrontFindDlg = null;
@@ -729,14 +747,14 @@ namespace IDCM.VModule.GCM
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
         private OpConditionType opCond = OpConditionType.UnKnown;
-        public event GCMStatusHandler GCMStatusChanged;
-        public event GCMProgressHandler GCMProgressInvoke;
-        public event GCMOpConditionHandler GCMOpConditionChanged;
+        
         //异步消息事件委托形式化声明
         public delegate void GCMOpConditionHandler(OpConditionType opType);
         public delegate void GCMProgressHandler(bool running);
         public delegate void GCMStatusHandler(string status);
+        #endregion
 
+        #region Constants
         public enum OpConditionType
         {
             Local_View=0,
@@ -746,6 +764,6 @@ namespace IDCM.VModule.GCM
             ABC_View=4,
             UnKnown=5
         }
-
+        #endregion
     }
 }

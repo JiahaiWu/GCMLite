@@ -14,6 +14,8 @@ namespace IDCM.Forms
 {
     public partial class ExportTypeDlg : Form
     {
+        #region Constructor&Destructor
+
         public ExportTypeDlg(string fpath=null)
         {
             if (fpath != null)
@@ -24,6 +26,9 @@ namespace IDCM.Forms
             this.label1.Text = IDCM.Base.GlobalTextRes.Text("SavePath")+":";
             this.Text = IDCM.Base.GlobalTextRes.Text("Select File Type For Export");
         }
+        #endregion
+
+        #region Events&Handlings
 
         private void button_cancel_Click(object sender, EventArgs e)
         {
@@ -31,42 +36,11 @@ namespace IDCM.Forms
             this.Close();
             this.Dispose();
         }
-        protected string getDefaultSuffix()
-        {
-            string suffix = "";
-            if (radioButton_json.Checked)
-            {
-                lastOptionValue = ExportType.JSONList;
-                suffix = ".jso";
-            }
-            if (radioButton_excel.Checked)
-            {
-                lastOptionValue = ExportType.Excel;
-                suffix = ".xlsx";
-            }
-            if (radioButton_csv.Checked)
-            {
-                lastOptionValue = ExportType.CSV;
-                suffix = ".csv";
-            }
-            if (radioButton_tsv.Checked)
-            {
-                lastOptionValue = ExportType.TSV;
-                suffix = ".tsv";
-            }
-            if (radioButton_xml.Checked)
-            {
-                lastOptionValue = ExportType.XML;
-                suffix = ".xml";
-            }
-            return suffix;
-        }
-
         private void button_confirm_Click(object sender, EventArgs e)
         {
             string suffix = getDefaultSuffix();
-            FileInfo fi=new FileInfo(textBox_path.Text.Trim());
-            if (fi.Exists || (fi.Directory!=null && fi.Directory.Exists))
+            FileInfo fi = new FileInfo(textBox_path.Text.Trim());
+            if (fi.Exists || (fi.Directory != null && fi.Directory.Exists))
             {
                 string fpath = fi.FullName;
                 if (Directory.Exists(fpath))
@@ -97,7 +71,7 @@ namespace IDCM.Forms
         {
             SaveFileDialog fbd = new SaveFileDialog();
             fbd.FileName = CUIDGenerator.getUID(CUIDGenerator.Radix_32) + getDefaultSuffix();
-            fbd.InitialDirectory =Path.GetDirectoryName(lastFilePath);
+            fbd.InitialDirectory = Path.GetDirectoryName(lastFilePath);
             if (radioButton_excel.Checked)
                 fbd.Filter = "Excel File(*.xls,*.xlsx)|*.xls;*.xlsx;";
             if (radioButton_json.Checked)
@@ -116,8 +90,49 @@ namespace IDCM.Forms
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        protected string getDefaultSuffix()
+        {
+            string suffix = "";
+            if (radioButton_json.Checked)
+            {
+                lastOptionValue = ExportType.JSONList;
+                suffix = ".jso";
+            }
+            if (radioButton_excel.Checked)
+            {
+                lastOptionValue = ExportType.Excel;
+                suffix = ".xlsx";
+            }
+            if (radioButton_csv.Checked)
+            {
+                lastOptionValue = ExportType.CSV;
+                suffix = ".csv";
+            }
+            if (radioButton_tsv.Checked)
+            {
+                lastOptionValue = ExportType.TSV;
+                suffix = ".tsv";
+            }
+            if (radioButton_xml.Checked)
+            {
+                lastOptionValue = ExportType.XML;
+                suffix = ".xml";
+            }
+            return suffix;
+        }
+        #endregion
+
+        #region Members
+
         private static ExportType lastOptionValue = ExportType.Excel;
         private static string lastFilePath = "C:\\idcm_export";
+        #endregion
+
+        #region Property
 
         public static string LastFilePath
         {
@@ -128,6 +143,6 @@ namespace IDCM.Forms
         {
             get { return ExportTypeDlg.lastOptionValue; }
         }
-        
+        #endregion
     }
 }

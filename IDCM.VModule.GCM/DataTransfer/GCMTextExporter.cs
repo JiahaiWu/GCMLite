@@ -11,6 +11,8 @@ namespace IDCM.DataTransfer
 {
     class GCMTextExporter
     {
+        #region Methods
+        
         /// <summary>
         /// 根据历史查询条件导出目标文本数据集
         /// </summary>
@@ -136,6 +138,8 @@ namespace IDCM.DataTransfer
             }
             return strbuilder.ToString();
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

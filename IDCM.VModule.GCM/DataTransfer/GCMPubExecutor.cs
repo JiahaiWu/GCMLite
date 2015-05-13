@@ -14,6 +14,8 @@ namespace IDCM.DataTransfer
 {
     class GCMPubExecutor
     {
+        #region Methods
+
         /// <summary>
         /// XML上传，批量导入（如果菌号相同，则更新均中信息）
         /// 说明：
@@ -90,6 +92,7 @@ namespace IDCM.DataTransfer
             XMLImportStrainsRes xisr = JsonConvert.DeserializeObject<XMLImportStrainsRes>(jsonStr);
             return xisr;
         }
+        #endregion
 
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }

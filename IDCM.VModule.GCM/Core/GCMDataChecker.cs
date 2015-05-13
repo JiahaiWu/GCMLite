@@ -12,6 +12,8 @@ namespace IDCM.Core
 {
     class GCMDataChecker
     {
+        #region Methods
+
         public static bool checkForPublish(MemoryStream xmlStream,out string errorInfo)
         {
             StringBuilder resStrbuilder = new StringBuilder();
@@ -45,6 +47,8 @@ namespace IDCM.Core
             errorInfo = resStrbuilder.ToString();
             return errorInfo.Length < 1;
         }
+        #endregion
+
         private static XmlReaderSettings GCMXMLSetting = null;
     }
 }

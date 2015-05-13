@@ -31,6 +31,8 @@ namespace IDCM.Core
     /// </summary>
     public class CustomColDef
     {
+        #region Property
+
         /// <summary>
         /// 属性名称(属性名称可以由大小写字母、数字、下划线组成，字段名大小写敏感)
         /// </summary>
@@ -63,7 +65,9 @@ namespace IDCM.Core
         /// 默认的排序标记值
         /// </summary>
         public int Corder { get; set; }
+        #endregion
 
+        #region Methods
         internal static List<CustomColDef> getCustomTableDef(string settingPath)
         {
             if (File.Exists(settingPath))
@@ -184,7 +188,12 @@ namespace IDCM.Core
             return Attr + splitChar + IsRequire + splitChar + IsUnique + splitChar
                 + Restrict + splitChar + Alias + splitChar + (DefaultVal == null ? "" : DefaultVal);
         }
+        #endregion
+
+        #region Members
+
         private static readonly char splitChar ='\t';
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        #endregion
     }
 }

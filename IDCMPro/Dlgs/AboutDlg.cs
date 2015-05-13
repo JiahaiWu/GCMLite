@@ -11,18 +11,23 @@ namespace IDCM.Dlgs
 {
     public partial class AboutDlg : Form
     {
+        #region Constructor&Destructor
         public AboutDlg()
         {
             InitializeComponent();
             setAboutText();
         }
+        #endregion
 
+        #region Events&Handlings
         private void button1_Click(object sender, EventArgs e)
         {
             if(!this.IsDisposed)
             this.Dispose();
         }
+        #endregion
 
+        #region Methods
         public void setAboutText()
         {
             this.version.Text = "IDCM v1.0(110)\n\nCopyright © All Rights Reserved";
@@ -30,5 +35,6 @@ namespace IDCM.Dlgs
             this.email.Text = "Email:jiahaiwu@im.ac.cn\n\n";
             this.address.Text = "Address:Beijing Chaoyang District";
         }
+        #endregion
     }
 }

@@ -13,6 +13,7 @@ namespace IDCM.Forms
 {
     public partial class LocalFrontFindDlg : Form
     {
+        #region Constructor&Destructor
         public LocalFrontFindDlg()
         {
             InitializeComponent();
@@ -43,6 +44,12 @@ namespace IDCM.Forms
                 dgvPool = null;
             }
         }
+        #endregion
+
+        #region Events&Handlings
+        public event SetHit<DataGridViewCell> setCellHit;
+        public event CancelHit<DataGridViewCell> cancelCellHit;
+
         private void FrontFindDlg_Load(object sender, EventArgs e)
         {
             this.comboBox_find.Focus();
@@ -68,6 +75,18 @@ namespace IDCM.Forms
         {
             resetIndex(true);
         }
+
+        private void LocalFrontFindDlg_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason.Equals(CloseReason.UserClosing) && e.CloseReason.Equals(CloseReason.None))
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+        }
+        #endregion
+
+        #region Methods
         public void findDown()
         {
             if (foundCell != null)
@@ -256,25 +275,20 @@ namespace IDCM.Forms
                 checkBox_matchCase.Checked = false;
             }
         }
-        private void LocalFrontFindDlg_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason.Equals(CloseReason.UserClosing) && e.CloseReason.Equals(CloseReason.None))
-            {
-                e.Cancel = true;
-                this.Hide();
-            }
-        }
+        #endregion
+
+        #region Members
+
         public delegate void SetHit<T>(T fc);
         public delegate void CancelHit<T>(T fc);
-        public event SetHit<DataGridViewCell> setCellHit;
-        public event CancelHit<DataGridViewCell> cancelCellHit;
+
         private static List<DataGridView> dgvPool = null;
         private static string lastFindTerm = "";
         private static int found_arrayIndex = -2;
         private static int found_rowIndex = -2;
         private static int found_colIndex = -2;
         private static DataGridViewCell foundCell = null;
-
+        #endregion
 
     }
 }

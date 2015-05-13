@@ -14,6 +14,8 @@ namespace IDCM.BGHandlerManager
     /// </summary>
     public class BGHandlerProxy
     {
+        #region Constructor&Destructor
+
         /// <summary>
         /// 构造方法
         /// </summary>
@@ -23,6 +25,10 @@ namespace IDCM.BGHandlerManager
             this.handler = _handler;
             doWorkTime = DateTime.Now;
         }
+        #endregion
+
+        #region Events&Handlings
+
         /// <summary>
         /// 后台任务执行方法的主体部分，异步执行代码段！
         /// </summary>
@@ -107,6 +113,9 @@ namespace IDCM.BGHandlerManager
             BackgroundWorker worker = (BackgroundWorker)sender;
             handler.progressChanged( e.ProgressPercentage, args);
         }
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// 获取任务代理包装的元处理器实例对象
@@ -136,6 +145,10 @@ namespace IDCM.BGHandlerManager
             TimeSpan span = DateTime.Now - doWorkTime;
             return span.Milliseconds;
         }
+        #endregion
+
+        #region Members
+
         /// <summary>
         /// 任务代理包装的元处理器实例对象
         /// </summary>
@@ -144,5 +157,6 @@ namespace IDCM.BGHandlerManager
         /// 用于标记任务执行的起始时间
         /// </summary>
         private DateTime doWorkTime;
+        #endregion
     }
 }

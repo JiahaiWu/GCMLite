@@ -26,10 +26,14 @@ namespace IDCM.ViewManager
 {
     class LocalServManager
     {
+        #region Constructor&Destructor
         public LocalServManager(CTableCache ctcache)
         {
             this.ctcache = ctcache;
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// 导入数据文档
         /// </summary>
@@ -173,8 +177,11 @@ namespace IDCM.ViewManager
             string dumppath = dumper.build(ctcache).dump();
             return dumppath;
         }
+        #endregion
 
+        #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private CTableCache ctcache = null;
+        #endregion
     }
 }

@@ -184,7 +184,7 @@
     <Compile Include="ViewManager\GCMServManager.cs" />
     <Compile Include="BGHandler\GCMTextExportHandler.cs" />
     <Compile Include="BGHandler\GCMXMLExportHandler.cs" />
-    <Compile Include="ViewManager\LocalDataFilterToRecvHandler.cs" />
+    <Compile Include="BGHandler\LocalDataFilterToRecvHandler.cs" />
     <Compile Include="ViewManager\LocalServManager.cs" />
     <Compile Include="BGHandler\MDIImportHandler.cs" />
     <EmbeddedResource Include="Forms\AttrMapOptionDlg.resx">

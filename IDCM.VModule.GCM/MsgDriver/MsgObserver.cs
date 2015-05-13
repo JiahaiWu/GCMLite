@@ -11,6 +11,7 @@ namespace IDCM.MsgDriver
 {
     internal class MsgObserver:IMsgObserver
     {
+        #region Methods
         public bool bind(IMsgListener listener)
         {
             if (listener == null)
@@ -38,6 +39,10 @@ namespace IDCM.MsgDriver
         {
             return listenerNoters.Values;
         }
+        #endregion
+
+        #region Members
         private ConcurrentDictionary<string,IMsgListener> listenerNoters = new ConcurrentDictionary<string,IMsgListener>();
+        #endregion
     }
 }

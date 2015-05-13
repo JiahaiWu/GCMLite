@@ -11,6 +11,8 @@ namespace IDCM.Forms
 {
     public partial class ColConfigDlg : Form
     {
+        #region Constructor&Destructor
+
         public ColConfigDlg(int cursor, string aliasName, bool isRequire, bool isUnique, string restrict)
         {
             InitializeComponent();
@@ -29,6 +31,10 @@ namespace IDCM.Forms
             dirtyStatus = false;
             this.FormClosing+=ColConfigDlg_FormClosing;
         }
+        #endregion
+
+        #region Events&Handlings
+        public event ColConfigChangedHandler ColConfigChanged;
 
         private void ColConfigDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -78,6 +84,9 @@ namespace IDCM.Forms
                 this.textBox_restrict.BackColor = Color.Red;
             }
         }
+        #endregion
+
+        #region Methods
 
         internal void Show(Form parent,Point point)
         {
@@ -85,12 +94,17 @@ namespace IDCM.Forms
             this.Location = point;
             this.ShowDialog(parent);
         }
+        #endregion
+
+        #region Members
+
         private int cursor = -1;
         private bool isRequire = false;
         private bool isUnique = false;
         private string restrictVal = null;
-        public event ColConfigChangedHandler ColConfigChanged;
+
         private bool dirtyStatus = false;
         public delegate void ColConfigChangedHandler(int cursor, bool isRequire, bool isUnique, string restrict);
+        #endregion
     }
 }

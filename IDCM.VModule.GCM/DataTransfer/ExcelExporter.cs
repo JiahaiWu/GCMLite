@@ -17,6 +17,8 @@ namespace IDCM.DataTransfer
 {
     class ExcelExporter
     {
+        #region Methods
+
         /// <summary>
         /// 导出数据到excel，数据源从数据库读取
         /// </summary>
@@ -201,6 +203,8 @@ namespace IDCM.DataTransfer
             }
             return rtn;
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

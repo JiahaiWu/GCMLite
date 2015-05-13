@@ -14,6 +14,8 @@ namespace IDCM.Core
 {
     class DataExportChecker
     {
+        #region Methods
+       
         /// <summary>
         /// 解析指定的GCM Pub XML文档，验证数据转换的属性映射条件.
         /// </summary>
@@ -58,5 +60,6 @@ namespace IDCM.Core
             }
             return gcmCols.Keys.ToList();
         }
+        #endregion
     }
 }

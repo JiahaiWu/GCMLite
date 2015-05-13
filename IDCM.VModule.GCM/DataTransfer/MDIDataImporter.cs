@@ -10,6 +10,7 @@ namespace IDCM.DataTransfer
 {
     class MDIDataImporter
     {
+        #region Methods
         internal static bool parseMDIData(Core.CTableCache ctcache, string mdiPath)
         {
             String jsonStr = FileUtil.readAsUTF8Text(mdiPath);
@@ -27,6 +28,6 @@ namespace IDCM.DataTransfer
             }
             return false;
         }
-
+        #endregion
     }
 }

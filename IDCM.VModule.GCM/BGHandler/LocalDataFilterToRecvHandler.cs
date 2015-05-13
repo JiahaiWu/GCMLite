@@ -8,7 +8,7 @@ using IDCM.MsgDriver;
 using IDCM.Core;
 using System.Collections;
 
-namespace IDCM.ViewManager
+namespace IDCM.BGHandler
 {
     class LocalDataFilterToRecvHandler : AbsBGHandler
     {

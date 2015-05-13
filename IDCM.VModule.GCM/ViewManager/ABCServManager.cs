@@ -11,15 +11,20 @@ namespace IDCM.ViewManager
 {
     class ABCServManager
     {
+        #region Members
         private DCMControlLib.GCM.ABCBrowser abcBrowser_abc;
         private Regex strainNumberPattern;
+        #endregion
 
+        #region Constructor&Destructor
         public ABCServManager(DCMControlLib.GCM.ABCBrowser abcBrowser_abc)
         {
             this.abcBrowser_abc = abcBrowser_abc;
             strainNumberPattern = new Regex(@"([A-Za-z]{2,10})[^A-Za-z0-9]{0,2}(\d{1,10})");
         }
+        #endregion
 
+        #region Methods
         internal bool linkTo(string strainId)
         {
             Match match = strainNumberPattern.Match(strainId);
@@ -37,6 +42,6 @@ namespace IDCM.ViewManager
             }
             return true;
         }
-
+        #endregion
     }
 }

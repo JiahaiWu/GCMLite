@@ -17,6 +17,8 @@ namespace IDCM.BGHandlerManager
     /// </summary>
     public class RunningHandlerNoter
     {
+        #region Methods
+
         /// <summary>
         /// 获取当前后台线程对象的存活状态快照集
         /// </summary>
@@ -121,24 +123,7 @@ namespace IDCM.BGHandlerManager
             }
             return worker;
         }
-        /// <summary>
-        /// 句柄对象释放时事件处理方法
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected static void OnHandleDisposed(object sender, EventArgs e)
-        {
-            if (sender == null)
-                return;
-            if (sender is BackgroundWorker)
-            {
-                removeBackgroundworker(sender as BackgroundWorker);
-            }
-            if (sender is HandleHolderI)
-            {
-                removeHanlde(sender as HandleHolderI);
-            }
-        }
+
         /// <summary>
         /// 移除目标实例句柄对象
         /// </summary>
@@ -178,7 +163,30 @@ namespace IDCM.BGHandlerManager
                 }
             }
         }
+        #endregion
 
+        #region Events&Handlings
+        /// <summary>
+        /// 句柄对象释放时事件处理方法
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected static void OnHandleDisposed(object sender, EventArgs e)
+        {
+            if (sender == null)
+                return;
+            if (sender is BackgroundWorker)
+            {
+                removeBackgroundworker(sender as BackgroundWorker);
+            }
+            if (sender is HandleHolderI)
+            {
+                removeHanlde(sender as HandleHolderI);
+            }
+        }
+        #endregion
+
+        #region Members
         /// <summary>
         /// 后台线程任务监控器独占保持的共享锁对象
         /// </summary>
@@ -188,6 +196,7 @@ namespace IDCM.BGHandlerManager
         /// @author JiahaiWu 2014-11-07
         /// </summary>
         private static LinkedList<HandleHolderI> handleList = new LinkedList<HandleHolderI>();
+        #endregion
 
         #region 内置对象实现部分
         /// <summary>
@@ -345,5 +354,6 @@ namespace IDCM.BGHandlerManager
             }
         }
         #endregion
+
     }
 }

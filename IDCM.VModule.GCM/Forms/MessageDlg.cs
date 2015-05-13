@@ -13,6 +13,7 @@ namespace IDCM.Forms
 {
     public partial class MessageDlg : Form
     {
+        #region Constructor&Destructor
         public MessageDlg(string dmsg)
         {
             InitializeComponent();
@@ -24,7 +25,9 @@ namespace IDCM.Forms
             wtimer.Tick += OnTipTimerTick;
             wtimer.Start();
         }
+        #endregion
 
+        #region Events&Handlings
         private void MessageDlg_VisibleChanged(object sender, EventArgs e)
         {
             try{
@@ -58,14 +61,6 @@ namespace IDCM.Forms
             grap.DrawString(msg, font, brush, this.Size.Width / 2, (this.Size.Height - size.Height) / 2, sf);
         }
 
-        public double LastTime
-        {
-            get
-            {
-                long lasttime = DateTime.Now.Ticks - timestamp;
-                return new TimeSpan(lasttime).TotalMilliseconds;
-            }
-        }
         private void OnTipTimerTick(object sender, EventArgs e)
         {
             if (LastTime > (wtick * 4))
@@ -75,11 +70,26 @@ namespace IDCM.Forms
                 Dispose();
             }
         }
+        #endregion
+
+        #region Property
+        public double LastTime
+        {
+            get
+            {
+                long lasttime = DateTime.Now.Ticks - timestamp;
+                return new TimeSpan(lasttime).TotalMilliseconds;
+            }
+        }
+        #endregion
+
+        #region Members
         private string msg = null;
         private long timestamp = 0L;
         public static readonly int wtick = 500;
         private System.Windows.Forms.Timer wtimer = null;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        #endregion
     }
 
     /// <summary>
@@ -87,6 +97,7 @@ namespace IDCM.Forms
     /// </summary>
     class AnimateWinAPI
     {
+        #region Constants
         /// <summary>
         /// Animates the window from left to right. This flag can be used with roll or slide animation.
         /// </summary>
@@ -123,6 +134,7 @@ namespace IDCM.Forms
         /// Uses a fade effect. This flag can be used only if hwnd is a top-level window.
         /// </summary>
         public const int AW_BLEND = 0X80000;
+        #endregion
 
         /// <summary>
         /// Animates a window.

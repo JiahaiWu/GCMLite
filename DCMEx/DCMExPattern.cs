@@ -9,10 +9,15 @@ namespace DCMEx
 {
     class DCMExPattern
     {
+        #region Members
+       
         private PrefixToken prefix = PrefixToken.DefaultMode;
         private IMatcher matchers = null;
         private char[] expChars;
         private int cursor;
+        #endregion
+
+        #region Constructor&Destructor
 
         /// <summary>
         /// 初始化构造函数
@@ -32,6 +37,9 @@ namespace DCMEx
                 matchers = new DCMMatcherGroup(expChars, cursor, expChars.Length);
             }
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// 设置前导符值
         /// </summary>
@@ -67,5 +75,7 @@ namespace DCMEx
                 return matchers.isMatch(chars);
             return false;
         }
+        #endregion
+
     }
 }

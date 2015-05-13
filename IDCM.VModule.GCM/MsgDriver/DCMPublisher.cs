@@ -14,6 +14,7 @@ namespace IDCM.MsgDriver
 {
     public class DCMPublisher
     {
+        #region Methods
         public static void noteJobProgress(Int32 percent)
         {
             if (msgObs == null)
@@ -52,6 +53,9 @@ namespace IDCM.MsgDriver
             messageMonitor.Enabled = false;
             return msgObs;
         }
+        #endregion
+
+        #region Events&Handlings
         /// <summary>
         /// 异步消息轮询监视器的心跳检测事件处理
         /// </summary>
@@ -85,6 +89,9 @@ namespace IDCM.MsgDriver
                 log.Error(ex.ToString());
             }
         }
+        #endregion
+
+        #region Property
         public static IMsgObserver MsgObs
         {
             get
@@ -92,6 +99,9 @@ namespace IDCM.MsgDriver
                 return msgObs;
             }
         }
+        #endregion
+
+        #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private static MsgObserver msgObs=null;
         /// <summary>
@@ -102,5 +112,6 @@ namespace IDCM.MsgDriver
         /// send Message Cache
         /// </summary>
         private static ConcurrentQueue<object> sendMsgCache = null;
+        #endregion
     }
 }

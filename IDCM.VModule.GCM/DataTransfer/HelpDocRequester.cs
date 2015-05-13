@@ -15,6 +15,8 @@ namespace IDCM.DataTransfer
     /// </summary>
     public class HelpDocRequester
     {
+        #region Methods
+
         /// <summary>
         /// 通过本地浏览器请求远程帮助文档
         /// 说明:
@@ -91,6 +93,8 @@ namespace IDCM.DataTransfer
         {
             return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Internet Explorer\\iexplore.exe");
         }
+        #endregion
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }
