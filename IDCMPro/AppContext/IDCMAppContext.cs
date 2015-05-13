@@ -76,7 +76,7 @@ namespace IDCM.AppContext
                 }
             }
         }
-        #region Methods
+        #endregion
 
         #region Events&Handlings
         /// <summary>
