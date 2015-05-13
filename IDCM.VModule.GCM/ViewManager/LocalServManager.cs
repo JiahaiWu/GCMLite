@@ -95,7 +95,7 @@ namespace IDCM.ViewManager
                             handler = selectedRowIdxs == null ? new XMLExportHandler(ctcache, epath) : new XMLExportHandler(ctcache, epath,selectedRowIdxs);
                             break;
                         default:
-                            MessageBox.Show("Unsupport export type!");
+                            MessageBox.Show(GlobalTextRes.Text("Unsupport export type")+"!");
                             break;
                     }
                     if(handler!=null)
@@ -103,8 +103,8 @@ namespace IDCM.ViewManager
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("数据导出失败。");
-                    log.Info("数据导出失败，错误信息：", ex);
+                    MessageBox.Show(GlobalTextRes.Text("Data export failed"));
+                    log.Info(GlobalTextRes.Text("Data export failed with error info") + "：", ex);
                 }
             }
         }

@@ -50,8 +50,8 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Error("本地数据验证失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: 本地数据验证失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -69,13 +69,13 @@ namespace IDCM.BGHandler
             if (error != null)
             {
                 log.Error(error);
-                log.Info("Data Check Failed!");
-                DCMPublisher.noteSimpleMsg("Data Check Failed!", Base.ComPO.DCMMsgType.Tip);
+                log.Info(IDCM.Base.GlobalTextRes.Text("Data Check failed")+"!");
+                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!", Base.ComPO.DCMMsgType.Tip);
             }
             else
             {
-                log.Info("Data Check success.");
-                DCMPublisher.noteSimpleMsg("Data Check success.", Base.ComPO.DCMMsgType.Tip);
+                log.Info(IDCM.Base.GlobalTextRes.Text("Data Check success")+".");
+                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check success")+".", Base.ComPO.DCMMsgType.Tip);
             }
         }
     }

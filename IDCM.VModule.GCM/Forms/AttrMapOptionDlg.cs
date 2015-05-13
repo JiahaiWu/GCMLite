@@ -17,6 +17,12 @@ namespace IDCM.Forms
         public AttrMapOptionDlg()
         {
             InitializeComponent();
+            this.button_confirm.Text = IDCM.Base.GlobalTextRes.Text("Confirm");
+            this.radioButton_custom.Text = IDCM.Base.GlobalTextRes.Text("Custom Mapping");
+            this.radioButton_exact.Text = IDCM.Base.GlobalTextRes.Text("Exact Match");
+            this.radioButton_similarity.Text = IDCM.Base.GlobalTextRes.Text("Similarity Match");
+            this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
+            this.Text = IDCM.Base.GlobalTextRes.Text("AttrMappingOptionDlg");
         }
         /// <summary>
         /// 设置初始化映射源和映射目标字符串集合，并指定有效映射返回字典的引用对象

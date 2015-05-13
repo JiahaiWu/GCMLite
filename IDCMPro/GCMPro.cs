@@ -25,7 +25,21 @@ namespace IDCM
         public GCMPro()
         {
             InitializeComponent();
-            this.toolStripStatusLabel_status.Text = GlobalTextRes.Text(this.toolStripStatusLabel_status.Text);
+            this.toolStripStatusLabel_status.Text = GlobalTextRes.Text("Ready");
+            this.fileFToolStripMenuItem.Text = GlobalTextRes.Text("File");
+            this.openAltOToolStripMenuItem.Text = GlobalTextRes.Text("Open (Alt+O)");
+            this.saveAltSToolStripMenuItem.Text = GlobalTextRes.Text("Save (Alt+S)");
+            this.quitAltQToolStripMenuItem.Text = GlobalTextRes.Text("Quit(Alt+Q)");
+            this.toolStripMenuItem_tool.Text = GlobalTextRes.Text("Tool");
+            this.validationAltVToolStripMenuItem.Text = GlobalTextRes.Text("Validation(Alt+V)");
+            this.filterAltRToolStripMenuItem.Text = GlobalTextRes.Text("Filter(Alt+R)");
+            this.exportAltEToolStripMenuItem.Text = GlobalTextRes.Text("Export(Alt+E)");
+            this.searchAltFToolStripMenuItem.Text = GlobalTextRes.Text("Search(Alt+F)");
+            this.clearAllAltCToolStripMenuItem.Text = GlobalTextRes.Text("Clear All(Alt+C)");
+            this.configurationCToolStripMenuItem.Text = GlobalTextRes.Text("Configuration");
+            this.helpHToolStripMenuItem.Text = GlobalTextRes.Text("Help");
+            this.webSupportAltHToolStripMenuItem.Text = GlobalTextRes.Text("Web Support(Alt+H)");
+            this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
         }
         /// <summary>
         /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作
@@ -39,7 +53,8 @@ namespace IDCM
             }
             if (ProcessUtil.checkDuplicateProcess() != null)
             {
-                MessageBox.Show("当前工作空间下工作进程已存在，确认退出当前实例。", "Notice", MessageBoxButtons.OK);
+                MessageBox.Show(GlobalTextRes.Text("Work process existing under this work space. Choose confirm and exit this instance."),
+                    GlobalTextRes.Text("Notice"), MessageBoxButtons.OK);
                 Application.Exit();
             }
         }
@@ -172,7 +187,7 @@ namespace IDCM
             }
             catch (Exception ex)
             {
-                log.Error("退出操作执行失败！ " ,ex);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Exit operation execute failed") + "！", ex);
             }
         }
         

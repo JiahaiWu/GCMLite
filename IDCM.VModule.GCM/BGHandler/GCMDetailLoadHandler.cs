@@ -42,8 +42,8 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Info("ERROR: GCM细览数据查询失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: GCM 细览数据查询失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Tip);
+                log.Info("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to query the detail of GCM data") + "！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to query the detail of GCM data") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Tip);
             }
             return new object[] { res };
         }

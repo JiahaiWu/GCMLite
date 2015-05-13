@@ -60,14 +60,14 @@ namespace IDCM.ViewManager
                         authInfo.Timestamp = auth.Timestamp;
                     }
                 }
-                string tip = authInfo.LoginFlag ? "已建立连接. [" + authInfo.Username + "]" : "未连接";
+                string tip = authInfo.LoginFlag ? GlobalTextRes.Text("Connected") + ". [" + authInfo.Username + "]" : GlobalTextRes.Text("Disconnected");
                 DCMPublisher.noteSimpleMsg(tip, DCMMsgType.Status);
                 DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMUserSigned);
             }
             catch (Exception ex)
             {
-                log.Error("连接到GCM失败", ex);
-                DCMPublisher.noteSimpleMsg("连接失败.", DCMMsgType.Status);
+                log.Error(GlobalTextRes.Text("Connect GCM failed"), ex);
+                DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"), DCMMsgType.Status);
             }
         }
         internal bool Signed

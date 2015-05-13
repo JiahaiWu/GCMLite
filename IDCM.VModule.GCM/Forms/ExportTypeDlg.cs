@@ -19,6 +19,11 @@ namespace IDCM.Forms
             if (fpath != null)
                 lastFilePath = fpath;
             InitializeComponent();
+            this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
+            this.button_confirm.Text = IDCM.Base.GlobalTextRes.Text("Confirm");
+            this.export_strain_tree_checkBox.Text = IDCM.Base.GlobalTextRes.Text("export strain tree");
+            this.label1.Text = IDCM.Base.GlobalTextRes.Text("SavePath")+":";
+            this.Text = IDCM.Base.GlobalTextRes.Text("Select File Type For Export");
         }
 
         private void button_cancel_Click(object sender, EventArgs e)
@@ -88,7 +93,7 @@ namespace IDCM.Forms
             }
             else
             {
-                MessageBox.Show("The save file path should be available.");
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available."));
             }
         }
         /// <summary>

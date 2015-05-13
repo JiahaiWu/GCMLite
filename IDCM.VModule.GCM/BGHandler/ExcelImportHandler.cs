@@ -37,7 +37,7 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Info("ERROR: Excel文件导入失败！ ", ex);
+                log.Info("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to Export excel file") + "！ ", ex);
                 DCMPublisher.noteSimpleMsg("ERROR: Excel文件导入失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
             }
             return new object[] { res, xlsPath };

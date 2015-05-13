@@ -35,8 +35,8 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Error("XML文件导入失败！", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: XML文件导入失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import XML document")+"！", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
             }
             return new object[] { res, xlsPath };
         }

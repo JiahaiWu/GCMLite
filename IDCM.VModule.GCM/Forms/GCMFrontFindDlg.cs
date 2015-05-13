@@ -19,6 +19,13 @@ namespace IDCM.Forms
             InitializeComponent();
             if (lastFindTerm != null && lastFindTerm.Length > 0)
                 this.comboBox_find.FormatString = lastFindTerm;
+            this.label_search.Text = IDCM.Base.GlobalTextRes.Text("Search")+":";
+            this.button_searchDown.Text = IDCM.Base.GlobalTextRes.Text("Find Down");
+            this.button_findRev.Text = IDCM.Base.GlobalTextRes.Text("Find Up");
+            this.checkBox_matchCase.Text = IDCM.Base.GlobalTextRes.Text("Match Case");
+            this.checkBox_matchAll.Text = IDCM.Base.GlobalTextRes.Text("Match Fully");
+            this.button_reset.Text = IDCM.Base.GlobalTextRes.Text("Reset");
+            this.Text = IDCM.Base.GlobalTextRes.Text("GCM Front Find");
         }
         public GCMFrontFindDlg(params DataGridView[] dgvs)
         {
@@ -87,7 +94,7 @@ namespace IDCM.Forms
                 }
                 if (ncell == null)
                 {
-                    MessageBox.Show("It's reached the end, and traverse over.");
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's reached the end, and traverse over."));
                     this.Hide();
                 }
             }
@@ -122,7 +129,7 @@ namespace IDCM.Forms
                 }
                 if (ncell == null)
                 {
-                    MessageBox.Show("It's reached the end, and traverse over.");
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's reached the end, and traverse over."));
                     this.Hide();
                 }
             }

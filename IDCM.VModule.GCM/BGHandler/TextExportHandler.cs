@@ -45,8 +45,8 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Error("XML文件导出失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: XML文件导出失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to export text file")+"！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export text file") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -64,11 +64,11 @@ namespace IDCM.BGHandler
             if (error != null)
             {
                 log.Error(error);
-                log.Info("Export Failed! @filepath=" + textPath);
+                log.Info(IDCM.Base.GlobalTextRes.Text("Export failed")+"! @filepath=" + textPath);
             }
             else
             {
-                log.Info("Export success. @filepath=" + textPath);
+                log.Info(IDCM.Base.GlobalTextRes.Text("Export success") + ". @filepath=" + textPath);
             }
         }
 

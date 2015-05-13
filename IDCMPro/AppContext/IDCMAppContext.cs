@@ -79,11 +79,11 @@ namespace IDCM.AppContext
         /// <param name="e"></param>
         private void OnApplicationExit(object sender, EventArgs e)
         {
-            log.Info("On IDCM application exiting.");
+            log.Info(GlobalTextRes.Text("On GCMLite application exiting."));
         }
         private void OnMainManagerExit(object sender, EventArgs e)
         {
-            log.Info("On Main Manager exited.");
+            log.Info(GlobalTextRes.Text("On Main Manager exited."));
             mainManger = null;
         }
 

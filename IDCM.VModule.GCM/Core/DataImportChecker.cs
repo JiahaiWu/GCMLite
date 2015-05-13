@@ -43,8 +43,8 @@ namespace IDCM.Core
             }
             catch (Exception ex)
             {
-                log.Error("Excel文件导入失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("Excel: XML文件导入失败！ " + ex.Message + "\n" + ex.ToString());
+                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import excel file")+"！ ", ex);
+                DCMPublisher.noteSimpleMsg("Excel: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString());
             }
             return false;
         }
@@ -71,8 +71,8 @@ namespace IDCM.Core
             }
             catch (Exception ex)
             {
-                log.Error("ERROR: XML文件导入失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: XML文件导入失败！ " + ex.Message + "\n" + ex.ToString());
+                log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString());
             }
             return false;
         }
@@ -92,8 +92,8 @@ namespace IDCM.Core
             }
             catch (Exception ex)
             {
-                log.Error("ERROR: MDI文件导入失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: MDI文件导入失败！ " + ex.Message + "\n" + ex.ToString());
+                log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message + "\n" + ex.ToString());
             }
             return false;
         }

@@ -117,577 +117,229 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABC Browser" xml:space="preserve">
+    <value>ABC 引用查询</value>
+  </data>
+  <data name="About GCMLite(Alt+A)" xml:space="preserve">
+    <value>关于 GCMLite(Alt+A)</value>
+  </data>
+  <data name="Application View Initialize Failed" xml:space="preserve">
+    <value>应用视图启动失败</value>
+  </data>
+  <data name="AttrMappingOptionDlg" xml:space="preserve">
+    <value>属性映射对话框</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CCInfo ID" xml:space="preserve">
+    <value>CCInfo 账号</value>
+  </data>
+  <data name="Clear All(Alt+C)" xml:space="preserve">
+    <value>清空所有(Alt+C)</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Confirm Message" xml:space="preserve">
+    <value>确认信息</value>
+  </data>
+  <data name="Connect GCM failed" xml:space="preserve">
+    <value>连接到GCM失败。</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>已建立连接</value>
+  </data>
+  <data name="Custom Mapping" xml:space="preserve">
+    <value>自定义映射匹配</value>
+  </data>
+  <data name="Data Check failed" xml:space="preserve">
+    <value>数据校验失败</value>
+  </data>
+  <data name="Data Check success" xml:space="preserve">
+    <value>数据校验完成</value>
+  </data>
+  <data name="Data export failed" xml:space="preserve">
+    <value>数据导出失败。</value>
+  </data>
+  <data name="Data export failed with error info" xml:space="preserve">
+    <value>数据导出失败，错误信息</value>
+  </data>
+  <data name="Data publish failed" xml:space="preserve">
+    <value>数据提交发布失败</value>
+  </data>
+  <data name="Data publish success" xml:space="preserve">
+    <value>数据提交发布成功</value>
+  </data>
+  <data name="Disconnected" xml:space="preserve">
+    <value>未连接</value>
+  </data>
+  <data name="Exact Match" xml:space="preserve">
+    <value>精确匹配</value>
+  </data>
+  <data name="Exit operation execute failed" xml:space="preserve">
+    <value>退出操作执行失败</value>
+  </data>
+  <data name="Export failed" xml:space="preserve">
+    <value>导出失败</value>
+  </data>
+  <data name="export strain tree" xml:space="preserve">
+    <value>导出菌树</value>
+  </data>
+  <data name="Export success" xml:space="preserve">
+    <value>导出完成</value>
+  </data>
+  <data name="Export(Alt+E)" xml:space="preserve">
+    <value>导出(Alt+E)</value>
+  </data>
+  <data name="Failed to export and publish the XML document for GCM" xml:space="preserve">
+    <value>GCMXML文件导出及上传失败</value>
+  </data>
+  <data name="Failed to Export excel file" xml:space="preserve">
+    <value>Excel文件导入失败</value>
+  </data>
+  <data name="Failed to export JSON File" xml:space="preserve">
+    <value>JSON文件导出失败</value>
+  </data>
+  <data name="Failed to export text file" xml:space="preserve">
+    <value>文本文件导出失败</value>
+  </data>
+  <data name="Failed to export XML document" xml:space="preserve">
+    <value>XML文件导出失败</value>
+  </data>
+  <data name="Failed to import dump file" xml:space="preserve">
+    <value>导入存档文件失败</value>
+  </data>
+  <data name="Failed to import excel file" xml:space="preserve">
+    <value>Excel文件导入失败</value>
+  </data>
+  <data name="Failed to import XML document" xml:space="preserve">
+    <value>XML文件导入失败</value>
+  </data>
+  <data name="Failed to query the detail of GCM data" xml:space="preserve">
+    <value>GCM细览数据查询失败</value>
+  </data>
+  <data name="Failed to query the overview of GCM data" xml:space="preserve">
+    <value>GCM 概览数据查询失败</value>
+  </data>
+  <data name="FATAL" xml:space="preserve">
+    <value>严重错误</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Filter(Alt+R)" xml:space="preserve">
+    <value>过滤式修复(Alt+R)</value>
+  </data>
+  <data name="Find Down" xml:space="preserve">
+    <value>向下查询</value>
+  </data>
+  <data name="Find Up" xml:space="preserve">
+    <value>向上查询</value>
+  </data>
+  <data name="Front Find" xml:space="preserve">
+    <value>前端查找</value>
+  </data>
+  <data name="GCM Password" xml:space="preserve">
+    <value>GCM 密码</value>
+  </data>
+  <data name="GCM Publish" xml:space="preserve">
+    <value>GCM 发布数据</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="It's Crash" xml:space="preserve">
+    <value>异常退出</value>
+  </data>
+  <data name="It's reached the end, and traverse over." xml:space="preserve">
+    <value>已达结尾，遍历结束。</value>
+  </data>
+  <data name="Local data validation did not pass" xml:space="preserve">
+    <value>本地数据验证失败</value>
+  </data>
+  <data name="Local DataSet" xml:space="preserve">
+    <value>本地数据管理</value>
+  </data>
+  <data name="Match Case" xml:space="preserve">
+    <value>匹配大小写</value>
+  </data>
+  <data name="Match Fully" xml:space="preserve">
+    <value>完整匹配</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>提醒</value>
+  </data>
+  <data name="On GCMLite application exiting." xml:space="preserve">
+    <value>GCMLite 应用程序退出。</value>
+  </data>
+  <data name="On Main Manager exited." xml:space="preserve">
+    <value>主程序已退出。</value>
+  </data>
+  <data name="Open (Alt+O)" xml:space="preserve">
+    <value>打开 (Alt+O)</value>
+  </data>
+  <data name="Please Login before submitting to GCM." xml:space="preserve">
+    <value>请登录GCM后再提交。</value>
+  </data>
+  <data name="Quit(Alt+Q)" xml:space="preserve">
+    <value>退出(Alt+Q)</value>
+  </data>
   <data name="Ready" xml:space="preserve">
     <value>就绪</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value>The data you pasted is in the wrong format for the cell</value>
+  <data name="Remember" xml:space="preserve">
+    <value>记住密码</value>
   </data>
-  <data name="String10" xml:space="preserve">
-    <value>Event raised when the value of the IsDrawHeader property is changed</value>
+  <data name="Reset" xml:space="preserve">
+    <value>重置</value>
   </data>
-  <data name="String100" xml:space="preserve">
-    <value>Exported XML Validation Failed:</value>
+  <data name="Save (Alt+S)" xml:space="preserve">
+    <value>存档 (Alt+S)</value>
   </data>
-  <data name="String101" xml:space="preserve">
-    <value>Local data mapping to export canceled.</value>
+  <data name="SavePath" xml:space="preserve">
+    <value>保存路径</value>
   </data>
-  <data name="String102" xml:space="preserve">
-    <value>GCMXML文件导出及上传失败！</value>
+  <data name="Search" xml:space="preserve">
+    <value>查找</value>
   </data>
-  <data name="String103" xml:space="preserve">
-    <value>ERROR: GCMXML文件导出及上传失败！</value>
+  <data name="Search(Alt+F)" xml:space="preserve">
+    <value>查找(Alt+F)</value>
   </data>
-  <data name="String104" xml:space="preserve">
-    <value>Data publish Failed!</value>
+  <data name="Select File Type For Export" xml:space="preserve">
+    <value>选择导出文件类型</value>
   </data>
-  <data name="String105" xml:space="preserve">
-    <value>Data publish success.</value>
+  <data name="Similarity Match" xml:space="preserve">
+    <value>模糊匹配</value>
   </data>
-  <data name="String106" xml:space="preserve">
-    <value>XML文件导入失败！</value>
+  <data name="The 'CCInfo Id' and 'GCM Password' should not be empty." xml:space="preserve">
+    <value>用户名和密码值不能为空</value>
   </data>
-  <data name="String107" xml:space="preserve">
-    <value>ERROR: XML文件导入失败！</value>
+  <data name="The data you pasted is in the wrong format for the cell" xml:space="preserve">
+    <value>粘贴到表格单元的数据格式错误</value>
   </data>
-  <data name="String108" xml:space="preserve">
-    <value>Idle</value>
+  <data name="The save file path should be available." xml:space="preserve">
+    <value>保存文件路径有误</value>
   </data>
-  <data name="String109" xml:space="preserve">
-    <value>InWorking</value>
-  </data>
-  <data name="String11" xml:space="preserve">
-    <value>Event raised when the value of the IsCaptionVisible property is changed</value>
-  </data>
-  <data name="String110" xml:space="preserve">
-    <value>Finished</value>
-  </data>
-  <data name="String111" xml:space="preserve">
-    <value>Unknown</value>
-  </data>
-  <data name="String112" xml:space="preserve">
-    <value>Asynchronous Control Invoke Error.</value>
-  </data>
-  <data name="String113" xml:space="preserve">
-    <value>Un Supported Method to invoke! The method named with</value>
-  </data>
-  <data name="String114" xml:space="preserve">
-    <value>should be declare as a public function.</value>
-  </data>
-  <data name="String115" xml:space="preserve">
-    <value>The setting file note exist! @Path=</value>
-  </data>
-  <data name="String116" xml:space="preserve">
-    <value>缺少数据表配置文件！ @path=</value>
-  </data>
-  <data name="String117" xml:space="preserve">
-    <value>数据表配置文件读取异常</value>
-  </data>
-  <data name="String118" xml:space="preserve">
-    <value>Value of</value>
-  </data>
-  <data name="String119" xml:space="preserve">
-    <value>can not be NULL.\n</value>
-  </data>
-  <data name="String12" xml:space="preserve">
-    <value>Event raised when the value of the HeaderVisibility(StretchToParent) property is changed</value>
-  </data>
-  <data name="String120" xml:space="preserve">
-    <value>should be unique value.\n</value>
-  </data>
-  <data name="String121" xml:space="preserve">
-    <value>should be match the expression:</value>
-  </data>
-  <data name="String122" xml:space="preserve">
-    <value>Load mapping attrs from GCM Pub XML template failed.</value>
-  </data>
-  <data name="String123" xml:space="preserve">
-    <value>Excel文件导入失败！</value>
-  </data>
-  <data name="String124" xml:space="preserve">
-    <value>Excel: XML文件导入失败！</value>
-  </data>
-  <data name="String125" xml:space="preserve">
-    <value>ERROR: MDI文件导入失败！</value>
-  </data>
-  <data name="String126" xml:space="preserve">
-    <value>Error in reading schema in checkForPublish(...)</value>
-  </data>
-  <data name="String127" xml:space="preserve">
-    <value>Error raised in exportExcel(...)</value>
-  </data>
-  <data name="String128" xml:space="preserve">
-    <value>selectedRows</value>
-  </data>
-  <data name="String129" xml:space="preserve">
-    <value>customAttrDBMapping</value>
-  </data>
-  <data name="String13" xml:space="preserve">
-    <value>Occurs when a tab page is being closed</value>
-  </data>
-  <data name="String130" xml:space="preserve">
-    <value>reqPage</value>
-  </data>
-  <data name="String131" xml:space="preserve">
-    <value>xmlImportStream</value>
-  </data>
-  <data name="String132" xml:space="preserve">
-    <value>authInfo</value>
-  </data>
-  <data name="String133" xml:space="preserve">
-    <value>xmlImportStrains Request Url=</value>
-  </data>
-  <data name="String134" xml:space="preserve">
-    <value>XMLImportExecutor Response=</value>
-  </data>
-  <data name="String135" xml:space="preserve">
-    <value>StrainViewQueryExecutor Request Url=</value>
-  </data>
-  <data name="String136" xml:space="preserve">
-    <value>application/x-www-form-urlencoded</value>
-  </data>
-  <data name="String137" xml:space="preserve">
-    <value>UTF-8</value>
-  </data>
-  <data name="String138" xml:space="preserve">
-    <value>StrainViewQueryExecutor Response=</value>
-  </data>
-  <data name="String139" xml:space="preserve">
-    <value>SignInExecutor Request Url=</value>
-  </data>
-  <data name="String14" xml:space="preserve">
-    <value>Occurs when a tab page is being selected</value>
-  </data>
-  <data name="String140" xml:space="preserve">
-    <value>SignInExecutor Response=</value>
-  </data>
-  <data name="String141" xml:space="preserve">
-    <value>Get RegistryKey of Default browser failed.</value>
-  </data>
-  <data name="String142" xml:space="preserve">
-    <value>Internet Explorer\\iexplore.exe</value>
-  </data>
-  <data name="String143" xml:space="preserve">
-    <value>Error raised in exportJSONList(...)</value>
-  </data>
-  <data name="String144" xml:space="preserve">
-    <value>StrainListQueryExecutor Request Url=</value>
-  </data>
-  <data name="String145" xml:space="preserve">
-    <value>StrainListQueryExecutor Response=</value>
-  </data>
-  <data name="String146" xml:space="preserve">
-    <value>Error raised in TextExporter(...)</value>
-  </data>
-  <data name="String147" xml:space="preserve">
-    <value>，如果导出的是csv分隔符是</value>
-  </data>
-  <data name="String148" xml:space="preserve">
-    <value>Error raised in exportXML(...)</value>
-  </data>
-  <data name="String149" xml:space="preserve">
-    <value>Error raised in exportGCMXML(...)</value>
-  </data>
-  <data name="String15" xml:space="preserve">
-    <value>Occurs when a user clicks the drop-down icon on the caption if it's visible</value>
-  </data>
-  <data name="String150" xml:space="preserve">
-    <value>The save file path should be available.</value>
-  </data>
-  <data name="String151" xml:space="preserve">
-    <value>It's reached the end, and traverse over.</value>
-  </data>
-  <data name="String152" xml:space="preserve">
-    <value>InitializeMsgDriver(...)</value>
-  </data>
-  <data name="String153" xml:space="preserve">
-    <value>InitializeGCMPro(...)</value>
-  </data>
-  <data name="String154" xml:space="preserve">
-    <value>Submit record</value>
-  </data>
-  <data name="String155" xml:space="preserve">
-    <value>Search record</value>
-  </data>
-  <data name="String156" xml:space="preserve">
-    <value>Application View Initialize Failed!</value>
-  </data>
-  <data name="String157" xml:space="preserve">
-    <value>Application View Initialize Failed! @Message=</value>
-  </data>
-  <data name="String158" xml:space="preserve">
-    <value>请登录GCM后再提交。</value>
-  </data>
-  <data name="String159" xml:space="preserve">
-    <value>startDataRender(...)</value>
-  </data>
-  <data name="String16" xml:space="preserve">
-    <value>Gets or Sets the tabPage style</value>
-  </data>
-  <data name="String160" xml:space="preserve">
-    <value>startGCMSiteRender(...)</value>
-  </data>
-  <data name="String161" xml:space="preserve">
-    <value>Ready</value>
-  </data>
-  <data name="String162" xml:space="preserve">
-    <value>本地数据导出完成</value>
-  </data>
-  <data name="String163" xml:space="preserve">
-    <value>本地数据导入完成</value>
-  </data>
-  <data name="String164" xml:space="preserve">
-    <value>Excel文件,mdi缓存文件,DI打包文件(*.xls,*.xlsx,*.xml,*.tsv,*csv,*.json)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.json</value>
-  </data>
-  <data name="String165" xml:space="preserve">
+  <data name="There are background tasks are executing, force quit or not" xml:space="preserve">
     <value>仍有后台任务正在执行中，是否强制退出？</value>
   </data>
-  <data name="String166" xml:space="preserve">
-    <value>确认信息</value>
+  <data name="Tool" xml:space="preserve">
+    <value>工具</value>
   </data>
-  <data name="String167" xml:space="preserve">
-    <value>The 'CCInfo Id' and 'GCM Password' should not be empty.</value>
+  <data name="Unsupport export type" xml:space="preserve">
+    <value>不支持的导出格式</value>
   </data>
-  <data name="String168" xml:space="preserve">
-    <value>退出操作执行失败！</value>
+  <data name="Validation(Alt+V)" xml:space="preserve">
+    <value>验证(Alt+V)</value>
   </data>
-  <data name="String169" xml:space="preserve">
-    <value>Default MsgObserver hasn't inited for publish Message!</value>
+  <data name="Web Support(Alt+H)" xml:space="preserve">
+    <value>在线技术支持(Alt+H)</value>
   </data>
-  <data name="String17" xml:space="preserve">
-    <value>Gets or Sets the border color of the control</value>
-  </data>
-  <data name="String170" xml:space="preserve">
-    <value>Unhandled asynchronous message.  @msgTag=</value>
-  </data>
-  <data name="String171" xml:space="preserve">
-    <value>正在连接GCM ...</value>
-  </data>
-  <data name="String172" xml:space="preserve">
-    <value>已建立连接. [</value>
-  </data>
-  <data name="String173" xml:space="preserve">
-    <value>连接到GCM失败</value>
-  </data>
-  <data name="String174" xml:space="preserve">
-    <value>连接失败.</value>
-  </data>
-  <data name="String175" xml:space="preserve">
-    <value>Unsupport export type!</value>
-  </data>
-  <data name="String176" xml:space="preserve">
-    <value>数据导出失败。</value>
-  </data>
-  <data name="String177" xml:space="preserve">
-    <value>数据导出失败，错误信息：</value>
-  </data>
-  <data name="String178" xml:space="preserve">
-    <value>preActions</value>
-  </data>
-  <data name="String179" xml:space="preserve">
-    <value>On IDCM application exiting.</value>
-  </data>
-  <data name="String18" xml:space="preserve">
-    <value>Gets or Sets the border color of the tab page area</value>
-  </data>
-  <data name="String180" xml:space="preserve">
-    <value>On Main Manager exited.</value>
-  </data>
-  <data name="String181" xml:space="preserve">
-    <value>IDCM v1.0(110)\n\nCopyright © All Rights Reserved</value>
-  </data>
-  <data name="String182" xml:space="preserve">
-    <value>Contact: jiahaiWu \n\n</value>
-  </data>
-  <data name="String183" xml:space="preserve">
-    <value>Email:jiahaiwu@im.ac.cn\n\n</value>
-  </data>
-  <data name="String184" xml:space="preserve">
-    <value>Address:Beijing Chaoyang District</value>
-  </data>
-  <data name="String185" xml:space="preserve">
-    <value>checkWorkSpace(...)</value>
-  </data>
-  <data name="String186" xml:space="preserve">
-    <value>当前工作空间下工作进程已存在，确认退出当前实例。</value>
-  </data>
-  <data name="String187" xml:space="preserve">
-    <value>Notice</value>
-  </data>
-  <data name="String188" xml:space="preserve">
-    <value>It's Crash! \n FATAL ERROR:</value>
-  </data>
-  <data name="String189" xml:space="preserve">
-    <value>FATAL!</value>
-  </data>
-  <data name="String19" xml:space="preserve">
-    <value>Gets or Sets the icon's color, selected tab page of the tab control</value>
-  </data>
-  <data name="String190" xml:space="preserve">
-    <value>reset</value>
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value>Determines whether the DataGridView header visible can be customs by pop-up context menu.</value>
-  </data>
-  <data name="String20" xml:space="preserve">
-    <value>Gets or Sets the distance, in pixels, between the left edge of the first tab page and the left edge of its container's client area, the value must be in the range of -2 to 5 pixel size</value>
-  </data>
-  <data name="String21" xml:space="preserve">
-    <value>Gets or Sets the background style of the tab page header</value>
-  </data>
-  <data name="String22" xml:space="preserve">
-    <value>You can determine a new border style for your tab control</value>
-  </data>
-  <data name="String23" xml:space="preserve">
-    <value>Gets or Sets the gradient colors of the selected tab page item</value>
-  </data>
-  <data name="String24" xml:space="preserve">
-    <value>Value cannot be null!, please enter a valid value.</value>
-  </data>
-  <data name="String25" xml:space="preserve">
-    <value>Gets or Sets the background hatch style and its sub properties of the tab page header</value>
-  </data>
-  <data name="String26" xml:space="preserve">
-    <value>You can determine a new caption gradient style for your tab control</value>
-  </data>
-  <data name="String27" xml:space="preserve">
-    <value>You can change your active or inactive caption buttons's color</value>
-  </data>
-  <data name="String28" xml:space="preserve">
-    <value>You can change your active and inactive caption color components (Red, Green, Blue, Alpha)</value>
-  </data>
-  <data name="String29" xml:space="preserve">
-    <value>Gets or Sets the background color of the tab page header</value>
-  </data>
-  <data name="String3" xml:space="preserve">
-    <value>Determines whether the DataGridView Cell Copy and paste supported by inner pop-up context menu.</value>
-  </data>
-  <data name="String30" xml:space="preserve">
-    <value>Gets or Sets the scroller(up/down) style of the tab control</value>
-  </data>
-  <data name="String31" xml:space="preserve">
-    <value>OfficeSilver</value>
-  </data>
-  <data name="String32" xml:space="preserve">
-    <value>Determines whether the active tab is stretched to its parent container or not</value>
-  </data>
-  <data name="String33" xml:space="preserve">
-    <value>StretchToParent</value>
-  </data>
-  <data name="String34" xml:space="preserve">
-    <value>Determines whether the tab header background is draw or not</value>
-  </data>
-  <data name="String35" xml:space="preserve">
-    <value>Determines whether the tab control caption is visible or not</value>
-  </data>
-  <data name="String36" xml:space="preserve">
-    <value>Determines whether the tab control's edge border is draw or not, you must set the IsCaptionVisible's value to false for this change to take effect</value>
-  </data>
-  <data name="String37" xml:space="preserve">
-    <value>Provides keyboard support to the user for tab control operations[Ex:Insert, Delete, F1 Keys, Keyboard navigation]</value>
-  </data>
-  <data name="String38" xml:space="preserve">
-    <value>Determines whether the tab separator line is visible or not between the tab pages</value>
-  </data>
-  <data name="String39" xml:space="preserve">
-    <value>Determines whether the tab control like as document tab style or not</value>
-  </data>
-  <data name="String4" xml:space="preserve">
-    <value>Must be a DCMDGVTextCell</value>
-  </data>
-  <data name="String40" xml:space="preserve">
-    <value>The operation was canceled by the user.</value>
-  </data>
-  <data name="String41" xml:space="preserve">
-    <value>Do you want to insert a new tab page here?</value>
-  </data>
-  <data name="String42" xml:space="preserve">
-    <value>Do you want to remove the selected tab page?</value>
-  </data>
-  <data name="String43" xml:space="preserve">
-    <value>The selected tab page could not be deleted!!!, it may be due to the following reasons;\r\n\r\n1.Tab page might be null or disposed by the application.\r\n2.Tab page might not be closable.\r\n3.Tab page might be disable.</value>
-  </data>
-  <data name="String44" xml:space="preserve">
-    <value>Occurs when the sub properties changed of the CaptionRandomizer property</value>
-  </data>
-  <data name="String45" xml:space="preserve">
-    <value>Determines whether the randomizer effect is enable or not for tab control caption</value>
-  </data>
-  <data name="String46" xml:space="preserve">
-    <value>Determines whether the transparency effect is visible or not for tab control caption</value>
-  </data>
-  <data name="String47" xml:space="preserve">
-    <value>The red color component property must be in the range of 0 to 255</value>
-  </data>
-  <data name="String48" xml:space="preserve">
-    <value>The green color component property must be in the range of 0 to 255</value>
-  </data>
-  <data name="String49" xml:space="preserve">
-    <value>The blue color component property must be in the range of 0 to 255</value>
-  </data>
-  <data name="String5" xml:space="preserve">
-    <value>Get the visible status.</value>
-  </data>
-  <data name="String50" xml:space="preserve">
-    <value>This property must be in the range of 50 to 255</value>
-  </data>
-  <data name="String51" xml:space="preserve">
-    <value>Bu tab zaten var.</value>
-  </data>
-  <data name="String52" xml:space="preserve">
-    <value>Exception while changing the value of the FirstColor property,</value>
-  </data>
-  <data name="String53" xml:space="preserve">
-    <value>Exception while changing the value of the SecondColor property,</value>
-  </data>
-  <data name="String54" xml:space="preserve">
-    <value>Exception while changing the value of the GradientMode property,</value>
-  </data>
-  <data name="String55" xml:space="preserve">
-    <value>Supports alpha component for tab item background colors</value>
-  </data>
-  <data name="String56" xml:space="preserve">
-    <value>Add a new tab page to the container</value>
-  </data>
-  <data name="String57" xml:space="preserve">
-    <value>Removes the selected tab page from the container</value>
-  </data>
-  <data name="String58" xml:space="preserve">
-    <value>Information</value>
-  </data>
-  <data name="String59" xml:space="preserve">
-    <value>Exception while generating the action list panel for this KRBTabControl,</value>
-  </data>
-  <data name="String6" xml:space="preserve">
-    <value>Indicates if drop-down is resizable.</value>
-  </data>
-  <data name="String60" xml:space="preserve">
-    <value>Property name not found.</value>
-  </data>
-  <data name="String61" xml:space="preserve">
-    <value>Property name must not blank.</value>
-  </data>
-  <data name="String62" xml:space="preserve">
-    <value>Exception while doing randomize action,</value>
-  </data>
-  <data name="String63" xml:space="preserve">
-    <value>Exception while changing the value of the HeaderVisibility property,</value>
-  </data>
-  <data name="String64" xml:space="preserve">
-    <value>Exception while adding a new TabPage to the tab container,</value>
-  </data>
-  <data name="String65" xml:space="preserve">
-    <value>Exception while removing the currently selected TabPage from the tab container,</value>
-  </data>
-  <data name="String66" xml:space="preserve">
-    <value>Determines whether the tab page is closable or not</value>
-  </data>
-  <data name="String67" xml:space="preserve">
-    <value>unsupported mode!</value>
-  </data>
-  <data name="String68" xml:space="preserve">
-    <value>Synax error in matching the closing brace!</value>
-  </data>
-  <data name="String69" xml:space="preserve">
-    <value>Synax error in matching the closing colon Tag!</value>
-  </data>
-  <data name="String7" xml:space="preserve">
-    <value>Indicates current sizing mode.</value>
-  </data>
-  <data name="String70" xml:space="preserve">
-    <value>Illegal synax, can note parse the expression!</value>
-  </data>
-  <data name="String71" xml:space="preserve">
-    <value>Unsupported Logic Symbol!</value>
-  </data>
-  <data name="String72" xml:space="preserve">
-    <value>GCM User Signed</value>
-  </data>
-  <data name="String73" xml:space="preserve">
-    <value>Local Data Imported</value>
-  </data>
-  <data name="String74" xml:space="preserve">
-    <value>Local Data Exported</value>
-  </data>
-  <data name="String75" xml:space="preserve">
-    <value>GCM Data Loaded</value>
-  </data>
-  <data name="String76" xml:space="preserve">
-    <value>GCM Item Detail Render</value>
-  </data>
-  <data name="String77" xml:space="preserve">
-    <value>Local Data Published</value>
-  </data>
-  <data name="String78" xml:space="preserve">
-    <value>Local Data Checked</value>
-  </data>
-  <data name="String79" xml:space="preserve">
-    <value>The Length of key must be not short than 56 bits.</value>
-  </data>
-  <data name="String8" xml:space="preserve">
-    <value>Custom Validation</value>
-  </data>
-  <data name="String80" xml:space="preserve">
-    <value>The Length of key must be not short than 7 Bytes.</value>
-  </data>
-  <data name="String81" xml:space="preserve">
-    <value>Not Exist!</value>
-  </data>
-  <data name="String82" xml:space="preserve">
-    <value>Error in checkDuplicateProcess.</value>
-  </data>
-  <data name="String83" xml:space="preserve">
-    <value>XML文件导出失败！</value>
-  </data>
-  <data name="String84" xml:space="preserve">
-    <value>ERROR: XML文件导出失败！</value>
-  </data>
-  <data name="String85" xml:space="preserve">
-    <value>Export Failed! @filepath=</value>
-  </data>
-  <data name="String86" xml:space="preserve">
-    <value>Export success. @filepath=</value>
-  </data>
-  <data name="String87" xml:space="preserve">
-    <value>ERROR: Excel文件导入失败！</value>
-  </data>
-  <data name="String88" xml:space="preserve">
-    <value>ERROR: GCM 概览数据查询失败！</value>
-  </data>
-  <data name="String89" xml:space="preserve">
-    <value>ERROR: GCM细览数据查询失败！</value>
-  </data>
-  <data name="String9" xml:space="preserve">
-    <value>Indicates current value validation result.</value>
-  </data>
-  <data name="String90" xml:space="preserve">
-    <value>ERROR: GCM 细览数据查询失败！</value>
-  </data>
-  <data name="String91" xml:space="preserve">
-    <value>JSON文件导出失败！</value>
-  </data>
-  <data name="String92" xml:space="preserve">
-    <value>ERROR: JSON文件导出失败！</value>
-  </data>
-  <data name="String93" xml:space="preserve">
-    <value>本地数据验证失败！</value>
-  </data>
-  <data name="String94" xml:space="preserve">
-    <value>ERROR: 本地数据验证失败！</value>
-  </data>
-  <data name="String95" xml:space="preserve">
-    <value>Data Check Failed!</value>
-  </data>
-  <data name="String96" xml:space="preserve">
-    <value>Data Check success.</value>
-  </data>
-  <data name="String97" xml:space="preserve">
-    <value>Local data check failed.</value>
-  </data>
-  <data name="String98" xml:space="preserve">
-    <value>Local data export to GCMPub XML failed.</value>
-  </data>
-  <data name="String99" xml:space="preserve">
-    <value>Local data publish to GCM operation success.</value>
+  <data name="Work process existing under this work space. Choose confirm and exit this instance." xml:space="preserve">
+    <value>当前工作空间下工作进程已存在，选择确认退出当前实例。</value>
   </data>
 </root>

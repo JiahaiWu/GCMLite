@@ -33,6 +33,14 @@ namespace IDCM.VModule.GCM
         {
             InitializeComponent();
             this.Load+=GCMProView_Load;
+            this.button_cancel.Text = GlobalTextRes.Text("Cancel");
+            this.checkBox_remember.Text = GlobalTextRes.Text("Remember");
+            this.button_confirm.Text = GlobalTextRes.Text("Confirm");
+            this.label1.Text = GlobalTextRes.Text("GCM Password")+":";
+            this.label_user.Text = GlobalTextRes.Text("CCInfo ID")+":";
+            this.tabPage_ABC.Text = GlobalTextRes.Text("ABC Browser");
+            this.tabPageEx_Local.Text = GlobalTextRes.Text("Local DataSet");
+            this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
         }
 
         private void GCMProView_Load(object sender, EventArgs e)
@@ -115,8 +123,8 @@ namespace IDCM.VModule.GCM
             catch (IDCMException ex)
             {
                 this.IsInited = false;
-                log.Error("Application View Initialize Failed!", ex);
-                MessageBox.Show("Application View Initialize Failed! @Message=" + ex.Message+" \n"+ex.ToString());
+                log.Error(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "!", ex);
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "! @Message=" + ex.Message + " \n" + ex.ToString());
             }
             finally
             {
@@ -160,7 +168,7 @@ namespace IDCM.VModule.GCM
                 }
                 else
                 {
-                    MessageBox.Show("请登录GCM后再提交。");
+                    MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
                     //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
                 }
             }else if (dcmDataGridView_local.CurrentCell != null)
@@ -171,7 +179,7 @@ namespace IDCM.VModule.GCM
                 }
                 else
                 {
-                    MessageBox.Show("请登录GCM后再提交。");
+                    MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
                     //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
                 }
             }
@@ -230,13 +238,16 @@ namespace IDCM.VModule.GCM
                     }
                     else
                     { break; }
-                    if (iFail > 0)
-                        MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                    /////////////////////////////////////////////////////////////////////////////
+                    //if (iFail > 0)
+                    //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                    //@Deprecated
+                    /////////////////////////////////////////////////////////////////////////////
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("The data you pasted is in the wrong format for the cell");
+                MessageBox.Show(GlobalTextRes.Text("The data you pasted is in the wrong format for the cell"));
                 return;
             }
         }
@@ -483,7 +494,8 @@ namespace IDCM.VModule.GCM
             CustomColDefGetter.saveUpdatedHistCfg();
             if (!RunningHandlerNoter.checkForIdle())
             {
-                if (MessageBox.Show("仍有后台任务正在执行中，是否强制退出？", "确认信息", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show(GlobalTextRes.Text("There are background tasks are executing, force quit or not"),
+                    GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     return null;
                 }
@@ -550,7 +562,7 @@ namespace IDCM.VModule.GCM
         {
             if (this.textBox_pwd.Text.Length <1 || this.textBox_ccinfoId.Text.Length < 1)
             {
-                MessageBox.Show("The 'CCInfo Id' and 'GCM Password' should not be empty.");
+                MessageBox.Show(GlobalTextRes.Text("The 'CCInfo Id' and 'GCM Password' should not be empty."));
                 return;
             }
             try
@@ -661,7 +673,7 @@ namespace IDCM.VModule.GCM
             }
             catch (Exception ex)
             {
-                log.Error("退出操作执行失败！ ", ex);
+                log.Error(GlobalTextRes.Text("Exit operation execute failed")+"！ ", ex);
             }
         }
         public OpConditionType OpConditions

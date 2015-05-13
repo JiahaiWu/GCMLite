@@ -135,8 +135,8 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Error("GCMXML文件导出及上传失败！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: GCMXML文件导出及上传失败！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ ", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -154,11 +154,11 @@ namespace IDCM.BGHandler
             if (error != null)
             {
                 log.Error(error);
-                log.Info("Data publish Failed!");
+                log.Info(IDCM.Base.GlobalTextRes.Text("Data publish failed")+"!");
             }
             else
             {
-                log.Info("Data publish success.");
+                log.Info(IDCM.Base.GlobalTextRes.Text("Data publish success") + ".");
             }
         }
     }

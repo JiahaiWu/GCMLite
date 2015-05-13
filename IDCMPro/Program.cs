@@ -64,11 +64,11 @@ namespace IDCM
             catch (Exception ex)
             {
 #if DEBUG
-                MessageBox.Show("It's Crash! \n FATAL ERROR:" + ex.Message + "\n" + ex.ToString());
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's Crash") + "! \n FATAL ERROR:" + ex.Message + "\n" + ex.ToString());
 #else
-                MessageBox.Show("It's Crash! \n FATAL ERROR:" + ex.Message);
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's Crash") + "! \n FATAL ERROR:" + ex.Message);
 #endif
-                log.Info("FATAL!", ex);
+                log.Info(IDCM.Base.GlobalTextRes.Text("FATAL") + "!", ex);
             }
         }
 

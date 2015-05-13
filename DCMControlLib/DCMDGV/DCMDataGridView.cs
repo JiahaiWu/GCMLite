@@ -151,8 +151,11 @@ namespace DCMControlLib
                     }
                     else
                     { break; }
-                    if (iFail > 0)
-                        MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                    //////////////////////////////////////////////////////////////////
+                    //if (iFail > 0)
+                    //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                    //@Deprecated
+                    ///////////////////////////////////////////////////////////////////
                 }
             }
             catch (FormatException)
