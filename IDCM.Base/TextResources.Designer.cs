@@ -68,5 +68,1715 @@ namespace IDCM.Base {
                 return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 The data you pasted is in the wrong format for the cell 的本地化字符串。
+        /// </summary>
+        internal static string String {
+            get {
+                return ResourceManager.GetString("String", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Event raised when the value of the IsDrawHeader property is changed 的本地化字符串。
+        /// </summary>
+        internal static string String10 {
+            get {
+                return ResourceManager.GetString("String10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exported XML Validation Failed: 的本地化字符串。
+        /// </summary>
+        internal static string String100 {
+            get {
+                return ResourceManager.GetString("String100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local data mapping to export canceled. 的本地化字符串。
+        /// </summary>
+        internal static string String101 {
+            get {
+                return ResourceManager.GetString("String101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 GCMXML文件导出及上传失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String102 {
+            get {
+                return ResourceManager.GetString("String102", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: GCMXML文件导出及上传失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String103 {
+            get {
+                return ResourceManager.GetString("String103", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data publish Failed! 的本地化字符串。
+        /// </summary>
+        internal static string String104 {
+            get {
+                return ResourceManager.GetString("String104", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data publish success. 的本地化字符串。
+        /// </summary>
+        internal static string String105 {
+            get {
+                return ResourceManager.GetString("String105", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 XML文件导入失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String106 {
+            get {
+                return ResourceManager.GetString("String106", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: XML文件导入失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String107 {
+            get {
+                return ResourceManager.GetString("String107", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Idle 的本地化字符串。
+        /// </summary>
+        internal static string String108 {
+            get {
+                return ResourceManager.GetString("String108", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 InWorking 的本地化字符串。
+        /// </summary>
+        internal static string String109 {
+            get {
+                return ResourceManager.GetString("String109", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Event raised when the value of the IsCaptionVisible property is changed 的本地化字符串。
+        /// </summary>
+        internal static string String11 {
+            get {
+                return ResourceManager.GetString("String11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Finished 的本地化字符串。
+        /// </summary>
+        internal static string String110 {
+            get {
+                return ResourceManager.GetString("String110", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unknown 的本地化字符串。
+        /// </summary>
+        internal static string String111 {
+            get {
+                return ResourceManager.GetString("String111", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Asynchronous Control Invoke Error. 的本地化字符串。
+        /// </summary>
+        internal static string String112 {
+            get {
+                return ResourceManager.GetString("String112", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Un Supported Method to invoke! The method named with 的本地化字符串。
+        /// </summary>
+        internal static string String113 {
+            get {
+                return ResourceManager.GetString("String113", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 should be declare as a public function. 的本地化字符串。
+        /// </summary>
+        internal static string String114 {
+            get {
+                return ResourceManager.GetString("String114", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The setting file note exist! @Path= 的本地化字符串。
+        /// </summary>
+        internal static string String115 {
+            get {
+                return ResourceManager.GetString("String115", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 缺少数据表配置文件！ @path= 的本地化字符串。
+        /// </summary>
+        internal static string String116 {
+            get {
+                return ResourceManager.GetString("String116", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据表配置文件读取异常 的本地化字符串。
+        /// </summary>
+        internal static string String117 {
+            get {
+                return ResourceManager.GetString("String117", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Value of 的本地化字符串。
+        /// </summary>
+        internal static string String118 {
+            get {
+                return ResourceManager.GetString("String118", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 can not be NULL.\n 的本地化字符串。
+        /// </summary>
+        internal static string String119 {
+            get {
+                return ResourceManager.GetString("String119", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Event raised when the value of the HeaderVisibility(StretchToParent) property is changed 的本地化字符串。
+        /// </summary>
+        internal static string String12 {
+            get {
+                return ResourceManager.GetString("String12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 should be unique value.\n 的本地化字符串。
+        /// </summary>
+        internal static string String120 {
+            get {
+                return ResourceManager.GetString("String120", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 should be match the expression: 的本地化字符串。
+        /// </summary>
+        internal static string String121 {
+            get {
+                return ResourceManager.GetString("String121", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Load mapping attrs from GCM Pub XML template failed. 的本地化字符串。
+        /// </summary>
+        internal static string String122 {
+            get {
+                return ResourceManager.GetString("String122", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Excel文件导入失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String123 {
+            get {
+                return ResourceManager.GetString("String123", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Excel: XML文件导入失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String124 {
+            get {
+                return ResourceManager.GetString("String124", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: MDI文件导入失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String125 {
+            get {
+                return ResourceManager.GetString("String125", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error in reading schema in checkForPublish(...) 的本地化字符串。
+        /// </summary>
+        internal static string String126 {
+            get {
+                return ResourceManager.GetString("String126", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error raised in exportExcel(...) 的本地化字符串。
+        /// </summary>
+        internal static string String127 {
+            get {
+                return ResourceManager.GetString("String127", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 selectedRows 的本地化字符串。
+        /// </summary>
+        internal static string String128 {
+            get {
+                return ResourceManager.GetString("String128", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 customAttrDBMapping 的本地化字符串。
+        /// </summary>
+        internal static string String129 {
+            get {
+                return ResourceManager.GetString("String129", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Occurs when a tab page is being closed 的本地化字符串。
+        /// </summary>
+        internal static string String13 {
+            get {
+                return ResourceManager.GetString("String13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 reqPage 的本地化字符串。
+        /// </summary>
+        internal static string String130 {
+            get {
+                return ResourceManager.GetString("String130", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 xmlImportStream 的本地化字符串。
+        /// </summary>
+        internal static string String131 {
+            get {
+                return ResourceManager.GetString("String131", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 authInfo 的本地化字符串。
+        /// </summary>
+        internal static string String132 {
+            get {
+                return ResourceManager.GetString("String132", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 xmlImportStrains Request Url= 的本地化字符串。
+        /// </summary>
+        internal static string String133 {
+            get {
+                return ResourceManager.GetString("String133", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 XMLImportExecutor Response= 的本地化字符串。
+        /// </summary>
+        internal static string String134 {
+            get {
+                return ResourceManager.GetString("String134", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 StrainViewQueryExecutor Request Url= 的本地化字符串。
+        /// </summary>
+        internal static string String135 {
+            get {
+                return ResourceManager.GetString("String135", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 application/x-www-form-urlencoded 的本地化字符串。
+        /// </summary>
+        internal static string String136 {
+            get {
+                return ResourceManager.GetString("String136", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 UTF-8 的本地化字符串。
+        /// </summary>
+        internal static string String137 {
+            get {
+                return ResourceManager.GetString("String137", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 StrainViewQueryExecutor Response= 的本地化字符串。
+        /// </summary>
+        internal static string String138 {
+            get {
+                return ResourceManager.GetString("String138", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SignInExecutor Request Url= 的本地化字符串。
+        /// </summary>
+        internal static string String139 {
+            get {
+                return ResourceManager.GetString("String139", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Occurs when a tab page is being selected 的本地化字符串。
+        /// </summary>
+        internal static string String14 {
+            get {
+                return ResourceManager.GetString("String14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SignInExecutor Response= 的本地化字符串。
+        /// </summary>
+        internal static string String140 {
+            get {
+                return ResourceManager.GetString("String140", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Get RegistryKey of Default browser failed. 的本地化字符串。
+        /// </summary>
+        internal static string String141 {
+            get {
+                return ResourceManager.GetString("String141", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Internet Explorer\\iexplore.exe 的本地化字符串。
+        /// </summary>
+        internal static string String142 {
+            get {
+                return ResourceManager.GetString("String142", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error raised in exportJSONList(...) 的本地化字符串。
+        /// </summary>
+        internal static string String143 {
+            get {
+                return ResourceManager.GetString("String143", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 StrainListQueryExecutor Request Url= 的本地化字符串。
+        /// </summary>
+        internal static string String144 {
+            get {
+                return ResourceManager.GetString("String144", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 StrainListQueryExecutor Response= 的本地化字符串。
+        /// </summary>
+        internal static string String145 {
+            get {
+                return ResourceManager.GetString("String145", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error raised in TextExporter(...) 的本地化字符串。
+        /// </summary>
+        internal static string String146 {
+            get {
+                return ResourceManager.GetString("String146", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ，如果导出的是csv分隔符是 的本地化字符串。
+        /// </summary>
+        internal static string String147 {
+            get {
+                return ResourceManager.GetString("String147", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error raised in exportXML(...) 的本地化字符串。
+        /// </summary>
+        internal static string String148 {
+            get {
+                return ResourceManager.GetString("String148", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error raised in exportGCMXML(...) 的本地化字符串。
+        /// </summary>
+        internal static string String149 {
+            get {
+                return ResourceManager.GetString("String149", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Occurs when a user clicks the drop-down icon on the caption if it&apos;s visible 的本地化字符串。
+        /// </summary>
+        internal static string String15 {
+            get {
+                return ResourceManager.GetString("String15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The save file path should be available. 的本地化字符串。
+        /// </summary>
+        internal static string String150 {
+            get {
+                return ResourceManager.GetString("String150", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 It&apos;s reached the end, and traverse over. 的本地化字符串。
+        /// </summary>
+        internal static string String151 {
+            get {
+                return ResourceManager.GetString("String151", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 InitializeMsgDriver(...) 的本地化字符串。
+        /// </summary>
+        internal static string String152 {
+            get {
+                return ResourceManager.GetString("String152", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 InitializeGCMPro(...) 的本地化字符串。
+        /// </summary>
+        internal static string String153 {
+            get {
+                return ResourceManager.GetString("String153", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Submit record 的本地化字符串。
+        /// </summary>
+        internal static string String154 {
+            get {
+                return ResourceManager.GetString("String154", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Search record 的本地化字符串。
+        /// </summary>
+        internal static string String155 {
+            get {
+                return ResourceManager.GetString("String155", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Application View Initialize Failed! 的本地化字符串。
+        /// </summary>
+        internal static string String156 {
+            get {
+                return ResourceManager.GetString("String156", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Application View Initialize Failed! @Message= 的本地化字符串。
+        /// </summary>
+        internal static string String157 {
+            get {
+                return ResourceManager.GetString("String157", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请登录GCM后再提交。 的本地化字符串。
+        /// </summary>
+        internal static string String158 {
+            get {
+                return ResourceManager.GetString("String158", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 startDataRender(...) 的本地化字符串。
+        /// </summary>
+        internal static string String159 {
+            get {
+                return ResourceManager.GetString("String159", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the tabPage style 的本地化字符串。
+        /// </summary>
+        internal static string String16 {
+            get {
+                return ResourceManager.GetString("String16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 startGCMSiteRender(...) 的本地化字符串。
+        /// </summary>
+        internal static string String160 {
+            get {
+                return ResourceManager.GetString("String160", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Ready 的本地化字符串。
+        /// </summary>
+        internal static string String161 {
+            get {
+                return ResourceManager.GetString("String161", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地数据导出完成 的本地化字符串。
+        /// </summary>
+        internal static string String162 {
+            get {
+                return ResourceManager.GetString("String162", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地数据导入完成 的本地化字符串。
+        /// </summary>
+        internal static string String163 {
+            get {
+                return ResourceManager.GetString("String163", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Excel文件,mdi缓存文件,DI打包文件(*.xls,*.xlsx,*.xml,*.tsv,*csv,*.json)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.json 的本地化字符串。
+        /// </summary>
+        internal static string String164 {
+            get {
+                return ResourceManager.GetString("String164", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 仍有后台任务正在执行中，是否强制退出？ 的本地化字符串。
+        /// </summary>
+        internal static string String165 {
+            get {
+                return ResourceManager.GetString("String165", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确认信息 的本地化字符串。
+        /// </summary>
+        internal static string String166 {
+            get {
+                return ResourceManager.GetString("String166", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The &apos;CCInfo Id&apos; and &apos;GCM Password&apos; should not be empty. 的本地化字符串。
+        /// </summary>
+        internal static string String167 {
+            get {
+                return ResourceManager.GetString("String167", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 退出操作执行失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String168 {
+            get {
+                return ResourceManager.GetString("String168", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Default MsgObserver hasn&apos;t inited for publish Message! 的本地化字符串。
+        /// </summary>
+        internal static string String169 {
+            get {
+                return ResourceManager.GetString("String169", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the border color of the control 的本地化字符串。
+        /// </summary>
+        internal static string String17 {
+            get {
+                return ResourceManager.GetString("String17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unhandled asynchronous message.  @msgTag= 的本地化字符串。
+        /// </summary>
+        internal static string String170 {
+            get {
+                return ResourceManager.GetString("String170", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在连接GCM ... 的本地化字符串。
+        /// </summary>
+        internal static string String171 {
+            get {
+                return ResourceManager.GetString("String171", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已建立连接. [ 的本地化字符串。
+        /// </summary>
+        internal static string String172 {
+            get {
+                return ResourceManager.GetString("String172", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接到GCM失败 的本地化字符串。
+        /// </summary>
+        internal static string String173 {
+            get {
+                return ResourceManager.GetString("String173", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接失败. 的本地化字符串。
+        /// </summary>
+        internal static string String174 {
+            get {
+                return ResourceManager.GetString("String174", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unsupport export type! 的本地化字符串。
+        /// </summary>
+        internal static string String175 {
+            get {
+                return ResourceManager.GetString("String175", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据导出失败。 的本地化字符串。
+        /// </summary>
+        internal static string String176 {
+            get {
+                return ResourceManager.GetString("String176", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据导出失败，错误信息： 的本地化字符串。
+        /// </summary>
+        internal static string String177 {
+            get {
+                return ResourceManager.GetString("String177", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 preActions 的本地化字符串。
+        /// </summary>
+        internal static string String178 {
+            get {
+                return ResourceManager.GetString("String178", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 On IDCM application exiting. 的本地化字符串。
+        /// </summary>
+        internal static string String179 {
+            get {
+                return ResourceManager.GetString("String179", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the border color of the tab page area 的本地化字符串。
+        /// </summary>
+        internal static string String18 {
+            get {
+                return ResourceManager.GetString("String18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 On Main Manager exited. 的本地化字符串。
+        /// </summary>
+        internal static string String180 {
+            get {
+                return ResourceManager.GetString("String180", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 IDCM v1.0(110)\n\nCopyright © All Rights Reserved 的本地化字符串。
+        /// </summary>
+        internal static string String181 {
+            get {
+                return ResourceManager.GetString("String181", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Contact: jiahaiWu \n\n 的本地化字符串。
+        /// </summary>
+        internal static string String182 {
+            get {
+                return ResourceManager.GetString("String182", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Email:jiahaiwu@im.ac.cn\n\n 的本地化字符串。
+        /// </summary>
+        internal static string String183 {
+            get {
+                return ResourceManager.GetString("String183", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Address:Beijing Chaoyang District 的本地化字符串。
+        /// </summary>
+        internal static string String184 {
+            get {
+                return ResourceManager.GetString("String184", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 checkWorkSpace(...) 的本地化字符串。
+        /// </summary>
+        internal static string String185 {
+            get {
+                return ResourceManager.GetString("String185", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前工作空间下工作进程已存在，确认退出当前实例。 的本地化字符串。
+        /// </summary>
+        internal static string String186 {
+            get {
+                return ResourceManager.GetString("String186", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Notice 的本地化字符串。
+        /// </summary>
+        internal static string String187 {
+            get {
+                return ResourceManager.GetString("String187", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 It&apos;s Crash! \n FATAL ERROR: 的本地化字符串。
+        /// </summary>
+        internal static string String188 {
+            get {
+                return ResourceManager.GetString("String188", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 FATAL! 的本地化字符串。
+        /// </summary>
+        internal static string String189 {
+            get {
+                return ResourceManager.GetString("String189", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the icon&apos;s color, selected tab page of the tab control 的本地化字符串。
+        /// </summary>
+        internal static string String19 {
+            get {
+                return ResourceManager.GetString("String19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 reset 的本地化字符串。
+        /// </summary>
+        internal static string String190 {
+            get {
+                return ResourceManager.GetString("String190", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the DataGridView header visible can be customs by pop-up context menu. 的本地化字符串。
+        /// </summary>
+        internal static string String2 {
+            get {
+                return ResourceManager.GetString("String2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the distance, in pixels, between the left edge of the first tab page and the left edge of its container&apos;s client area, the value must be in the range of -2 to 5 pixel size 的本地化字符串。
+        /// </summary>
+        internal static string String20 {
+            get {
+                return ResourceManager.GetString("String20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the background style of the tab page header 的本地化字符串。
+        /// </summary>
+        internal static string String21 {
+            get {
+                return ResourceManager.GetString("String21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You can determine a new border style for your tab control 的本地化字符串。
+        /// </summary>
+        internal static string String22 {
+            get {
+                return ResourceManager.GetString("String22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the gradient colors of the selected tab page item 的本地化字符串。
+        /// </summary>
+        internal static string String23 {
+            get {
+                return ResourceManager.GetString("String23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Value cannot be null!, please enter a valid value. 的本地化字符串。
+        /// </summary>
+        internal static string String24 {
+            get {
+                return ResourceManager.GetString("String24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the background hatch style and its sub properties of the tab page header 的本地化字符串。
+        /// </summary>
+        internal static string String25 {
+            get {
+                return ResourceManager.GetString("String25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You can determine a new caption gradient style for your tab control 的本地化字符串。
+        /// </summary>
+        internal static string String26 {
+            get {
+                return ResourceManager.GetString("String26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You can change your active or inactive caption buttons&apos;s color 的本地化字符串。
+        /// </summary>
+        internal static string String27 {
+            get {
+                return ResourceManager.GetString("String27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You can change your active and inactive caption color components (Red, Green, Blue, Alpha) 的本地化字符串。
+        /// </summary>
+        internal static string String28 {
+            get {
+                return ResourceManager.GetString("String28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the background color of the tab page header 的本地化字符串。
+        /// </summary>
+        internal static string String29 {
+            get {
+                return ResourceManager.GetString("String29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the DataGridView Cell Copy and paste supported by inner pop-up context menu. 的本地化字符串。
+        /// </summary>
+        internal static string String3 {
+            get {
+                return ResourceManager.GetString("String3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Gets or Sets the scroller(up/down) style of the tab control 的本地化字符串。
+        /// </summary>
+        internal static string String30 {
+            get {
+                return ResourceManager.GetString("String30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 OfficeSilver 的本地化字符串。
+        /// </summary>
+        internal static string String31 {
+            get {
+                return ResourceManager.GetString("String31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the active tab is stretched to its parent container or not 的本地化字符串。
+        /// </summary>
+        internal static string String32 {
+            get {
+                return ResourceManager.GetString("String32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 StretchToParent 的本地化字符串。
+        /// </summary>
+        internal static string String33 {
+            get {
+                return ResourceManager.GetString("String33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the tab header background is draw or not 的本地化字符串。
+        /// </summary>
+        internal static string String34 {
+            get {
+                return ResourceManager.GetString("String34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the tab control caption is visible or not 的本地化字符串。
+        /// </summary>
+        internal static string String35 {
+            get {
+                return ResourceManager.GetString("String35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the tab control&apos;s edge border is draw or not, you must set the IsCaptionVisible&apos;s value to false for this change to take effect 的本地化字符串。
+        /// </summary>
+        internal static string String36 {
+            get {
+                return ResourceManager.GetString("String36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Provides keyboard support to the user for tab control operations[Ex:Insert, Delete, F1 Keys, Keyboard navigation] 的本地化字符串。
+        /// </summary>
+        internal static string String37 {
+            get {
+                return ResourceManager.GetString("String37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the tab separator line is visible or not between the tab pages 的本地化字符串。
+        /// </summary>
+        internal static string String38 {
+            get {
+                return ResourceManager.GetString("String38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the tab control like as document tab style or not 的本地化字符串。
+        /// </summary>
+        internal static string String39 {
+            get {
+                return ResourceManager.GetString("String39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Must be a DCMDGVTextCell 的本地化字符串。
+        /// </summary>
+        internal static string String4 {
+            get {
+                return ResourceManager.GetString("String4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The operation was canceled by the user. 的本地化字符串。
+        /// </summary>
+        internal static string String40 {
+            get {
+                return ResourceManager.GetString("String40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Do you want to insert a new tab page here? 的本地化字符串。
+        /// </summary>
+        internal static string String41 {
+            get {
+                return ResourceManager.GetString("String41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Do you want to remove the selected tab page? 的本地化字符串。
+        /// </summary>
+        internal static string String42 {
+            get {
+                return ResourceManager.GetString("String42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The selected tab page could not be deleted!!!, it may be due to the following reasons;\r\n\r\n1.Tab page might be null or disposed by the application.\r\n2.Tab page might not be closable.\r\n3.Tab page might be disable. 的本地化字符串。
+        /// </summary>
+        internal static string String43 {
+            get {
+                return ResourceManager.GetString("String43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Occurs when the sub properties changed of the CaptionRandomizer property 的本地化字符串。
+        /// </summary>
+        internal static string String44 {
+            get {
+                return ResourceManager.GetString("String44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the randomizer effect is enable or not for tab control caption 的本地化字符串。
+        /// </summary>
+        internal static string String45 {
+            get {
+                return ResourceManager.GetString("String45", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the transparency effect is visible or not for tab control caption 的本地化字符串。
+        /// </summary>
+        internal static string String46 {
+            get {
+                return ResourceManager.GetString("String46", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The red color component property must be in the range of 0 to 255 的本地化字符串。
+        /// </summary>
+        internal static string String47 {
+            get {
+                return ResourceManager.GetString("String47", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The green color component property must be in the range of 0 to 255 的本地化字符串。
+        /// </summary>
+        internal static string String48 {
+            get {
+                return ResourceManager.GetString("String48", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The blue color component property must be in the range of 0 to 255 的本地化字符串。
+        /// </summary>
+        internal static string String49 {
+            get {
+                return ResourceManager.GetString("String49", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Get the visible status. 的本地化字符串。
+        /// </summary>
+        internal static string String5 {
+            get {
+                return ResourceManager.GetString("String5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 This property must be in the range of 50 to 255 的本地化字符串。
+        /// </summary>
+        internal static string String50 {
+            get {
+                return ResourceManager.GetString("String50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Bu tab zaten var. 的本地化字符串。
+        /// </summary>
+        internal static string String51 {
+            get {
+                return ResourceManager.GetString("String51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while changing the value of the FirstColor property, 的本地化字符串。
+        /// </summary>
+        internal static string String52 {
+            get {
+                return ResourceManager.GetString("String52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while changing the value of the SecondColor property, 的本地化字符串。
+        /// </summary>
+        internal static string String53 {
+            get {
+                return ResourceManager.GetString("String53", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while changing the value of the GradientMode property, 的本地化字符串。
+        /// </summary>
+        internal static string String54 {
+            get {
+                return ResourceManager.GetString("String54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Supports alpha component for tab item background colors 的本地化字符串。
+        /// </summary>
+        internal static string String55 {
+            get {
+                return ResourceManager.GetString("String55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Add a new tab page to the container 的本地化字符串。
+        /// </summary>
+        internal static string String56 {
+            get {
+                return ResourceManager.GetString("String56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Removes the selected tab page from the container 的本地化字符串。
+        /// </summary>
+        internal static string String57 {
+            get {
+                return ResourceManager.GetString("String57", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Information 的本地化字符串。
+        /// </summary>
+        internal static string String58 {
+            get {
+                return ResourceManager.GetString("String58", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while generating the action list panel for this KRBTabControl, 的本地化字符串。
+        /// </summary>
+        internal static string String59 {
+            get {
+                return ResourceManager.GetString("String59", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Indicates if drop-down is resizable. 的本地化字符串。
+        /// </summary>
+        internal static string String6 {
+            get {
+                return ResourceManager.GetString("String6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Property name not found. 的本地化字符串。
+        /// </summary>
+        internal static string String60 {
+            get {
+                return ResourceManager.GetString("String60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Property name must not blank. 的本地化字符串。
+        /// </summary>
+        internal static string String61 {
+            get {
+                return ResourceManager.GetString("String61", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while doing randomize action, 的本地化字符串。
+        /// </summary>
+        internal static string String62 {
+            get {
+                return ResourceManager.GetString("String62", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while changing the value of the HeaderVisibility property, 的本地化字符串。
+        /// </summary>
+        internal static string String63 {
+            get {
+                return ResourceManager.GetString("String63", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while adding a new TabPage to the tab container, 的本地化字符串。
+        /// </summary>
+        internal static string String64 {
+            get {
+                return ResourceManager.GetString("String64", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exception while removing the currently selected TabPage from the tab container, 的本地化字符串。
+        /// </summary>
+        internal static string String65 {
+            get {
+                return ResourceManager.GetString("String65", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Determines whether the tab page is closable or not 的本地化字符串。
+        /// </summary>
+        internal static string String66 {
+            get {
+                return ResourceManager.GetString("String66", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 unsupported mode! 的本地化字符串。
+        /// </summary>
+        internal static string String67 {
+            get {
+                return ResourceManager.GetString("String67", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Synax error in matching the closing brace! 的本地化字符串。
+        /// </summary>
+        internal static string String68 {
+            get {
+                return ResourceManager.GetString("String68", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Synax error in matching the closing colon Tag! 的本地化字符串。
+        /// </summary>
+        internal static string String69 {
+            get {
+                return ResourceManager.GetString("String69", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Indicates current sizing mode. 的本地化字符串。
+        /// </summary>
+        internal static string String7 {
+            get {
+                return ResourceManager.GetString("String7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Illegal synax, can note parse the expression! 的本地化字符串。
+        /// </summary>
+        internal static string String70 {
+            get {
+                return ResourceManager.GetString("String70", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unsupported Logic Symbol! 的本地化字符串。
+        /// </summary>
+        internal static string String71 {
+            get {
+                return ResourceManager.GetString("String71", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 GCM User Signed 的本地化字符串。
+        /// </summary>
+        internal static string String72 {
+            get {
+                return ResourceManager.GetString("String72", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local Data Imported 的本地化字符串。
+        /// </summary>
+        internal static string String73 {
+            get {
+                return ResourceManager.GetString("String73", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local Data Exported 的本地化字符串。
+        /// </summary>
+        internal static string String74 {
+            get {
+                return ResourceManager.GetString("String74", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 GCM Data Loaded 的本地化字符串。
+        /// </summary>
+        internal static string String75 {
+            get {
+                return ResourceManager.GetString("String75", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 GCM Item Detail Render 的本地化字符串。
+        /// </summary>
+        internal static string String76 {
+            get {
+                return ResourceManager.GetString("String76", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local Data Published 的本地化字符串。
+        /// </summary>
+        internal static string String77 {
+            get {
+                return ResourceManager.GetString("String77", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local Data Checked 的本地化字符串。
+        /// </summary>
+        internal static string String78 {
+            get {
+                return ResourceManager.GetString("String78", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The Length of key must be not short than 56 bits. 的本地化字符串。
+        /// </summary>
+        internal static string String79 {
+            get {
+                return ResourceManager.GetString("String79", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Custom Validation 的本地化字符串。
+        /// </summary>
+        internal static string String8 {
+            get {
+                return ResourceManager.GetString("String8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The Length of key must be not short than 7 Bytes. 的本地化字符串。
+        /// </summary>
+        internal static string String80 {
+            get {
+                return ResourceManager.GetString("String80", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Not Exist! 的本地化字符串。
+        /// </summary>
+        internal static string String81 {
+            get {
+                return ResourceManager.GetString("String81", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error in checkDuplicateProcess. 的本地化字符串。
+        /// </summary>
+        internal static string String82 {
+            get {
+                return ResourceManager.GetString("String82", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 XML文件导出失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String83 {
+            get {
+                return ResourceManager.GetString("String83", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: XML文件导出失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String84 {
+            get {
+                return ResourceManager.GetString("String84", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export Failed! @filepath= 的本地化字符串。
+        /// </summary>
+        internal static string String85 {
+            get {
+                return ResourceManager.GetString("String85", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export success. @filepath= 的本地化字符串。
+        /// </summary>
+        internal static string String86 {
+            get {
+                return ResourceManager.GetString("String86", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: Excel文件导入失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String87 {
+            get {
+                return ResourceManager.GetString("String87", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: GCM 概览数据查询失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String88 {
+            get {
+                return ResourceManager.GetString("String88", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: GCM细览数据查询失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String89 {
+            get {
+                return ResourceManager.GetString("String89", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Indicates current value validation result. 的本地化字符串。
+        /// </summary>
+        internal static string String9 {
+            get {
+                return ResourceManager.GetString("String9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: GCM 细览数据查询失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String90 {
+            get {
+                return ResourceManager.GetString("String90", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 JSON文件导出失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String91 {
+            get {
+                return ResourceManager.GetString("String91", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: JSON文件导出失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String92 {
+            get {
+                return ResourceManager.GetString("String92", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地数据验证失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String93 {
+            get {
+                return ResourceManager.GetString("String93", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ERROR: 本地数据验证失败！ 的本地化字符串。
+        /// </summary>
+        internal static string String94 {
+            get {
+                return ResourceManager.GetString("String94", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data Check Failed! 的本地化字符串。
+        /// </summary>
+        internal static string String95 {
+            get {
+                return ResourceManager.GetString("String95", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data Check success. 的本地化字符串。
+        /// </summary>
+        internal static string String96 {
+            get {
+                return ResourceManager.GetString("String96", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local data check failed. 的本地化字符串。
+        /// </summary>
+        internal static string String97 {
+            get {
+                return ResourceManager.GetString("String97", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local data export to GCMPub XML failed. 的本地化字符串。
+        /// </summary>
+        internal static string String98 {
+            get {
+                return ResourceManager.GetString("String98", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Local data publish to GCM operation success. 的本地化字符串。
+        /// </summary>
+        internal static string String99 {
+            get {
+                return ResourceManager.GetString("String99", resourceCulture);
+            }
+        }
     }
 }
