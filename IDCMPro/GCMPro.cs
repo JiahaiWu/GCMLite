@@ -12,6 +12,7 @@ using System.IO;
 using IDCM.Base;
 using IDCM.Base.Utils;
 using IDCM.DataTransfer;
+using IDCM.Dlgs;
 
 namespace IDCM
 {
@@ -289,8 +290,7 @@ namespace IDCM
 
         private void aboutGCMLiteAltAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //AboutDlg aboutDlg = new AboutDlg();
-            //aboutDlg.ShowDialog();
+            openAboutUsDlg();
         }
         /******************************************************************
          * 键盘事件处理方法
@@ -345,10 +345,9 @@ namespace IDCM
 
         private void openAboutUsDlg()
         {
-            throw new NotImplementedException();
+            AboutDlg aboutDlg = new AboutDlg();
+            aboutDlg.ShowDialog();
         }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
-
-
     }
 }

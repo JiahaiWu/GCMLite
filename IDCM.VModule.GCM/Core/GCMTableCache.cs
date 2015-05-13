@@ -138,7 +138,16 @@ namespace IDCM.Core
         {
             return this.dgv_overview.RowCount;
         }
-
+        internal Dictionary<string, int> getOverViewIAttrMapping()
+        {
+            Dictionary<string, int> map = new Dictionary<string, int>();
+            DataGridViewColumnCollection dgvcc = dgv_overview.Columns;
+            foreach (DataGridViewColumn dgvc in dgvcc)
+            {
+                map[dgvc.Name] = dgvc.Index;
+            }
+            return map;
+        }
         internal Dictionary<int, string> getOverViewIRow(int ridx)
         {
             if (ridx > -1 && ridx < dgv_overview.RowCount)

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace IDCM.Forms
+namespace IDCM.Dlgs
 {
     public partial class AboutDlg : Form
     {

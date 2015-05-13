@@ -1,4 +1,4 @@
-﻿namespace IDCM.Forms
+﻿namespace IDCM.Dlgs
 {
     partial class AboutDlg
     {

@@ -11,6 +11,9 @@ using IDCM.Core;
 using IDCM.ComPO;
 using IDCM.BGHandler;
 using IDCM.BGHandlerManager;
+using IDCM.Forms;
+using System.Windows.Forms;
+using IDCM.Base.AbsInterfaces;
 
 namespace IDCM.ViewManager
 {
@@ -112,6 +115,65 @@ namespace IDCM.ViewManager
                 GCMDetailLoadHandler gdlh = new GCMDetailLoadHandler(gtcache, ridx, authInfo);
                 BGWorkerInvoker.pushHandler(gdlh);
             }
+        }
+
+        internal void downGCMData(DataGridView dgv)
+        {
+            int[] selectedRowIdxs = fetchSelectRowIdxs(dgv);
+            GCMExportTypeDlg exportDlg = new GCMExportTypeDlg();
+            if (exportDlg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    AbsBGHandler handler = null;
+                    ExportType etype = GCMExportTypeDlg.LastOptionValue;
+                    string epath = GCMExportTypeDlg.LastFilePath;
+                    bool exportStrainTree = GCMExportTypeDlg.ExportStainTree;
+                    switch (etype)
+                    {
+                        case ExportType.Excel:
+                            handler = selectedRowIdxs == null ? new GCMExcelExportHandler(gtcache, epath) : new GCMExcelExportHandler(gtcache, epath, selectedRowIdxs);
+                            break;
+                        case ExportType.JSONList:
+                            handler = selectedRowIdxs == null ? new GCMJSONListExportHandler(gtcache, epath) : new GCMJSONListExportHandler(gtcache, epath, selectedRowIdxs);
+                            break;
+                        case ExportType.TSV:
+                            handler = selectedRowIdxs == null ? new GCMTextExportHandler(gtcache, epath, "\t") : new GCMTextExportHandler(gtcache, epath, selectedRowIdxs, "\t");
+                            break;
+                        case ExportType.CSV:
+                            handler = selectedRowIdxs == null ? new GCMTextExportHandler(gtcache, epath, ",") : new GCMTextExportHandler(gtcache, epath, selectedRowIdxs, ",");
+                            break;
+                        case ExportType.XML:
+                            handler = selectedRowIdxs == null ? new GCMXMLExportHandler(gtcache, epath) : new GCMXMLExportHandler(gtcache, epath, selectedRowIdxs);
+                            break;
+                        default:
+                            MessageBox.Show(GlobalTextRes.Text("Unsupport export type") + "!");
+                            break;
+                    }
+                    if (handler != null)
+                        BGWorkerInvoker.pushHandler(handler);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(GlobalTextRes.Text("Data export failed"));
+                    log.Info(GlobalTextRes.Text("Data export failed with error info") + "：", ex);
+                }
+            }
+        }
+        private int[] fetchSelectRowIdxs(DataGridView dgv)
+        {
+            DataGridViewSelectedRowCollection selectedRows = dgv.SelectedRows;
+            if (selectedRows != null && selectedRows.Count > 0)
+            {
+                int[] sridxs = new int[selectedRows.Count];
+                int idx = 0;
+                foreach (DataGridViewRow dgvr in selectedRows)
+                {
+                    sridxs[idx] = dgvr.Index;
+                }
+                return sridxs;
+            }
+            return null;
         }
         private GCMTableCache gtcache;
         /// <summary>

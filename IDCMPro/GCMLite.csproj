@@ -58,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppContext\IDCMAppContext.cs" />
+    <Compile Include="Dlgs\AboutDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dlgs\AboutDlg.designer.cs">
+      <DependentUpon>AboutDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="GCMPro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Resources\gcm_logo.png" />
+    <EmbeddedResource Include="Dlgs\AboutDlg.resx">
+      <DependentUpon>AboutDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GCMPro.resx">
       <DependentUpon>GCMPro.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +139,7 @@
       <Name>IDCM.GCM</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -106,9 +106,13 @@
     <Compile Include="Core\DataImportChecker.cs" />
     <Compile Include="Core\GCMDataChecker.cs" />
     <Compile Include="Core\LocalDataChecker.cs" />
+    <Compile Include="DataTransfer\GCMExcelExporter.cs" />
     <Compile Include="DataTransfer\GCMItemsLoader.cs" />
+    <Compile Include="DataTransfer\GCMJSONListExporter.cs" />
     <Compile Include="DataTransfer\GCMPubExecutor.cs" />
     <Compile Include="DataTransfer\GCMSignExecutor.cs" />
+    <Compile Include="DataTransfer\GCMTextExporter.cs" />
+    <Compile Include="DataTransfer\GCMXMLExporter.cs" />
     <Compile Include="DataTransfer\HelpDocRequester.cs" />
     <Compile Include="DataTransfer\JSONListExporter.cs" />
     <Compile Include="DataTransfer\LocalDataDumper.cs" />
@@ -126,6 +130,12 @@
     </Compile>
     <Compile Include="Forms\AttrMapOptionDlg.Designer.cs">
       <DependentUpon>AttrMapOptionDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ColConfigDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColConfigDlg.Designer.cs">
+      <DependentUpon>ColConfigDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ExportTypeDlg.cs">
       <SubType>Form</SubType>
@@ -151,6 +161,12 @@
     <Compile Include="Forms\MessageDlg.Designer.cs">
       <DependentUpon>MessageDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GCMExportTypeDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GCMExportTypeDlg.Designer.cs">
+      <DependentUpon>GCMExportTypeDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="GCMProView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,11 +179,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewManager\ABCServManager.cs" />
     <Compile Include="ViewManager\AsyncServInvoker.cs" />
+    <Compile Include="BGHandler\GCMExcelExportHandler.cs" />
+    <Compile Include="BGHandler\GCMJSONListExportHandler.cs" />
     <Compile Include="ViewManager\GCMServManager.cs" />
+    <Compile Include="BGHandler\GCMTextExportHandler.cs" />
+    <Compile Include="BGHandler\GCMXMLExportHandler.cs" />
     <Compile Include="ViewManager\LocalServManager.cs" />
     <Compile Include="BGHandler\MDIImportHandler.cs" />
     <EmbeddedResource Include="Forms\AttrMapOptionDlg.resx">
       <DependentUpon>AttrMapOptionDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ColConfigDlg.resx">
+      <DependentUpon>ColConfigDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExportTypeDlg.resx">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
@@ -180,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageDlg.resx">
       <DependentUpon>MessageDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GCMExportTypeDlg.resx">
+      <DependentUpon>GCMExportTypeDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCMProView.resx">
       <DependentUpon>GCMProView.cs</DependentUpon>

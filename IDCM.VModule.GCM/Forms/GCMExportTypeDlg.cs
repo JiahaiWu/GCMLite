@@ -12,15 +12,16 @@ using IDCM.Base.Utils;
 
 namespace IDCM.Forms
 {
-    public partial class ExportTypeDlg : Form
+    public partial class GCMExportTypeDlg : Form
     {
-        public ExportTypeDlg(string fpath=null)
+        public GCMExportTypeDlg(string fpath = null)
         {
             if (fpath != null)
                 lastFilePath = fpath;
             InitializeComponent();
             this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
             this.button_confirm.Text = IDCM.Base.GlobalTextRes.Text("Confirm");
+            this.export_strain_tree_checkBox.Text = IDCM.Base.GlobalTextRes.Text("export strain tree");
             this.label1.Text = IDCM.Base.GlobalTextRes.Text("SavePath")+":";
             this.Text = IDCM.Base.GlobalTextRes.Text("Select File Type For Export");
         }
@@ -62,9 +63,15 @@ namespace IDCM.Forms
             return suffix;
         }
 
+        private void updatOptionalStatus()
+        {
+            exportStainTree = export_strain_tree_checkBox.Checked;
+        }
+
         private void button_confirm_Click(object sender, EventArgs e)
         {
             string suffix = getDefaultSuffix();
+            updatOptionalStatus();
             FileInfo fi=new FileInfo(textBox_path.Text.Trim());
             if (fi.Exists || (fi.Directory!=null && fi.Directory.Exists))
             {
@@ -116,17 +123,29 @@ namespace IDCM.Forms
             }
         }
 
+        public void setCheckBoxVisible(bool visible = false)
+        {
+            groupbox_optional.Visible = visible;
+            export_strain_tree_checkBox.Visible = visible;
+        }
+
         private static ExportType lastOptionValue = ExportType.Excel;
         private static string lastFilePath = "C:\\idcm_export";
+        private static bool exportStainTree = false;
+
+        public static bool ExportStainTree
+        {
+            get { return exportStainTree; }
+        }
 
         public static string LastFilePath
         {
-            get { return ExportTypeDlg.lastFilePath; }
+            get { return lastFilePath; }
         }
 
         public static ExportType LastOptionValue
         {
-            get { return ExportTypeDlg.lastOptionValue; }
+            get { return lastOptionValue; }
         }
         
     }

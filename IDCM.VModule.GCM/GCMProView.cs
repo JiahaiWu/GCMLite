@@ -100,6 +100,7 @@ namespace IDCM.VModule.GCM
                     this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
                     this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
                     this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
+                    this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
                     localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
                     localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
                     localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
@@ -133,6 +134,39 @@ namespace IDCM.VModule.GCM
             }
         }
 
+        private void colConfiger_ColConfigChanged(int cursor, bool isRequire, bool isUnique, string restrict)
+        {
+            if (cursor > -1)
+            {
+                ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
+                {
+                    DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
+                    if (dgvc != null && dgvc.Visible)
+                    {
+                        CustomColDefGetter.updateCustomColRestrict(dgvc.Name, isRequire, isUnique, restrict);
+                        MsgDriver.DCMPublisher.noteSimpleMsg("字段约束条件属性更新成功");
+                    }
+                }));
+            }
+        }
+
+        private void dcmDataGridView_local_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
+            {
+                if(e.ColumnIndex>-1)
+                {
+                    CustomColDef ccd =CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
+                    if (ccd != null && ccd.IsEnable)
+                    {
+                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex,ccd.Alias, ccd.IsRequire, ccd.IsUnique, ccd.Restrict);
+                        colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
+                        colConfiger.Show(this.FindForm(),new Point(MousePosition.X, MousePosition.Y));
+                    }
+                }
+            }
+        }
+
         private void setDGVCellHit(DataGridViewCell cell)
         {
             if (cell.Visible == false)
@@ -159,30 +193,7 @@ namespace IDCM.VModule.GCM
 
         private void OnLocalSubmitClick(object sender, EventArgs e)
         {
-            DataGridViewSelectedRowCollection selectedRows = dcmDataGridView_local.SelectedRows;
-            if (selectedRows != null && selectedRows.Count > 0)
-            {
-                if (gcmServManager.Signed)
-                {
-                    localServManager.publishLocalDataToGCM(gcmServManager.getAuthInfo(),selectedRows);
-                }
-                else
-                {
-                    MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
-                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
-                }
-            }else if (dcmDataGridView_local.CurrentCell != null)
-            {
-                if (gcmServManager.Signed)
-                {
-                    localServManager.publishLocalDataToGCM(gcmServManager.getAuthInfo(),dcmDataGridView_local.CurrentRow);
-                }
-                else
-                {
-                    MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
-                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
-                }
-            }
+            publishLocalData();
         }
         private void OnLocalSearchClick(object sender, EventArgs e)
         {
@@ -576,6 +587,12 @@ namespace IDCM.VModule.GCM
             }
         }
 
+        private void splitContainer_GCM_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Point reNewPoint=new Point(this.splitContainer_GCM.Panel1.Width/2-this.panel_GCM_start.Width/2,(int)(this.splitContainer_GCM.Panel1.Height*0.82-this.panel_GCM_start.Height));
+            this.panel_GCM_start.Location = reNewPoint;
+        }
+
         public void addLocalDataRow()
         {
             dcmDataGridView_local.Rows.Add();
@@ -598,12 +615,36 @@ namespace IDCM.VModule.GCM
 
         public void publishLocalData()
         {
-            throw new NotImplementedException();
+            DataGridViewSelectedRowCollection selectedRows = dcmDataGridView_local.SelectedRows;
+            if (selectedRows != null && selectedRows.Count > 0)
+            {
+                if (gcmServManager.Signed)
+                {
+                    localServManager.publishLocalDataToGCM(gcmServManager.getAuthInfo(), selectedRows);
+                }
+                else
+                {
+                    MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
+                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
+                }
+            }
+            else if (dcmDataGridView_local.CurrentCell != null)
+            {
+                if (gcmServManager.Signed)
+                {
+                    localServManager.publishLocalDataToGCM(gcmServManager.getAuthInfo(), dcmDataGridView_local.CurrentRow);
+                }
+                else
+                {
+                    MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
+                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
+                }
+            }
         }
 
         public void pullGCMData()
         {
-            throw new NotImplementedException();
+            gcmServManager.downGCMData(dcmDataGridView_gcm);
         }
         public void requestHelpDoc()
         {
@@ -710,7 +751,6 @@ namespace IDCM.VModule.GCM
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
         private OpConditionType opCond = OpConditionType.UnKnown;
-
         public event GCMStatusHandler GCMStatusChanged;
         public event GCMProgressHandler GCMProgressInvoke;
         public event GCMOpConditionHandler GCMOpConditionChanged;
@@ -728,5 +768,6 @@ namespace IDCM.VModule.GCM
             ABC_View=4,
             UnKnown=5
         }
+
     }
 }

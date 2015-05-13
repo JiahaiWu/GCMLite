@@ -170,6 +170,29 @@ namespace IDCM.Core
                 }
             }
         }
+        public static void updateCustomColRestrict(string attr, bool isRequire, bool isUnique, string restrict)
+        {
+            CustomColDef ccd = null;
+            if (ccdCache.TryGetValue(attr, out ccd))
+            {
+                if (ccd.IsRequire != isRequire)
+                {
+                    ccd.IsRequire = isRequire;
+                    dirtyStatus = true;
+                }
+                if (ccd.IsUnique != isUnique)
+                {
+                    ccd.IsUnique = isUnique;
+                    dirtyStatus = true;
+                }
+                if (ccd.Restrict==null|| !ccd.Restrict.Equals(restrict))
+                {
+                    ccd.Restrict = restrict;
+                    dirtyStatus = true;
+                }
+                saveUpdatedHistCfg();
+            }
+        }
         public static string KeyName
         {
             get
@@ -182,6 +205,9 @@ namespace IDCM.Core
         private static CustomColDef primaryKeyNode = null;
         private static Dictionary<string,CustomColDef> ccdCache = null;
 
-        
+        internal static void updateCustomColRestrict(string p, bool isRequire, bool isUnique, string restrict)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
