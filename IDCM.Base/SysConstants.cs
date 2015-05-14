@@ -10,7 +10,7 @@ namespace IDCM.Base
     public class SysConstants
     {
         #region Keys of AppSettings
-        public const string cacheDir = "/GCMPro/cache/";
+        public const string cacheDir = "/GCMLite/cache/";
         public const string tableDefNote = "tableDef.xml";
         public const string export_note = "export.ini";
         public const string exit_note = "exit.ini";
@@ -75,6 +75,10 @@ namespace IDCM.Base
         /// 探索XML节点稳定性，增长系数，如果在DetectDepth深度下，探索过程中出现strain节点下的attr节点增加的情况，会触发 DetectDepth * DetectDepth，使探索深度翻倍
         /// </summary>
         public const string GrowthFactor = "GrowthFactor";
+        /// <summary>
+        /// 默认最大化设置
+        /// </summary>
+        public const string DefaultMaximum = "DefaultMaximum";
         #endregion
         public static int SessionValidMilliSeconds = 600000;
         /// <summary>

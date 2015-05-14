@@ -96,17 +96,24 @@ namespace IDCM.DataTransfer
             if (path == null)
                 return;
             lastDumpPath = path;
-            FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.default_dump_Note, lastDumpPath);
+            FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.default_dump_Note, lastDumpPath +"\n"+ CustomColDefGetter.LastSrcHashCode);
         }
         protected void loadLastDumpPath(bool autoRemoveOld=true)
         {
             FileInfo fileinfo = new FileInfo(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.default_dump_Note);
             if (fileinfo.Exists)
             {
-                String path = FileUtil.readAsUTF8Text(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.default_dump_Note);
-                lastDumpPath = path;
-                if(autoRemoveOld)
-                    clearOlderDumpPath(fileinfo.LastWriteTime);
+                String[] lines = FileUtil.readAsUTF8Lines(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.default_dump_Note);
+                if (lines != null && lines.Length > 1 && lines[1].Trim().Equals(CustomColDefGetter.LastSrcHashCode))
+                {
+                    String path = lines[0].Trim();
+                    if (File.Exists(path))
+                        lastDumpPath = path;
+                    else
+                        File.Delete(fileinfo.FullName);
+                    if (autoRemoveOld)
+                        clearOlderDumpPath(fileinfo.LastWriteTime);
+                }
             }
         }
         protected void clearOlderDumpPath(DateTime lastModified)
@@ -117,8 +124,22 @@ namespace IDCM.DataTransfer
                 foreach(FileInfo fileinfo in dirInfo.GetFiles())
                 {
                     if (fileinfo.Name.EndsWith(SysConstants.default_dump_Suffix) && DateTime.Compare(fileinfo.LastWriteTime, lastModified) < 0)
-                        fileinfo.Delete();
+                    {
+                        TimeSpan ts = new TimeSpan(lastModified.Ticks - fileinfo.LastWriteTime.Ticks);
+                        if(ts.TotalHours>1)
+                            fileinfo.Delete();
+                    }
                 }
+            }
+        }
+        #endregion
+
+        #region Property
+        internal string LastDumpPath
+        {
+            get
+            {
+                return lastDumpPath;
             }
         }
         #endregion

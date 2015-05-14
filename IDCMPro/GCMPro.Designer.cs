@@ -68,6 +68,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_status,
             this.toolStripProgressBar_progress});
@@ -89,9 +90,11 @@
             // toolStripProgressBar_progress
             // 
             this.toolStripProgressBar_progress.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar_progress.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.toolStripProgressBar_progress.Margin = new System.Windows.Forms.Padding(1, 1, 10, 1);
             this.toolStripProgressBar_progress.Name = "toolStripProgressBar_progress";
             this.toolStripProgressBar_progress.Size = new System.Drawing.Size(200, 20);
+            this.toolStripProgressBar_progress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.toolStripProgressBar_progress.Visible = false;
             // 
             // menuStrip_gcmlite
@@ -364,7 +367,6 @@
             // gcmProView_lite
             // 
             this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcmProView_lite.Enabled = false;
             this.gcmProView_lite.Location = new System.Drawing.Point(0, 55);
             this.gcmProView_lite.Name = "gcmProView_lite";
             this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);

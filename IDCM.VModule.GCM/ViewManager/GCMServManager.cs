@@ -68,12 +68,14 @@ namespace IDCM.ViewManager
                 }
                 string tip = authInfo.LoginFlag ? GlobalTextRes.Text("Connected") + ". [" + authInfo.Username + "]" : GlobalTextRes.Text("Disconnected");
                 DCMPublisher.noteSimpleMsg(tip, DCMMsgType.Status);
+                DCMPublisher.noteSimpleMsg(tip);
                 DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMUserSigned);
             }
             catch (Exception ex)
             {
                 log.Error(GlobalTextRes.Text("Connect GCM failed"), ex);
                 DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"), DCMMsgType.Status);
+                DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"));
             }
         }
 

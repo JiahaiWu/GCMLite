@@ -28,7 +28,7 @@ namespace IDCM.ViewManager
         {
             if (OnProgressChange!=null)
             {
-                if (percent < 1 || percent > 99)
+                if (percent<100)
                 {
                     OnProgressChange(true);
                 }
@@ -98,8 +98,6 @@ namespace IDCM.ViewManager
             }
         }
         #endregion
-
-
         #endregion
 
         #region Events&Handlings

@@ -134,7 +134,11 @@ namespace IDCM.DataTransfer
             StringBuilder strbuilder = new StringBuilder();
             foreach (KeyValuePair<string, int> kvpair in customAttrDBMapping)
             {
-                strbuilder.Append(row[kvpair.Value]).Append(spliter);
+                string value = null;
+                if (row.TryGetValue(kvpair.Value, out value))
+                {
+                    strbuilder.Append(value).Append(spliter);
+                }
             }
             return strbuilder.ToString();
         }

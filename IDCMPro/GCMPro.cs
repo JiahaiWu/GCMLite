@@ -13,6 +13,7 @@ using IDCM.Base;
 using IDCM.Base.Utils;
 using IDCM.DataTransfer;
 using IDCM.Dlgs;
+using System.Configuration;
 
 namespace IDCM
 {
@@ -27,6 +28,8 @@ namespace IDCM
         public GCMPro()
         {
             InitializeComponent();
+            if (ConfigurationManager.AppSettings[SysConstants.DefaultMaximum].Equals("true", StringComparison.CurrentCultureIgnoreCase))
+                this.WindowState = FormWindowState.Maximized;
             this.toolStripStatusLabel_status.Text = GlobalTextRes.Text("Ready");
             this.fileFToolStripMenuItem.Text = GlobalTextRes.Text("File");
             this.openAltOToolStripMenuItem.Text = GlobalTextRes.Text("Open (Alt+O)");
@@ -238,7 +241,7 @@ namespace IDCM
 
         private void ServInvoker_OnProgressChange(bool msgTag)
         {
-            this.toolStripProgressBar_progress.Visible = (bool)msgTag;
+            this.toolStripProgressBar_progress.Visible = msgTag;
         }
 
         private void ServInvoker_OnBottomSatusChange(string msgTag)

@@ -38,7 +38,7 @@ namespace IDCM.DataTransfer
                 string resStr = myStreamReader.ReadToEnd();
                 myStreamReader.Close();
                 myResponseStream.Close();
-                log.Info("StrainListQueryExecutor Response=" + resStr);
+                log.Debug("StrainListQueryExecutor Response=" + resStr);
                 StrainListPage slp = parserToListPageInfo(resStr);
                 if (slp != null)
                 {

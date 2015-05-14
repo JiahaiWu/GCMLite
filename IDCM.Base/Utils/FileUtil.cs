@@ -54,6 +54,25 @@ namespace IDCM.Base.Utils
             return new UTF8Encoding(true).GetString(info, 0, len);
         }
 
+        public static String[] readAsUTF8Lines(String filepath)
+        {
+            if (!System.IO.File.Exists(filepath))
+                return null;
+            List<string> lines = new List<string>();
+            FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, new UTF8Encoding(true));
+            string str = null;
+            while (!sr.EndOfStream)
+            {
+                str=sr.ReadLine();
+                if (str!=null && str.Length > 0)
+                    lines.Add(str);
+            }
+            sr.Close();
+            fs.Close();
+            return lines.ToArray();
+        }
+
         /// <summary>
         /// 判断文件是否正在被占用  
         /// </summary>

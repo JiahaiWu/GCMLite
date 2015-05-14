@@ -29,20 +29,24 @@ namespace IDCM.Core
         public bool checkValid(string cellValue)
         {
             bool isValid = true;
-            if (isRequire && (cellValue == null || cellValue.Trim().Length < 1))
+            
+            if (cellValue != null && cellValue.Length > 0)
+            {
+                if (isValid && sets != null)
+                {
+                    if (sets.Contains(cellValue))
+                        isValid = false;
+                    else
+                        sets.Add(cellValue);
+                }
+                if (isValid && restrict != null)
+                {
+                    isValid = restrict.isMatch(cellValue);
+                }
+            }
+            else if (isRequire)
             {
                 isValid = false;
-            }
-            if (isValid && cellValue!=null && sets != null)
-            {
-                if (sets.Contains(cellValue))
-                    isValid = false;
-                else
-                    sets.Add(cellValue);
-            }
-            if (isValid && restrict != null)
-            {
-                isValid = restrict.isMatch(cellValue);
             }
             return isValid;
         }

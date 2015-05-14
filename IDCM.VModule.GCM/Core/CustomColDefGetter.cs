@@ -206,6 +206,13 @@ namespace IDCM.Core
                 return primaryKeyNode.Attr;
             }
         }
+        internal static string LastSrcHashCode
+        {
+            get
+            {
+                return lastSrcHashCode;
+            }
+        }
         #endregion
         
         #region Members

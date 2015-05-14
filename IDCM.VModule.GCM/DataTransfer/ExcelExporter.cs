@@ -54,13 +54,13 @@ namespace IDCM.DataTransfer
                 CellRangeAddress cra = CellRangeAddress.ValueOf("A1:" + numToExcelIndex(maps.Count) + "1");
                 sheet.SetAutoFilter(cra);
                 //填写内容
-                int ridx = 1;
+                int ridx = 0;
                 while (ridx < tcount)
                 {
                     Dictionary<int, string> drow = ctableCache.getIRow(ridx);
                     if(drow!=null)
                     {
-                        IRow srow = sheet.CreateRow(ridx++);
+                        IRow srow = sheet.CreateRow(++ridx);
                         mergeDataToSheetRow(maps, drow, srow);
                     }
                 }
@@ -146,11 +146,14 @@ namespace IDCM.DataTransfer
             int idx = 0;
             foreach (KeyValuePair<string, int> kvpair in customAttrDBMapping)
             {
-                if (kvpair.Value > 0)
+                if (kvpair.Value > -1)
                 {
                     int k = kvpair.Value;
-                    string value = row[k].ToString();
-                    srow.CreateCell(idx).SetCellValue(value);
+                    string value = null;
+                    if (row.TryGetValue(k, out value))
+                    {
+                        srow.CreateCell(idx).SetCellValue(value);
+                    }
                 }
                 else
                 {

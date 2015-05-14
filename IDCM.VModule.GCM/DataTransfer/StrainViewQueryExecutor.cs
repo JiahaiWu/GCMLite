@@ -37,7 +37,7 @@ namespace IDCM.DataTransfer
                 string resStr = myStreamReader.ReadToEnd();
                 myStreamReader.Close();
                 myResponseStream.Close();
-                //log.Info("StrainViewQueryExecutor Response=" + resStr);
+                log.Debug("StrainViewQueryExecutor Response=" + resStr);
                 StrainView sv = parserToViewPageInfo(resStr);
                 if (sv != null)
                 {

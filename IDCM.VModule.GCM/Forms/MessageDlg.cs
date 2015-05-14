@@ -36,11 +36,11 @@ namespace IDCM.Forms
                     int x = Screen.PrimaryScreen.WorkingArea.Right - this.Width;
                     int y = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height - 20;
                     this.Location = new Point(x, y);//设置窗体在屏幕右下角显示
-                    AnimateWinAPI.AnimateWindow(this.Handle, 500, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_ACTIVATE | AnimateWinAPI.AW_HOR_NEGATIVE);
+                    AnimateWinAPI.AnimateWindow(this.Handle, wtick, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_ACTIVATE | AnimateWinAPI.AW_HOR_NEGATIVE);
                 }
                 else
                 {
-                    AnimateWinAPI.AnimateWindow(this.Handle, 500, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_HIDE | AnimateWinAPI.AW_HOR_POSITIVE);
+                    AnimateWinAPI.AnimateWindow(this.Handle, wtick*4, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_HIDE | AnimateWinAPI.AW_HOR_POSITIVE);
                 }
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace IDCM.Forms
         #region Members
         private string msg = null;
         private long timestamp = 0L;
-        public static readonly int wtick = 500;
+        public static readonly int wtick = 700;
         private System.Windows.Forms.Timer wtimer = null;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion

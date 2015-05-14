@@ -34,7 +34,7 @@ namespace IDCM.VModule.GCM
         public GCMProView()
         {
             InitializeComponent();
-            this.Load+=GCMProView_Load;
+            
             this.button_cancel.Text = GlobalTextRes.Text("Cancel");
             this.checkBox_remember.Text = GlobalTextRes.Text("Remember");
             this.button_confirm.Text = GlobalTextRes.Text("Confirm");
@@ -43,6 +43,10 @@ namespace IDCM.VModule.GCM
             this.tabPage_ABC.Text = GlobalTextRes.Text("ABC Browser");
             this.tabPageEx_Local.Text = GlobalTextRes.Text("Local DataSet");
             this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
+
+            this.Load += GCMProView_Load;
+            InitializeMsgDriver();
+            InitializeGCMPro();
         }
         #endregion
 
@@ -54,8 +58,7 @@ namespace IDCM.VModule.GCM
 
         private void GCMProView_Load(object sender, EventArgs e)
         {
-            InitializeMsgDriver();
-            InitializeGCMPro();
+
             startLocalDataRender();
             startGCMSiteRender();
         }
@@ -254,20 +257,26 @@ namespace IDCM.VModule.GCM
         }
         private void OnBottomSatusChange(object msgTag, params object[] vals)
         {
-            if (GCMStatusChanged != null)
+            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
             {
-                GCMStatusChanged((msgTag != null) ? msgTag.ToString() : GlobalTextRes.Text("Ready"));
-            }
+                if (GCMStatusChanged != null)
+                {
+                    GCMStatusChanged((msgTag != null) ? msgTag.ToString() : GlobalTextRes.Text("Ready"));
+                }
+            }));
         }
         private void OnProgressChange(object msgTag, params object[] vals)
         {
-            if (GCMProgressInvoke != null)
+            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
             {
-                if (msgTag.GetType().Equals(typeof(bool)))
+                if (GCMProgressInvoke != null)
                 {
-                    GCMProgressInvoke((bool)msgTag);
+                    if (msgTag.GetType().Equals(typeof(bool)))
+                    {
+                        GCMProgressInvoke((bool)msgTag);
+                    }
                 }
-            }
+            }));
         }
 
         private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
@@ -495,13 +504,10 @@ namespace IDCM.VModule.GCM
             string lastDump = SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note;
             if (File.Exists(lastDump))
             {
-                string lastdumpPath = FileUtil.readAsUTF8Text(lastDump).Trim();
-                if (lastdumpPath.Length > 0 && File.Exists(lastdumpPath))
+                string lastdumpPath = new LocalDataDumper().LastDumpPath;
+                if (lastdumpPath!=null && lastdumpPath.Length > 0 && File.Exists(lastdumpPath))
                 {
-#if DEBUG
-#else
                     localServManager.importData(lastdumpPath);
-#endif
                 }
             }
         }
@@ -553,7 +559,6 @@ namespace IDCM.VModule.GCM
                     return null;
                 }
             }
-            this.Enabled = false;
             return localServManager.doExitDump();
         }
 
@@ -616,7 +621,7 @@ namespace IDCM.VModule.GCM
                 else
                 {
                     MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
-                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
+                    this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
                 }
             }
             else if (dcmDataGridView_local.CurrentCell != null)
@@ -628,7 +633,7 @@ namespace IDCM.VModule.GCM
                 else
                 {
                     MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
-                    //this.gcmTabControl_GCM.SelectedIndex = tabPageEx_gcm.TabIndex;
+                    this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
                 }
             }
         }

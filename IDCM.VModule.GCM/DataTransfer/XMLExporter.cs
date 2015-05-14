@@ -126,8 +126,12 @@ namespace IDCM.DataTransfer
             foreach (KeyValuePair<string, int> mapEntry in maps)
             {
                 XmlElement attrEle = xmlDoc.CreateElement(mapEntry.Key);
-                attrEle.InnerText = row[mapEntry.Value];
-                strainEle.AppendChild(attrEle);
+                string value = null;
+                if (mapEntry.Value >-1 && row.TryGetValue(mapEntry.Value, out value))
+                {
+                    attrEle.InnerText = value;
+                    strainEle.AppendChild(attrEle);
+                }
             }
             return strainEle;
         }
@@ -139,8 +143,12 @@ namespace IDCM.DataTransfer
             foreach (KeyValuePair<string, string> mapEntry in maps)
             {
                 XmlElement attrEle = xmlDoc.CreateElement(mapEntry.Key);
-                attrEle.InnerText = row[mapEntry.Value];
-                strainEle.AppendChild(attrEle);
+                string value = null;
+                if (mapEntry.Value!=null && row.TryGetValue(mapEntry.Value, out value))
+                {
+                    attrEle.InnerText = value;
+                    strainEle.AppendChild(attrEle);
+                }
             }
             return strainEle;
         }

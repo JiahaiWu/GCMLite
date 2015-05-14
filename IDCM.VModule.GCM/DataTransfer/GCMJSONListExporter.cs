@@ -109,11 +109,15 @@ namespace IDCM.DataTransfer
             Dictionary<string, string> dict = new Dictionary<string, string>();
             foreach (KeyValuePair<string, int> kvpair in maps)
             {
-                if (kvpair.Value > 0)
+                if (kvpair.Value > -1)
                 {
                     string key = kvpair.Key;
                     int k = kvpair.Value;
-                    dict[key] = vals[k];
+                    string value = null;
+                    if (vals.TryGetValue(k, out value))
+                    {
+                        dict[key] = value;
+                    }
                 }
             }
             return JsonConvert.SerializeObject(dict);
