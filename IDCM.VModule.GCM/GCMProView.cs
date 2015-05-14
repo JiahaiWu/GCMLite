@@ -34,7 +34,7 @@ namespace IDCM.VModule.GCM
         public GCMProView()
         {
             InitializeComponent();
-            
+
             this.button_cancel.Text = GlobalTextRes.Text("Cancel");
             this.checkBox_remember.Text = GlobalTextRes.Text("Remember");
             this.button_confirm.Text = GlobalTextRes.Text("Confirm");
@@ -45,6 +45,7 @@ namespace IDCM.VModule.GCM
             this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
 
             this.Load += GCMProView_Load;
+
             InitializeMsgDriver();
             InitializeGCMPro();
         }
@@ -125,6 +126,7 @@ namespace IDCM.VModule.GCM
                     opCond = OpConditionType.Local_View;
                     ////////////////////////////////////////////////////
                     this.IsInited = true;
+                    
                 }
             }
             catch (IDCMException ex)
@@ -288,6 +290,7 @@ namespace IDCM.VModule.GCM
                 else
                 {
                     MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
+                    gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
                     this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
                 }
             }
@@ -300,6 +303,7 @@ namespace IDCM.VModule.GCM
                 else
                 {
                     MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
+                    gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
                     this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
                 }
             }
@@ -402,7 +406,8 @@ namespace IDCM.VModule.GCM
 
         private void GCMProView_Load(object sender, EventArgs e)
         {
-
+            gcmTabControl_GCM.HideTab(tabPage_ABC);
+            
             startLocalDataRender();
             startGCMSiteRender();
         }
@@ -610,7 +615,11 @@ namespace IDCM.VModule.GCM
         {
             if (gcmServManager.Signed)
             {
-                showGCMDataDlg();
+                /////////////////////////////////////////////
+                ///showGCMDataDlg();
+                ///@Deprecated
+                gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                ///////////////////////////////////////////////
                 if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
                 {
                     ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
