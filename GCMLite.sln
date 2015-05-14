@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{9D82ACC8-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCMEx", "DCMEx\DCMEx.csproj", "{40FC25DE-108D-44B8-B18B-322B2A9A206B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDCM.BGHandlerManager", "IDCM.BGHandlerManager\IDCM.BGHandlerManager.csproj", "{0ACA3B9F-061F-40D5-8654-C0243712DF57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDCM.MsgDriver", "IDCM.MsgDriver\IDCM.MsgDriver.csproj", "{DA9A2DA8-6226-41AE-93D4-709C40FA61DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,14 @@ Global
 		{40FC25DE-108D-44B8-B18B-322B2A9A206B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40FC25DE-108D-44B8-B18B-322B2A9A206B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40FC25DE-108D-44B8-B18B-322B2A9A206B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ACA3B9F-061F-40D5-8654-C0243712DF57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ACA3B9F-061F-40D5-8654-C0243712DF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ACA3B9F-061F-40D5-8654-C0243712DF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ACA3B9F-061F-40D5-8654-C0243712DF57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA9A2DA8-6226-41AE-93D4-709C40FA61DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA9A2DA8-6226-41AE-93D4-709C40FA61DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA9A2DA8-6226-41AE-93D4-709C40FA61DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA9A2DA8-6226-41AE-93D4-709C40FA61DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDCM.Base.AbsInterfaces;
+using IDCM.MsgDriver;
 using IDCM.Base.ComPO;
 
 namespace IDCM.ViewManager

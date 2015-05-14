@@ -37,7 +37,7 @@ namespace IDCM.DataTransfer
                         gtcache.addOverViewRow(valMap);
                     }
                 }
-                DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.GCMItemDetailRender);
+                DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMItemDetailRender);
                 while (hasNextPage(slp, curPage))
                 {
                     curPage++;

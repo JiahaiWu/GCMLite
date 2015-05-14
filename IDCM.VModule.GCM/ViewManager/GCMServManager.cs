@@ -13,7 +13,6 @@ using IDCM.BGHandler;
 using IDCM.BGHandlerManager;
 using IDCM.Forms;
 using System.Windows.Forms;
-using IDCM.Base.AbsInterfaces;
 
 namespace IDCM.ViewManager
 {

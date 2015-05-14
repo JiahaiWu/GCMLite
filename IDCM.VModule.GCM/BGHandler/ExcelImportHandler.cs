@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
 using System.Windows.Forms;
 using IDCM.DataTransfer;
 using System.Data;
 using IDCM.Core;
+using IDCM.BGHandlerManager;
 
 namespace IDCM.BGHandler
 {
@@ -38,7 +38,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Info("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to Export excel file") + "！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to Export excel file") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to Export excel file") + "！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res, xlsPath };
         }
@@ -50,7 +50,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataImported);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
             if (canceled)
                 return;
             if (error != null)

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDCM.Base.AbsInterfaces;
 using System.Windows.Forms;
 using IDCM.Core;
 using IDCM.MsgDriver;
 using IDCM.DataTransfer;
 using IDCM.ComPO;
+using IDCM.BGHandlerManager;
 
 namespace IDCM.BGHandler
 {
@@ -36,7 +36,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Info("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to query the overview of GCM data") + "！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to query the overview of GCM data") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Tip);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to query the overview of GCM data") + "！ " + ex.Message, DCMMsgType.Tip);
             }
             return new object[] { res };
         }
@@ -48,7 +48,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.GCMDataLoaded);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
             if (canceled)
                 return;
             if (error != null)

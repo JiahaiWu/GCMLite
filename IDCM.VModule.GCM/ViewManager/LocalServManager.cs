@@ -8,7 +8,6 @@ using IDCM.Base;
 using IDCM.Base.Utils;
 using System.IO;
 using System.Configuration;
-using IDCM.Base.AbsInterfaces;
 using NPOI.SS.UserModel;
 using System.Windows.Forms;
 using System.Xml;

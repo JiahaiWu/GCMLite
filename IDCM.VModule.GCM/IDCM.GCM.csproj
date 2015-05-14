@@ -73,11 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BGHandlerManager\BGHandlerProxy.cs" />
-    <Compile Include="BGHandlerManager\BGWorkerInvoker.cs" />
-    <Compile Include="BGHandlerManager\HandlerHolderI.cs" />
-    <Compile Include="BGHandlerManager\HandleRunStatus.cs" />
-    <Compile Include="BGHandlerManager\RunningHandlerNoter.cs" />
     <Compile Include="BGHandler\ExcelExportHandler.cs" />
     <Compile Include="BGHandler\ExcelImportHandler.cs" />
     <Compile Include="BGHandler\GCMDataLoadHandler.cs" />
@@ -173,8 +168,6 @@
     <Compile Include="GCMProView.Designer.cs">
       <DependentUpon>GCMProView.cs</DependentUpon>
     </Compile>
-    <Compile Include="MsgDriver\DCMPublisher.cs" />
-    <Compile Include="MsgDriver\MsgObserver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewManager\ABCServManager.cs" />
@@ -251,6 +244,14 @@
     <ProjectReference Include="..\IDCM.Base\IDCM.Base.csproj">
       <Project>{1b2dd284-7d56-4ac8-be7c-ff34a807d55e}</Project>
       <Name>IDCM.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDCM.BGHandlerManager\IDCM.BGHandlerManager.csproj">
+      <Project>{0aca3b9f-061f-40d5-8654-c0243712df57}</Project>
+      <Name>IDCM.BGHandlerManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDCM.MsgDriver\IDCM.MsgDriver.csproj">
+      <Project>{da9a2da8-6226-41ae-93d4-709c40fa61db}</Project>
+      <Name>IDCM.MsgDriver</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

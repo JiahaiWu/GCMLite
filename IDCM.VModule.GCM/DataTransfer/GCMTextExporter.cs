@@ -5,7 +5,7 @@ using System.Text;
 using IDCM.Core;
 using System.IO;
 using IDCM.Base;
-using IDCM.Base.AbsInterfaces;
+using IDCM.BGHandlerManager;
 
 namespace IDCM.DataTransfer
 {

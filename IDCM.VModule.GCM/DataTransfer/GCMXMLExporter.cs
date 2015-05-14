@@ -6,7 +6,6 @@ using IDCM.Core;
 using IDCM.Base;
 using System.IO;
 using System.Xml;
-using IDCM.Base.AbsInterfaces;
 
 namespace IDCM.DataTransfer
 {

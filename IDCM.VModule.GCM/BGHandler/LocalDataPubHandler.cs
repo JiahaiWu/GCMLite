@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
 using IDCM.Core;
 using IDCM.DataTransfer;
 using System.IO;
 using IDCM.Base;
 using IDCM.ComPO;
+using IDCM.BGHandlerManager;
 
 namespace IDCM.BGHandler
 {
@@ -136,7 +136,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -148,7 +148,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataPublished);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataPublished);
             if (canceled)
                 return;
             if (error != null)

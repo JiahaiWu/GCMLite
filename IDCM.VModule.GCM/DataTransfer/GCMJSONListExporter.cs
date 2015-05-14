@@ -6,7 +6,6 @@ using IDCM.Core;
 using System.IO;
 using IDCM.Base;
 using Newtonsoft.Json;
-using IDCM.Base.AbsInterfaces;
 
 namespace IDCM.DataTransfer
 {

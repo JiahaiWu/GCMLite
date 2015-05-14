@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IDCM.Base.AbsInterfaces;
+using IDCM.BGHandlerManager;
 using IDCM.MsgDriver;
 using IDCM.Core;
 using System.Collections;
@@ -51,7 +51,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -63,19 +63,19 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataChecked);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataChecked);
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
                 log.Info(IDCM.Base.GlobalTextRes.Text("Data filter failed")+"!");
-                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data filter failed") + "!", Base.ComPO.DCMMsgType.Tip);
+                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data filter failed") + "!", DCMMsgType.Tip);
             }
             else
             {
                 log.Info(IDCM.Base.GlobalTextRes.Text("Data filter success")+".");
-                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data filter success") + ".", Base.ComPO.DCMMsgType.Tip);
+                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data filter success") + ".", DCMMsgType.Tip);
             }
         }
     }

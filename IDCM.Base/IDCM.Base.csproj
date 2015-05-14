@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbsInterfaces\AbsBGHandler.cs" />
     <Compile Include="ComPO\ExportType.cs" />
     <Compile Include="GlobalTextRes.cs" />
     <Compile Include="TextResources.Designer.cs">
@@ -60,13 +59,6 @@
     <Compile Include="Utils\Base64CShared.cs" />
     <Compile Include="Utils\Base64DESEncrypt.cs" />
     <Compile Include="Utils\Base64SharedI.cs" />
-    <Compile Include="AbsInterfaces\IBGHandler.cs" />
-    <Compile Include="AbsInterfaces\IMainManager.cs" />
-    <Compile Include="AbsInterfaces\IMsgListener.cs" />
-    <Compile Include="AbsInterfaces\IMsgObserver.cs" />
-    <Compile Include="ComPO\DCMMessage.cs" />
-    <Compile Include="ComPO\AsyncMsgNotice.cs" />
-    <Compile Include="ComPO\HandleRunInfo.cs" />
     <Compile Include="IDCMDataException.cs" />
     <Compile Include="IDCMException.cs" />
     <Compile Include="IDCMServException.cs" />

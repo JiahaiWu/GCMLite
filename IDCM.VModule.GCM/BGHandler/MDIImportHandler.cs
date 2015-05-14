@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using IDCM.Core;
-using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
 using IDCM.Base.Utils;
 using Newtonsoft.Json;
 using IDCM.DataTransfer;
+using IDCM.BGHandlerManager;
 
 namespace IDCM.BGHandler
 {
@@ -35,7 +35,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res, mdiPath };
         }
@@ -48,7 +48,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataImported);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
             if (canceled)
                 return;
             if (error != null)

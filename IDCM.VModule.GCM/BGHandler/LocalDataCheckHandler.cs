@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IDCM.Base.AbsInterfaces;
 using IDCM.MsgDriver;
 using IDCM.Core;
+using IDCM.BGHandlerManager;
 
 namespace IDCM.BGHandler
 {
@@ -51,7 +51,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: "+IDCM.Base.GlobalTextRes.Text("Local data validation did not pass")+"！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -63,19 +63,19 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataChecked);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataChecked);
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
                 log.Info(IDCM.Base.GlobalTextRes.Text("Data Check failed")+"!");
-                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!", Base.ComPO.DCMMsgType.Tip);
+                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check failed") + "!", DCMMsgType.Tip);
             }
             else
             {
                 log.Info(IDCM.Base.GlobalTextRes.Text("Data Check success")+".");
-                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check success")+".", Base.ComPO.DCMMsgType.Tip);
+                DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Data Check success")+".", DCMMsgType.Tip);
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IDCM.Base.AbsInterfaces;
+using IDCM.BGHandlerManager;
 using IDCM.Core;
 using IDCM.MsgDriver;
 using IDCM.DataTransfer;
@@ -43,7 +43,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to export XML document")+"！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export XML document") + "！ " + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export XML document") + "！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -55,7 +55,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataExported);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
             if (canceled)
                 return;
             if (error != null)

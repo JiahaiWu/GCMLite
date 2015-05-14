@@ -134,6 +134,10 @@
       <Project>{1b2dd284-7d56-4ac8-be7c-ff34a807d55e}</Project>
       <Name>IDCM.Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IDCM.BGHandlerManager\IDCM.BGHandlerManager.csproj">
+      <Project>{0aca3b9f-061f-40d5-8654-c0243712df57}</Project>
+      <Name>IDCM.BGHandlerManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IDCM.VModule.GCM\IDCM.GCM.csproj">
       <Project>{c3639c5d-8a22-4c09-9a42-5a469866b974}</Project>
       <Name>IDCM.GCM</Name>

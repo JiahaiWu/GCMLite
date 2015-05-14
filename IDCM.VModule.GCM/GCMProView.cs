@@ -20,6 +20,7 @@ using System.Collections.Concurrent;
 using IDCM.ComPO;
 using IDCM.DataTransfer;
 using IDCM.Forms;
+using IDCM.MsgDriver;
 
 namespace IDCM.VModule.GCM
 {
@@ -382,7 +383,7 @@ namespace IDCM.VModule.GCM
             //////////////////////////////////////////////////////
             //初始化消息池
             servInvoker = new AsyncServInvoker();
-            Base.AbsInterfaces.IMsgObserver msgObs = MsgDriver.DCMPublisher.initDefaultMsgObserver();
+            IMsgObserver msgObs = DCMPublisher.initDefaultMsgObserver();
             msgObs.bind(servInvoker);
             ////////////////////////////////////////////////////
             //绑定消息事件处理方法

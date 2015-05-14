@@ -1,4 +1,4 @@
-﻿using IDCM.Base.AbsInterfaces;
+﻿using IDCM.BGHandlerManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +36,7 @@ namespace IDCM.BGHandler
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import XML document")+"！", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + ex.Message, IDCM.Base.ComPO.DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res, xlsPath };
         }
@@ -49,7 +49,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(Base.ComPO.AsyncMsgNotice.LocalDataImported);
+            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
             if (canceled)
                 return;
             if (error != null)
