@@ -1649,93 +1649,93 @@ namespace DCMControlLib.GCM
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if ((keyData == (Keys.Tab | Keys.Control)) || (keyData == (Keys.Tab | Keys.Shift | Keys.Control)))
-            {
-                if (!OnNavigateTabPage((keyData & Keys.Shift) != Keys.Shift ? this.SelectedIndex + 1 : this.SelectedIndex - 1, true))
-                {
-                    msg.Result = new IntPtr(1);
-                    return true;
-                }
-            }
-            else
-            {
-                switch (keyData)
-                {
-                    // Selects Last TabPage
-                    case Keys.End:
-                        if (!OnNavigateTabPage(this.TabCount - 1, false))
-                        {
-                            msg.Result = new IntPtr(1);
-                            return true;
-                        }
-                        break;
-                    // Selects First TabPage
-                    case Keys.Home:
-                        if (!OnNavigateTabPage(0, false))
-                        {
-                            msg.Result = new IntPtr(1);
-                            return true;
-                        }
-                        break;
-                    // Selects the tab on the left side of the currently selected TabPage
-                    case Keys.Left:
-                        if (!OnNavigateTabPage(this.SelectedIndex - 1, false))
-                        {
-                            msg.Result = new IntPtr(1);
-                            return true;
-                        }
-                        break;
-                    // Selects the tab on the right side of the currently selected TabPage
-                    case Keys.Right:
-                        if (!OnNavigateTabPage(this.SelectedIndex + 1, false))
-                        {
-                            msg.Result = new IntPtr(1);
-                            return true;
-                        }
-                        break;
-                    case Keys.Insert:
-                        if (conditionBooleanArray[3] && MessageBox.Show("Do you want to insert a new tab page here?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            TabPageEx tabPage = new TabPageEx();
-                            this.Controls.Add(tabPage);
-                        }
-                        break;
-                    case Keys.Delete:
-                        if (conditionBooleanArray[3] && this.TabCount > 0)
-                        {
-                            if (MessageBox.Show("Do you want to remove the selected tab page?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                TabPageEx removingTabPage = this.SelectedTab as TabPageEx;
-                                if (removingTabPage != null && removingTabPage.IsClosable && removingTabPage.Enabled)
-                                {
-                                    using (SelectedIndexChangingEventArgs e = new SelectedIndexChangingEventArgs(removingTabPage, this.SelectedIndex))
-                                    {
-                                        // Fire a Notification Event.
-                                        OnTabPageClosing(e);
+            //if ((keyData == (Keys.Tab | Keys.Control)) || (keyData == (Keys.Tab | Keys.Shift | Keys.Control)))
+            //{
+            //    if (!OnNavigateTabPage((keyData & Keys.Shift) != Keys.Shift ? this.SelectedIndex + 1 : this.SelectedIndex - 1, true))
+            //    {
+            //        msg.Result = new IntPtr(1);
+            //        return true;
+            //    }
+            //}
+            //else
+            //{
+            //    switch (keyData)
+            //    {
+            //        // Selects Last TabPage
+            //        case Keys.End:
+            //            if (!OnNavigateTabPage(this.TabCount - 1, false))
+            //            {
+            //                msg.Result = new IntPtr(1);
+            //                return true;
+            //            }
+            //            break;
+            //        // Selects First TabPage
+            //        case Keys.Home:
+            //            if (!OnNavigateTabPage(0, false))
+            //            {
+            //                msg.Result = new IntPtr(1);
+            //                return true;
+            //            }
+            //            break;
+            //        // Selects the tab on the left side of the currently selected TabPage
+            //        case Keys.Left:
+            //            if (!OnNavigateTabPage(this.SelectedIndex - 1, false))
+            //            {
+            //                msg.Result = new IntPtr(1);
+            //                return true;
+            //            }
+            //            break;
+            //        // Selects the tab on the right side of the currently selected TabPage
+            //        case Keys.Right:
+            //            if (!OnNavigateTabPage(this.SelectedIndex + 1, false))
+            //            {
+            //                msg.Result = new IntPtr(1);
+            //                return true;
+            //            }
+            //            break;
+            //        case Keys.Insert:
+            //            if (conditionBooleanArray[3] && MessageBox.Show("Do you want to insert a new tab page here?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //            {
+            //                TabPageEx tabPage = new TabPageEx();
+            //                this.Controls.Add(tabPage);
+            //            }
+            //            break;
+            //        case Keys.Delete:
+            //            if (conditionBooleanArray[3] && this.TabCount > 0)
+            //            {
+            //                if (MessageBox.Show("Do you want to remove the selected tab page?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //                {
+            //                    TabPageEx removingTabPage = this.SelectedTab as TabPageEx;
+            //                    if (removingTabPage != null && removingTabPage.IsClosable && removingTabPage.Enabled)
+            //                    {
+            //                        using (SelectedIndexChangingEventArgs e = new SelectedIndexChangingEventArgs(removingTabPage, this.SelectedIndex))
+            //                        {
+            //                            // Fire a Notification Event.
+            //                            OnTabPageClosing(e);
 
-                                        if (!e.Cancel)
-                                        {
-                                            this.TabPages.Remove(removingTabPage);
-                                            SelectNextAvailableTabPage();
-                                        }
-                                        else
-                                            MessageBox.Show("The operation was canceled by the user.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("The selected tab page could not be deleted!!!, it may be due to the following reasons;\r\n\r\n1.Tab page might be null or disposed by the application.\r\n2.Tab page might not be closable.\r\n3.Tab page might be disable.",
-                                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                            }
-                        }
-                        break;
-                    case Keys.Escape:
-                        break;
-                    case Keys.F1:
-                        break;
-                }
-            }
+            //                            if (!e.Cancel)
+            //                            {
+            //                                this.TabPages.Remove(removingTabPage);
+            //                                SelectNextAvailableTabPage();
+            //                            }
+            //                            else
+            //                                MessageBox.Show("The operation was canceled by the user.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        MessageBox.Show("The selected tab page could not be deleted!!!, it may be due to the following reasons;\r\n\r\n1.Tab page might be null or disposed by the application.\r\n2.Tab page might not be closable.\r\n3.Tab page might be disable.",
+            //                            Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //                    }
+            //                }
+            //            }
+            //            break;
+            //        case Keys.Escape:
+            //            break;
+            //        case Keys.F1:
+            //            break;
+            //    }
+            //}
             return base.ProcessCmdKey(ref msg,keyData);
         }
 

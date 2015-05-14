@@ -79,6 +79,15 @@ namespace IDCM.Base
         /// 默认最大化设置
         /// </summary>
         public const string DefaultMaximum = "DefaultMaximum";
+        /// <summary>
+        /// GCM数据记录主键名称标记
+        /// </summary>
+        public const string GCMSIDName = "GCMSIDName";
+        /// <summary>
+        /// GCM菌种目录名称标记
+        /// </summary>
+        public const string GCMStrainKeyName = "GCMStrainKeyName";
+
         #endregion
         public static int SessionValidMilliSeconds = 600000;
         /// <summary>

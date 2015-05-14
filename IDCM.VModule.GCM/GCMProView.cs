@@ -50,341 +50,6 @@ namespace IDCM.VModule.GCM
         }
         #endregion
 
-        #region Events&Handlings
-
-        public event GCMStatusHandler GCMStatusChanged;
-        public event GCMProgressHandler GCMProgressInvoke;
-        public event GCMOpConditionHandler GCMOpConditionChanged;
-
-        private void GCMProView_Load(object sender, EventArgs e)
-        {
-
-            startLocalDataRender();
-            startGCMSiteRender();
-        }
-        private void colConfiger_ColConfigChanged(int cursor, bool isRequire, bool isUnique, string restrict)
-        {
-            if (cursor > -1)
-            {
-                ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
-                {
-                    DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
-                    if (dgvc != null && dgvc.Visible)
-                    {
-                        CustomColDefGetter.updateCustomColCond(dgvc.Name, isRequire, isUnique, restrict);
-                        MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
-                    }
-                }));
-            }
-        }
-
-        private void dcmDataGridView_local_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
-            {
-                if (e.ColumnIndex > -1)
-                {
-                    CustomColDef ccd = CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
-                    if (ccd != null && ccd.IsEnable)
-                    {
-                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd.Alias, ccd.IsRequire, ccd.IsUnique, ccd.Restrict);
-                        colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
-                        colConfiger.Show(this.FindForm(), new Point(MousePosition.X, MousePosition.Y));
-                    }
-                }
-            }
-        }
-        private void OnLocalSubmitClick(object sender, EventArgs e)
-        {
-            publishLocalData();
-        }
-        private void OnLocalSearchClick(object sender, EventArgs e)
-        {
-            if (dcmDataGridView_local.CurrentRow != null)
-            {
-                DataGridViewCellCollection dgvcc = dcmDataGridView_local.CurrentRow.Cells;
-                string strainId = dgvcc[ctcache.getKeyColIndex()].FormattedValue.ToString();
-                if (abcServManager.linkTo(strainId))
-                    gcmTabControl_GCM.SelectedIndex = tabPage_ABC.TabIndex;
-            }
-        }
-
-        private void OnLocalCopyClick(object sender, EventArgs e)
-        {
-            DataObject d = this.dcmDataGridView_local.GetClipboardContent();
-            Clipboard.SetDataObject(d);
-        }
-
-        private void OnLocalPasteClick(object sender, EventArgs e)
-        {
-            try
-            {
-                string s = Clipboard.GetText();
-                string[] lines = s.Split('\n');
-                int iFail = 0, iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
-                int iCol = this.dcmDataGridView_local.CurrentCell.ColumnIndex;
-                DataGridViewCell oCell;
-                foreach (string line in lines)
-                {
-                    if (iRow < this.dcmDataGridView_local.RowCount && line.Length > 0)
-                    {
-                        string[] sCells = line.Split('\t');
-                        for (int i = 0; i < sCells.GetLength(0); ++i)
-                        {
-                            if (iCol + i < this.dcmDataGridView_local.ColumnCount)
-                            {
-                                oCell = this.dcmDataGridView_local[iCol + i, iRow];
-                                if (!oCell.ReadOnly)
-                                {
-                                    if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
-                                    {
-                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
-                                        oCell.Style.BackColor = Color.Tomato;
-                                    }
-                                    else
-                                        iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
-                                }
-                            }
-                            else
-                            { break; }
-                        }
-                        iRow++;
-                    }
-                    else
-                    { break; }
-                    /////////////////////////////////////////////////////////////////////////////
-                    //if (iFail > 0)
-                    //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
-                    //@Deprecated
-                    /////////////////////////////////////////////////////////////////////////////
-                }
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show(GlobalTextRes.Text("The data you pasted is in the wrong format for the cell"));
-                return;
-            }
-        }
-
-        private void OnLocalKeyDownDetect(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.V)
-            {
-                OnLocalPasteClick(sender, e);
-            }
-            if (e.Control && e.KeyCode == Keys.Insert)
-            {
-                int iRow = 0;
-                if (this.dcmDataGridView_local.CurrentCell != null)
-                {
-                    iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
-                    if (iRow < 0)
-                        iRow = 0;
-                    if (iRow < this.dcmDataGridView_local.RowCount)
-                        iRow = this.dcmDataGridView_local.RowCount;
-                }
-                else
-                {
-                    iRow = this.dcmDataGridView_local.RowCount;
-                }
-                this.dcmDataGridView_local.Rows.Insert(iRow, 1);
-            }
-        }
-
-
-        private void dataGridView_local_CustomContextMenuDetect(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (dcmDataGridView_local.CurrentRow != null)
-                {
-                    Point plocation = dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
-                    int eY = MousePosition.Y - plocation.Y;
-                    if (eY > this.dcmDataGridView_local.ColumnHeadersHeight)
-                    {
-                        cellContextMenu_local.Show(dcmDataGridView_local, new Point(MousePosition.X - plocation.X, MousePosition.Y - plocation.Y));
-                    }
-                }
-            }
-        }
-
-        private void dataGridView_local_columns_StateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
-        {
-            if (e.Column != null && e.StateChanged.Equals(DataGridViewElementStates.Visible))
-            {
-                CustomColDefGetter.updateCustomColDef(e.Column.Name, e.Column.Visible);
-            }
-        }
-        private void OnSimpleMsgTip(object msgTag, params object[] vals)
-        {
-            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
-            {
-                new IDCM.Forms.MessageDlg(msgTag.ToString()).Show();
-            }));
-        }
-        private void OnGCMItemDetailRender(object msgTag, params object[] vals)
-        {
-            ControlAsyncUtil.SyncInvoke(dcmDataGridView_gcm, new ControlAsyncUtil.InvokeHandler(delegate()
-            {
-                int index = 0;
-                if (vals != null && vals.Length > 0 && vals[0].GetType().Equals(typeof(int)))
-                    index = (int)vals[0];
-                gcmServManager.showGCMDataDetail(index);
-            }));
-        }
-        private void OnGCMUserSigned(object msgTag, params object[] vals)
-        {
-            if (gcmServManager.Signed)
-            {
-                showGCMDataDlg();
-                if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
-                {
-                    ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
-                    if (gtcache.RememberLogin && gcmServManager.Password != null)
-                    {
-                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, Base64DESEncrypt.CreateInstance(gcmServManager.UserName).Encrypt(gcmServManager.Password), SysConstants.defaultCfgPath);
-                    }
-                    else
-                    {
-                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, "", SysConstants.defaultCfgPath);
-                    }
-                }
-            }
-            else
-            {
-                showLoginDlg();
-            }
-        }
-        private void OnBottomSatusChange(object msgTag, params object[] vals)
-        {
-            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
-            {
-                if (GCMStatusChanged != null)
-                {
-                    GCMStatusChanged((msgTag != null) ? msgTag.ToString() : GlobalTextRes.Text("Ready"));
-                }
-            }));
-        }
-        private void OnProgressChange(object msgTag, params object[] vals)
-        {
-            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
-            {
-                if (GCMProgressInvoke != null)
-                {
-                    if (msgTag.GetType().Equals(typeof(bool)))
-                    {
-                        GCMProgressInvoke((bool)msgTag);
-                    }
-                }
-            }));
-        }
-
-        private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
-        {
-            if (e.TabPageIndex == tabPageEx_GCM.TabIndex)
-            {
-                if (gcmServManager.Signed)
-                {
-                    showGCMDataDlg();
-                }
-                else
-                {
-                    showLoginDlg();
-                }
-            }
-            else if (e.TabPageIndex == tabPage_ABC.TabIndex)
-                notifyOpConditions(OpConditionType.ABC_View);
-            else
-                notifyOpConditions(OpConditionType.Local_View);
-        }
-
-
-        private void OnLocalDataExported(object msgTag, params object[] vals)
-        {
-            MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data exported success"));
-        }
-        private void OnLocalDataImported(object msgTag, params object[] vals)
-        {
-            MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data import success"));
-        }
-
-        private void dataGridView_gcm_CellClicked(object sender, DataGridViewCellEventArgs e)
-        {
-            gcmServManager.showGCMDataDetail(e.RowIndex);
-        }
-        /// <summary>
-        /// 拖拽事件运行时的鼠标状态切换方法
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView_local_items_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Link;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-        /// <summary>
-        /// 文件拖拽后事件处理方法
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView_local_items_DragDrop(object sender, DragEventArgs e)
-        {
-            String[] recvs = (String[])e.Data.GetData(DataFormats.FileDrop, false);
-            e.Effect = DragDropEffects.None;
-            for (int i = 0; i < recvs.Length; i++)
-            {
-                if (recvs[i].Trim() != "")
-                {
-                    String fpath = recvs[i].Trim();
-                    bool exists = System.IO.File.Exists(fpath);
-                    if (exists == true)
-                    {
-                        localServManager.importData(fpath);
-                    }
-                }
-            }
-        }
-        private void button_cancel_Click(object sender, EventArgs e)
-        {
-            this.Select(true, false);
-        }
-
-        private void pictureBox_Signhelp_Click(object sender, EventArgs e)
-        {
-            HelpDocRequester.requestHelpDoc(HelpDocConstants.StartViewTag);
-        }
-
-        private void button_confirm_Click(object sender, EventArgs e)
-        {
-            if (this.textBox_pwd.Text.Length < 1 || this.textBox_ccinfoId.Text.Length < 1)
-            {
-                MessageBox.Show(GlobalTextRes.Text("The 'CCInfo Id' and 'GCM Password' should not be empty."));
-                return;
-            }
-            try
-            {
-                this.panel_GCM_start.Enabled = false;
-                gcmServManager.connnectGCM();
-            }
-            finally
-            {
-                this.panel_GCM_start.Enabled = true;
-            }
-        }
-
-        private void splitContainer_GCM_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Point reNewPoint = new Point(this.splitContainer_GCM.Panel1.Width / 2 - this.panel_GCM_start.Width / 2, (int)(this.splitContainer_GCM.Panel1.Height * 0.82 - this.panel_GCM_start.Height));
-            this.panel_GCM_start.Location = reNewPoint;
-        }
-        #endregion
-
         #region Methods
         private void InitializeMsgDriver()
         {
@@ -443,6 +108,12 @@ namespace IDCM.VModule.GCM
                     gtcache = new GCMTableCache(textBox_ccinfoId, textBox_pwd, checkBox_remember, dcmDataGridView_gcm, dcmTreeView_gcm);
                     gcmServManager = new GCMServManager(gtcache);
                     this.dcmDataGridView_gcm.CellClick += dataGridView_gcm_CellClicked;
+                    this.dcmDataGridView_gcm.AllowUserToResizeColumns = true;
+                    this.dcmDataGridView_gcm.AllowUserToResizeRows = true;
+                    this.dcmDataGridView_gcm.CellMouseClick+=dcmDataGridView_gcm_CellMouseClick;
+                    this.cellContextMenu_gcm = new System.Windows.Forms.ContextMenu();
+                    this.cellContextMenu_gcm.MenuItems.Add(new MenuItem("Search record", OnGCMSearchClick));
+
                     gcmFrontFindDlg = new GCMFrontFindDlg(dcmDataGridView_gcm);
                     gcmFrontFindDlg.setCellHit += new GCMFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
                     gcmFrontFindDlg.cancelCellHit += new GCMFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
@@ -469,8 +140,6 @@ namespace IDCM.VModule.GCM
             }
         }
         
-        
-
         private void setDGVCellHit(DataGridViewCell cell)
         {
             if (cell.Visible == false)
@@ -495,8 +164,6 @@ namespace IDCM.VModule.GCM
             cell.Selected = false;
         }
         
-        
-
         private void startLocalDataRender()
         {
             log.Debug("startDataRender(...)");
@@ -727,6 +394,371 @@ namespace IDCM.VModule.GCM
         }
         #endregion
 
+        #region Events&Handlings
+
+        public event GCMStatusHandler GCMStatusChanged;
+        public event GCMProgressHandler GCMProgressInvoke;
+        public event GCMOpConditionHandler GCMOpConditionChanged;
+
+        private void GCMProView_Load(object sender, EventArgs e)
+        {
+
+            startLocalDataRender();
+            startGCMSiteRender();
+        }
+        private void colConfiger_ColConfigChanged(int cursor, bool isRequire, bool isUnique, string restrict)
+        {
+            if (cursor > -1)
+            {
+                ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
+                {
+                    DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
+                    if (dgvc != null && dgvc.Visible)
+                    {
+                        CustomColDefGetter.updateCustomColCond(dgvc.Name, isRequire, isUnique, restrict);
+                        MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
+                    }
+                }));
+            }
+        }
+
+        private void dcmDataGridView_local_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
+            {
+                if (e.ColumnIndex > -1)
+                {
+                    CustomColDef ccd = CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
+                    if (ccd != null && ccd.IsEnable)
+                    {
+                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd.Alias, ccd.IsRequire, ccd.IsUnique, ccd.Restrict);
+                        colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
+                        colConfiger.Show(this.FindForm(), new Point(MousePosition.X, MousePosition.Y));
+                    }
+                }
+            }
+        }
+        private void OnLocalSubmitClick(object sender, EventArgs e)
+        {
+            publishLocalData();
+        }
+        private void OnLocalSearchClick(object sender, EventArgs e)
+        {
+            if (dcmDataGridView_local.CurrentRow != null)
+            {
+                DataGridViewCellCollection dgvcc = dcmDataGridView_local.CurrentRow.Cells;
+                string strainId = dgvcc[ctcache.getKeyColIndex()].FormattedValue.ToString();
+                if (abcServManager.linkTo(strainId))
+                    gcmTabControl_GCM.SelectedIndex = tabPage_ABC.TabIndex;
+            }
+        }
+        private void OnGCMSearchClick(object sender, EventArgs e)
+        {
+            if (dcmDataGridView_gcm.CurrentRow != null)
+            {
+                DataGridViewCellCollection dgvcc = dcmDataGridView_gcm.CurrentRow.Cells;
+                if (gtcache.getStrainKeyColIndex() > -1)
+                {
+                    string strainId = dgvcc[gtcache.getStrainKeyColIndex()].FormattedValue.ToString();
+                    if (abcServManager.linkTo(strainId))
+                        gcmTabControl_GCM.SelectedIndex = tabPage_ABC.TabIndex;
+                }
+            }
+        }
+        
+        private void OnLocalCopyClick(object sender, EventArgs e)
+        {
+            DataObject d = this.dcmDataGridView_local.GetClipboardContent();
+            Clipboard.SetDataObject(d);
+        }
+
+        private void OnLocalPasteClick(object sender, EventArgs e)
+        {
+            try
+            {
+                string s = Clipboard.GetText();
+                string[] lines = s.Split('\n');
+                int iFail = 0, iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
+                int iCol = this.dcmDataGridView_local.CurrentCell.ColumnIndex;
+                DataGridViewCell oCell;
+                foreach (string line in lines)
+                {
+                    if (iRow < this.dcmDataGridView_local.RowCount && line.Length > 0)
+                    {
+                        string[] sCells = line.Split('\t');
+                        for (int i = 0; i < sCells.GetLength(0); ++i)
+                        {
+                            if (iCol + i < this.dcmDataGridView_local.ColumnCount)
+                            {
+                                oCell = this.dcmDataGridView_local[iCol + i, iRow];
+                                if (!oCell.ReadOnly)
+                                {
+                                    if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
+                                    {
+                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
+                                        oCell.Style.BackColor = Color.Tomato;
+                                    }
+                                    else
+                                        iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
+                                }
+                            }
+                            else
+                            { break; }
+                        }
+                        iRow++;
+                    }
+                    else
+                    { break; }
+                    /////////////////////////////////////////////////////////////////////////////
+                    //if (iFail > 0)
+                    //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                    //@Deprecated
+                    /////////////////////////////////////////////////////////////////////////////
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show(GlobalTextRes.Text("The data you pasted is in the wrong format for the cell"));
+                return;
+            }
+        }
+
+        private void OnLocalKeyDownDetect(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                OnLocalPasteClick(sender, e);
+            }
+            if (e.Control && e.KeyCode == Keys.Insert)
+            {
+                int iRow = 0;
+                if (this.dcmDataGridView_local.CurrentCell != null)
+                {
+                    iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
+                    if (iRow < 0)
+                        iRow = 0;
+                    if (iRow < this.dcmDataGridView_local.RowCount)
+                        iRow = this.dcmDataGridView_local.RowCount;
+                }
+                else
+                {
+                    iRow = this.dcmDataGridView_local.RowCount;
+                }
+                this.dcmDataGridView_local.Rows.Insert(iRow, 1);
+            }
+        }
+
+
+        private void dataGridView_local_CustomContextMenuDetect(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (dcmDataGridView_local.CurrentRow != null)
+                {
+                    Point plocation = dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
+                    int eY = MousePosition.Y - plocation.Y;
+                    if (eY > this.dcmDataGridView_local.ColumnHeadersHeight)
+                    {
+                        cellContextMenu_local.Show(dcmDataGridView_local, new Point(MousePosition.X - plocation.X, MousePosition.Y - plocation.Y));
+                    }
+                }
+            }
+        }
+
+        private void dcmDataGridView_gcm_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (dcmDataGridView_gcm.CurrentRow != null)
+                {
+                    Point plocation = dcmDataGridView_gcm.PointToScreen(dcmDataGridView_gcm.Location);
+                    int eY = MousePosition.Y - plocation.Y;
+                    if (eY > this.dcmDataGridView_gcm.ColumnHeadersHeight)
+                    {
+                        cellContextMenu_gcm.Show(dcmDataGridView_gcm, new Point(MousePosition.X - plocation.X, MousePosition.Y - plocation.Y));
+                    }
+                }
+            }
+        }
+
+
+        private void dataGridView_local_columns_StateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (e.Column != null && e.StateChanged.Equals(DataGridViewElementStates.Visible))
+            {
+                CustomColDefGetter.updateCustomColDef(e.Column.Name, e.Column.Visible);
+            }
+        }
+        private void OnSimpleMsgTip(object msgTag, params object[] vals)
+        {
+            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                new IDCM.Forms.MessageDlg(msgTag.ToString()).Show();
+            }));
+        }
+        private void OnGCMItemDetailRender(object msgTag, params object[] vals)
+        {
+            ControlAsyncUtil.SyncInvoke(dcmDataGridView_gcm, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                int index = 0;
+                if (vals != null && vals.Length > 0 && vals[0].GetType().Equals(typeof(int)))
+                    index = (int)vals[0];
+                gcmServManager.showGCMDataDetail(index);
+            }));
+        }
+        private void OnGCMUserSigned(object msgTag, params object[] vals)
+        {
+            if (gcmServManager.Signed)
+            {
+                showGCMDataDlg();
+                if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
+                {
+                    ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
+                    if (gtcache.RememberLogin && gcmServManager.Password != null)
+                    {
+                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, Base64DESEncrypt.CreateInstance(gcmServManager.UserName).Encrypt(gcmServManager.Password), SysConstants.defaultCfgPath);
+                    }
+                    else
+                    {
+                        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, "", SysConstants.defaultCfgPath);
+                    }
+                }
+            }
+            else
+            {
+                showLoginDlg();
+            }
+        }
+        private void OnBottomSatusChange(object msgTag, params object[] vals)
+        {
+            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                if (GCMStatusChanged != null)
+                {
+                    GCMStatusChanged((msgTag != null) ? msgTag.ToString() : GlobalTextRes.Text("Ready"));
+                }
+            }));
+        }
+        private void OnProgressChange(object msgTag, params object[] vals)
+        {
+            ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                if (GCMProgressInvoke != null)
+                {
+                    if (msgTag.GetType().Equals(typeof(bool)))
+                    {
+                        GCMProgressInvoke((bool)msgTag);
+                    }
+                }
+            }));
+        }
+
+        private void gcmTabControl_GCM_SelectedIndexChanging(object sender, DCMControlLib.GCM.SelectedIndexChangingEventArgs e)
+        {
+            if (e.TabPageIndex == tabPageEx_GCM.TabIndex)
+            {
+                if (gcmServManager.Signed)
+                {
+                    showGCMDataDlg();
+                }
+                else
+                {
+                    showLoginDlg();
+                }
+            }
+            else if (e.TabPageIndex == tabPage_ABC.TabIndex)
+                notifyOpConditions(OpConditionType.ABC_View);
+            else
+                notifyOpConditions(OpConditionType.Local_View);
+        }
+
+
+        private void OnLocalDataExported(object msgTag, params object[] vals)
+        {
+            MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data exported success"));
+        }
+        private void OnLocalDataImported(object msgTag, params object[] vals)
+        {
+            MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data import success"));
+        }
+
+        private void dataGridView_gcm_CellClicked(object sender, DataGridViewCellEventArgs e)
+        {
+            gcmServManager.showGCMDataDetail(e.RowIndex);
+        }
+        /// <summary>
+        /// 拖拽事件运行时的鼠标状态切换方法
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView_local_items_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        /// <summary>
+        /// 文件拖拽后事件处理方法
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView_local_items_DragDrop(object sender, DragEventArgs e)
+        {
+            String[] recvs = (String[])e.Data.GetData(DataFormats.FileDrop, false);
+            e.Effect = DragDropEffects.None;
+            for (int i = 0; i < recvs.Length; i++)
+            {
+                if (recvs[i].Trim() != "")
+                {
+                    String fpath = recvs[i].Trim();
+                    bool exists = System.IO.File.Exists(fpath);
+                    if (exists == true)
+                    {
+                        localServManager.importData(fpath);
+                    }
+                }
+            }
+        }
+        private void button_cancel_Click(object sender, EventArgs e)
+        {
+            this.Select(true, false);
+        }
+
+        private void pictureBox_Signhelp_Click(object sender, EventArgs e)
+        {
+            HelpDocRequester.requestHelpDoc(HelpDocConstants.StartViewTag);
+        }
+
+        private void button_confirm_Click(object sender, EventArgs e)
+        {
+            if (this.textBox_pwd.Text.Length < 1 || this.textBox_ccinfoId.Text.Length < 1)
+            {
+                MessageBox.Show(GlobalTextRes.Text("The 'CCInfo Id' and 'GCM Password' should not be empty."));
+                return;
+            }
+            try
+            {
+                this.panel_GCM_start.Enabled = false;
+                gcmServManager.connnectGCM();
+            }
+            finally
+            {
+                this.panel_GCM_start.Enabled = true;
+            }
+        }
+
+        private void splitContainer_GCM_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Point reNewPoint = new Point(this.splitContainer_GCM.Panel1.Width / 2 - this.panel_GCM_start.Width / 2, (int)(this.splitContainer_GCM.Panel1.Height * 0.82 - this.panel_GCM_start.Height));
+            this.panel_GCM_start.Location = reNewPoint;
+        }
+        #endregion
+
         #region Property
         public OpConditionType OpConditions
         {
@@ -743,6 +775,7 @@ namespace IDCM.VModule.GCM
         #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private ContextMenu cellContextMenu_local = null;
+        private ContextMenu cellContextMenu_gcm = null;
         private LocalFrontFindDlg localFrontFindDlg = null;
         private GCMFrontFindDlg gcmFrontFindDlg = null;
         private AsyncServInvoker servInvoker = null;

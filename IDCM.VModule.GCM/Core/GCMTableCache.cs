@@ -10,6 +10,7 @@ using IDCM.DataTransfer;
 using IDCM.Base.ComPO;
 using IDCM.MsgDriver;
 using IDCM.ComponentUtil;
+using System.Configuration;
 
 namespace IDCM.Core
 {
@@ -25,7 +26,8 @@ namespace IDCM.Core
             this.dgv_overview = dgv_overview;
             this.tree_detail = tree_detail;
             keyIndexs = new Dictionary<string, int>();
-            keyName = "id";
+            keyName = ConfigurationManager.AppSettings[SysConstants.GCMSIDName];
+            strainKeyName= ConfigurationManager.AppSettings[SysConstants.GCMStrainKeyName];
         }
         #endregion
 
@@ -74,7 +76,8 @@ namespace IDCM.Core
                 DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
                 dgvtbc.Name = keyName;
                 dgvtbc.HeaderText = keyName;
-                dgvtbc.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                dgvtbc.Width = 100;
+                dgvtbc.Resizable = DataGridViewTriState.True;
                 ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
                     dgv_overview.Columns.Add(dgvtbc);
@@ -103,7 +106,8 @@ namespace IDCM.Core
                         DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
                         dgvtbc.Name = entry.Key;
                         dgvtbc.HeaderText = entry.Key;
-                        dgvtbc.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                        dgvtbc.Width = 100;
+                        dgvtbc.Resizable = DataGridViewTriState.True;
                         dgv_overview.Columns.Add(dgvtbc);
                     }
                     DataGridViewCell dgvc = dgv_overview.Rows[dgvrIdx].Cells[entry.Key];
@@ -238,6 +242,16 @@ namespace IDCM.Core
                 }
             }));
         }
+        internal int getStrainKeyColIndex()
+        {
+            if (dgv_overview != null && dgv_overview.ColumnCount > 0)
+            {
+                DataGridViewColumn dgvc = dgv_overview.Columns[strainKeyName];
+                if (dgvc != null)
+                    return dgvc.Index;
+            }
+            return -1;
+        }
         #endregion
 
         #region Members
@@ -250,6 +264,10 @@ namespace IDCM.Core
         /// 主键名称标记
         /// </summary>
         private string keyName = "id";
+        /// <summary>
+        /// 主键名称标记
+        /// </summary>
+        private string strainKeyName = "strain_number";
         /// <summary>
         /// 主键映射表缓存表设定
         /// </summary>
@@ -271,5 +289,7 @@ namespace IDCM.Core
         private CheckBox checkBox_remember;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion
+
+
     }
 }
