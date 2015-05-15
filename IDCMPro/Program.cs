@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IDCM.AppContext;
 using IDCM.Base.Utils;
+using System.Configuration;
+using IDCM.Base;
+
 /********************************
  * GCMLite
  * Specific Data Admin For Global Catalogue of Microorganisms (GCM) Data Intergration
@@ -48,6 +51,19 @@ namespace IDCM
         {
             try
             {
+                try
+                {
+                    string lan = ConfigurationManager.AppSettings[SysConstants.CultureInfo];
+                    if (lan != null && lan.Length > 0)
+                    {
+                        Application.CurrentCulture = new System.Globalization.CultureInfo(lan);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    log.Error("Set Lanaguage by app.config failed.", ex);
+                }
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Dictionary<string, string> preSetttings = commandArgScreening(args);

@@ -29,7 +29,7 @@ namespace IDCM.Core
     /// 3.配置文档使用UTF-8字符集编码。
     /// @see http://gcm.wfcc.info/GCMDIhelp
     /// </summary>
-    public class CustomColDef
+    public class CustomColDef:ICloneable
     {
         #region Property
 
@@ -187,6 +187,21 @@ namespace IDCM.Core
         {
             return Attr + splitChar + IsRequire + splitChar + IsUnique + splitChar
                 + Restrict + splitChar + Alias + splitChar + (DefaultVal == null ? "" : DefaultVal);
+        }
+
+        public object Clone()
+        {
+            CustomColDef copyccd = new CustomColDef();
+            copyccd.Attr=Attr;
+            copyccd.Alias=Alias;
+            copyccd.Restrict=Restrict;
+            copyccd.IsUnique=IsUnique;
+            copyccd.IsRequire=IsRequire;
+            copyccd.IsEnable=IsEnable;
+            copyccd.DefaultVal=DefaultVal;
+            copyccd.Corder=Corder;
+            return copyccd;
+
         }
         #endregion
 

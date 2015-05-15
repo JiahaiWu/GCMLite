@@ -215,10 +215,10 @@ namespace IDCM.VModule.GCM
         {
             localServManager.checkLocalData();
         }
-        public string doExitDump()
+        public string doExitDump(bool slient=false)
         {
             CustomColDefGetter.saveUpdatedHistCfg();
-            if (!RunningHandlerNoter.checkForIdle())
+            if (slient | !RunningHandlerNoter.checkForIdle())
             {
                 if (MessageBox.Show(GlobalTextRes.Text("There are background tasks are executing, force quit or not"),
                     GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -372,7 +372,7 @@ namespace IDCM.VModule.GCM
                 {
                     Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
                 }
-                string dumppath = doExitDump();
+                string dumppath = doExitDump(true);
                 FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
             }
             catch (Exception ex)
@@ -406,16 +406,16 @@ namespace IDCM.VModule.GCM
             startLocalDataRender();
             startGCMSiteRender();
         }
-        private void colConfiger_ColConfigChanged(int cursor, bool isRequire, bool isUnique, string restrict)
+        private void colConfiger_ColConfigChanged(int cursor, CustomColDef ccd)
         {
-            if (cursor > -1)
+            if (cursor > -1 && ccd!=null)
             {
                 ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
                     DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
                     if (dgvc != null && dgvc.Visible)
                     {
-                        CustomColDefGetter.updateCustomColCond(dgvc.Name, isRequire, isUnique, restrict);
+                        CustomColDefGetter.updateCustomColCond(ccd);
                         MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
                     }
                 }));
@@ -431,7 +431,7 @@ namespace IDCM.VModule.GCM
                     CustomColDef ccd = CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
                     if (ccd != null && ccd.IsEnable)
                     {
-                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd.Alias, ccd.IsRequire, ccd.IsUnique, ccd.Restrict);
+                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd);
                         colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
                         colConfiger.Show(this.FindForm(), new Point(MousePosition.X, MousePosition.Y));
                     }

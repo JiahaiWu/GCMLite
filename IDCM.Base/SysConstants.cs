@@ -87,7 +87,10 @@ namespace IDCM.Base
         /// GCM菌种目录名称标记
         /// </summary>
         public const string GCMStrainKeyName = "GCMStrainKeyName";
-
+        /// <summary>
+        /// 国际化语言设置
+        /// </summary>
+        public const string CultureInfo = "CultureInfo";
         #endregion
         public static int SessionValidMilliSeconds = 600000;
         /// <summary>

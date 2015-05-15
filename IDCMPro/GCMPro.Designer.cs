@@ -44,6 +44,9 @@
             this.searchAltFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllAltCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageAltLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simplifiedChineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webSupportAltHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutGCMLiteAltAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +64,8 @@
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
             this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
+            this.toolStripButton_compare = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_colConfig = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -193,9 +198,34 @@
             // 
             // configurationCToolStripMenuItem
             // 
+            this.configurationCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.languageAltLToolStripMenuItem});
             this.configurationCToolStripMenuItem.Name = "configurationCToolStripMenuItem";
             this.configurationCToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
             this.configurationCToolStripMenuItem.Text = "Configuration";
+            // 
+            // languageAltLToolStripMenuItem
+            // 
+            this.languageAltLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.simplifiedChineseToolStripMenuItem});
+            this.languageAltLToolStripMenuItem.Name = "languageAltLToolStripMenuItem";
+            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.languageAltLToolStripMenuItem.Text = "Language(Alt+L)";
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.englishToolStripMenuItem.Text = "English";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
+            // 
+            // simplifiedChineseToolStripMenuItem
+            // 
+            this.simplifiedChineseToolStripMenuItem.Name = "simplifiedChineseToolStripMenuItem";
+            this.simplifiedChineseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.simplifiedChineseToolStripMenuItem.Text = "Simplified Chinese";
+            this.simplifiedChineseToolStripMenuItem.Click += new System.EventHandler(this.simplifiedChineseToolStripMenuItem_Click);
             // 
             // helpHToolStripMenuItem
             // 
@@ -234,6 +264,8 @@
             this.toolStripSeparator1,
             this.toolStripButton_down,
             this.toolStripButton_pub,
+            this.toolStripButton_compare,
+            this.toolStripButton_colConfig,
             this.toolStripButton_export,
             this.toolStripButton_import,
             this.toolStripButton_del,
@@ -257,6 +289,7 @@
             this.toolStripButton_help.Name = "toolStripButton_help";
             this.toolStripButton_help.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_help.Text = "toolStripButton7";
+            this.toolStripButton_help.ToolTipText = "Help";
             this.toolStripButton_help.Click += new System.EventHandler(this.toolStripButton_help_Click);
             // 
             // toolStripSeparator2
@@ -275,6 +308,7 @@
             this.toolStripButton_search.Name = "toolStripButton_search";
             this.toolStripButton_search.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_search.Text = "toolStripButton6";
+            this.toolStripButton_search.ToolTipText = "Search";
             this.toolStripButton_search.Click += new System.EventHandler(this.toolStripButton_search_Click);
             // 
             // toolStripTextBox_search
@@ -300,6 +334,7 @@
             this.toolStripButton_down.Name = "toolStripButton_down";
             this.toolStripButton_down.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_down.Text = "toolStripButton8";
+            this.toolStripButton_down.ToolTipText = "DownLoad from GCM";
             this.toolStripButton_down.Click += new System.EventHandler(this.toolStripButton_down_Click);
             // 
             // toolStripButton_pub
@@ -311,6 +346,7 @@
             this.toolStripButton_pub.Name = "toolStripButton_pub";
             this.toolStripButton_pub.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_pub.Text = "toolStripButton5";
+            this.toolStripButton_pub.ToolTipText = "Publish to GCM";
             this.toolStripButton_pub.Click += new System.EventHandler(this.toolStripButton_pub_Click);
             // 
             // toolStripButton_export
@@ -322,6 +358,7 @@
             this.toolStripButton_export.Name = "toolStripButton_export";
             this.toolStripButton_export.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_export.Text = "toolStripButton4";
+            this.toolStripButton_export.ToolTipText = "Export";
             this.toolStripButton_export.Click += new System.EventHandler(this.toolStripButton_export_Click);
             // 
             // toolStripButton_import
@@ -333,6 +370,7 @@
             this.toolStripButton_import.Name = "toolStripButton_import";
             this.toolStripButton_import.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_import.Text = "toolStripButton3";
+            this.toolStripButton_import.ToolTipText = "Import";
             this.toolStripButton_import.Click += new System.EventHandler(this.toolStripButton_import_Click);
             // 
             // toolStripButton_del
@@ -344,6 +382,7 @@
             this.toolStripButton_del.Name = "toolStripButton_del";
             this.toolStripButton_del.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_del.Text = "toolStripButton2";
+            this.toolStripButton_del.ToolTipText = "Delete";
             this.toolStripButton_del.Click += new System.EventHandler(this.toolStripButton_del_Click);
             // 
             // toolStripButton_add
@@ -355,6 +394,7 @@
             this.toolStripButton_add.Name = "toolStripButton_add";
             this.toolStripButton_add.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton_add.Text = "toolStripButton1";
+            this.toolStripButton_add.ToolTipText = "Add Row";
             this.toolStripButton_add.Click += new System.EventHandler(this.toolStripButton_add_Click);
             // 
             // toolStripLabel_OfficialNotice
@@ -367,10 +407,36 @@
             // gcmProView_lite
             // 
             this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcmProView_lite.Enabled = false;
             this.gcmProView_lite.Location = new System.Drawing.Point(0, 55);
             this.gcmProView_lite.Name = "gcmProView_lite";
             this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);
             this.gcmProView_lite.TabIndex = 3;
+            this.gcmProView_lite.Visible = false;
+            // 
+            // toolStripButton_compare
+            // 
+            this.toolStripButton_compare.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton_compare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_compare.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_compare.Image")));
+            this.toolStripButton_compare.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_compare.Name = "toolStripButton_compare";
+            this.toolStripButton_compare.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.toolStripButton_compare.Size = new System.Drawing.Size(40, 28);
+            this.toolStripButton_compare.Text = "toolStripButton1";
+            this.toolStripButton_compare.ToolTipText = "Compare with GCM";
+            // 
+            // toolStripButton_colConfig
+            // 
+            this.toolStripButton_colConfig.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton_colConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_colConfig.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_colConfig.Image")));
+            this.toolStripButton_colConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_colConfig.Name = "toolStripButton_colConfig";
+            this.toolStripButton_colConfig.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.toolStripButton_colConfig.Size = new System.Drawing.Size(40, 28);
+            this.toolStripButton_colConfig.Text = "toolStripButton2";
+            this.toolStripButton_colConfig.ToolTipText = "Config Columns";
             // 
             // GCMPro
             // 
@@ -431,5 +497,10 @@
         private System.Windows.Forms.ToolStripMenuItem webSupportAltHToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutGCMLiteAltAToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel toolStripLabel_OfficialNotice;
+        private System.Windows.Forms.ToolStripMenuItem languageAltLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simplifiedChineseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton_compare;
+        private System.Windows.Forms.ToolStripButton toolStripButton_colConfig;
     }
 }

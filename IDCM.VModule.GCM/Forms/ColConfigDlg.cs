@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using IDCM.Core;
 
 namespace IDCM.Forms
 {
@@ -13,20 +14,21 @@ namespace IDCM.Forms
     {
         #region Constructor&Destructor
 
-        public ColConfigDlg(int cursor, string aliasName, bool isRequire, bool isUnique, string restrict)
+        public ColConfigDlg(int cursor, CustomColDef ccd)
         {
             InitializeComponent();
-            this.label1.Text = IDCM.Base.GlobalTextRes.Text("Column Name")+":";
+            this.label_alias.Text = IDCM.Base.GlobalTextRes.Text("Column Name")+":";
             this.label4.Text = IDCM.Base.GlobalTextRes.Text("Restrict Expression")+":";
             this.checkBox_NotEmpty.Text = IDCM.Base.GlobalTextRes.Text("Not Empty");
             this.checkBox_unique.Text = IDCM.Base.GlobalTextRes.Text("Unique");
             this.Text = IDCM.Base.GlobalTextRes.Text("Column Config Dialog");
             //////////////////////////////////////////////
             this.cursor = cursor;
-            this.label_ColName.Text = aliasName;
-            this.checkBox_NotEmpty.Checked = isRequire;
-            this.checkBox_unique.Checked = isUnique;
-            this.textBox_restrict.Text = restrict;
+            this.label_colName.Text = ccd.Attr;
+            this.textBox_ColAlias.Text = ccd.Alias;
+            this.checkBox_NotEmpty.Checked = ccd.IsRequire;
+            this.checkBox_unique.Checked = ccd.IsUnique;
+            this.textBox_restrict.Text = ccd.Restrict;
             this.textBox_restrict.BackColor = Color.White;
             dirtyStatus = false;
             this.FormClosing+=ColConfigDlg_FormClosing;
@@ -44,10 +46,11 @@ namespace IDCM.Forms
                 {
                     if (dirtyStatus)
                     {
-                        this.isRequire = this.checkBox_NotEmpty.Checked;
-                        this.isUnique = this.checkBox_unique.Checked;
-                        this.restrictVal = this.textBox_restrict.Text;
-                        ColConfigChanged(cursor, isRequire, isUnique, restrictVal);
+                        this.customCol.IsRequire = this.checkBox_NotEmpty.Checked;
+                        this.customCol.IsUnique = this.checkBox_unique.Checked;
+                        this.customCol.Restrict = this.textBox_restrict.Text;
+                        this.customCol.Alias = this.textBox_ColAlias.Text;
+                        ColConfigChanged(cursor, customCol);
                     }
                 }
                 else
@@ -60,13 +63,13 @@ namespace IDCM.Forms
 
         private void checkBox_NotEmpty_CheckedChanged(object sender, EventArgs e)
         {
-            this.isRequire = this.checkBox_NotEmpty.Checked;
+            customCol.IsUnique = this.checkBox_NotEmpty.Checked;
             dirtyStatus = true;
         }
 
         private void checkBox_unique_CheckedChanged(object sender, EventArgs e)
         {
-            this.isUnique = this.checkBox_unique.Checked;
+            customCol.IsUnique = this.checkBox_unique.Checked;
             dirtyStatus = true;
         }
 
@@ -75,7 +78,7 @@ namespace IDCM.Forms
             try
             {
                 DCMEx.DCMEx dcmEx = new DCMEx.DCMEx(this.textBox_restrict.Text);
-                this.restrictVal = this.textBox_restrict.Text;
+                customCol.Restrict = this.textBox_restrict.Text;
                 this.textBox_restrict.BackColor = Color.White;
                 dirtyStatus = true;
             }
@@ -99,12 +102,10 @@ namespace IDCM.Forms
         #region Members
 
         private int cursor = -1;
-        private bool isRequire = false;
-        private bool isUnique = false;
-        private string restrictVal = null;
+        private CustomColDef customCol;
 
         private bool dirtyStatus = false;
-        public delegate void ColConfigChangedHandler(int cursor, bool isRequire, bool isUnique, string restrict);
+        public delegate void ColConfigChangedHandler(int cursor,CustomColDef ccd);
         #endregion
     }
 }

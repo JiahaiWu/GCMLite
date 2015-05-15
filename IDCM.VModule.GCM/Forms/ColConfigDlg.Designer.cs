@@ -30,12 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColConfigDlg));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_alias = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label_ColName = new System.Windows.Forms.Label();
             this.checkBox_NotEmpty = new System.Windows.Forms.CheckBox();
             this.textBox_restrict = new System.Windows.Forms.TextBox();
             this.checkBox_unique = new System.Windows.Forms.CheckBox();
+            this.label_name = new System.Windows.Forms.Label();
+            this.label_colName = new System.Windows.Forms.Label();
+            this.textBox_ColAlias = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,61 +47,53 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label_ColName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox_NotEmpty, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_restrict, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox_unique, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label_alias, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox_NotEmpty, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_restrict, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox_unique, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label_name, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label_colName, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_ColAlias, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(334, 212);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(467, 244);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // label1
+            // label_alias
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Location = new System.Drawing.Point(21, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Column Name:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label_alias.AutoSize = true;
+            this.label_alias.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label_alias.Location = new System.Drawing.Point(15, 27);
+            this.label_alias.Name = "label_alias";
+            this.label_alias.Size = new System.Drawing.Size(83, 25);
+            this.label_alias.TabIndex = 1;
+            this.label_alias.Text = "Column Alias:";
+            this.label_alias.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label4.Location = new System.Drawing.Point(27, 53);
+            this.label4.Location = new System.Drawing.Point(27, 105);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 158);
+            this.label4.Size = new System.Drawing.Size(71, 138);
             this.label4.TabIndex = 4;
             this.label4.Text = "Restrict Expression:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label_ColName
-            // 
-            this.label_ColName.AutoSize = true;
-            this.label_ColName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label_ColName.Location = new System.Drawing.Point(105, 1);
-            this.label_ColName.Name = "label_ColName";
-            this.label_ColName.Size = new System.Drawing.Size(11, 25);
-            this.label_ColName.TabIndex = 5;
-            this.label_ColName.Text = "?";
-            this.label_ColName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // checkBox_NotEmpty
             // 
             this.checkBox_NotEmpty.AutoSize = true;
             this.checkBox_NotEmpty.Dock = System.Windows.Forms.DockStyle.Left;
-            this.checkBox_NotEmpty.Location = new System.Drawing.Point(105, 30);
+            this.checkBox_NotEmpty.Location = new System.Drawing.Point(105, 56);
             this.checkBox_NotEmpty.Name = "checkBox_NotEmpty";
             this.checkBox_NotEmpty.Size = new System.Drawing.Size(78, 19);
             this.checkBox_NotEmpty.TabIndex = 6;
@@ -110,18 +104,19 @@
             // textBox_restrict
             // 
             this.textBox_restrict.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_restrict.Location = new System.Drawing.Point(105, 56);
+            this.textBox_restrict.Location = new System.Drawing.Point(103, 106);
+            this.textBox_restrict.Margin = new System.Windows.Forms.Padding(1);
             this.textBox_restrict.Multiline = true;
             this.textBox_restrict.Name = "textBox_restrict";
-            this.textBox_restrict.Size = new System.Drawing.Size(228, 152);
+            this.textBox_restrict.Size = new System.Drawing.Size(362, 136);
             this.textBox_restrict.TabIndex = 8;
             this.textBox_restrict.TextChanged += new System.EventHandler(this.textBox_restrict_TextChanged);
             // 
             // checkBox_unique
             // 
             this.checkBox_unique.AutoSize = true;
-            this.checkBox_unique.Dock = System.Windows.Forms.DockStyle.Right;
-            this.checkBox_unique.Location = new System.Drawing.Point(38, 30);
+            this.checkBox_unique.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkBox_unique.Location = new System.Drawing.Point(105, 82);
             this.checkBox_unique.Name = "checkBox_unique";
             this.checkBox_unique.Size = new System.Drawing.Size(60, 19);
             this.checkBox_unique.TabIndex = 7;
@@ -129,11 +124,42 @@
             this.checkBox_unique.UseVisualStyleBackColor = true;
             this.checkBox_unique.CheckedChanged += new System.EventHandler(this.checkBox_unique_CheckedChanged);
             // 
+            // label_name
+            // 
+            this.label_name.AutoSize = true;
+            this.label_name.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label_name.Location = new System.Drawing.Point(21, 1);
+            this.label_name.Name = "label_name";
+            this.label_name.Size = new System.Drawing.Size(77, 25);
+            this.label_name.TabIndex = 9;
+            this.label_name.Text = "Column Name:";
+            this.label_name.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label_colName
+            // 
+            this.label_colName.AutoSize = true;
+            this.label_colName.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label_colName.Location = new System.Drawing.Point(105, 1);
+            this.label_colName.Name = "label_colName";
+            this.label_colName.Size = new System.Drawing.Size(11, 25);
+            this.label_colName.TabIndex = 10;
+            this.label_colName.Text = "?";
+            this.label_colName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox_ColAlias
+            // 
+            this.textBox_ColAlias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ColAlias.Location = new System.Drawing.Point(103, 28);
+            this.textBox_ColAlias.Margin = new System.Windows.Forms.Padding(1);
+            this.textBox_ColAlias.Name = "textBox_ColAlias";
+            this.textBox_ColAlias.Size = new System.Drawing.Size(362, 21);
+            this.textBox_ColAlias.TabIndex = 11;
+            // 
             // ColConfigDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 212);
+            this.ClientSize = new System.Drawing.Size(467, 244);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -149,11 +175,13 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_alias;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label_ColName;
         private System.Windows.Forms.CheckBox checkBox_NotEmpty;
         private System.Windows.Forms.TextBox textBox_restrict;
         private System.Windows.Forms.CheckBox checkBox_unique;
+        private System.Windows.Forms.Label label_name;
+        private System.Windows.Forms.Label label_colName;
+        private System.Windows.Forms.TextBox textBox_ColAlias;
     }
 }
