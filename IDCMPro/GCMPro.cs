@@ -133,7 +133,7 @@ namespace IDCM
         private void GCMPro_Load(object sender, EventArgs e)
         {
             checkWorkSpace();
-            this.FormClosed += GCMPro_FormClosed;
+            this.FormClosing+=GCMPro_FormClosing;
             gcmProView_lite.GCMStatusChanged += ServInvoker_OnBottomSatusChange;
             gcmProView_lite.GCMProgressInvoke += ServInvoker_OnProgressChange;
             gcmProView_lite.GCMOpConditionChanged += GCMLite_GCMOpConditionChanging;
@@ -156,7 +156,10 @@ namespace IDCM
                     this.toolStripButton_import.Enabled = true;
                     this.toolStripButton_export.Enabled = true;
                     this.toolStripButton_pub.Enabled = true;
+                    this.toolStripButton_colConfig.Enabled = true;
+                    this.toolStripButton_compare.Enabled = true;
                     this.toolStripButton_down.Enabled = false;
+                    this.toolStripButton_down.Visible = false;
                     openAltOToolStripMenuItem.Enabled = true;
                     saveAltSToolStripMenuItem.Enabled = true;
                     quitAltQToolStripMenuItem.Enabled = true;
@@ -173,8 +176,11 @@ namespace IDCM
                     this.toolStripButton_del.Enabled = true;
                     this.toolStripButton_import.Enabled = true;
                     this.toolStripButton_export.Enabled = true;
+                    this.toolStripButton_colConfig.Enabled = false;
+                    this.toolStripButton_compare.Enabled = true;
                     this.toolStripButton_pub.Enabled = true;
                     this.toolStripButton_down.Enabled = false;
+                    this.toolStripButton_down.Visible = false;
                     openAltOToolStripMenuItem.Enabled = false;
                     saveAltSToolStripMenuItem.Enabled = false;
                     quitAltQToolStripMenuItem.Enabled = false;
@@ -205,6 +211,7 @@ namespace IDCM
                     this.toolStripButton_export.Enabled = false;
                     this.toolStripButton_pub.Enabled = false;
                     this.toolStripButton_down.Enabled = true;
+                    this.toolStripButton_down.Visible = true;
                     openAltOToolStripMenuItem.Enabled = false;
                     saveAltSToolStripMenuItem.Enabled = false;
                     quitAltQToolStripMenuItem.Enabled = true;
@@ -249,7 +256,7 @@ namespace IDCM
             this.toolStripStatusLabel_status.Text = msgTag;
         }
 
-        private void GCMPro_FormClosed(object sender, FormClosedEventArgs e)
+        private void GCMPro_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
@@ -258,6 +265,9 @@ namespace IDCM
                     Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
                 }
                 string dumppath = gcmProView_lite.doExitDump();
+                if (dumppath == null)
+                    e.Cancel = true;
+                else
                 FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
             }
             catch (Exception ex)
@@ -366,10 +376,23 @@ namespace IDCM
         {
             openAboutUsDlg();
         }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IDCM.Base.Utils.ConfigurationHelper.SetAppConfig(SysConstants.CultureInfo, "en-US");
+            Application.Restart();
+        }
+
+        private void simplifiedChineseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IDCM.Base.Utils.ConfigurationHelper.SetAppConfig(SysConstants.CultureInfo, "zh-CN");
+            Application.Restart();
+        }
         #endregion
 
         #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion
+
     }
 }

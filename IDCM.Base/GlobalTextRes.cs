@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Resources;
 using System.Threading;
 using System.Globalization;
+using System.Configuration;
 
 namespace IDCM.Base
 {
+
     public sealed class GlobalTextRes
     {
         public static string Text(string text)
@@ -17,6 +19,7 @@ namespace IDCM.Base
             string itext= rm.GetString(text, ci);
             return itext==null || itext.Length > 0 ? itext : text;
         }
+        private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private static ResourceManager rm = new ResourceManager("IDCM.Base.TextResources", Assembly.GetExecutingAssembly());
     }
 }

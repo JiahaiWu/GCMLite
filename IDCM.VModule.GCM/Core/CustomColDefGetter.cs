@@ -158,7 +158,7 @@ namespace IDCM.Core
         {
             CustomColDef coldef = null;
             ccdCache.TryGetValue(attr, out coldef);
-            return coldef;
+            return coldef.Clone() as CustomColDef;
         }
         internal static void updateCustomColDef(string attr, bool isEnable)
         {
@@ -172,26 +172,12 @@ namespace IDCM.Core
                 }
             }
         }
-        public static void updateCustomColCond(string attr, bool isRequire, bool isUnique, string restrict)
+        public static void updateCustomColCond(CustomColDef ccd)
         {
-            CustomColDef ccd = null;
-            if (ccdCache.TryGetValue(attr, out ccd))
+            if (ccd.Attr != null && ccd.Attr.Length > 0)
             {
-                if (ccd.IsRequire != isRequire)
-                {
-                    ccd.IsRequire = isRequire;
-                    dirtyStatus = true;
-                }
-                if (ccd.IsUnique != isUnique)
-                {
-                    ccd.IsUnique = isUnique;
-                    dirtyStatus = true;
-                }
-                if (ccd.Restrict==null|| !ccd.Restrict.Equals(restrict))
-                {
-                    ccd.Restrict = restrict;
-                    dirtyStatus = true;
-                }
+                ccdCache[ccd.Attr] = ccd;
+                dirtyStatus = true;
                 saveUpdatedHistCfg();
             }
         }
