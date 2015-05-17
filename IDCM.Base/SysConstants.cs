@@ -91,8 +91,15 @@ namespace IDCM.Base
         /// 国际化语言设置
         /// </summary>
         public const string CultureInfo = "CultureInfo";
+        /// <summary>
+        /// 运行模式标记
+        /// </summary>
+        public const string RunningMode = "RunningMode";
         #endregion
-        public static int SessionValidMilliSeconds = 600000;
+        /// <summary>
+        /// Session 保持失效时间30分钟
+        /// </summary>
+        public static int SessionValidMilliSeconds = 30*60000;
         /// <summary>
         /// 内部默认的字符编码
         /// </summary>

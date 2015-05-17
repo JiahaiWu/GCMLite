@@ -43,11 +43,6 @@ namespace IDCM.VModule.GCM
             this.tabPage_ABC.Text = GlobalTextRes.Text("ABC Browser");
             this.tabPageEx_Local.Text = GlobalTextRes.Text("Local DataSet");
             this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
-
-            this.Load += GCMProView_Load;
-
-            InitializeMsgDriver();
-            InitializeGCMPro();
         }
         #endregion
 
@@ -134,11 +129,6 @@ namespace IDCM.VModule.GCM
                 this.IsInited = false;
                 log.Error(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "!", ex);
                 MessageBox.Show(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "! @Message=" + ex.Message + " \n" + ex.ToString());
-            }
-            finally
-            {
-                this.Enabled = this.IsInited;
-                this.Visible = this.Enabled;
             }
         }
         
@@ -250,7 +240,7 @@ namespace IDCM.VModule.GCM
         {
             ControlAsyncUtil.SyncInvoke(splitContainer_GCM, new ControlAsyncUtil.InvokeHandler(delegate()
             {
-                gcmServManager.refreshGCMDataset();
+                gcmServManager.refreshGCMDataset(false);
                 splitContainer_GCM.Panel1Collapsed = true;
                 splitContainer_GCM.Panel2Collapsed = false;
             }));
@@ -396,6 +386,18 @@ namespace IDCM.VModule.GCM
                 }));
             }
         }
+
+        public void initComponenent()
+        {
+            if("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+                gcmTabControl_GCM.HideTab(tabPage_ABC);
+            InitializeMsgDriver();
+            InitializeGCMPro();
+            startLocalDataRender();
+            startGCMSiteRender();
+            this.Enabled = this.IsInited;
+            this.Visible = this.Enabled;
+        }
         #endregion
 
         #region Events&Handlings
@@ -404,13 +406,6 @@ namespace IDCM.VModule.GCM
         public event GCMProgressHandler GCMProgressInvoke;
         public event GCMOpConditionHandler GCMOpConditionChanged;
 
-        private void GCMProView_Load(object sender, EventArgs e)
-        {
-            gcmTabControl_GCM.HideTab(tabPage_ABC);
-            
-            startLocalDataRender();
-            startGCMSiteRender();
-        }
         private void colConfiger_ColConfigChanged(int cursor, CustomColDef ccd)
         {
             if (cursor > -1 && ccd!=null)
@@ -615,10 +610,12 @@ namespace IDCM.VModule.GCM
         {
             if (gcmServManager.Signed)
             {
-                /////////////////////////////////////////////
-                ///showGCMDataDlg();
-                ///@Deprecated
-                gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+                {
+                    gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                    gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                }else
+                    showGCMDataDlg();
                 ///////////////////////////////////////////////
                 if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
                 {

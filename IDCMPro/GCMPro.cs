@@ -133,6 +133,8 @@ namespace IDCM
         private void GCMPro_Load(object sender, EventArgs e)
         {
             checkWorkSpace();
+            gcmProView_lite.initComponenent();
+
             this.FormClosing+=GCMPro_FormClosing;
             gcmProView_lite.GCMStatusChanged += ServInvoker_OnBottomSatusChange;
             gcmProView_lite.GCMProgressInvoke += ServInvoker_OnProgressChange;

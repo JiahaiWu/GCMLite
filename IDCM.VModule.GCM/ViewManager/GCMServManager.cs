@@ -38,7 +38,6 @@ namespace IDCM.ViewManager
         {
             authInfo.Username = gtcache.UserName;
             authInfo.Password = gtcache.Password;
-            //authInfo.autoLogin = gtcache.RememberLogin;//@depercated
             authInfo.autoLogin = true;
             authInfo.Timestamp = 0;
             new System.Threading.Thread(delegate() { OnSignInHold(null, null); }).Start();
@@ -83,10 +82,16 @@ namespace IDCM.ViewManager
         {
             return this.authInfo;
         }
-        internal void refreshGCMDataset()
+        internal void refreshGCMDataset(bool force=false)
         {
-            GCMDataLoadHandler gdlh = new GCMDataLoadHandler(gtcache,authInfo);
-            BGWorkerInvoker.pushHandler(gdlh);
+            long elapsedTicks = DateTime.Now.Ticks - lastUpdateTimeStamp;
+            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+            if (elapsedSpan.TotalMilliseconds > SysConstants.SessionValidMilliSeconds / 2 || force)
+            {
+                GCMDataLoadHandler gdlh = new GCMDataLoadHandler(gtcache, authInfo);
+                BGWorkerInvoker.pushHandler(gdlh);
+                lastUpdateTimeStamp = System.DateTime.Now.Ticks;
+            }
         }
         internal void showGCMDataDetail(int ridx=0)
         {
@@ -188,6 +193,7 @@ namespace IDCM.ViewManager
 
         #region Members
         private GCMTableCache gtcache;
+        private long lastUpdateTimeStamp=0;
         /// <summary>
         /// SignIn hold Monitor
         /// </summary>
