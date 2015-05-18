@@ -58,14 +58,14 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_down = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_pub = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_compare = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_colConfig = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_export = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_import = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
             this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
-            this.toolStripButton_compare = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_colConfig = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -349,6 +349,30 @@
             this.toolStripButton_pub.ToolTipText = "Publish to GCM";
             this.toolStripButton_pub.Click += new System.EventHandler(this.toolStripButton_pub_Click);
             // 
+            // toolStripButton_compare
+            // 
+            this.toolStripButton_compare.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton_compare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_compare.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_compare.Image")));
+            this.toolStripButton_compare.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_compare.Name = "toolStripButton_compare";
+            this.toolStripButton_compare.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.toolStripButton_compare.Size = new System.Drawing.Size(40, 28);
+            this.toolStripButton_compare.Text = "toolStripButton1";
+            this.toolStripButton_compare.ToolTipText = "Compare with GCM";
+            // 
+            // toolStripButton_colConfig
+            // 
+            this.toolStripButton_colConfig.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton_colConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_colConfig.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_colConfig.Image")));
+            this.toolStripButton_colConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_colConfig.Name = "toolStripButton_colConfig";
+            this.toolStripButton_colConfig.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.toolStripButton_colConfig.Size = new System.Drawing.Size(40, 28);
+            this.toolStripButton_colConfig.Text = "toolStripButton2";
+            this.toolStripButton_colConfig.ToolTipText = "Config Columns";
+            // 
             // toolStripButton_export
             // 
             this.toolStripButton_export.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -399,6 +423,7 @@
             // 
             // toolStripLabel_OfficialNotice
             // 
+            this.toolStripLabel_OfficialNotice.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Italic);
             this.toolStripLabel_OfficialNotice.ForeColor = System.Drawing.Color.Blue;
             this.toolStripLabel_OfficialNotice.Name = "toolStripLabel_OfficialNotice";
             this.toolStripLabel_OfficialNotice.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -414,30 +439,6 @@
             this.gcmProView_lite.TabIndex = 3;
             this.gcmProView_lite.Visible = false;
             // 
-            // toolStripButton_compare
-            // 
-            this.toolStripButton_compare.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton_compare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_compare.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_compare.Image")));
-            this.toolStripButton_compare.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_compare.Name = "toolStripButton_compare";
-            this.toolStripButton_compare.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.toolStripButton_compare.Size = new System.Drawing.Size(40, 28);
-            this.toolStripButton_compare.Text = "toolStripButton1";
-            this.toolStripButton_compare.ToolTipText = "Compare with GCM";
-            // 
-            // toolStripButton_colConfig
-            // 
-            this.toolStripButton_colConfig.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton_colConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_colConfig.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_colConfig.Image")));
-            this.toolStripButton_colConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_colConfig.Name = "toolStripButton_colConfig";
-            this.toolStripButton_colConfig.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.toolStripButton_colConfig.Size = new System.Drawing.Size(40, 28);
-            this.toolStripButton_colConfig.Text = "toolStripButton2";
-            this.toolStripButton_colConfig.ToolTipText = "Config Columns";
-            // 
             // GCMPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -450,7 +451,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip_gcmlite;
             this.Name = "GCMPro";
-            this.Text = "GCMPro";
+            this.Text = "GCMLite";
             this.Load += new System.EventHandler(this.GCMPro_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

@@ -45,6 +45,24 @@ namespace IDCM
             this.helpHToolStripMenuItem.Text = GlobalTextRes.Text("Help");
             this.webSupportAltHToolStripMenuItem.Text = GlobalTextRes.Text("Web Support(Alt+H)");
             this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
+
+            viewMonitor = new Timer();
+            viewMonitor.Interval = 3000;
+            viewMonitor.Tick+=viewMonitor_Tick;
+            viewMonitor.Start();
+        }
+
+        private void viewMonitor_Tick(object sender, EventArgs e)
+        {
+            if(gcmProView_lite.Enabled && gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View))
+            {
+                int localCount = gcmProView_lite.LocalRowCount;
+                if (localCount > 0)
+                {
+                    string text = localCount.ToString() + GlobalTextRes.Text(" records in total.");
+                    this.toolStripLabel_OfficialNotice.Text = text;
+                }
+            }
         }
         #endregion
 
@@ -394,6 +412,10 @@ namespace IDCM
 
         #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// GCMProView Monitor
+        /// </summary>
+        private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
 
     }

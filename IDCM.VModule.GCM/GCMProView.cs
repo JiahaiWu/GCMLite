@@ -210,7 +210,7 @@ namespace IDCM.VModule.GCM
         public string doExitDump(bool slient=false)
         {
             CustomColDefGetter.saveUpdatedHistCfg();
-            if (slient | !RunningHandlerNoter.checkForIdle())
+            if (slient==false && !RunningHandlerNoter.checkForIdle())
             {
                 if (MessageBox.Show(GlobalTextRes.Text("There are background tasks are executing, force quit or not"),
                     GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -389,8 +389,11 @@ namespace IDCM.VModule.GCM
 
         public void initComponenent()
         {
-            if("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+            if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+            {
+                gcmTabControl_GCM.HideTab(tabPageEx_GCM);
                 gcmTabControl_GCM.HideTab(tabPage_ABC);
+            }
             InitializeMsgDriver();
             InitializeGCMPro();
             startLocalDataRender();
@@ -654,6 +657,13 @@ namespace IDCM.VModule.GCM
                     if (msgTag.GetType().Equals(typeof(bool)))
                     {
                         GCMProgressInvoke((bool)msgTag);
+                        if (gcmTabControl_GCM.TabIndex == tabPageEx_Local.TabIndex)
+                        {
+                            if ((bool)msgTag)
+                                notifyOpConditions(OpConditionType.Local_Processing);
+                            else
+                                notifyOpConditions(OpConditionType.Local_View);
+                        }
                     }
                 }
             }));
@@ -776,6 +786,13 @@ namespace IDCM.VModule.GCM
                     return opCond;
             }
         }
+        public int LocalRowCount
+        {
+            get
+            {
+                return dcmDataGridView_local.RowCount;
+            }
+        }
         #endregion
 
         #region Members
@@ -810,5 +827,6 @@ namespace IDCM.VModule.GCM
             UnKnown=5
         }
         #endregion
+
     }
 }

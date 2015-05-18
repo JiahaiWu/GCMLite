@@ -17,7 +17,7 @@ namespace IDCM.Base
         {
             CultureInfo ci = Thread.CurrentThread.CurrentCulture;
             string itext= rm.GetString(text, ci);
-            return itext==null || itext.Length > 0 ? itext : text;
+            return itext==null || itext.Length <1 ? text:itext;
         }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private static ResourceManager rm = new ResourceManager("IDCM.Base.TextResources", Assembly.GetExecutingAssembly());
