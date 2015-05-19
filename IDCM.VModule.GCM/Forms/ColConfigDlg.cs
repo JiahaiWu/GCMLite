@@ -24,10 +24,12 @@ namespace IDCM.Forms
             this.Text = IDCM.Base.GlobalTextRes.Text("Column Config Dialog");
             //////////////////////////////////////////////
             this.cursor = cursor;
+            this.customCol = ccd;
             this.label_colName.Text = ccd.Attr;
             this.textBox_ColAlias.Text = ccd.Alias;
             this.checkBox_NotEmpty.Checked = ccd.IsRequire;
             this.checkBox_unique.Checked = ccd.IsUnique;
+            this.textBox_defaultVal.Text = ccd.DefaultVal;
             this.textBox_restrict.Text = ccd.Restrict;
             this.textBox_restrict.BackColor = Color.White;
             dirtyStatus = false;
@@ -50,6 +52,7 @@ namespace IDCM.Forms
                         this.customCol.IsUnique = this.checkBox_unique.Checked;
                         this.customCol.Restrict = this.textBox_restrict.Text;
                         this.customCol.Alias = this.textBox_ColAlias.Text;
+                        this.customCol.DefaultVal = this.textBox_defaultVal.Text;
                         ColConfigChanged(cursor, customCol);
                     }
                 }

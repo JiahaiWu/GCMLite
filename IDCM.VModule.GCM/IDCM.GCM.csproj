@@ -341,7 +341,9 @@
   <ItemGroup>
     <None Include="Resources\uploading2_cut1.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\broken.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\abc.png" />
   </ItemGroup>
