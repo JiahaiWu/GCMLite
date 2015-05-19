@@ -284,7 +284,7 @@ namespace IDCM
                 {
                     Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
                 }
-                string dumppath = gcmProView_lite.doExitDump();
+                string dumppath = gcmProView_lite.doDumpWork();
                 if (dumppath == null)
                     e.Cancel = true;
                 else

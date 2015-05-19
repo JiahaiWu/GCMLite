@@ -101,8 +101,11 @@ namespace IDCM.ViewManager
                             MessageBox.Show(GlobalTextRes.Text("Unsupport export type")+"!");
                             break;
                     }
-                    if(handler!=null)
+                    if (handler != null)
+                    {
+                        lastIOPath = epath;
                         BGWorkerInvoker.pushHandler(handler);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -170,17 +173,36 @@ namespace IDCM.ViewManager
             BGWorkerInvoker.pushHandler(checkHandler);
         }
 
-        public string doExitDump()
+        public string doDumpWork()
         {
             LocalDataDumper dumper = new LocalDataDumper();
             string dumppath = dumper.build(ctcache).dump();
             return dumppath;
+        }
+
+        public string LastIOPath
+        {
+            get{
+                if (lastIOPath == null)
+                {
+                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
+                }
+                else
+                    lastIOPath = Path.GetDirectoryName(lastIOPath);
+                if (!Directory.Exists(lastIOPath))
+                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
+                return lastIOPath;
+            }
+            set{
+                lastIOPath=value;
+            }
         }
         #endregion
 
         #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private CTableCache ctcache = null;
+        private string lastIOPath = null;
         #endregion
     }
 }

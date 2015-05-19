@@ -207,7 +207,7 @@ namespace IDCM.VModule.GCM
         {
             localServManager.checkLocalData();
         }
-        public string doExitDump(bool slient=false)
+        public string doDumpWork(bool slient = false)
         {
             CustomColDefGetter.saveUpdatedHistCfg();
             if (slient==false && !RunningHandlerNoter.checkForIdle())
@@ -218,7 +218,7 @@ namespace IDCM.VModule.GCM
                     return null;
                 }
             }
-            return localServManager.doExitDump();
+            return localServManager.doDumpWork();
         }
 
 
@@ -366,14 +366,33 @@ namespace IDCM.VModule.GCM
                 {
                     Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
                 }
-                string dumppath = doExitDump(true);
+                string dumppath = doDumpWork(true);
                 FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
+                if (useDefaultPath == false)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.FileName = System.IO.Path.GetFileName(dumppath);
+                    sfd.InitialDirectory = localServManager.LastIOPath;
+                    sfd.Filter = "mdi文件(*.mdi)|*.mdi";
+                    String renameFilePath = "";
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        renameFilePath = sfd.FileName;
+                        localServManager.LastIOPath = renameFilePath;
+                        if (renameFilePath != null && renameFilePath.Length > 0)
+                        {
+                            FileInfo dumpfile = new FileInfo(dumppath);
+                            dumpfile.CopyTo(System.IO.Path.GetFullPath(renameFilePath), true);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 log.Error(GlobalTextRes.Text("Exit operation execute failed")+"！ ", ex);
             }
         }
+
         private void notifyOpConditions(OpConditionType opType)
         {
             if (opCond != opType)
@@ -806,6 +825,7 @@ namespace IDCM.VModule.GCM
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
         private OpConditionType opCond = OpConditionType.UnKnown;
+
         
         //异步消息事件委托形式化声明
         public delegate void GCMOpConditionHandler(OpConditionType opType);
