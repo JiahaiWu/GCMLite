@@ -631,8 +631,11 @@ namespace IDCM.VModule.GCM
             {
                 if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
                 {
-                    gcmTabControl_GCM.HideTab(tabPageEx_GCM);
-                    gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                    ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                        gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                    }));
                 }else
                     showGCMDataDlg();
                 ///////////////////////////////////////////////
