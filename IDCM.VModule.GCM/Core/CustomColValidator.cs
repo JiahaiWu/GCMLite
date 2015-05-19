@@ -11,7 +11,10 @@ namespace IDCM.Core
         internal CustomColValidator(CustomColDef ccd)
         {
             isRequire = ccd.IsRequire;
-            validDesc +="Value of "+ ccd.Alias + " can not be NULL.\n";
+            if (isRequire)
+            {
+                validDesc += "Value of " + ccd.Alias + " can not be NULL.\n";
+            }
             if (ccd.IsUnique)
             {
                 sets = new HashSet<string>();

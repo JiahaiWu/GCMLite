@@ -75,7 +75,17 @@ namespace IDCM.Forms
             customCol.IsUnique = this.checkBox_unique.Checked;
             dirtyStatus = true;
         }
+        private void textBox_defaultVal_TextChanged(object sender, EventArgs e)
+        {
+            customCol.DefaultVal = this.textBox_defaultVal.Text;
+            dirtyStatus = true;
+        }
 
+        private void textBox_ColAlias_TextChanged(object sender, EventArgs e)
+        {
+            customCol.Alias = this.textBox_ColAlias.Text;
+            dirtyStatus = true;
+        }
         private void textBox_restrict_TextChanged(object sender, EventArgs e)
         {
             try

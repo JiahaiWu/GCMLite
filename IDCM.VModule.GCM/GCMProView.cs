@@ -413,15 +413,12 @@ namespace IDCM.VModule.GCM
         {
             if (cursor > -1 && ccd!=null)
             {
-                ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
+                DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
+                if (dgvc != null && dgvc.Visible)
                 {
-                    DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
-                    if (dgvc != null && dgvc.Visible)
-                    {
-                        CustomColDefGetter.updateCustomColCond(ccd);
-                        MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
-                    }
-                }));
+                    ctcache.updateCustomColCond(cursor, ccd);
+                    MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
+                }
             }
         }
 

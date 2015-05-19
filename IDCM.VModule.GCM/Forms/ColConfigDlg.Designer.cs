@@ -159,6 +159,7 @@
             this.textBox_ColAlias.Name = "textBox_ColAlias";
             this.textBox_ColAlias.Size = new System.Drawing.Size(362, 21);
             this.textBox_ColAlias.TabIndex = 11;
+            this.textBox_ColAlias.TextChanged += new System.EventHandler(this.textBox_ColAlias_TextChanged);
             // 
             // label_defaultVal
             // 
@@ -179,6 +180,7 @@
             this.textBox_defaultVal.Name = "textBox_defaultVal";
             this.textBox_defaultVal.Size = new System.Drawing.Size(362, 21);
             this.textBox_defaultVal.TabIndex = 13;
+            this.textBox_defaultVal.TextChanged += new System.EventHandler(this.textBox_defaultVal_TextChanged);
             // 
             // ColConfigDlg
             // 
