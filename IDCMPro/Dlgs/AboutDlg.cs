@@ -30,10 +30,10 @@ namespace IDCM.Dlgs
         #region Methods
         public void setAboutText()
         {
-            this.version.Text = "IDCM v1.0(110)\n\nCopyright © All Rights Reserved";
-            this.contact.Text = "Contact: jiahaiWu \n\n ";
-            this.email.Text = "Email:jiahaiwu@im.ac.cn\n\n";
-            this.address.Text = "Address:Beijing Chaoyang District";
+            this.version.Text = "IDCM v1.0(110)\nCopyright © All Rights Reserved";
+            this.contact.Text = "Contact: (+86)010-64807462";
+            this.email.Text = "Email: office@im.ac.cn";
+            this.address.Text = "Address: NO.1 Beichen West Road, Chaoyang District, Beijing 100101";
         }
         #endregion
     }

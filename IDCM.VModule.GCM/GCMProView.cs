@@ -303,9 +303,12 @@ namespace IDCM.VModule.GCM
         {
             gcmServManager.downGCMData(dcmDataGridView_gcm);
         }
-        public void requestHelpDoc()
+        public void requestHelpDoc(string uri=null)
         {
-            HelpDocRequester.requestHelpDoc();
+            if (uri == null)
+                HelpDocRequester.requestHelpDoc();
+            else
+                HelpDocRequester.tryToOpenLinkUrl(uri);
         }
         public void frontFindData()
         {
@@ -419,6 +422,14 @@ namespace IDCM.VModule.GCM
             startGCMSiteRender();
             this.Enabled = this.IsInited;
             this.Visible = this.Enabled;
+        }
+
+        public void openLoginPage()
+        {
+            if (gcmServManager.Signed)
+                gcmServManager.logout();
+            gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
+            gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
         }
         #endregion
 
@@ -847,6 +858,5 @@ namespace IDCM.VModule.GCM
             UnKnown=5
         }
         #endregion
-
     }
 }

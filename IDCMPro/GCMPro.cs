@@ -110,6 +110,11 @@ namespace IDCM
                     gcmProView_lite.clearAllLocalData(); break;
                 case Keys.Alt | Keys.F:
                     gcmProView_lite.frontFindData(); break;
+                case Keys.Alt | Keys.L:
+                    configurationCToolStripMenuItem.ShowDropDown();
+                    languageAltLToolStripMenuItem.ShowDropDown();break;
+                case Keys.Alt | Keys.G:
+                    gcmProView_lite.openLoginPage(); break;
                 case Keys.Alt | Keys.H:
                     openWebHelpDocument(); break;
                 case Keys.Alt | Keys.A:
@@ -392,11 +397,18 @@ namespace IDCM
             openWebHelpDocument();
         }
 
+        private void offlineDocumentAltDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.requestHelpDoc("file:///"+Path.GetDirectoryName(SysConstants.exePath)+"/GCMLite_Help.htm");
+        }
         private void aboutGCMLiteAltAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openAboutUsDlg();
         }
-
+        private void loginGCMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.openLoginPage();
+        }
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IDCM.Base.Utils.ConfigurationHelper.SetAppConfig(SysConstants.CultureInfo, "en-US");
@@ -408,6 +420,18 @@ namespace IDCM
             IDCM.Base.Utils.ConfigurationHelper.SetAppConfig(SysConstants.CultureInfo, "zh-CN");
             Application.Restart();
         }
+        private void languageAltLToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem tsmi in languageAltLToolStripMenuItem.DropDownItems)
+            {
+                tsmi.Checked = false;
+            }
+            if (GlobalTextRes.getLanguageName().StartsWith("zh-CN"))
+                simplifiedChineseToolStripMenuItem.Checked = true;
+            else
+                englishToolStripMenuItem.Checked = true;
+        }
+
         #endregion
 
         #region Members
@@ -417,6 +441,5 @@ namespace IDCM
         /// </summary>
         private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
-
     }
 }

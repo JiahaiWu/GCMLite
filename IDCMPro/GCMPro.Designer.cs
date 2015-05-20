@@ -44,6 +44,7 @@
             this.searchAltFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllAltCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginGCMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageAltLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simplifiedChineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +67,7 @@
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
             this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
+            this.offlineDocumentAltDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -199,10 +201,18 @@
             // configurationCToolStripMenuItem
             // 
             this.configurationCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loginGCMToolStripMenuItem,
             this.languageAltLToolStripMenuItem});
             this.configurationCToolStripMenuItem.Name = "configurationCToolStripMenuItem";
             this.configurationCToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
             this.configurationCToolStripMenuItem.Text = "Configuration";
+            // 
+            // loginGCMToolStripMenuItem
+            // 
+            this.loginGCMToolStripMenuItem.Name = "loginGCMToolStripMenuItem";
+            this.loginGCMToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.loginGCMToolStripMenuItem.Text = "Login GCM(Alt+G)";
+            this.loginGCMToolStripMenuItem.Click += new System.EventHandler(this.loginGCMToolStripMenuItem_Click);
             // 
             // languageAltLToolStripMenuItem
             // 
@@ -210,8 +220,9 @@
             this.englishToolStripMenuItem,
             this.simplifiedChineseToolStripMenuItem});
             this.languageAltLToolStripMenuItem.Name = "languageAltLToolStripMenuItem";
-            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.languageAltLToolStripMenuItem.Text = "Language(Alt+L)";
+            this.languageAltLToolStripMenuItem.DropDownOpening += new System.EventHandler(this.languageAltLToolStripMenuItem_DropDownOpening);
             // 
             // englishToolStripMenuItem
             // 
@@ -231,6 +242,7 @@
             // 
             this.helpHToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.webSupportAltHToolStripMenuItem,
+            this.offlineDocumentAltDToolStripMenuItem,
             this.aboutGCMLiteAltAToolStripMenuItem});
             this.helpHToolStripMenuItem.Name = "helpHToolStripMenuItem";
             this.helpHToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
@@ -239,14 +251,14 @@
             // webSupportAltHToolStripMenuItem
             // 
             this.webSupportAltHToolStripMenuItem.Name = "webSupportAltHToolStripMenuItem";
-            this.webSupportAltHToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.webSupportAltHToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.webSupportAltHToolStripMenuItem.Text = "Web Support(Alt+H)";
             this.webSupportAltHToolStripMenuItem.Click += new System.EventHandler(this.webSupportAltHToolStripMenuItem_Click);
             // 
             // aboutGCMLiteAltAToolStripMenuItem
             // 
             this.aboutGCMLiteAltAToolStripMenuItem.Name = "aboutGCMLiteAltAToolStripMenuItem";
-            this.aboutGCMLiteAltAToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.aboutGCMLiteAltAToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.aboutGCMLiteAltAToolStripMenuItem.Text = "About GCMLite(Alt+A)";
             this.aboutGCMLiteAltAToolStripMenuItem.Click += new System.EventHandler(this.aboutGCMLiteAltAToolStripMenuItem_Click);
             // 
@@ -439,6 +451,13 @@
             this.gcmProView_lite.TabIndex = 3;
             this.gcmProView_lite.Visible = false;
             // 
+            // offlineDocumentAltDToolStripMenuItem
+            // 
+            this.offlineDocumentAltDToolStripMenuItem.Name = "offlineDocumentAltDToolStripMenuItem";
+            this.offlineDocumentAltDToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.offlineDocumentAltDToolStripMenuItem.Text = "Offline Document(Alt+D)";
+            this.offlineDocumentAltDToolStripMenuItem.Click += new System.EventHandler(this.offlineDocumentAltDToolStripMenuItem_Click);
+            // 
             // GCMPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -503,5 +522,7 @@
         private System.Windows.Forms.ToolStripMenuItem simplifiedChineseToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_compare;
         private System.Windows.Forms.ToolStripButton toolStripButton_colConfig;
+        private System.Windows.Forms.ToolStripMenuItem loginGCMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem offlineDocumentAltDToolStripMenuItem;
     }
 }

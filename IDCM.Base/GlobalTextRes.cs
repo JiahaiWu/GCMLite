@@ -19,6 +19,10 @@ namespace IDCM.Base
             string itext= rm.GetString(text, ci);
             return itext==null || itext.Length <1 ? text:itext;
         }
+        public static string getLanguageName()
+        {
+            return Thread.CurrentThread.CurrentCulture.Name;
+        }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private static ResourceManager rm = new ResourceManager("IDCM.Base.TextResources", Assembly.GetExecutingAssembly());
     }

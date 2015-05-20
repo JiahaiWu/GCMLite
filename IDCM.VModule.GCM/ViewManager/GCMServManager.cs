@@ -42,7 +42,12 @@ namespace IDCM.ViewManager
             authInfo.Timestamp = 0;
             new System.Threading.Thread(delegate() { OnSignInHold(null, null); }).Start();
         }
-
+        internal void logout()
+        {
+            if(authInfo!=null)
+                GCMSignExecutor.SignOff(authInfo);
+            authInfo.LoginFlag=false;
+        }
         /// <summary>
         /// 登录状态验证与保持
         /// </summary>
@@ -204,5 +209,6 @@ namespace IDCM.ViewManager
         private readonly AuthInfo authInfo;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion
+
     }
 }
