@@ -97,6 +97,10 @@ namespace IDCM.ViewManager
                 BGWorkerInvoker.pushHandler(gdlh);
                 lastUpdateTimeStamp = System.DateTime.Now.Ticks;
             }
+            else
+            {
+                DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
+            }
         }
         internal void showGCMDataDetail(int ridx=0)
         {
@@ -165,6 +169,24 @@ namespace IDCM.ViewManager
             }
             return null;
         }
+
+        internal void SyncStrainLinksCompare(DCMControlLib.DCMDataGridView dcmDataGridView_local,int keyIndex)
+        {
+            foreach(DataGridViewRow dgvr in dcmDataGridView_local.Rows)
+            {
+                DataGridViewCell dgvc=dgvr.Cells[keyIndex];
+                if(dgvc!=null && dgvc.Value!=null)
+                {
+                    if (gtcache.containsStrainNumber(dgvc.FormattedValue.ToString()))
+                    {
+                        //ComponentUtil.ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()
+                        //{
+                            dgvr.Tag = true;
+                        //}));
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Property
@@ -177,6 +199,13 @@ namespace IDCM.ViewManager
                 long elapsedTicks = DateTime.Now.Ticks - authInfo.Timestamp;
                 TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
                 return elapsedSpan.TotalMilliseconds < SysConstants.SessionValidMilliSeconds;
+            }
+        }
+        public int RowCount
+        {
+            get
+            {
+                return gtcache.getRowCount();
             }
         }
         public string UserName

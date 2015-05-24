@@ -64,7 +64,10 @@ namespace IDCM.VModule.GCM
             servInvoker.OnGCMItemDetailRender += OnGCMItemDetailRender;
             servInvoker.OnBottomSatusChange += OnBottomSatusChange;
             servInvoker.OnProgressChange += OnProgressChange;
+            servInvoker.OnGCMDataLoaded+=servInvoker_OnGCMDataLoaded;
         }
+
+
         /// <summary>
         /// 初始化流程
         /// </summary>
@@ -157,9 +160,12 @@ namespace IDCM.VModule.GCM
 
         void dcmDataGridView_local_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X+1, e.RowBounds.Location.Y+1, e.RowBounds.Height-2, e.RowBounds.Height-2);
-            // Draw the Tag 
-            e.Graphics.DrawImage(global::IDCM.Properties.Resources.broken, rect);
+            if (dcmDataGridView_local.Rows[e.RowIndex].Tag!=null)
+            {
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X + 1, e.RowBounds.Location.Y + 1, e.RowBounds.Height - 2, e.RowBounds.Height - 2);
+                // Draw the Tag 
+                e.Graphics.DrawImage(global::IDCM.Properties.Resources.broken, rect);
+            }
         }
         
         private void setDGVCellHit(DataGridViewCell cell)
@@ -460,6 +466,15 @@ namespace IDCM.VModule.GCM
                 gcmServManager.logout();
             gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
             gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
+        }
+        public void CompareGCMRecords()
+        {
+            gcmServManager.refreshGCMDataset();
+        }
+
+        public void ConfigColumns()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -833,6 +848,19 @@ namespace IDCM.VModule.GCM
             Point reNewPoint = new Point(this.splitContainer_GCM.Panel1.Width / 2 - this.panel_GCM_start.Width / 2, (int)(this.splitContainer_GCM.Panel1.Height * 0.82 - this.panel_GCM_start.Height));
             this.panel_GCM_start.Location = reNewPoint;
         }
+        private void servInvoker_OnGCMDataLoaded(object msgTag, params object[] vals)
+        {
+            if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_Local.TabIndex))
+            {
+                gcmServManager.SyncStrainLinksCompare(dcmDataGridView_local, localServManager.KeyColIndex);
+                this.dcmDataGridView_local.Invalidate();
+                this.dcmDataGridView_local.Update();
+            }
+            else if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_GCM.TabIndex))
+            {
+               
+            }
+        }
         #endregion
 
         #region Property
@@ -850,7 +878,14 @@ namespace IDCM.VModule.GCM
         {
             get
             {
-                return dcmDataGridView_local.RowCount;
+                return localServManager.RowCount;
+            }
+        }
+        public int GCMRowCount
+        {
+            get
+            {
+                return gcmServManager.RowCount;
             }
         }
         #endregion

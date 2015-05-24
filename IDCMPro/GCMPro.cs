@@ -51,19 +51,6 @@ namespace IDCM
             viewMonitor.Tick+=viewMonitor_Tick;
             viewMonitor.Start();
         }
-
-        private void viewMonitor_Tick(object sender, EventArgs e)
-        {
-            if(gcmProView_lite.Enabled && gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View))
-            {
-                int localCount = gcmProView_lite.LocalRowCount;
-                if (localCount >= 0)
-                {
-                    string text = localCount.ToString() + GlobalTextRes.Text(" records in total.");
-                    this.toolStripLabel_OfficialNotice.Text = text;
-                }
-            }
-        }
         #endregion
 
         #region Methods
@@ -148,6 +135,32 @@ namespace IDCM
         #endregion
 
         #region Events&Handlings
+        private void viewMonitor_Tick(object sender, EventArgs e)
+        {
+            if (gcmProView_lite.Enabled ){
+                if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View))
+                {
+                    int localCount = gcmProView_lite.LocalRowCount;
+                    if (localCount >= 0)
+                    {
+                        string text = localCount.ToString() + GlobalTextRes.Text(" records in total.");
+                        this.toolStripLabel_OfficialNotice.Text = text;
+                        return;
+                    }
+                }
+                else if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.GCM_View))
+                {
+                    int gcmCount = gcmProView_lite.GCMRowCount;
+                    if (gcmCount >= 0)
+                    {
+                        string text = gcmCount.ToString() + GlobalTextRes.Text(" records in total.");
+                        this.toolStripLabel_OfficialNotice.Text = text;
+                        return;
+                    }
+                }
+            }
+            this.toolStripLabel_OfficialNotice.Text = "";
+        }
         /// <summary>
         /// 初始界面加载后事件处理
         /// </summary>
@@ -431,7 +444,15 @@ namespace IDCM
             else
                 englishToolStripMenuItem.Checked = true;
         }
+        private void toolStripButton_compare_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.CompareGCMRecords();
+        }
 
+        private void toolStripButton_colConfig_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.ConfigColumns();
+        }
         #endregion
 
         #region Members
@@ -441,5 +462,6 @@ namespace IDCM
         /// </summary>
         private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
+
     }
 }

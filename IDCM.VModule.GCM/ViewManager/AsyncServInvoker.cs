@@ -92,6 +92,12 @@ namespace IDCM.ViewManager
                     if(OnGCMItemDetailRender!=null)
                         OnGCMItemDetailRender(amsg.MsgTag, amsg.Parameters);
                     break;
+                case MsgNoticeType.GCMDataLoaded:
+                    if (OnGCMDataLoaded != null)
+                    {
+                        OnGCMDataLoaded(amsg.MsgTag, amsg.Parameters);
+                    }
+                    break;
                 default:
                     log.Warn("Unhandled asynchronous message.  @msgTag=" + amsg.MsgTag);
                     break;
@@ -113,6 +119,8 @@ namespace IDCM.ViewManager
         internal event IDCMAsyncRequest OnLocalDataExported;
         internal event IDCMAsyncRequest OnLocalDataImported;
         internal event IDCMAsyncRequest OnGCMItemDetailRender;
+        internal event IDCMAsyncRequest OnGCMDataLoaded;
+
         #region 默认的消息事件处理行为定义
         private void _OnSimpleMsgAlert(object msgTag, params object[] vals)
         {

@@ -68,15 +68,18 @@ namespace IDCM.Core
         #endregion
 
         #region Methods
-
+        internal int getRowCount()
+        {
+            return dgv_overview.RowCount;
+        }
         internal void addOverViewRow(Dictionary<string, string> valMap)
         {
-            if (!dgv_overview.Columns.Contains(keyName))
+            if (!dgv_overview.Columns.Contains(strainKeyName))
             {
                 DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
-                dgvtbc.Name = keyName;
-                dgvtbc.HeaderText = keyName;
-                dgvtbc.Width = 100;
+                dgvtbc.Name = strainKeyName;
+                dgvtbc.HeaderText = strainKeyName;
+                dgvtbc.Width = 200;
                 dgvtbc.Resizable = DataGridViewTriState.True;
                 ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
@@ -85,7 +88,7 @@ namespace IDCM.Core
             }
             //add valMap note Tag into loadedNoter Map
             int dgvrIdx = -1;
-            if (!keyIndexs.TryGetValue(valMap[keyName], out dgvrIdx))
+            if (!StrainKeyIndexs.TryGetValue(valMap[strainKeyName], out dgvrIdx))
             {
                 dgvrIdx = dgv_overview.RowCount;
             }
@@ -94,7 +97,7 @@ namespace IDCM.Core
             ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
             {
                 dgv_overview.Rows.InsertRange(dgvrIdx, dgvr);
-                keyIndexs[valMap[keyName]]= dgvrIdx;
+                StrainKeyIndexs[valMap[strainKeyName]] = dgvrIdx;
                 foreach (KeyValuePair<string, string> entry in valMap)
                 {
                     //if itemDGV not contains Column of entry.key
@@ -125,6 +128,21 @@ namespace IDCM.Core
                 else
                 {
                     object val = dgvr.Cells[keyName].FormattedValue;
+                    return val == null ? null : val.ToString();
+                }
+            }
+            return null;
+        }
+        internal string getStrainNumberByRowIdx(int ridx)
+        {
+            if (ridx > -1 && ridx < dgv_overview.RowCount)
+            {
+                DataGridViewRow dgvr = dgv_overview.Rows[ridx];
+                if (dgvr.IsNewRow)
+                    return null;
+                else
+                {
+                    object val = dgvr.Cells[strainKeyName].FormattedValue;
                     return val == null ? null : val.ToString();
                 }
             }
@@ -252,6 +270,10 @@ namespace IDCM.Core
             }
             return -1;
         }
+        internal bool containsStrainNumber(string strainNumber)
+        {
+            return StrainKeyIndexs.ContainsKey(strainNumber);
+        }
         #endregion
 
         #region Members
@@ -269,9 +291,9 @@ namespace IDCM.Core
         /// </summary>
         private string strainKeyName = "strain_number";
         /// <summary>
-        /// 主键映射表缓存表设定
+        /// 菌号映射表缓存表设定
         /// </summary>
-        private Dictionary<string, int> keyIndexs;
+        private Dictionary<string, int> StrainKeyIndexs;
         /// <summary>
         /// 缓存表（暂为备用）
         /// </summary>
@@ -289,7 +311,6 @@ namespace IDCM.Core
         private CheckBox checkBox_remember;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion
-
 
     }
 }

@@ -50,6 +50,7 @@
             this.simplifiedChineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webSupportAltHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.offlineDocumentAltDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutGCMLiteAltAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip_gcmlite = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_help = new System.Windows.Forms.ToolStripButton();
@@ -67,7 +68,6 @@
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
             this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
-            this.offlineDocumentAltDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -255,6 +255,13 @@
             this.webSupportAltHToolStripMenuItem.Text = "Web Support(Alt+H)";
             this.webSupportAltHToolStripMenuItem.Click += new System.EventHandler(this.webSupportAltHToolStripMenuItem_Click);
             // 
+            // offlineDocumentAltDToolStripMenuItem
+            // 
+            this.offlineDocumentAltDToolStripMenuItem.Name = "offlineDocumentAltDToolStripMenuItem";
+            this.offlineDocumentAltDToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.offlineDocumentAltDToolStripMenuItem.Text = "Offline Document(Alt+D)";
+            this.offlineDocumentAltDToolStripMenuItem.Click += new System.EventHandler(this.offlineDocumentAltDToolStripMenuItem_Click);
+            // 
             // aboutGCMLiteAltAToolStripMenuItem
             // 
             this.aboutGCMLiteAltAToolStripMenuItem.Name = "aboutGCMLiteAltAToolStripMenuItem";
@@ -372,6 +379,7 @@
             this.toolStripButton_compare.Size = new System.Drawing.Size(40, 28);
             this.toolStripButton_compare.Text = "toolStripButton1";
             this.toolStripButton_compare.ToolTipText = "Compare with GCM";
+            this.toolStripButton_compare.Click += new System.EventHandler(this.toolStripButton_compare_Click);
             // 
             // toolStripButton_colConfig
             // 
@@ -384,6 +392,7 @@
             this.toolStripButton_colConfig.Size = new System.Drawing.Size(40, 28);
             this.toolStripButton_colConfig.Text = "toolStripButton2";
             this.toolStripButton_colConfig.ToolTipText = "Config Columns";
+            this.toolStripButton_colConfig.Click += new System.EventHandler(this.toolStripButton_colConfig_Click);
             // 
             // toolStripButton_export
             // 
@@ -450,13 +459,6 @@
             this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);
             this.gcmProView_lite.TabIndex = 3;
             this.gcmProView_lite.Visible = false;
-            // 
-            // offlineDocumentAltDToolStripMenuItem
-            // 
-            this.offlineDocumentAltDToolStripMenuItem.Name = "offlineDocumentAltDToolStripMenuItem";
-            this.offlineDocumentAltDToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.offlineDocumentAltDToolStripMenuItem.Text = "Offline Document(Alt+D)";
-            this.offlineDocumentAltDToolStripMenuItem.Click += new System.EventHandler(this.offlineDocumentAltDToolStripMenuItem_Click);
             // 
             // GCMPro
             // 

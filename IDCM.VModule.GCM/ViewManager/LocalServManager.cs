@@ -199,10 +199,29 @@ namespace IDCM.ViewManager
         }
         #endregion
 
+        #region Property
+        public int RowCount
+        {
+            get
+            {
+                return ctcache.getRowCount();
+            }
+        }
+        public int KeyColIndex
+        {
+            get
+            {
+                return ctcache.getKeyColIndex();
+            }
+        }
+        #endregion
+
         #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private CTableCache ctcache = null;
         private string lastIOPath = null;
         #endregion
+
+
     }
 }
