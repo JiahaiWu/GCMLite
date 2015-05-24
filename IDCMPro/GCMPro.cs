@@ -57,7 +57,7 @@ namespace IDCM
             if(gcmProView_lite.Enabled && gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View))
             {
                 int localCount = gcmProView_lite.LocalRowCount;
-                if (localCount > 0)
+                if (localCount >= 0)
                 {
                     string text = localCount.ToString() + GlobalTextRes.Text(" records in total.");
                     this.toolStripLabel_OfficialNotice.Text = text;

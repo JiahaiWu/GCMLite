@@ -97,6 +97,9 @@ namespace IDCM.VModule.GCM
                     this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
                     this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
                     this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
+                    this.dcmDataGridView_local.RowPostPaint += dcmDataGridView_local_RowPostPaint;
+                    this.dcmDataGridView_local.RowsAdded+=dcmDataGridView_local_RowsAdded;
+                    this.dcmDataGridView_local.RowsRemoved+=dcmDataGridView_local_RowsRemoved;
                     localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
                     localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
                     localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
@@ -130,6 +133,33 @@ namespace IDCM.VModule.GCM
                 log.Error(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "!", ex);
                 MessageBox.Show(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "! @Message=" + ex.Message + " \n" + ex.ToString());
             }
+        }
+
+        private void dcmDataGridView_local_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            int width = dcmDataGridView_local.RowHeadersWidth-dcmDataGridView_local.ColumnHeadersHeight;
+            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
+            if (width < size.Width+4)
+            {
+                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight +4+ Convert.ToInt32(Math.Ceiling(size.Width));
+            }
+        }
+
+        private void dcmDataGridView_local_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
+            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
+            if (width < size.Width+4)
+            {
+                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4+Convert.ToInt32(Math.Ceiling(size.Width));
+            }
+        }
+
+        void dcmDataGridView_local_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X+1, e.RowBounds.Location.Y+1, e.RowBounds.Height-2, e.RowBounds.Height-2);
+            // Draw the Tag 
+            e.Graphics.DrawImage(global::IDCM.Properties.Resources.broken, rect);
         }
         
         private void setDGVCellHit(DataGridViewCell cell)
