@@ -103,6 +103,7 @@ namespace IDCM.VModule.GCM
                     this.dcmDataGridView_local.RowPostPaint += dcmDataGridView_local_RowPostPaint;
                     this.dcmDataGridView_local.RowsAdded+=dcmDataGridView_local_RowsAdded;
                     this.dcmDataGridView_local.RowsRemoved+=dcmDataGridView_local_RowsRemoved;
+                    this.dcmDataGridView_local.CellValueChanged+=dcmDataGridView_local_CellValueChanged;
                     localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
                     localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
                     localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
@@ -138,36 +139,6 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        private void dcmDataGridView_local_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            int width = dcmDataGridView_local.RowHeadersWidth-dcmDataGridView_local.ColumnHeadersHeight;
-            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
-            if (width < size.Width+4)
-            {
-                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight +4+ Convert.ToInt32(Math.Ceiling(size.Width));
-            }
-        }
-
-        private void dcmDataGridView_local_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
-            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
-            if (width < size.Width+4)
-            {
-                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4+Convert.ToInt32(Math.Ceiling(size.Width));
-            }
-        }
-
-        void dcmDataGridView_local_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            if (dcmDataGridView_local.Rows[e.RowIndex].Tag!=null)
-            {
-                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X + 1, e.RowBounds.Location.Y + 1, e.RowBounds.Height - 2, e.RowBounds.Height - 2);
-                // Draw the Tag 
-                e.Graphics.DrawImage(global::IDCM.Properties.Resources.broken, rect);
-            }
-        }
-        
         private void setDGVCellHit(DataGridViewCell cell)
         {
             if (cell.Visible == false)
@@ -485,6 +456,51 @@ namespace IDCM.VModule.GCM
         public event GCMProgressHandler GCMProgressInvoke;
         public event GCMOpConditionHandler GCMOpConditionChanged;
 
+
+        private void dcmDataGridView_local_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex>-1)
+            {
+                if (e.ColumnIndex > -1 && e.ColumnIndex.Equals(localServManager.KeyColIndex))
+                {
+                    DataGridViewRow dgvr = this.dcmDataGridView_local.Rows[e.RowIndex];
+                    dgvr.Tag = null;
+                    dcmDataGridView_local.InvalidateRow(e.RowIndex);
+                }
+            }
+        }
+
+        private void dcmDataGridView_local_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
+            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
+            if (width < size.Width + 4)
+            {
+                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4 + Convert.ToInt32(Math.Ceiling(size.Width));
+            }
+        }
+
+        private void dcmDataGridView_local_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
+            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
+            if (width < size.Width + 4)
+            {
+                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4 + Convert.ToInt32(Math.Ceiling(size.Width));
+            }
+        }
+
+        void dcmDataGridView_local_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (dcmDataGridView_local.Rows[e.RowIndex].Tag != null && dcmDataGridView_local.Rows[e.RowIndex].Tag.GetType().Equals(typeof(bool)))
+            {
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X + 1, e.RowBounds.Location.Y + 1, e.RowBounds.Height - 2, e.RowBounds.Height - 2);
+                // Draw the Tag 
+                bool linked = Convert.ToBoolean(dcmDataGridView_local.Rows[e.RowIndex].Tag);
+                e.Graphics.DrawImage(linked ? global::IDCM.Properties.Resources.clip : global::IDCM.Properties.Resources.broken, rect);
+            }
+        }
+        
         private void colConfiger_ColConfigChanged(int cursor, CustomColDef ccd)
         {
             if (cursor > -1 && ccd!=null)
@@ -851,16 +867,22 @@ namespace IDCM.VModule.GCM
         }
         private void servInvoker_OnGCMDataLoaded(object msgTag, params object[] vals)
         {
-            if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_Local.TabIndex))
+            ComponentUtil.ControlAsyncUtil.SyncInvoke(gcmTabControl_GCM, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()
             {
-                gcmServManager.SyncStrainLinksCompare(dcmDataGridView_local, localServManager.KeyColIndex);
-                this.dcmDataGridView_local.Invalidate();
-                this.dcmDataGridView_local.Update();
-            }
-            else if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_GCM.TabIndex))
-            {
+                if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_Local.TabIndex))
+                {
+                    gcmServManager.SyncStrainLinksCompare(dcmDataGridView_local, localServManager.KeyColIndex);
+                    ComponentUtil.ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        this.dcmDataGridView_local.Invalidate();
+                        this.dcmDataGridView_local.Update();
+                    }));
+                }
+                else if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_GCM.TabIndex))
+                {
                
-            }
+                }
+           }));
         }
         #endregion
 

@@ -177,13 +177,7 @@ namespace IDCM.ViewManager
                 DataGridViewCell dgvc=dgvr.Cells[keyIndex];
                 if(dgvc!=null && dgvc.Value!=null)
                 {
-                    if (gtcache.containsStrainNumber(dgvc.FormattedValue.ToString()))
-                    {
-                        //ComponentUtil.ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()
-                        //{
-                            dgvr.Tag = true;
-                        //}));
-                    }
+                    dgvr.Tag = gtcache.containsStrainNumber(dgvc.FormattedValue.ToString());
                 }
             }
         }
