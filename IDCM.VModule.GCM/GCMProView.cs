@@ -220,7 +220,7 @@ namespace IDCM.VModule.GCM
             if (slient==false && !RunningHandlerNoter.checkForIdle())
             {
                 if (MessageBox.Show(GlobalTextRes.Text("There are background tasks are executing, force quit or not"),
-                    GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) != DialogResult.OK)
                 {
                     return null;
                 }
@@ -440,7 +440,16 @@ namespace IDCM.VModule.GCM
         }
         public void CompareGCMRecords()
         {
-            gcmServManager.refreshGCMDataset();
+            if (gcmServManager.Signed)
+            {
+                gcmServManager.refreshGCMDataset();
+            }
+            else
+            {
+                MessageBox.Show(GlobalTextRes.Text("Please Login before compare records to GCM."));
+                gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
+                this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
+            }
         }
 
         public void ConfigColumns()

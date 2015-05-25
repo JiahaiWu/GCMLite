@@ -74,17 +74,20 @@ namespace IDCM.Core
         }
         internal void addOverViewRow(Dictionary<string, string> valMap)
         {
-            if (!dgv_overview.Columns.Contains(strainKeyName))
+            if (!"Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
             {
-                DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
-                dgvtbc.Name = strainKeyName;
-                dgvtbc.HeaderText = strainKeyName;
-                dgvtbc.Width = 200;
-                dgvtbc.Resizable = DataGridViewTriState.True;
-                ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
+                if (!dgv_overview.Columns.Contains(strainKeyName))
                 {
-                    dgv_overview.Columns.Add(dgvtbc);
-                }));
+                    DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
+                    dgvtbc.Name = strainKeyName;
+                    dgvtbc.HeaderText = strainKeyName;
+                    dgvtbc.Width = 200;
+                    dgvtbc.Resizable = DataGridViewTriState.True;
+                    ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        dgv_overview.Columns.Add(dgvtbc);
+                    }));
+                }
             }
             //add valMap note Tag into loadedNoter Map
             int dgvrIdx = -1;
@@ -94,29 +97,33 @@ namespace IDCM.Core
             }
             DataGridViewRow dgvr = new DataGridViewRow();
             dgvr.CreateCells(dgv_overview);
-            ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
+            
+            StrainKeyIndexs[valMap[strainKeyName]] = dgvrIdx;
+            if (!"Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
             {
-                dgv_overview.Rows.InsertRange(dgvrIdx, dgvr);
-                StrainKeyIndexs[valMap[strainKeyName]] = dgvrIdx;
-                foreach (KeyValuePair<string, string> entry in valMap)
+                ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
-                    //if itemDGV not contains Column of entry.key
-                    //   add Column named with entry.key
-                    //then merge data into itemDGV View.
-                    //(if this valMap has exist in loadedNoter Map use Update Method else is append Method.) 
-                    if (!dgv_overview.Columns.Contains(entry.Key))
+                    dgv_overview.Rows.InsertRange(dgvrIdx, dgvr);
+                    foreach (KeyValuePair<string, string> entry in valMap)
                     {
-                        DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
-                        dgvtbc.Name = entry.Key;
-                        dgvtbc.HeaderText = entry.Key;
-                        dgvtbc.Width = 100;
-                        dgvtbc.Resizable = DataGridViewTriState.True;
-                        dgv_overview.Columns.Add(dgvtbc);
+                        //if itemDGV not contains Column of entry.key
+                        //   add Column named with entry.key
+                        //then merge data into itemDGV View.
+                        //(if this valMap has exist in loadedNoter Map use Update Method else is append Method.) 
+                        if (!dgv_overview.Columns.Contains(entry.Key))
+                        {
+                            DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
+                            dgvtbc.Name = entry.Key;
+                            dgvtbc.HeaderText = entry.Key;
+                            dgvtbc.Width = 100;
+                            dgvtbc.Resizable = DataGridViewTriState.True;
+                            dgv_overview.Columns.Add(dgvtbc);
+                        }
+                        DataGridViewCell dgvc = dgv_overview.Rows[dgvrIdx].Cells[entry.Key];
+                        dgvc.Value = entry.Value;
                     }
-                    DataGridViewCell dgvc = dgv_overview.Rows[dgvrIdx].Cells[entry.Key];
-                    dgvc.Value = entry.Value;
-                }
-            }));
+                }));
+            }
         }
         internal string getSIDByRowIdx(int ridx)
         {
