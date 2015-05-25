@@ -138,10 +138,11 @@ namespace IDCM
         private void viewMonitor_Tick(object sender, EventArgs e)
         {
             if (gcmProView_lite.Enabled ){
-                if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View))
+                if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View)||
+                    gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_Processing))
                 {
                     int localCount = gcmProView_lite.LocalRowCount;
-                    if (localCount >= 0)
+                    if (localCount > 0)
                     {
                         string text = localCount.ToString() + GlobalTextRes.Text(" records in total.");
                         this.toolStripLabel_OfficialNotice.Text = text;
@@ -151,7 +152,7 @@ namespace IDCM
                 else if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.GCM_View))
                 {
                     int gcmCount = gcmProView_lite.GCMRowCount;
-                    if (gcmCount >= 0)
+                    if (gcmCount >0)
                     {
                         string text = gcmCount.ToString() + GlobalTextRes.Text(" records in total.");
                         this.toolStripLabel_OfficialNotice.Text = text;

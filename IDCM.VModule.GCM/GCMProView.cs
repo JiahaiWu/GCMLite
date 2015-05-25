@@ -474,7 +474,8 @@ namespace IDCM.VModule.GCM
 
         public void ConfigColumns()
         {
-            throw new NotImplementedException();
+            ConfigColumnsDlg ccdlg = new ConfigColumnsDlg();
+            ccdlg.ShowDialog();
         }
         #endregion
 

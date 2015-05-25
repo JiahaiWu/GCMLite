@@ -25,7 +25,7 @@ namespace IDCM.Core
             this.checkBox_remember = checkBox_remember;
             this.dgv_overview = dgv_overview;
             this.tree_detail = tree_detail;
-            keyIndexs = new Dictionary<string, int>();
+            StrainKeyIndexs = new Dictionary<string, int>();
             keyName = ConfigurationManager.AppSettings[SysConstants.GCMSIDName];
             strainKeyName= ConfigurationManager.AppSettings[SysConstants.GCMStrainKeyName];
         }

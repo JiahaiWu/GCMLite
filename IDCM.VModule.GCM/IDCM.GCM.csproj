@@ -132,6 +132,12 @@
     <Compile Include="Forms\ColConfigDlg.Designer.cs">
       <DependentUpon>ColConfigDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ConfigColumnsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfigColumnsDlg.Designer.cs">
+      <DependentUpon>ConfigColumnsDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExportTypeDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColConfigDlg.resx">
       <DependentUpon>ColConfigDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfigColumnsDlg.resx">
+      <DependentUpon>ConfigColumnsDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExportTypeDlg.resx">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
