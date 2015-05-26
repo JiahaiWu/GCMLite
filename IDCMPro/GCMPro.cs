@@ -59,23 +59,7 @@ namespace IDCM
         #endregion
 
         #region Methods
-        /// <summary>
-        /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作
-        /// </summary>
-        private void checkWorkSpace()
-        {
-            log.Debug("checkWorkSpace(...)");
-            if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
-            {
-                Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
-            }
-            if (ProcessUtil.checkDuplicateProcess() != null)
-            {
-                MessageBox.Show(GlobalTextRes.Text("Work process existing under this work space. Choose confirm and exit this instance."),
-                    GlobalTextRes.Text("Notice"), MessageBoxButtons.OK);
-                Application.Exit();
-            }
-        }
+
         /******************************************************************
          * 键盘事件处理方法
          * @auther JiahaiWu 2014-03-17
@@ -174,7 +158,6 @@ namespace IDCM
         /// <param name="e"></param>
         private void GCMPro_Load(object sender, EventArgs e)
         {
-            checkWorkSpace();
             gcmProView_lite.initComponenent();
 
             this.FormClosing+=GCMPro_FormClosing;

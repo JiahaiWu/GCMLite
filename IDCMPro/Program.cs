@@ -49,40 +49,53 @@ namespace IDCM
         [STAThread]
         static void Main(string[] args)
         {
-            try
+            
+            bool isapprunning = false;
+            System.Threading.Mutex mutex = new System.Threading.Mutex(true, System.Diagnostics.Process.GetCurrentProcess().ProcessName,
+            out isapprunning);
+            if (!isapprunning)
+            {
+                MessageBox.Show(GlobalTextRes.Text("Work process existing under this work space. Choose confirm and exit this instance."),
+                    GlobalTextRes.Text("Notice"), MessageBoxButtons.OK);
+                Application.Exit();
+            }
+            else
             {
                 try
                 {
-                    string lan = ConfigurationManager.AppSettings[SysConstants.CultureInfo];
-                    if (lan != null && lan.Length > 0)
+                    try
                     {
-                        Application.CurrentCulture = new System.Globalization.CultureInfo(lan);
+                        string lan = ConfigurationManager.AppSettings[SysConstants.CultureInfo];
+                        if (lan != null && lan.Length > 0)
+                        {
+                            Application.CurrentCulture = new System.Globalization.CultureInfo(lan);
+                        }
                     }
+                    catch (Exception ex)
+                    {
+
+                        log.Error("Set Lanaguage by app.config failed.", ex);
+                    }
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Dictionary<string, string> preSetttings = commandArgScreening(args);
+                    if (preSetttings.Count > 0)
+                    {
+                        prepareAppContext(preSetttings);
+                        return;
+                    }
+                    IDCMAppContext appContext = new IDCMAppContext(preSetttings);
+                    Application.Run(appContext);
                 }
                 catch (Exception ex)
                 {
-
-                    log.Error("Set Lanaguage by app.config failed.", ex);
-                }
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Dictionary<string, string> preSetttings = commandArgScreening(args);
-                if (preSetttings.Count > 0)
-                {
-                    prepareAppContext(preSetttings);
-                    return;
-                }
-                IDCMAppContext appContext = new IDCMAppContext(preSetttings);
-                Application.Run(appContext);
-            }
-            catch (Exception ex)
-            {
 #if DEBUG
-                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's Crash") + "! \n FATAL ERROR:" + ex.Message + "\n" + ex.ToString());
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's Crash") + "! \n FATAL ERROR:" + ex.Message + "\n" + ex.ToString());
 #else
                 MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's Crash") + "! \n FATAL ERROR:" + ex.Message);
 #endif
-                log.Info(IDCM.Base.GlobalTextRes.Text("FATAL") + "!", ex);
+                    log.Info(IDCM.Base.GlobalTextRes.Text("FATAL") + "!", ex);
+                }
             }
         }
 
