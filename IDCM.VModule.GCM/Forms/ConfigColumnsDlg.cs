@@ -15,6 +15,7 @@ namespace IDCM.Forms
 {
     public partial class ConfigColumnsDlg : Form
     {
+        #region Constructor&Destructor
         public ConfigColumnsDlg()
         {
             InitializeComponent();
@@ -26,6 +27,8 @@ namespace IDCM.Forms
             dataGridView_colCfg.RowPostPaint+=dataGridView_colCfg_RowPostPaint;
             dataGridView_colCfg.CellClick += dataGridView_colCfg_CellClick;
         }
+        #endregion
+        #region Event&Handlings
 
         void dataGridView_colCfg_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -125,7 +128,44 @@ namespace IDCM.Forms
                     MessageBox.Show("Please choose a key name, it's not available.");
             }
         }
+        private void comboBox_keyField_Enter(object sender, EventArgs e)
+        {
+            if (Tag_comboBox_keyField_Updating == false)
+            {
+                Tag_comboBox_keyField_Updating = true;
+                Graphics g = comboBox_keyField.CreateGraphics();
+                int newWidth = 0;
+                int maxWidth = comboBox_keyField.Width;
 
+                List<string> iterms = new List<string>();
+                foreach (DataGridViewRow dgvr in dataGridView_colCfg.Rows)
+                {
+                    if (dgvr.IsNewRow)
+                        continue;
+                    DataGridViewCell dgvc = dgvr.Cells["Attr"];
+                    if (dgvc != null && dgvc.Value != null)
+                    {
+                        string term = dgvc.FormattedValue.ToString();
+                        if (term.Length > 0)
+                        {
+                            iterms.Add(term);
+                            newWidth = (int)g.MeasureString(term.ToString().Trim(), comboBox_keyField.Font).Width;
+                            if (newWidth > maxWidth)
+                                maxWidth = newWidth;
+                        }
+                    }
+                }
+                comboBox_keyField.Items.Clear();
+                comboBox_keyField.Items.AddRange(iterms.ToArray());
+                if (comboBox_keyField.Items.Count > comboBox_keyField.MaxDropDownItems)
+                    maxWidth += SystemInformation.VerticalScrollBarWidth;
+                comboBox_keyField.DropDownHeight = maxWidth;
+                Tag_comboBox_keyField_Updating = false;
+            }
+        }
+        #endregion
+
+        #region Methods
         private bool checkFields(out bool keyNameAvailable)
         {
             bool noError = true;
@@ -213,43 +253,10 @@ namespace IDCM.Forms
                 }
             }
         }
+        #endregion
 
-
-        private void comboBox_keyField_Enter(object sender, EventArgs e)
-        {
-            if (Tag_comboBox_keyField_Updating == false)
-            {
-                Tag_comboBox_keyField_Updating = true;
-                Graphics g = comboBox_keyField.CreateGraphics();
-                int newWidth = 0;
-                int maxWidth = comboBox_keyField.Width;
-
-                List<string> iterms = new List<string>();
-                foreach (DataGridViewRow dgvr in dataGridView_colCfg.Rows)
-                {
-                    if (dgvr.IsNewRow)
-                        continue;
-                    DataGridViewCell dgvc = dgvr.Cells["Attr"];
-                    if (dgvc != null && dgvc.Value != null)
-                    {
-                        string term = dgvc.FormattedValue.ToString();
-                        if (term.Length > 0)
-                        {
-                            iterms.Add(term);
-                            newWidth = (int)g.MeasureString(term.ToString().Trim(), comboBox_keyField.Font).Width;
-                            if (newWidth > maxWidth)
-                                maxWidth = newWidth;
-                        }
-                    }
-                }
-                comboBox_keyField.Items.Clear();
-                comboBox_keyField.Items.AddRange(iterms.ToArray());
-                if (comboBox_keyField.Items.Count > comboBox_keyField.MaxDropDownItems)
-                    maxWidth += SystemInformation.VerticalScrollBarWidth;
-                comboBox_keyField.DropDownHeight = maxWidth;
-                Tag_comboBox_keyField_Updating = false;
-            }
-        }
+        #region Members
         private volatile bool Tag_comboBox_keyField_Updating=false;
+        #endregion
     }
 }

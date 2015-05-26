@@ -420,4 +420,7 @@
   <data name="Work process existing under this work space. Choose confirm and exit this instance." xml:space="preserve">
     <value>当前工作空间下工作进程已存在，选择确认退出当前实例。</value>
   </data>
+  <data name="Reset Local Columns" xml:space="preserve">
+    <value>重设本地数据列</value>
+  </data>
 </root>

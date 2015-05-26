@@ -317,6 +317,17 @@ namespace IDCM.VModule.GCM
             else
                 HelpDocRequester.tryToOpenLinkUrl(uri);
         }
+        public void quickFindData(string findTerm)
+        {
+            if (opCond.Equals(OpConditionType.Local_View) || opCond.Equals(OpConditionType.Local_Processing))
+            {
+                localFrontFindDlg.beginFind(findTerm);
+            }
+            else if (opCond.Equals(OpConditionType.GCM_View))
+            {
+                gcmFrontFindDlg.beginFind(findTerm);
+            }
+        }
         public void frontFindData()
         {
             if (opCond.Equals(OpConditionType.Local_View) || opCond.Equals(OpConditionType.Local_Processing))

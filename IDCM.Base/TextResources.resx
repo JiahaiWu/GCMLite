@@ -121,7 +121,7 @@
     <value>ABC Browser</value>
   </data>
   <data name="About GCMLite" xml:space="preserve">
-    <value>关于 GCMLite</value>
+    <value>About GCMLite</value>
   </data>
   <data name="About GCMLite(Alt+A)" xml:space="preserve">
     <value>About GCMLite(Alt+A)</value>
@@ -355,7 +355,7 @@
     <value>Ready</value>
   </data>
   <data name="records in total." xml:space="preserve">
-    <value>条记录。</value>
+    <value>records in total.</value>
   </data>
   <data name="Remember" xml:space="preserve">
     <value>Remember</value>
@@ -416,5 +416,8 @@
   </data>
   <data name="Work process existing under this work space. Choose confirm and exit this instance." xml:space="preserve">
     <value>Work process existing under this work space. Choose confirm and exit this instance.</value>
+  </data>
+  <data name="Reset Local Columns" xml:space="preserve">
+    <value>Reset Local Columns</value>
   </data>
 </root>

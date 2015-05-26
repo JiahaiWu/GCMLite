@@ -50,7 +50,7 @@ namespace IDCM
             this.webSupportAltHToolStripMenuItem.Text = GlobalTextRes.Text("Web Support(Alt+H)");
             this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
             this.offlineDocumentAltDToolStripMenuItem.Text = GlobalTextRes.Text("Offline Document(Alt+D)");
-
+            this.resetColumnsToolStripMenuItem.Text = GlobalTextRes.Text("Reset Local Columns");
             viewMonitor = new Timer();
             viewMonitor.Interval = 3000;
             viewMonitor.Tick+=viewMonitor_Tick;
@@ -339,14 +339,25 @@ namespace IDCM
 
         private void toolStripButton_search_Click(object sender, EventArgs e)
         {
-            gcmProView_lite.frontFindData();
+
+            string findTerm = this.toolStripTextBox_search.Text.Trim();
+            if (findTerm.Length > 0)
+            {
+                gcmProView_lite.quickFindData(findTerm);
+            }
         }
 
-        private void toolStripTextBox_search_Click(object sender, EventArgs e)
+        private void toolStripTextBox_search_KeyDown(object sender, KeyEventArgs e)
         {
-            //////////////////
+            if (e.KeyCode == Keys.Enter)
+            {
+                string findTerm = this.toolStripTextBox_search.Text.Trim();
+                if (findTerm.Length > 0)
+                {
+                    gcmProView_lite.quickFindData(findTerm);
+                }
+            }
         }
-
         private void toolStripButton_help_Click(object sender, EventArgs e)
         {
             openWebHelpDocument();
@@ -445,6 +456,24 @@ namespace IDCM
         {
             gcmProView_lite.ConfigColumns();
         }
+
+        private void toolStripTextBox_search_Enter(object sender, EventArgs e)
+        {
+            if (this.toolStripTextBox_search.Text.Length > 0 && this.toolStripTextBox_search.ForeColor.Equals(Color.DarkGray))
+            {
+                this.toolStripTextBox_search.Text = "";
+                this.toolStripTextBox_search.ForeColor = Color.Black;
+            }
+        }
+
+        private void toolStripTextBox_search_Leave(object sender, EventArgs e)
+        {
+            if (this.toolStripTextBox_search.Text.Length < 1)
+            {
+                this.toolStripTextBox_search.Text = "Quick Search";
+                this.toolStripTextBox_search.ForeColor = Color.DarkGray;
+            }
+        }
         #endregion
 
         #region Members
@@ -454,8 +483,6 @@ namespace IDCM
         /// </summary>
         private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
-
-
 
     }
 }

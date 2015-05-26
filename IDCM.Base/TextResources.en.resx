@@ -370,7 +370,7 @@
     <value>Work process existing under this work space. Choose confirm and exit this instance.</value>
   </data>
   <data name="About GCMLite" xml:space="preserve">
-    <value>关于 GCMLite</value>
+    <value>About GCMLite</value>
   </data>
   <data name="Address NO.1 Beichen West Road, Chaoyang District, Beijing 100101" xml:space="preserve">
     <value>Address: NO.1 Beichen West Road, Chaoyang District, Beijing 100101</value>
@@ -412,9 +412,12 @@
     <value>Ok</value>
   </data>
   <data name="records in total." xml:space="preserve">
-    <value>条记录。</value>
+    <value>records in total.</value>
   </data>
   <data name="Simplified Chinese" xml:space="preserve">
     <value>Simplified Chinese</value>
+  </data>
+  <data name="Reset Local Columns" xml:space="preserve">
+    <value>Reset Local Columns</value>
   </data>
 </root>

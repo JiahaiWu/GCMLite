@@ -48,6 +48,7 @@
             this.languageAltLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simplifiedChineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webSupportAltHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.offlineDocumentAltDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,6 @@
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
             this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
-            this.resetColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -211,7 +211,7 @@
             // loginGCMToolStripMenuItem
             // 
             this.loginGCMToolStripMenuItem.Name = "loginGCMToolStripMenuItem";
-            this.loginGCMToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.loginGCMToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.loginGCMToolStripMenuItem.Text = "Login GCM(Alt+G)";
             this.loginGCMToolStripMenuItem.Click += new System.EventHandler(this.loginGCMToolStripMenuItem_Click);
             // 
@@ -221,7 +221,7 @@
             this.englishToolStripMenuItem,
             this.simplifiedChineseToolStripMenuItem});
             this.languageAltLToolStripMenuItem.Name = "languageAltLToolStripMenuItem";
-            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.languageAltLToolStripMenuItem.Text = "Language(Alt+L)";
             this.languageAltLToolStripMenuItem.DropDownOpening += new System.EventHandler(this.languageAltLToolStripMenuItem_DropDownOpening);
             // 
@@ -238,6 +238,13 @@
             this.simplifiedChineseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.simplifiedChineseToolStripMenuItem.Text = "Simplified Chinese";
             this.simplifiedChineseToolStripMenuItem.Click += new System.EventHandler(this.simplifiedChineseToolStripMenuItem_Click);
+            // 
+            // resetColumnsToolStripMenuItem
+            // 
+            this.resetColumnsToolStripMenuItem.Name = "resetColumnsToolStripMenuItem";
+            this.resetColumnsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.resetColumnsToolStripMenuItem.Text = "Reset Local Columns";
+            this.resetColumnsToolStripMenuItem.Click += new System.EventHandler(this.resetColumnsToolStripMenuItem_Click);
             // 
             // helpHToolStripMenuItem
             // 
@@ -333,9 +340,14 @@
             // toolStripTextBox_search
             // 
             this.toolStripTextBox_search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripTextBox_search.ForeColor = System.Drawing.Color.DarkGray;
             this.toolStripTextBox_search.Name = "toolStripTextBox_search";
             this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 31);
-            this.toolStripTextBox_search.Click += new System.EventHandler(this.toolStripTextBox_search_Click);
+            this.toolStripTextBox_search.Text = "Quick Search";
+            this.toolStripTextBox_search.ToolTipText = "Quick Search";
+            this.toolStripTextBox_search.Enter += new System.EventHandler(this.toolStripTextBox_search_Enter);
+            this.toolStripTextBox_search.Leave += new System.EventHandler(this.toolStripTextBox_search_Leave);
+            this.toolStripTextBox_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox_search_KeyDown);
             // 
             // toolStripSeparator1
             // 
@@ -446,13 +458,6 @@
             this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);
             this.gcmProView_lite.TabIndex = 3;
             this.gcmProView_lite.Visible = false;
-            // 
-            // resetColumnsToolStripMenuItem
-            // 
-            this.resetColumnsToolStripMenuItem.Name = "resetColumnsToolStripMenuItem";
-            this.resetColumnsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.resetColumnsToolStripMenuItem.Text = "Reset Local Columns";
-            this.resetColumnsToolStripMenuItem.Click += new System.EventHandler(this.resetColumnsToolStripMenuItem_Click);
             // 
             // GCMPro
             // 

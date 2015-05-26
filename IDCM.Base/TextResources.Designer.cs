@@ -70,7 +70,7 @@ namespace IDCM.Base {
         }
         
         /// <summary>
-        ///   查找类似 关于 GCMLite 的本地化字符串。
+        ///   查找类似 About GCMLite 的本地化字符串。
         /// </summary>
         internal static string About_GCMLite {
             get {
@@ -772,7 +772,7 @@ namespace IDCM.Base {
         }
         
         /// <summary>
-        ///   查找类似 条记录。 的本地化字符串。
+        ///   查找类似 records in total. 的本地化字符串。
         /// </summary>
         internal static string records_in_total_ {
             get {
@@ -795,6 +795,15 @@ namespace IDCM.Base {
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Reset Local Columns 的本地化字符串。
+        /// </summary>
+        internal static string Reset_Local_Columns {
+            get {
+                return ResourceManager.GetString("Reset Local Columns", resourceCulture);
             }
         }
         
