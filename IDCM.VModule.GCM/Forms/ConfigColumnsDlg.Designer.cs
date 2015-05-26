@@ -70,7 +70,6 @@
             // 
             // dataGridView_colCfg
             // 
-            this.dataGridView_colCfg.AllowUserToOrderColumns = true;
             this.dataGridView_colCfg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_colCfg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Attr,
@@ -171,13 +170,11 @@
             // 
             // comboBox_keyField
             // 
-            this.comboBox_keyField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_keyField.FormattingEnabled = true;
             this.comboBox_keyField.Location = new System.Drawing.Point(85, 15);
             this.comboBox_keyField.Name = "comboBox_keyField";
-            this.comboBox_keyField.Size = new System.Drawing.Size(121, 20);
+            this.comboBox_keyField.Size = new System.Drawing.Size(220, 20);
             this.comboBox_keyField.TabIndex = 4;
-            this.comboBox_keyField.Click += new System.EventHandler(this.comboBox_keyField_Click);
+            this.comboBox_keyField.Enter += new System.EventHandler(this.comboBox_keyField_Enter);
             // 
             // label1
             // 

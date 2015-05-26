@@ -174,9 +174,25 @@ namespace IDCM.Core
         }
         public static void updateCustomColCond(params CustomColDef[] ccds)
         {
-            if (ccds != null)
+            if (ccds == null)
                 return;
             foreach(CustomColDef ccd in ccds)
+            {
+                if (ccd.Attr != null && ccd.Attr.Length > 0)
+                {
+                    ccdCache[ccd.Attr] = ccd;
+                    dirtyStatus = true;
+                }
+            }
+            saveUpdatedHistCfg();
+        }
+
+        public static void rebuildCustomColCond(CustomColDef[] ccds)
+        {
+            if (ccds == null)
+                throw new IDCMException("Illegal request parameters!");
+            ccdCache.Clear();
+            foreach (CustomColDef ccd in ccds)
             {
                 if (ccd.Attr != null && ccd.Attr.Length > 0)
                 {

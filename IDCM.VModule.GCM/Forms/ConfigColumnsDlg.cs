@@ -37,7 +37,6 @@ namespace IDCM.Forms
                     DataGridViewRow newRow = dataGridView_colCfg.Rows[selectedRowIndex];
                     dataGridView_colCfg.Rows.RemoveAt(selectedRowIndex);
                     dataGridView_colCfg.Rows.Insert(selectedRowIndex + 1, newRow);
-                    //dataGridView_fields.Rows[selectedRowIndex + 1].Selected = true;
                 }
             }
             else if (dataGridView_colCfg.Columns[e.ColumnIndex].HeaderText.Equals("Up"))
@@ -48,12 +47,10 @@ namespace IDCM.Forms
                     DataGridViewRow newRow = dataGridView_colCfg.Rows[selectedRowIndex];
                     dataGridView_colCfg.Rows.RemoveAt(selectedRowIndex);
                     dataGridView_colCfg.Rows.Insert(selectedRowIndex - 1, newRow);
-                    //dataGridView_fields.Rows[selectedRowIndex - 1].Selected = true;
                 }
             }
             else if (dataGridView_colCfg.Columns[e.ColumnIndex].HeaderText.Equals("Delete"))
             {
-                OnRemoveField(this, new IDCMViewEventArgs(new DataGridViewRow[] { dataGridView_colCfg.Rows[e.RowIndex] }));
                 dataGridView_colCfg.Rows.RemoveAt(e.RowIndex);
             }
         }
@@ -74,6 +71,7 @@ namespace IDCM.Forms
                 dgvr.Cells["Alias"].Value = ccd.Alias;
                 dgvr.Cells["Enable"].Value = ccd.IsEnable;
             }
+            comboBox_keyField.Text = CustomColDefGetter.KeyName;
         }
         private void dataGridView_colCfg_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -91,53 +89,39 @@ namespace IDCM.Forms
 
         private void Check_Click(object sender, EventArgs e)
         {
-            if (checkFields())
+            bool keyNameAvailable = true;
+            if (checkFields(out keyNameAvailable))
             {
                 MessageBox.Show("It seems all right.");
             }
             else
             {
-                MessageBox.Show("Please notice the error tips shown in the data grid view, you need to update the value.");
+                if (keyNameAvailable)
+                    MessageBox.Show("Please notice the error tips shown in the data grid view, fix those errors and confirm again.");
+                else
+                    MessageBox.Show("Please choose a key name, it's not available.");
             }
         }
 
         private void Confirm_Click(object sender, EventArgs e)
         {
-            if (checkFields())
+            bool keyNameAvailable = true;
+            if (checkFields(out keyNameAvailable))
             {
                 submitSetting();
+                this.Close();
+                this.Dispose();
             }
             else
             {
-                MessageBox.Show("Please notice the error tips shown in the data grid view, fix those errors and confirm again.");
+                if(keyNameAvailable)
+                    MessageBox.Show("Please notice the error tips shown in the data grid view, fix those errors and confirm again.");
+                else
+                    MessageBox.Show("Please choose a key name, it's not available.");
             }
-            this.Close();
-            this.Dispose();
         }
 
-
-        private void comboBox_keyField_Click(object sender, EventArgs e)
-        {
-            List<string> iterms = new List<string>();
-            foreach (DataGridViewRow dgvr in dataGridView_colCfg.Rows)
-            {
-                if(dgvr.IsNewRow)
-                    continue;
-                DataGridViewCell dgvc = dgvr.Cells["Attr"];
-                if (dgvc != null && dgvc.Value != null)
-                {
-                    string term = dgvc.FormattedValue.ToString();
-                    if(term.Length>0)
-                        iterms.Add(term);
-                }
-            }
-            comboBox_keyField.Items.Clear();
-            comboBox_keyField.Items.AddRange(iterms.ToArray());
-            //comboBox_keyField.Invalidate();
-            //comboBox_keyField.Update();
-        }
-
-        private bool checkFields()
+        private bool checkFields(out bool keyNameAvailable)
         {
             bool noError = true;
             //验证字段名重复 &
@@ -181,12 +165,14 @@ namespace IDCM.Forms
                     }
                 }
             }
-            if (!iterms.Contains(comboBox_keyField.SelectedText))
+            if (!iterms.Contains(comboBox_keyField.Text))
             {
-                MessageBox.Show("Please choose a key name, it's not available.");
+                keyNameAvailable = false;
                 noError = false;
                 comboBox_keyField.Focus();
             }
+            else
+                keyNameAvailable = true;
             return noError;
         }
 
@@ -217,11 +203,48 @@ namespace IDCM.Forms
                 }
                 else
                 {
-                    CustomColDefGetter.updateCustomColCond(ccds.ToArray());
-                    Application.Exit();
+                    CustomColDefGetter.rebuildCustomColCond(ccds.ToArray());
+                    Application.Restart();
                 }
             }
         }
 
+
+        private void comboBox_keyField_Enter(object sender, EventArgs e)
+        {
+            if (Tag_comboBox_keyField_Updating == false)
+            {
+                Tag_comboBox_keyField_Updating = true;
+                Graphics g = comboBox_keyField.CreateGraphics();
+                int newWidth = 0;
+                int maxWidth = comboBox_keyField.Width;
+
+                List<string> iterms = new List<string>();
+                foreach (DataGridViewRow dgvr in dataGridView_colCfg.Rows)
+                {
+                    if (dgvr.IsNewRow)
+                        continue;
+                    DataGridViewCell dgvc = dgvr.Cells["Attr"];
+                    if (dgvc != null && dgvc.Value != null)
+                    {
+                        string term = dgvc.FormattedValue.ToString();
+                        if (term.Length > 0)
+                        {
+                            iterms.Add(term);
+                            newWidth = (int)g.MeasureString(term.ToString().Trim(), comboBox_keyField.Font).Width;
+                            if (newWidth > maxWidth)
+                                maxWidth = newWidth;
+                        }
+                    }
+                }
+                comboBox_keyField.Items.Clear();
+                comboBox_keyField.Items.AddRange(iterms.ToArray());
+                if (comboBox_keyField.Items.Count > comboBox_keyField.MaxDropDownItems)
+                    maxWidth += SystemInformation.VerticalScrollBarWidth;
+                comboBox_keyField.DropDownHeight = maxWidth;
+                Tag_comboBox_keyField_Updating = false;
+            }
+        }
+        private volatile bool Tag_comboBox_keyField_Updating=false;
     }
 }
