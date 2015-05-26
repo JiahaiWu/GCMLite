@@ -42,9 +42,14 @@ namespace IDCM
             this.searchAltFToolStripMenuItem.Text = GlobalTextRes.Text("Search(Alt+F)");
             this.clearAllAltCToolStripMenuItem.Text = GlobalTextRes.Text("Clear All(Alt+C)");
             this.configurationCToolStripMenuItem.Text = GlobalTextRes.Text("Configuration");
+            this.loginGCMToolStripMenuItem.Text = GlobalTextRes.Text("Login GCM(Alt+G)");
+            this.languageAltLToolStripMenuItem.Text = GlobalTextRes.Text("Language(Alt+L)");
+            this.englishToolStripMenuItem.Text = GlobalTextRes.Text("English");
+            this.simplifiedChineseToolStripMenuItem.Text = GlobalTextRes.Text("Simplified Chinese");
             this.helpHToolStripMenuItem.Text = GlobalTextRes.Text("Help");
             this.webSupportAltHToolStripMenuItem.Text = GlobalTextRes.Text("Web Support(Alt+H)");
             this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
+            this.offlineDocumentAltDToolStripMenuItem.Text = GlobalTextRes.Text("Offline Document(Alt+D)");
 
             viewMonitor = new Timer();
             viewMonitor.Interval = 3000;
@@ -144,7 +149,7 @@ namespace IDCM
                     int localCount = gcmProView_lite.LocalRowCount;
                     if (localCount > 0)
                     {
-                        string text = localCount.ToString() + GlobalTextRes.Text(" records in total.");
+                        string text = localCount.ToString() +" "+ GlobalTextRes.Text("records in total.");
                         this.toolStripLabel_OfficialNotice.Text = text;
                         return;
                     }
@@ -154,7 +159,7 @@ namespace IDCM
                     int gcmCount = gcmProView_lite.GCMRowCount;
                     if (gcmCount >0)
                     {
-                        string text = gcmCount.ToString() + GlobalTextRes.Text(" records in total.");
+                        string text = gcmCount.ToString() + " " + GlobalTextRes.Text("records in total.");
                         this.toolStripLabel_OfficialNotice.Text = text;
                         return;
                     }
@@ -195,7 +200,6 @@ namespace IDCM
                     this.toolStripButton_import.Enabled = true;
                     this.toolStripButton_export.Enabled = true;
                     this.toolStripButton_pub.Enabled = true;
-                    this.toolStripButton_colConfig.Enabled = true;
                     this.toolStripButton_compare.Enabled = true;
                     this.toolStripButton_down.Enabled = false;
                     this.toolStripButton_down.Visible = false;
@@ -207,6 +211,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = true;
                     searchAltFToolStripMenuItem.Enabled = true;
                     clearAllAltCToolStripMenuItem.Enabled = true;
+                    resetColumnsToolStripMenuItem.Enabled = true;
                     break;
                 case GCMProView.OpConditionType.Local_Processing:
                     this.toolStrip_gcmlite.Enabled = true;
@@ -215,7 +220,6 @@ namespace IDCM
                     this.toolStripButton_del.Enabled = true;
                     this.toolStripButton_import.Enabled = true;
                     this.toolStripButton_export.Enabled = true;
-                    this.toolStripButton_colConfig.Enabled = false;
                     this.toolStripButton_compare.Enabled = true;
                     this.toolStripButton_pub.Enabled = true;
                     this.toolStripButton_down.Enabled = false;
@@ -228,6 +232,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = true;
                     searchAltFToolStripMenuItem.Enabled = true;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.GCM_Login:
                     this.toolStrip_gcmlite.Enabled = false;
@@ -240,6 +245,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = false;
                     searchAltFToolStripMenuItem.Enabled = false;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.GCM_View:
                     this.toolStrip_gcmlite.Enabled = true;
@@ -259,6 +265,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = false;
                     searchAltFToolStripMenuItem.Enabled = true;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.ABC_View:
                     this.toolStrip_gcmlite.Enabled = true;
@@ -277,6 +284,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = false;
                     searchAltFToolStripMenuItem.Enabled = false;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.UnKnown:
                     this.toolStrip_gcmlite.Enabled = false;
@@ -450,7 +458,7 @@ namespace IDCM
             gcmProView_lite.CompareGCMRecords();
         }
 
-        private void toolStripButton_colConfig_Click(object sender, EventArgs e)
+        private void resetColumnsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gcmProView_lite.ConfigColumns();
         }
@@ -463,6 +471,8 @@ namespace IDCM
         /// </summary>
         private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
+
+
 
     }
 }

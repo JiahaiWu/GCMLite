@@ -61,13 +61,13 @@
             this.toolStripButton_down = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_pub = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_compare = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_colConfig = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_export = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_import = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
             this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
+            this.resetColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -202,7 +202,8 @@
             // 
             this.configurationCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loginGCMToolStripMenuItem,
-            this.languageAltLToolStripMenuItem});
+            this.languageAltLToolStripMenuItem,
+            this.resetColumnsToolStripMenuItem});
             this.configurationCToolStripMenuItem.Name = "configurationCToolStripMenuItem";
             this.configurationCToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
             this.configurationCToolStripMenuItem.Text = "Configuration";
@@ -284,7 +285,6 @@
             this.toolStripButton_down,
             this.toolStripButton_pub,
             this.toolStripButton_compare,
-            this.toolStripButton_colConfig,
             this.toolStripButton_export,
             this.toolStripButton_import,
             this.toolStripButton_del,
@@ -381,19 +381,6 @@
             this.toolStripButton_compare.ToolTipText = "Compare with GCM";
             this.toolStripButton_compare.Click += new System.EventHandler(this.toolStripButton_compare_Click);
             // 
-            // toolStripButton_colConfig
-            // 
-            this.toolStripButton_colConfig.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton_colConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_colConfig.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_colConfig.Image")));
-            this.toolStripButton_colConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_colConfig.Name = "toolStripButton_colConfig";
-            this.toolStripButton_colConfig.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.toolStripButton_colConfig.Size = new System.Drawing.Size(40, 28);
-            this.toolStripButton_colConfig.Text = "toolStripButton2";
-            this.toolStripButton_colConfig.ToolTipText = "Config Columns";
-            this.toolStripButton_colConfig.Click += new System.EventHandler(this.toolStripButton_colConfig_Click);
-            // 
             // toolStripButton_export
             // 
             this.toolStripButton_export.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -460,6 +447,13 @@
             this.gcmProView_lite.TabIndex = 3;
             this.gcmProView_lite.Visible = false;
             // 
+            // resetColumnsToolStripMenuItem
+            // 
+            this.resetColumnsToolStripMenuItem.Name = "resetColumnsToolStripMenuItem";
+            this.resetColumnsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.resetColumnsToolStripMenuItem.Text = "Reset Local Columns";
+            this.resetColumnsToolStripMenuItem.Click += new System.EventHandler(this.resetColumnsToolStripMenuItem_Click);
+            // 
             // GCMPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -523,8 +517,8 @@
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem simplifiedChineseToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_compare;
-        private System.Windows.Forms.ToolStripButton toolStripButton_colConfig;
         private System.Windows.Forms.ToolStripMenuItem loginGCMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offlineDocumentAltDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetColumnsToolStripMenuItem;
     }
 }

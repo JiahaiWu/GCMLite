@@ -18,6 +18,11 @@ namespace IDCM.Forms
         public ConfigColumnsDlg()
         {
             InitializeComponent();
+            this.label1.Text = GlobalTextRes.Text("Key Name")+":";
+            this.Btn_Cancel.Text = GlobalTextRes.Text("Cancel");
+            this.Btn_Check.Text = GlobalTextRes.Text("Check");
+            this.Btn_Confirm.Text = GlobalTextRes.Text("Confirm");
+            this.Text = GlobalTextRes.Text("ConfigColumnsDlg");
             dataGridView_colCfg.RowPostPaint+=dataGridView_colCfg_RowPostPaint;
             dataGridView_colCfg.CellClick += dataGridView_colCfg_CellClick;
         }

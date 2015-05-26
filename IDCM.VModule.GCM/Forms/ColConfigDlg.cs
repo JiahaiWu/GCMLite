@@ -22,6 +22,7 @@ namespace IDCM.Forms
             this.checkBox_NotEmpty.Text = IDCM.Base.GlobalTextRes.Text("Not Empty");
             this.checkBox_unique.Text = IDCM.Base.GlobalTextRes.Text("Unique");
             this.Text = IDCM.Base.GlobalTextRes.Text("Column Config Dialog");
+            this.label_defaultVal.Text = IDCM.Base.GlobalTextRes.Text("Default Value")+":";
             //////////////////////////////////////////////
             this.cursor = cursor;
             this.customCol = ccd;
