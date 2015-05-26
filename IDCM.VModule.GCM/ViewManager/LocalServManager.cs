@@ -180,23 +180,6 @@ namespace IDCM.ViewManager
             return dumppath;
         }
 
-        public string LastIOPath
-        {
-            get{
-                if (lastIOPath == null)
-                {
-                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
-                }
-                else
-                    lastIOPath = Path.GetDirectoryName(lastIOPath);
-                if (!Directory.Exists(lastIOPath))
-                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
-                return lastIOPath;
-            }
-            set{
-                lastIOPath=value;
-            }
-        }
         #endregion
 
         #region Property
@@ -214,6 +197,25 @@ namespace IDCM.ViewManager
                 return ctcache.getKeyColIndex();
             }
         }
+        public string LastIOPath
+        {
+            get
+            {
+                if (lastIOPath == null)
+                {
+                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
+                }
+                else
+                    lastIOPath = Path.GetDirectoryName(lastIOPath);
+                if (!Directory.Exists(lastIOPath))
+                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
+                return lastIOPath;
+            }
+            set
+            {
+                lastIOPath = value;
+            }
+        }
         #endregion
 
         #region Members
@@ -221,7 +223,6 @@ namespace IDCM.ViewManager
         private CTableCache ctcache = null;
         private string lastIOPath = null;
         #endregion
-
 
     }
 }

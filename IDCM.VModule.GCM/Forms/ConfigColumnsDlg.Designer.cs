@@ -28,14 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView_colCfg = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Btn_Cancel = new System.Windows.Forms.Button();
-            this.Btn_Check = new System.Windows.Forms.Button();
-            this.Btn_Confirm = new System.Windows.Forms.Button();
             this.Attr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Require = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -46,6 +42,12 @@
             this.Up = new System.Windows.Forms.DataGridViewImageColumn();
             this.Down = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox_keyField = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Btn_Cancel = new System.Windows.Forms.Button();
+            this.Btn_Check = new System.Windows.Forms.Button();
+            this.Btn_Confirm = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_colCfg)).BeginInit();
             this.panel1.SuspendLayout();
@@ -88,54 +90,10 @@
             this.dataGridView_colCfg.Size = new System.Drawing.Size(926, 381);
             this.dataGridView_colCfg.TabIndex = 0;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.Btn_Cancel);
-            this.panel1.Controls.Add(this.Btn_Check);
-            this.panel1.Controls.Add(this.Btn_Confirm);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(926, 44);
-            this.panel1.TabIndex = 1;
-            // 
-            // Btn_Cancel
-            // 
-            this.Btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Btn_Cancel.Location = new System.Drawing.Point(618, 9);
-            this.Btn_Cancel.Name = "Btn_Cancel";
-            this.Btn_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.Btn_Cancel.TabIndex = 2;
-            this.Btn_Cancel.Text = "Cancel";
-            this.Btn_Cancel.UseVisualStyleBackColor = true;
-            this.Btn_Cancel.Click += new System.EventHandler(this.Cancel_Click);
-            // 
-            // Btn_Check
-            // 
-            this.Btn_Check.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Btn_Check.Location = new System.Drawing.Point(727, 9);
-            this.Btn_Check.Name = "Btn_Check";
-            this.Btn_Check.Size = new System.Drawing.Size(75, 23);
-            this.Btn_Check.TabIndex = 1;
-            this.Btn_Check.Text = "Check";
-            this.Btn_Check.UseVisualStyleBackColor = true;
-            this.Btn_Check.Click += new System.EventHandler(this.Check_Click);
-            // 
-            // Btn_Confirm
-            // 
-            this.Btn_Confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Btn_Confirm.Location = new System.Drawing.Point(829, 9);
-            this.Btn_Confirm.Name = "Btn_Confirm";
-            this.Btn_Confirm.Size = new System.Drawing.Size(75, 23);
-            this.Btn_Confirm.TabIndex = 0;
-            this.Btn_Confirm.Text = "Confirm";
-            this.Btn_Confirm.UseVisualStyleBackColor = true;
-            this.Btn_Confirm.Click += new System.EventHandler(this.Confirm_Click);
-            // 
             // Attr
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Attr.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Attr.DefaultCellStyle = dataGridViewCellStyle1;
             this.Attr.HeaderText = "Name";
             this.Attr.Name = "Attr";
             // 
@@ -156,8 +114,8 @@
             // 
             // Alias
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Alias.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Alias.DefaultCellStyle = dataGridViewCellStyle2;
             this.Alias.HeaderText = "Alias";
             this.Alias.Name = "Alias";
             // 
@@ -198,6 +156,71 @@
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Delete.Width = 50;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.comboBox_keyField);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.Btn_Cancel);
+            this.panel1.Controls.Add(this.Btn_Check);
+            this.panel1.Controls.Add(this.Btn_Confirm);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(926, 44);
+            this.panel1.TabIndex = 1;
+            // 
+            // comboBox_keyField
+            // 
+            this.comboBox_keyField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_keyField.FormattingEnabled = true;
+            this.comboBox_keyField.Location = new System.Drawing.Point(85, 15);
+            this.comboBox_keyField.Name = "comboBox_keyField";
+            this.comboBox_keyField.Size = new System.Drawing.Size(121, 20);
+            this.comboBox_keyField.TabIndex = 4;
+            this.comboBox_keyField.Click += new System.EventHandler(this.comboBox_keyField_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Key Name:";
+            // 
+            // Btn_Cancel
+            // 
+            this.Btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Cancel.Location = new System.Drawing.Point(618, 9);
+            this.Btn_Cancel.Name = "Btn_Cancel";
+            this.Btn_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Cancel.TabIndex = 2;
+            this.Btn_Cancel.Text = "Cancel";
+            this.Btn_Cancel.UseVisualStyleBackColor = true;
+            this.Btn_Cancel.Click += new System.EventHandler(this.Cancel_Click);
+            // 
+            // Btn_Check
+            // 
+            this.Btn_Check.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Check.Location = new System.Drawing.Point(727, 9);
+            this.Btn_Check.Name = "Btn_Check";
+            this.Btn_Check.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Check.TabIndex = 1;
+            this.Btn_Check.Text = "Check";
+            this.Btn_Check.UseVisualStyleBackColor = true;
+            this.Btn_Check.Click += new System.EventHandler(this.Check_Click);
+            // 
+            // Btn_Confirm
+            // 
+            this.Btn_Confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Confirm.Location = new System.Drawing.Point(829, 9);
+            this.Btn_Confirm.Name = "Btn_Confirm";
+            this.Btn_Confirm.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Confirm.TabIndex = 0;
+            this.Btn_Confirm.Text = "Confirm";
+            this.Btn_Confirm.UseVisualStyleBackColor = true;
+            this.Btn_Confirm.Click += new System.EventHandler(this.Confirm_Click);
+            // 
             // ConfigColumnsDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -210,6 +233,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_colCfg)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -232,5 +256,7 @@
         private System.Windows.Forms.DataGridViewImageColumn Up;
         private System.Windows.Forms.DataGridViewImageColumn Down;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_keyField;
     }
 }

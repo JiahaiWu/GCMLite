@@ -94,9 +94,7 @@ namespace IDCM.ViewManager
                     break;
                 case MsgNoticeType.GCMDataLoaded:
                     if (OnGCMDataLoaded != null)
-                    {
                         OnGCMDataLoaded(amsg.MsgTag, amsg.Parameters);
-                    }
                     break;
                 default:
                     log.Warn("Unhandled asynchronous message.  @msgTag=" + amsg.MsgTag);

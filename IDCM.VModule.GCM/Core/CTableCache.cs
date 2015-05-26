@@ -73,6 +73,7 @@ namespace IDCM.Core
                 }
             }));
         }
+
         internal void addRow(Dictionary<string, string> mapvalues)
         {
             string value = null;
