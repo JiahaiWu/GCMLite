@@ -245,7 +245,8 @@ namespace DCMControlLib
                             ocMenu.addMenu(dgvc.HeaderText, dgvc.Visible);
                         }
                     }
-                    ocMenu.Show(this, new Point(e.X, e.Y));
+                    Point plocation = this.PointToScreen(this.Location);
+                    ocMenu.Show(this, new Point(MousePosition.X - plocation.X, MousePosition.Y - plocation.Y));
                 }
             }
         }

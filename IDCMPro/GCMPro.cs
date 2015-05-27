@@ -52,7 +52,7 @@ namespace IDCM
             this.offlineDocumentAltDToolStripMenuItem.Text = GlobalTextRes.Text("Offline Document(Alt+D)");
             this.resetColumnsToolStripMenuItem.Text = GlobalTextRes.Text("Reset Local Columns");
             viewMonitor = new Timer();
-            viewMonitor.Interval = 3000;
+            viewMonitor.Interval = 500;
             viewMonitor.Tick+=viewMonitor_Tick;
             viewMonitor.Start();
         }

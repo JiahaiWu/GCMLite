@@ -52,7 +52,7 @@ namespace IDCM.Core
                 dataTable.Columns.Add(col);
             }
             //////////////////////////////////////////
-            keyIndexs = new Dictionary<string, int>();
+            keyIndexs = new ConcurrentDictionary<string, DataGridViewRow>();
         }
         #endregion
 
@@ -79,19 +79,43 @@ namespace IDCM.Core
             string value = null;
             if (mapvalues.TryGetValue(KeyName, out value))
             {
-                int idx = -1;
-                if (!keyIndexs.TryGetValue(value, out idx) || idx<0)
+                DataGridViewRow dgvr = null;
+                if (!keyIndexs.TryGetValue(value, out dgvr))
                 {
                     ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
                     {
-                        idx = dgv.Rows.Add();
-                        keyIndexs[value] = idx;
+                        int idx = dgv.Rows.Add();
+                        dgvr=dgv.Rows[idx];
+                        keyIndexs[value] = dgvr;
                     }));
                 }
                 ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
-                    DataGridViewRow dgvr = dgv.Rows[idx];
                     foreach (KeyValuePair<string, string> kvpair in mapvalues)
+                    {
+                        dgvr.Cells[dgv.Columns[kvpair.Key].Index].Value = kvpair.Value;
+                    }
+                }));
+            }
+        }
+        internal void addRow(Dictionary<int, string> mapvalues)
+        {
+            string value = null;
+            if (mapvalues.TryGetValue(getKeyColIndex(), out value))
+            {
+                DataGridViewRow dgvr = null;
+                if (!keyIndexs.TryGetValue(value, out dgvr))
+                {
+                    ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        int idx = dgv.Rows.Add();
+                        dgvr = dgv.Rows[idx];
+                        keyIndexs[value] = dgvr;
+                    }));
+                }
+                ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
+                {
+                    foreach (KeyValuePair<int, string> kvpair in mapvalues)
                     {
                         dgvr.Cells[kvpair.Key].Value = kvpair.Value;
                     }
@@ -177,6 +201,32 @@ namespace IDCM.Core
             }
             return null;
         }
+
+        internal void removeRow(DataGridViewRow dgvr)
+        {
+            DataGridViewRow row = null;
+            keyIndexs.TryRemove(dgvr.Cells[KeyName].FormattedValue.ToString(),out row);
+            ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                this.dgv.Rows.Remove(dgvr);
+            }));
+
+        }
+
+        internal void syncKeyCellValue(DataGridViewRow dgvr)
+        {
+            if (dgvr != null && dgvr.Index > 0 && !dgvr.IsNewRow)
+            {
+                DataGridViewRow row = null;
+                foreach(KeyValuePair<string,DataGridViewRow> pair in keyIndexs.Where(rs=>rs.Value==dgvr))
+                {
+                    keyIndexs.TryRemove(pair.Key,out row);
+                }
+                string keyVal =DGVUtil.getCellValue(dgvr.Cells[KeyName]);
+                if (keyVal != null)
+                    keyIndexs[keyVal] = dgvr;
+            }
+        }
         #endregion
 
         #region Members
@@ -195,7 +245,7 @@ namespace IDCM.Core
         /// <summary>
         /// 主键映射表缓存表设定
         /// </summary>
-        private Dictionary<string, int> keyIndexs;
+        private ConcurrentDictionary<string, DataGridViewRow> keyIndexs;
         /// <summary>
         /// 缓存表（暂为备用）
         /// </summary>

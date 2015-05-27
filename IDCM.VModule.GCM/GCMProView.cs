@@ -266,12 +266,12 @@ namespace IDCM.VModule.GCM
             {
                 foreach(DataGridViewRow dgvr in dcmDataGridView_local.SelectedRows)
                 {
-                    dcmDataGridView_local.Rows.Remove(dgvr);
+                    localServManager.removeRow(dgvr);
                 }
                 
             }else if (dcmDataGridView_local.CurrentRow != null)
             {
-                dcmDataGridView_local.Rows.RemoveAt(dcmDataGridView_local.CurrentRow.Index);
+                localServManager.removeRow(dcmDataGridView_local.CurrentRow);
             }
         }
 
@@ -488,8 +488,13 @@ namespace IDCM.VModule.GCM
                 if (e.ColumnIndex > -1 && e.ColumnIndex.Equals(localServManager.KeyColIndex))
                 {
                     DataGridViewRow dgvr = this.dcmDataGridView_local.Rows[e.RowIndex];
-                    dgvr.Tag = null;
-                    dcmDataGridView_local.InvalidateRow(e.RowIndex);
+                    localServManager.syncKeyCellValue(dgvr);
+                    ///////////////////////////////////////////////////////////////////////////
+                    //DataGridViewRow dgvr = this.dcmDataGridView_local.Rows[e.RowIndex];
+                    //dgvr.Tag = null;
+                    //dcmDataGridView_local.InvalidateRow(e.RowIndex);
+                    //@Depercated   2015-05-27
+                    ///////////////////////////////////////////////////////////////////////////
                 }
             }
         }
@@ -669,6 +674,9 @@ namespace IDCM.VModule.GCM
         {
             if (e.Button == MouseButtons.Right)
             {
+                ////////////////////////////////////////////////////////////////////////////////
+                //选择本地数据非表头部分，右键点击事件处理，弹出目标数据单元或数据行对应的操作选项。
+                ////////////////////////////////////////////////////////////////////////////////
                 if (dcmDataGridView_local.CurrentRow != null)
                 {
                     Point plocation = dcmDataGridView_local.PointToScreen(dcmDataGridView_local.Location);
@@ -812,6 +820,11 @@ namespace IDCM.VModule.GCM
         private void OnLocalDataImported(object msgTag, params object[] vals)
         {
             MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data import success"));
+            ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                dcmDataGridView_local.Invalidate();
+                dcmDataGridView_local.Update();
+            }));
         }
 
         private void dataGridView_gcm_CellClicked(object sender, DataGridViewCellEventArgs e)

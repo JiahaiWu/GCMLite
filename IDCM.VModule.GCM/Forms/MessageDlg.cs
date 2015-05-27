@@ -75,7 +75,7 @@ namespace IDCM.Forms
 
         private void OnTipTimerTick(object sender, EventArgs e)
         {
-            if (LastTime > (wtick * 4))
+            if (LastTime > (wtick * 9))
             {
                 Hide();
                 wtimer.Stop();

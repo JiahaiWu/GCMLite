@@ -45,7 +45,11 @@ namespace IDCM.Core
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import excel file")+"！ ", ex);
-                DCMPublisher.noteSimpleMsg("Excel: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString());
+#if DEBUG
+                DCMPublisher.noteSimpleMsg("Excel: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString(),DCMMsgType.Alert);
+#else
+                DCMPublisher.noteSimpleMsg("Excel: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message,DCMMsgType.Alert);
+#endif
             }
             return false;
         }
@@ -73,7 +77,11 @@ namespace IDCM.Core
             catch (Exception ex)
             {
                 log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString());
+#if DEBUG
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString(), DCMMsgType.Alert);
+#else
+                                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message, DCMMsgType.Alert);
+#endif
             }
             return false;
         }
@@ -94,7 +102,11 @@ namespace IDCM.Core
             catch (Exception ex)
             {
                 log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message + "\n" + ex.ToString());
+#if DEBUG
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message + "\n" + ex.ToString(), DCMMsgType.Alert);
+#else
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message, DCMMsgType.Alert);
+#endif
             }
             return false;
         }

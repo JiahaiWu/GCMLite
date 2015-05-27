@@ -106,10 +106,7 @@ namespace IDCM.Core
                     lock (ctcache.GSyncRoot)
                     {
                         if (checkForValid(dgvr, checkers))
-                            ControlAsyncUtil.SyncInvoke(dgvr.DataGridView, new ControlAsyncUtil.InvokeHandler(delegate()
-                            {
-                                dgvr.DataGridView.Rows.Remove(dgvr);
-                            }));
+                            ctcache.removeRow(dgvr);
                     }
                 }
             }
@@ -130,10 +127,7 @@ namespace IDCM.Core
                 {
                     DataGridViewRow dgvr = ctcache.getDGVRow(ridx);
                     if (checkForValid(dgvr, checkers))
-                        ControlAsyncUtil.SyncInvoke(dgvr.DataGridView, new ControlAsyncUtil.InvokeHandler(delegate()
-                        {
-                            dgvr.DataGridView.Rows.Remove(dgvr);
-                        }));
+                        ctcache.removeRow(dgvr);
                     else
                         ridx++;
                 }

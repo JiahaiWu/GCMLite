@@ -131,6 +131,18 @@ namespace IDCM.ViewManager
             return null;
         }
 
+        internal void removeRow(DataGridViewRow dgvr)
+        {
+            lock (ctcache.GSyncRoot)
+            {
+                ctcache.removeRow(dgvr);
+            }
+        }
+        internal void syncKeyCellValue(DataGridViewRow dgvr)
+        {
+            ctcache.syncKeyCellValue(dgvr);
+            dgvr.Tag = null;
+        }
         /// <summary>
         /// 校验数据文档
         /// </summary>
