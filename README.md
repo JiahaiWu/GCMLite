@@ -13,8 +13,9 @@ Server-side storage and publishing
 Data sharing
 ***********************************************************
 ![Framwork of GCM Pro](https://github.com/NIC-IMCAS/IDCMPro/tree/GCMPro/Docs/IDCM FrameWork_GCMPro.png "Framwork of GCM Pro")
+![Mamual of GCM Lite](https://github.com/NIC-IMCAS/IDCMPro/tree/GCMPro/Docs/GCMLite_Help_0.1.htm "Mamual of GCM Lite")
 ***********************************************************
-Version 0.0.1
+Version 1.0.1
 
 From 2015-04-10 to 2015-05-20 
 
