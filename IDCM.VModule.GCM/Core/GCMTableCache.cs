@@ -25,7 +25,7 @@ namespace IDCM.Core
             this.checkBox_remember = checkBox_remember;
             this.dgv_overview = dgv_overview;
             this.tree_detail = tree_detail;
-            keyIndexs = new Dictionary<string, int>();
+            StrainKeyIndexs = new Dictionary<string, int>();
             keyName = ConfigurationManager.AppSettings[SysConstants.GCMSIDName];
             strainKeyName= ConfigurationManager.AppSettings[SysConstants.GCMStrainKeyName];
         }
@@ -68,52 +68,62 @@ namespace IDCM.Core
         #endregion
 
         #region Methods
-
+        internal int getRowCount()
+        {
+            return dgv_overview.RowCount;
+        }
         internal void addOverViewRow(Dictionary<string, string> valMap)
         {
-            if (!dgv_overview.Columns.Contains(keyName))
+            if (!"Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
             {
-                DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
-                dgvtbc.Name = keyName;
-                dgvtbc.HeaderText = keyName;
-                dgvtbc.Width = 100;
-                dgvtbc.Resizable = DataGridViewTriState.True;
-                ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
+                if (!dgv_overview.Columns.Contains(strainKeyName))
                 {
-                    dgv_overview.Columns.Add(dgvtbc);
-                }));
+                    DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
+                    dgvtbc.Name = strainKeyName;
+                    dgvtbc.HeaderText = strainKeyName;
+                    dgvtbc.Width = 200;
+                    dgvtbc.Resizable = DataGridViewTriState.True;
+                    ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        dgv_overview.Columns.Add(dgvtbc);
+                    }));
+                }
             }
             //add valMap note Tag into loadedNoter Map
             int dgvrIdx = -1;
-            if (!keyIndexs.TryGetValue(valMap[keyName], out dgvrIdx))
+            if (!StrainKeyIndexs.TryGetValue(valMap[strainKeyName], out dgvrIdx))
             {
                 dgvrIdx = dgv_overview.RowCount;
             }
             DataGridViewRow dgvr = new DataGridViewRow();
             dgvr.CreateCells(dgv_overview);
-            ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
+            
+            StrainKeyIndexs[valMap[strainKeyName]] = dgvrIdx;
+            if (!"Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
             {
-                dgv_overview.Rows.InsertRange(dgvrIdx, dgvr);
-                keyIndexs[valMap[keyName]]= dgvrIdx;
-                foreach (KeyValuePair<string, string> entry in valMap)
+                ControlAsyncUtil.SyncInvoke(dgv_overview, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
-                    //if itemDGV not contains Column of entry.key
-                    //   add Column named with entry.key
-                    //then merge data into itemDGV View.
-                    //(if this valMap has exist in loadedNoter Map use Update Method else is append Method.) 
-                    if (!dgv_overview.Columns.Contains(entry.Key))
+                    dgv_overview.Rows.InsertRange(dgvrIdx, dgvr);
+                    foreach (KeyValuePair<string, string> entry in valMap)
                     {
-                        DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
-                        dgvtbc.Name = entry.Key;
-                        dgvtbc.HeaderText = entry.Key;
-                        dgvtbc.Width = 100;
-                        dgvtbc.Resizable = DataGridViewTriState.True;
-                        dgv_overview.Columns.Add(dgvtbc);
+                        //if itemDGV not contains Column of entry.key
+                        //   add Column named with entry.key
+                        //then merge data into itemDGV View.
+                        //(if this valMap has exist in loadedNoter Map use Update Method else is append Method.) 
+                        if (!dgv_overview.Columns.Contains(entry.Key))
+                        {
+                            DataGridViewTextBoxColumn dgvtbc = new DataGridViewTextBoxColumn();
+                            dgvtbc.Name = entry.Key;
+                            dgvtbc.HeaderText = entry.Key;
+                            dgvtbc.Width = 100;
+                            dgvtbc.Resizable = DataGridViewTriState.True;
+                            dgv_overview.Columns.Add(dgvtbc);
+                        }
+                        DataGridViewCell dgvc = dgv_overview.Rows[dgvrIdx].Cells[entry.Key];
+                        dgvc.Value = entry.Value;
                     }
-                    DataGridViewCell dgvc = dgv_overview.Rows[dgvrIdx].Cells[entry.Key];
-                    dgvc.Value = entry.Value;
-                }
-            }));
+                }));
+            }
         }
         internal string getSIDByRowIdx(int ridx)
         {
@@ -125,6 +135,21 @@ namespace IDCM.Core
                 else
                 {
                     object val = dgvr.Cells[keyName].FormattedValue;
+                    return val == null ? null : val.ToString();
+                }
+            }
+            return null;
+        }
+        internal string getStrainNumberByRowIdx(int ridx)
+        {
+            if (ridx > -1 && ridx < dgv_overview.RowCount)
+            {
+                DataGridViewRow dgvr = dgv_overview.Rows[ridx];
+                if (dgvr.IsNewRow)
+                    return null;
+                else
+                {
+                    object val = dgvr.Cells[strainKeyName].FormattedValue;
                     return val == null ? null : val.ToString();
                 }
             }
@@ -252,6 +277,10 @@ namespace IDCM.Core
             }
             return -1;
         }
+        internal bool containsStrainNumber(string strainNumber)
+        {
+            return StrainKeyIndexs.ContainsKey(strainNumber);
+        }
         #endregion
 
         #region Members
@@ -269,9 +298,9 @@ namespace IDCM.Core
         /// </summary>
         private string strainKeyName = "strain_number";
         /// <summary>
-        /// 主键映射表缓存表设定
+        /// 菌号映射表缓存表设定
         /// </summary>
-        private Dictionary<string, int> keyIndexs;
+        private Dictionary<string, int> StrainKeyIndexs;
         /// <summary>
         /// 缓存表（暂为备用）
         /// </summary>
@@ -289,7 +318,6 @@ namespace IDCM.Core
         private CheckBox checkBox_remember;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion
-
 
     }
 }

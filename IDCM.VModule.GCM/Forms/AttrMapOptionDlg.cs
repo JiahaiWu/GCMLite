@@ -73,7 +73,7 @@ namespace IDCM.Forms
             this.dataGridView_map.Rows.Clear();
             foreach (KeyValuePair<string, string> mappair in mapping)
             {
-                this.dataGridView_map.Rows.Add(new string[] { mappair.Key, null, null, mappair.Value, null });
+                this.dataGridView_map.Rows.Add(new string[] { mappair.Key, null, mappair.Value,null, null });
             }
             radioButton_similarity.Checked = true;
         }
@@ -98,7 +98,7 @@ namespace IDCM.Forms
             this.dataGridView_map.Rows.Clear();
             foreach (KeyValuePair<string, string> mappair in mapping)
             {
-                this.dataGridView_map.Rows.Add(new string[] { mappair.Key, null, null,mappair.Value, null });
+                this.dataGridView_map.Rows.Add(new string[] { mappair.Key, null,mappair.Value, null,null });
             }
             radioButton_exact.Checked = true;
         }
@@ -187,21 +187,21 @@ namespace IDCM.Forms
             {
                 if (e.ColumnIndex < 0 || e.RowIndex < 0)
                     return;
-                if (dataGridView_map.Columns[e.ColumnIndex].HeaderText.Equals("Unbound"))
+                if (dataGridView_map.Columns[e.ColumnIndex].HeaderText.Equals("Unbind"))
                 {
                     DataGridViewCell dgvcell = dataGridView_map.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     dgvcell.Value = null;
                     string col = dataGridView_map.Rows[e.RowIndex].Cells[0].Value.ToString();
                     mapping[col] = null;
-                    dataGridView_map.Rows[e.RowIndex].Cells[3].Value = null;
+                    dataGridView_map.Rows[e.RowIndex].Cells[2].Value = null;
                     radioButton_custom.Checked = true;
                 }
-                else if (dataGridView_map.Columns[e.ColumnIndex].HeaderText.Equals("Config"))
+                else if (dataGridView_map.Columns[e.ColumnIndex].HeaderText.Equals("Rebind"))
                 {
                     toolStripComboBox_dest.Items.AddRange(unboundDestCols());
                     toolStripComboBox_dest.SelectedIndex = 0;
                     ControlUtil.ClearEvent(toolStripComboBox_dest, "SelectedIndexChanged");
-                    toolStripComboBox_dest.Click += delegate(object tsender, EventArgs te) { toolStripComboBox_dest_Changed(tsender, te, e.ColumnIndex, e.RowIndex); };
+                    toolStripComboBox_dest.SelectedIndexChanged += delegate(object tsender, EventArgs te) { toolStripComboBox_dest_Changed(tsender, te, e.ColumnIndex, e.RowIndex); };
                     contextMenuStrip_destList.Show(MousePosition);
                 }
             }
@@ -215,11 +215,12 @@ namespace IDCM.Forms
         /// <param name="rowIndex"></param>
         private void toolStripComboBox_dest_Changed(object sender, EventArgs e, int columnIndex, int rowIndex)
         {
-            string stext=toolStripComboBox_dest.SelectedText;
+            string stext=toolStripComboBox_dest.Text;
             if (stext!=null)
             {
-                dataGridView_map.Rows[rowIndex].Cells[3].Value =stext;
+                dataGridView_map.Rows[rowIndex].Cells[2].Value =stext;
                 mapping[dataGridView_map.Rows[rowIndex].Cells[0].Value.ToString()] = stext;
+                radioButton_custom.Checked = true;
             }
         }
         #endregion

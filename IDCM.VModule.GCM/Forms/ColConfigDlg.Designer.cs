@@ -38,6 +38,8 @@
             this.label_name = new System.Windows.Forms.Label();
             this.label_colName = new System.Windows.Forms.Label();
             this.textBox_ColAlias = new System.Windows.Forms.TextBox();
+            this.label_defaultVal = new System.Windows.Forms.Label();
+            this.textBox_defaultVal = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,17 +50,20 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.label_alias, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_NotEmpty, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_restrict, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_restrict, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_unique, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label_name, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label_colName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox_ColAlias, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label_defaultVal, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_defaultVal, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -82,9 +87,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label4.Location = new System.Drawing.Point(27, 105);
+            this.label4.Location = new System.Drawing.Point(27, 131);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 138);
+            this.label4.Size = new System.Drawing.Size(71, 112);
             this.label4.TabIndex = 4;
             this.label4.Text = "Restrict Expression:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -104,11 +109,11 @@
             // textBox_restrict
             // 
             this.textBox_restrict.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_restrict.Location = new System.Drawing.Point(103, 106);
+            this.textBox_restrict.Location = new System.Drawing.Point(103, 132);
             this.textBox_restrict.Margin = new System.Windows.Forms.Padding(1);
             this.textBox_restrict.Multiline = true;
             this.textBox_restrict.Name = "textBox_restrict";
-            this.textBox_restrict.Size = new System.Drawing.Size(362, 136);
+            this.textBox_restrict.Size = new System.Drawing.Size(362, 110);
             this.textBox_restrict.TabIndex = 8;
             this.textBox_restrict.TextChanged += new System.EventHandler(this.textBox_restrict_TextChanged);
             // 
@@ -154,6 +159,28 @@
             this.textBox_ColAlias.Name = "textBox_ColAlias";
             this.textBox_ColAlias.Size = new System.Drawing.Size(362, 21);
             this.textBox_ColAlias.TabIndex = 11;
+            this.textBox_ColAlias.TextChanged += new System.EventHandler(this.textBox_ColAlias_TextChanged);
+            // 
+            // label_defaultVal
+            // 
+            this.label_defaultVal.AutoSize = true;
+            this.label_defaultVal.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label_defaultVal.Location = new System.Drawing.Point(9, 105);
+            this.label_defaultVal.Name = "label_defaultVal";
+            this.label_defaultVal.Size = new System.Drawing.Size(89, 25);
+            this.label_defaultVal.TabIndex = 12;
+            this.label_defaultVal.Text = "Default Value:";
+            this.label_defaultVal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textBox_defaultVal
+            // 
+            this.textBox_defaultVal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_defaultVal.Location = new System.Drawing.Point(103, 106);
+            this.textBox_defaultVal.Margin = new System.Windows.Forms.Padding(1);
+            this.textBox_defaultVal.Name = "textBox_defaultVal";
+            this.textBox_defaultVal.Size = new System.Drawing.Size(362, 21);
+            this.textBox_defaultVal.TabIndex = 13;
+            this.textBox_defaultVal.TextChanged += new System.EventHandler(this.textBox_defaultVal_TextChanged);
             // 
             // ColConfigDlg
             // 
@@ -183,5 +210,7 @@
         private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.Label label_colName;
         private System.Windows.Forms.TextBox textBox_ColAlias;
+        private System.Windows.Forms.Label label_defaultVal;
+        private System.Windows.Forms.TextBox textBox_defaultVal;
     }
 }

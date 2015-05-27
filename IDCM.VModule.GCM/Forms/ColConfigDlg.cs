@@ -22,12 +22,15 @@ namespace IDCM.Forms
             this.checkBox_NotEmpty.Text = IDCM.Base.GlobalTextRes.Text("Not Empty");
             this.checkBox_unique.Text = IDCM.Base.GlobalTextRes.Text("Unique");
             this.Text = IDCM.Base.GlobalTextRes.Text("Column Config Dialog");
+            this.label_defaultVal.Text = IDCM.Base.GlobalTextRes.Text("Default Value")+":";
             //////////////////////////////////////////////
             this.cursor = cursor;
+            this.customCol = ccd;
             this.label_colName.Text = ccd.Attr;
             this.textBox_ColAlias.Text = ccd.Alias;
             this.checkBox_NotEmpty.Checked = ccd.IsRequire;
             this.checkBox_unique.Checked = ccd.IsUnique;
+            this.textBox_defaultVal.Text = ccd.DefaultVal;
             this.textBox_restrict.Text = ccd.Restrict;
             this.textBox_restrict.BackColor = Color.White;
             dirtyStatus = false;
@@ -50,6 +53,7 @@ namespace IDCM.Forms
                         this.customCol.IsUnique = this.checkBox_unique.Checked;
                         this.customCol.Restrict = this.textBox_restrict.Text;
                         this.customCol.Alias = this.textBox_ColAlias.Text;
+                        this.customCol.DefaultVal = this.textBox_defaultVal.Text;
                         ColConfigChanged(cursor, customCol);
                     }
                 }
@@ -72,7 +76,17 @@ namespace IDCM.Forms
             customCol.IsUnique = this.checkBox_unique.Checked;
             dirtyStatus = true;
         }
+        private void textBox_defaultVal_TextChanged(object sender, EventArgs e)
+        {
+            customCol.DefaultVal = this.textBox_defaultVal.Text;
+            dirtyStatus = true;
+        }
 
+        private void textBox_ColAlias_TextChanged(object sender, EventArgs e)
+        {
+            customCol.Alias = this.textBox_ColAlias.Text;
+            dirtyStatus = true;
+        }
         private void textBox_restrict_TextChanged(object sender, EventArgs e)
         {
             try

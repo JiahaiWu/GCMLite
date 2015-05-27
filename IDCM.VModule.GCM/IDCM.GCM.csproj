@@ -132,6 +132,12 @@
     <Compile Include="Forms\ColConfigDlg.Designer.cs">
       <DependentUpon>ColConfigDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ConfigColumnsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfigColumnsDlg.Designer.cs">
+      <DependentUpon>ConfigColumnsDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExportTypeDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColConfigDlg.resx">
       <DependentUpon>ColConfigDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfigColumnsDlg.resx">
+      <DependentUpon>ConfigColumnsDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExportTypeDlg.resx">
       <DependentUpon>ExportTypeDlg.cs</DependentUpon>
@@ -341,9 +350,14 @@
   <ItemGroup>
     <None Include="Resources\uploading2_cut1.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\broken.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\abc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paper_clip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

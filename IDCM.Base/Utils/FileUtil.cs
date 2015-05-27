@@ -36,7 +36,6 @@ namespace IDCM.Base.Utils
             BinaryWriter bw = new BinaryWriter(fs);
             fs.Write(info, 0, info.Length);
             bw.Close();
-            fs.Close();
             return true;
         }
 
@@ -50,7 +49,6 @@ namespace IDCM.Base.Utils
             Byte[] info = new Byte[len];
             len = br.Read(info, 0, len);
             br.Close();
-            fs.Close();
             return new UTF8Encoding(true).GetString(info, 0, len);
         }
 
@@ -69,7 +67,6 @@ namespace IDCM.Base.Utils
                     lines.Add(str);
             }
             sr.Close();
-            fs.Close();
             return lines.ToArray();
         }
 

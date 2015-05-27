@@ -42,30 +42,24 @@ namespace IDCM
             this.searchAltFToolStripMenuItem.Text = GlobalTextRes.Text("Search(Alt+F)");
             this.clearAllAltCToolStripMenuItem.Text = GlobalTextRes.Text("Clear All(Alt+C)");
             this.configurationCToolStripMenuItem.Text = GlobalTextRes.Text("Configuration");
+            this.loginGCMToolStripMenuItem.Text = GlobalTextRes.Text("Login GCM(Alt+G)");
+            this.languageAltLToolStripMenuItem.Text = GlobalTextRes.Text("Language(Alt+L)");
+            this.englishToolStripMenuItem.Text = GlobalTextRes.Text("English");
+            this.simplifiedChineseToolStripMenuItem.Text = GlobalTextRes.Text("Simplified Chinese");
             this.helpHToolStripMenuItem.Text = GlobalTextRes.Text("Help");
             this.webSupportAltHToolStripMenuItem.Text = GlobalTextRes.Text("Web Support(Alt+H)");
             this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
+            this.offlineDocumentAltDToolStripMenuItem.Text = GlobalTextRes.Text("Offline Document(Alt+D)");
+            this.resetColumnsToolStripMenuItem.Text = GlobalTextRes.Text("Reset Local Columns");
+            viewMonitor = new Timer();
+            viewMonitor.Interval = 3000;
+            viewMonitor.Tick+=viewMonitor_Tick;
+            viewMonitor.Start();
         }
         #endregion
 
         #region Methods
-        /// <summary>
-        /// 检查同一目录下是否存在已经运行的进程实例，如果存在执行退出操作
-        /// </summary>
-        private void checkWorkSpace()
-        {
-            log.Debug("checkWorkSpace(...)");
-            if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
-            {
-                Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
-            }
-            if (ProcessUtil.checkDuplicateProcess() != null)
-            {
-                MessageBox.Show(GlobalTextRes.Text("Work process existing under this work space. Choose confirm and exit this instance."),
-                    GlobalTextRes.Text("Notice"), MessageBoxButtons.OK);
-                Application.Exit();
-            }
-        }
+
         /******************************************************************
          * 键盘事件处理方法
          * @auther JiahaiWu 2014-03-17
@@ -92,6 +86,11 @@ namespace IDCM
                     gcmProView_lite.clearAllLocalData(); break;
                 case Keys.Alt | Keys.F:
                     gcmProView_lite.frontFindData(); break;
+                case Keys.Alt | Keys.L:
+                    configurationCToolStripMenuItem.ShowDropDown();
+                    languageAltLToolStripMenuItem.ShowDropDown();break;
+                case Keys.Alt | Keys.G:
+                    gcmProView_lite.openLoginPage(); break;
                 case Keys.Alt | Keys.H:
                     openWebHelpDocument(); break;
                 case Keys.Alt | Keys.A:
@@ -125,6 +124,33 @@ namespace IDCM
         #endregion
 
         #region Events&Handlings
+        private void viewMonitor_Tick(object sender, EventArgs e)
+        {
+            if (gcmProView_lite.Enabled ){
+                if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_View)||
+                    gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.Local_Processing))
+                {
+                    int localCount = gcmProView_lite.LocalRowCount;
+                    if (localCount > 0)
+                    {
+                        string text = localCount.ToString() +" "+ GlobalTextRes.Text("records in total.");
+                        this.toolStripLabel_OfficialNotice.Text = text;
+                        return;
+                    }
+                }
+                else if (gcmProView_lite.OpConditions.Equals(IDCM.VModule.GCM.GCMProView.OpConditionType.GCM_View))
+                {
+                    int gcmCount = gcmProView_lite.GCMRowCount;
+                    if (gcmCount >0)
+                    {
+                        string text = gcmCount.ToString() + " " + GlobalTextRes.Text("records in total.");
+                        this.toolStripLabel_OfficialNotice.Text = text;
+                        return;
+                    }
+                }
+            }
+            this.toolStripLabel_OfficialNotice.Text = "";
+        }
         /// <summary>
         /// 初始界面加载后事件处理
         /// </summary>
@@ -132,7 +158,8 @@ namespace IDCM
         /// <param name="e"></param>
         private void GCMPro_Load(object sender, EventArgs e)
         {
-            checkWorkSpace();
+            gcmProView_lite.initComponenent();
+
             this.FormClosing+=GCMPro_FormClosing;
             gcmProView_lite.GCMStatusChanged += ServInvoker_OnBottomSatusChange;
             gcmProView_lite.GCMProgressInvoke += ServInvoker_OnProgressChange;
@@ -156,7 +183,6 @@ namespace IDCM
                     this.toolStripButton_import.Enabled = true;
                     this.toolStripButton_export.Enabled = true;
                     this.toolStripButton_pub.Enabled = true;
-                    this.toolStripButton_colConfig.Enabled = true;
                     this.toolStripButton_compare.Enabled = true;
                     this.toolStripButton_down.Enabled = false;
                     this.toolStripButton_down.Visible = false;
@@ -168,6 +194,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = true;
                     searchAltFToolStripMenuItem.Enabled = true;
                     clearAllAltCToolStripMenuItem.Enabled = true;
+                    resetColumnsToolStripMenuItem.Enabled = true;
                     break;
                 case GCMProView.OpConditionType.Local_Processing:
                     this.toolStrip_gcmlite.Enabled = true;
@@ -176,7 +203,6 @@ namespace IDCM
                     this.toolStripButton_del.Enabled = true;
                     this.toolStripButton_import.Enabled = true;
                     this.toolStripButton_export.Enabled = true;
-                    this.toolStripButton_colConfig.Enabled = false;
                     this.toolStripButton_compare.Enabled = true;
                     this.toolStripButton_pub.Enabled = true;
                     this.toolStripButton_down.Enabled = false;
@@ -189,6 +215,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = true;
                     searchAltFToolStripMenuItem.Enabled = true;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.GCM_Login:
                     this.toolStrip_gcmlite.Enabled = false;
@@ -201,6 +228,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = false;
                     searchAltFToolStripMenuItem.Enabled = false;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.GCM_View:
                     this.toolStrip_gcmlite.Enabled = true;
@@ -220,6 +248,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = false;
                     searchAltFToolStripMenuItem.Enabled = true;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.ABC_View:
                     this.toolStrip_gcmlite.Enabled = true;
@@ -238,6 +267,7 @@ namespace IDCM
                     exportAltEToolStripMenuItem.Enabled = false;
                     searchAltFToolStripMenuItem.Enabled = false;
                     clearAllAltCToolStripMenuItem.Enabled = false;
+                    resetColumnsToolStripMenuItem.Enabled = false;
                     break;
                 case GCMProView.OpConditionType.UnKnown:
                     this.toolStrip_gcmlite.Enabled = false;
@@ -248,7 +278,7 @@ namespace IDCM
 
         private void ServInvoker_OnProgressChange(bool msgTag)
         {
-            this.toolStripProgressBar_progress.Enabled = msgTag;
+            this.toolStripProgressBar_progress.Visible = msgTag;
         }
 
         private void ServInvoker_OnBottomSatusChange(string msgTag)
@@ -264,11 +294,11 @@ namespace IDCM
                 {
                     Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
                 }
-                string dumppath = gcmProView_lite.doExitDump();
+                string dumppath = gcmProView_lite.doDumpWork();
                 if (dumppath == null)
                     e.Cancel = true;
                 else
-                    FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
+                FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
             }
             catch (Exception ex)
             {
@@ -309,14 +339,25 @@ namespace IDCM
 
         private void toolStripButton_search_Click(object sender, EventArgs e)
         {
-            gcmProView_lite.frontFindData();
+
+            string findTerm = this.toolStripTextBox_search.Text.Trim();
+            if (findTerm.Length > 0)
+            {
+                gcmProView_lite.quickFindData(findTerm);
+            }
         }
 
-        private void toolStripTextBox_search_Click(object sender, EventArgs e)
+        private void toolStripTextBox_search_KeyDown(object sender, KeyEventArgs e)
         {
-            //////////////////
+            if (e.KeyCode == Keys.Enter)
+            {
+                string findTerm = this.toolStripTextBox_search.Text.Trim();
+                if (findTerm.Length > 0)
+                {
+                    gcmProView_lite.quickFindData(findTerm);
+                }
+            }
         }
-
         private void toolStripButton_help_Click(object sender, EventArgs e)
         {
             openWebHelpDocument();
@@ -372,11 +413,18 @@ namespace IDCM
             openWebHelpDocument();
         }
 
+        private void offlineDocumentAltDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.requestHelpDoc("file:///"+Path.GetDirectoryName(SysConstants.exePath)+"/GCMLite_Help.htm");
+        }
         private void aboutGCMLiteAltAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openAboutUsDlg();
         }
-
+        private void loginGCMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.openLoginPage();
+        }
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IDCM.Base.Utils.ConfigurationHelper.SetAppConfig(SysConstants.CultureInfo, "en-US");
@@ -388,10 +436,52 @@ namespace IDCM
             IDCM.Base.Utils.ConfigurationHelper.SetAppConfig(SysConstants.CultureInfo, "zh-CN");
             Application.Restart();
         }
+        private void languageAltLToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem tsmi in languageAltLToolStripMenuItem.DropDownItems)
+            {
+                tsmi.Checked = false;
+            }
+            if (GlobalTextRes.getLanguageName().StartsWith("zh-CN"))
+                simplifiedChineseToolStripMenuItem.Checked = true;
+            else
+                englishToolStripMenuItem.Checked = true;
+        }
+        private void toolStripButton_compare_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.CompareGCMRecords();
+        }
+
+        private void resetColumnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gcmProView_lite.ConfigColumns();
+        }
+
+        private void toolStripTextBox_search_Enter(object sender, EventArgs e)
+        {
+            if (this.toolStripTextBox_search.Text.Length > 0 && this.toolStripTextBox_search.ForeColor.Equals(Color.DarkGray))
+            {
+                this.toolStripTextBox_search.Text = "";
+                this.toolStripTextBox_search.ForeColor = Color.Black;
+            }
+        }
+
+        private void toolStripTextBox_search_Leave(object sender, EventArgs e)
+        {
+            if (this.toolStripTextBox_search.Text.Length < 1)
+            {
+                this.toolStripTextBox_search.Text = "Quick Search";
+                this.toolStripTextBox_search.ForeColor = Color.DarkGray;
+            }
+        }
         #endregion
 
         #region Members
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// GCMProView Monitor
+        /// </summary>
+        private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
 
     }

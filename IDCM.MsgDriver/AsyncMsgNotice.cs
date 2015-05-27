@@ -18,7 +18,7 @@ namespace IDCM.MsgDriver
         public static readonly AsyncMsgNotice GCMItemDetailRender = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "GCM Item Detail Render");
         public static readonly AsyncMsgNotice LocalDataPublished = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "Local Data Published");
         public static readonly AsyncMsgNotice LocalDataChecked = new AsyncMsgNotice(MsgNoticeType.GCMItemDetailRender, "Local Data Checked");
-
+        
         
         
         /// <summary>

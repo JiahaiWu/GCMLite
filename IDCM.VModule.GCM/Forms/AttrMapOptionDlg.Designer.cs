@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttrMapOptionDlg));
             this.dataGridView_map = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -43,11 +45,13 @@
             this.button_cancel = new System.Windows.Forms.Button();
             this.contextMenuStrip_destList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripComboBox_dest = new System.Windows.Forms.ToolStripComboBox();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column_src = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_alter = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column_tag = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column_dest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_UnBound = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column_UnBind = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column_rebind = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_map)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -59,17 +63,29 @@
             // 
             this.dataGridView_map.AllowUserToAddRows = false;
             this.dataGridView_map.AllowUserToDeleteRows = false;
+            this.dataGridView_map.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView_map.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_map.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_map.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_src,
-            this.Column_alter,
             this.Column_tag,
             this.Column_dest,
-            this.Column_UnBound});
+            this.Column_UnBind,
+            this.Column_rebind});
             this.dataGridView_map.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_map.Location = new System.Drawing.Point(3, 83);
             this.dataGridView_map.Name = "dataGridView_map";
             this.dataGridView_map.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_map.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView_map.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridView_map.RowTemplate.Height = 23;
             this.dataGridView_map.Size = new System.Drawing.Size(710, 429);
             this.dataGridView_map.TabIndex = 0;
@@ -128,7 +144,6 @@
             // radioButton_custom
             // 
             this.radioButton_custom.AutoSize = true;
-            this.radioButton_custom.Enabled = false;
             this.radioButton_custom.Location = new System.Drawing.Point(269, 33);
             this.radioButton_custom.Name = "radioButton_custom";
             this.radioButton_custom.Size = new System.Drawing.Size(107, 16);
@@ -170,37 +185,44 @@
             // 
             // contextMenuStrip_destList
             // 
+            this.contextMenuStrip_destList.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.contextMenuStrip_destList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.contextMenuStrip_destList.DropShadowEnabled = false;
             this.contextMenuStrip_destList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox_dest});
             this.contextMenuStrip_destList.Name = "contextMenuStrip_destList";
-            this.contextMenuStrip_destList.Size = new System.Drawing.Size(182, 51);
+            this.contextMenuStrip_destList.ShowImageMargin = false;
+            this.contextMenuStrip_destList.Size = new System.Drawing.Size(157, 29);
             // 
             // toolStripComboBox_dest
             // 
-            this.toolStripComboBox_dest.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.toolStripComboBox_dest.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripComboBox_dest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBox_dest.Margin = new System.Windows.Forms.Padding(0);
             this.toolStripComboBox_dest.Name = "toolStripComboBox_dest";
             this.toolStripComboBox_dest.Size = new System.Drawing.Size(121, 25);
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "To";
+            this.dataGridViewImageColumn1.Image = global::IDCM.Properties.Resources.rightArrow;
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.HeaderText = "Unbound";
+            this.dataGridViewImageColumn2.Image = global::IDCM.Properties.Resources.broken;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            // 
             // Column_src
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column_src.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column_src.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column_src.HeaderText = "From Attr";
             this.Column_src.Name = "Column_src";
             this.Column_src.ReadOnly = true;
             this.Column_src.Width = 150;
-            // 
-            // Column_alter
-            // 
-            this.Column_alter.HeaderText = "Config";
-            this.Column_alter.Name = "Column_alter";
-            this.Column_alter.ReadOnly = true;
-            this.Column_alter.Text = "...";
-            this.Column_alter.ToolTipText = "...";
-            this.Column_alter.UseColumnTextForButtonValue = true;
-            this.Column_alter.Width = 60;
             // 
             // Column_tag
             // 
@@ -212,19 +234,30 @@
             // 
             // Column_dest
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column_dest.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column_dest.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column_dest.HeaderText = "Dest Attr";
             this.Column_dest.Name = "Column_dest";
             this.Column_dest.ReadOnly = true;
             this.Column_dest.Width = 150;
             // 
-            // Column_UnBound
+            // Column_UnBind
             // 
-            this.Column_UnBound.HeaderText = "Unbound";
-            this.Column_UnBound.Image = global::IDCM.Properties.Resources.del_note;
-            this.Column_UnBound.Name = "Column_UnBound";
-            this.Column_UnBound.ReadOnly = true;
+            this.Column_UnBind.HeaderText = "Unbind";
+            this.Column_UnBind.Image = global::IDCM.Properties.Resources.broken;
+            this.Column_UnBind.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Column_UnBind.Name = "Column_UnBind";
+            this.Column_UnBind.ReadOnly = true;
+            // 
+            // Column_rebind
+            // 
+            this.Column_rebind.HeaderText = "Rebind";
+            this.Column_rebind.Name = "Column_rebind";
+            this.Column_rebind.ReadOnly = true;
+            this.Column_rebind.Text = "...";
+            this.Column_rebind.ToolTipText = "...";
+            this.Column_rebind.UseColumnTextForButtonValue = true;
+            this.Column_rebind.Width = 60;
             // 
             // AttrMapOptionDlg
             // 
@@ -260,11 +293,13 @@
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_destList;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox_dest;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_src;
-        private System.Windows.Forms.DataGridViewButtonColumn Column_alter;
         private System.Windows.Forms.DataGridViewImageColumn Column_tag;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_dest;
-        private System.Windows.Forms.DataGridViewImageColumn Column_UnBound;
+        private System.Windows.Forms.DataGridViewImageColumn Column_UnBind;
+        private System.Windows.Forms.DataGridViewButtonColumn Column_rebind;
 
     }
 }

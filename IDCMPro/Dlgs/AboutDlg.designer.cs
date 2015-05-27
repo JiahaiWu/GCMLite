@@ -136,7 +136,7 @@
             this.MinimizeBox = false;
             this.Name = "AboutDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AboutIDCM";
+            this.Text = "About GCMLite";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

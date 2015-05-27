@@ -34,7 +34,7 @@ namespace IDCM.VModule.GCM
         public GCMProView()
         {
             InitializeComponent();
-            
+
             this.button_cancel.Text = GlobalTextRes.Text("Cancel");
             this.checkBox_remember.Text = GlobalTextRes.Text("Remember");
             this.button_confirm.Text = GlobalTextRes.Text("Confirm");
@@ -43,10 +43,6 @@ namespace IDCM.VModule.GCM
             this.tabPage_ABC.Text = GlobalTextRes.Text("ABC Browser");
             this.tabPageEx_Local.Text = GlobalTextRes.Text("Local DataSet");
             this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
-
-            this.Load += GCMProView_Load;
-            InitializeMsgDriver();
-            InitializeGCMPro();
         }
         #endregion
 
@@ -68,7 +64,10 @@ namespace IDCM.VModule.GCM
             servInvoker.OnGCMItemDetailRender += OnGCMItemDetailRender;
             servInvoker.OnBottomSatusChange += OnBottomSatusChange;
             servInvoker.OnProgressChange += OnProgressChange;
+            servInvoker.OnGCMDataLoaded+=servInvoker_OnGCMDataLoaded;
         }
+
+
         /// <summary>
         /// 初始化流程
         /// </summary>
@@ -101,6 +100,10 @@ namespace IDCM.VModule.GCM
                     this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
                     this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
                     this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
+                    this.dcmDataGridView_local.RowPostPaint += dcmDataGridView_local_RowPostPaint;
+                    this.dcmDataGridView_local.RowsAdded+=dcmDataGridView_local_RowsAdded;
+                    this.dcmDataGridView_local.RowsRemoved+=dcmDataGridView_local_RowsRemoved;
+                    this.dcmDataGridView_local.CellValueChanged+=dcmDataGridView_local_CellValueChanged;
                     localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
                     localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
                     localFrontFindDlg.cancelCellHit += new LocalFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
@@ -125,6 +128,7 @@ namespace IDCM.VModule.GCM
                     opCond = OpConditionType.Local_View;
                     ////////////////////////////////////////////////////
                     this.IsInited = true;
+                    
                 }
             }
             catch (IDCMException ex)
@@ -133,13 +137,8 @@ namespace IDCM.VModule.GCM
                 log.Error(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "!", ex);
                 MessageBox.Show(IDCM.Base.GlobalTextRes.Text("Application View Initialize Failed") + "! @Message=" + ex.Message + " \n" + ex.ToString());
             }
-            finally
-            {
-                this.Enabled = this.IsInited;
-                this.Visible = this.Enabled;
-            }
         }
-        
+
         private void setDGVCellHit(DataGridViewCell cell)
         {
             if (cell.Visible == false)
@@ -215,18 +214,18 @@ namespace IDCM.VModule.GCM
         {
             localServManager.checkLocalData();
         }
-        public string doExitDump(bool slient=false)
+        public string doDumpWork(bool slient = false)
         {
             CustomColDefGetter.saveUpdatedHistCfg();
-            if (slient | !RunningHandlerNoter.checkForIdle())
+            if (slient==false && !RunningHandlerNoter.checkForIdle())
             {
                 if (MessageBox.Show(GlobalTextRes.Text("There are background tasks are executing, force quit or not"),
-                    GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    GlobalTextRes.Text("Confirm Message"), MessageBoxButtons.OKCancel) != DialogResult.OK)
                 {
                     return null;
                 }
             }
-            return localServManager.doExitDump();
+            return localServManager.doDumpWork();
         }
 
 
@@ -248,7 +247,7 @@ namespace IDCM.VModule.GCM
         {
             ControlAsyncUtil.SyncInvoke(splitContainer_GCM, new ControlAsyncUtil.InvokeHandler(delegate()
             {
-                gcmServManager.refreshGCMDataset();
+                gcmServManager.refreshGCMDataset(false);
                 splitContainer_GCM.Panel1Collapsed = true;
                 splitContainer_GCM.Panel2Collapsed = false;
             }));
@@ -288,6 +287,7 @@ namespace IDCM.VModule.GCM
                 else
                 {
                     MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
+                    gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
                     this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
                 }
             }
@@ -300,6 +300,7 @@ namespace IDCM.VModule.GCM
                 else
                 {
                     MessageBox.Show(GlobalTextRes.Text("Please Login before submitting to GCM."));
+                    gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
                     this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
                 }
             }
@@ -309,9 +310,23 @@ namespace IDCM.VModule.GCM
         {
             gcmServManager.downGCMData(dcmDataGridView_gcm);
         }
-        public void requestHelpDoc()
+        public void requestHelpDoc(string uri=null)
         {
-            HelpDocRequester.requestHelpDoc();
+            if (uri == null)
+                HelpDocRequester.requestHelpDoc();
+            else
+                HelpDocRequester.tryToOpenLinkUrl(uri);
+        }
+        public void quickFindData(string findTerm)
+        {
+            if (opCond.Equals(OpConditionType.Local_View) || opCond.Equals(OpConditionType.Local_Processing))
+            {
+                localFrontFindDlg.beginFind(findTerm);
+            }
+            else if (opCond.Equals(OpConditionType.GCM_View))
+            {
+                gcmFrontFindDlg.beginFind(findTerm);
+            }
         }
         public void frontFindData()
         {
@@ -372,14 +387,33 @@ namespace IDCM.VModule.GCM
                 {
                     Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
                 }
-                string dumppath = doExitDump(true);
+                string dumppath = doDumpWork(true);
                 FileUtil.writeToUTF8File(SysConstants.initEnvDir + SysConstants.cacheDir + SysConstants.exit_note, dumppath == null ? "" : dumppath);
+                if (useDefaultPath == false)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.FileName = System.IO.Path.GetFileName(dumppath);
+                    sfd.InitialDirectory = localServManager.LastIOPath;
+                    sfd.Filter = "mdi文件(*.mdi)|*.mdi";
+                    String renameFilePath = "";
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        renameFilePath = sfd.FileName;
+                        localServManager.LastIOPath = renameFilePath;
+                        if (renameFilePath != null && renameFilePath.Length > 0)
+                        {
+                            FileInfo dumpfile = new FileInfo(dumppath);
+                            dumpfile.CopyTo(System.IO.Path.GetFullPath(renameFilePath), true);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 log.Error(GlobalTextRes.Text("Exit operation execute failed")+"！ ", ex);
             }
         }
+
         private void notifyOpConditions(OpConditionType opType)
         {
             if (opCond != opType)
@@ -392,6 +426,52 @@ namespace IDCM.VModule.GCM
                 }));
             }
         }
+
+        public void initComponenent()
+        {
+            if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
+            {
+                Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
+            }
+            if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+            {
+                gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                gcmTabControl_GCM.HideTab(tabPage_ABC);
+            }
+            InitializeMsgDriver();
+            InitializeGCMPro();
+            startLocalDataRender();
+            startGCMSiteRender();
+            this.Enabled = this.IsInited;
+            this.Visible = this.Enabled;
+        }
+
+        public void openLoginPage()
+        {
+            if (gcmServManager.Signed)
+                gcmServManager.logout();
+            gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
+            gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
+        }
+        public void CompareGCMRecords()
+        {
+            if (gcmServManager.Signed)
+            {
+                gcmServManager.refreshGCMDataset();
+            }
+            else
+            {
+                MessageBox.Show(GlobalTextRes.Text("Please Login before compare records to GCM."));
+                gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
+                this.gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
+            }
+        }
+
+        public void ConfigColumns()
+        {
+            ConfigColumnsDlg ccdlg = new ConfigColumnsDlg();
+            ccdlg.ShowDialog();
+        }
         #endregion
 
         #region Events&Handlings
@@ -400,25 +480,61 @@ namespace IDCM.VModule.GCM
         public event GCMProgressHandler GCMProgressInvoke;
         public event GCMOpConditionHandler GCMOpConditionChanged;
 
-        private void GCMProView_Load(object sender, EventArgs e)
-        {
 
-            startLocalDataRender();
-            startGCMSiteRender();
+        private void dcmDataGridView_local_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex>-1)
+            {
+                if (e.ColumnIndex > -1 && e.ColumnIndex.Equals(localServManager.KeyColIndex))
+                {
+                    DataGridViewRow dgvr = this.dcmDataGridView_local.Rows[e.RowIndex];
+                    dgvr.Tag = null;
+                    dcmDataGridView_local.InvalidateRow(e.RowIndex);
+                }
+            }
         }
+
+        private void dcmDataGridView_local_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
+            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
+            if (width < size.Width + 4)
+            {
+                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4 + Convert.ToInt32(Math.Ceiling(size.Width));
+            }
+        }
+
+        private void dcmDataGridView_local_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
+            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
+            if (width < size.Width + 4)
+            {
+                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4 + Convert.ToInt32(Math.Ceiling(size.Width));
+            }
+        }
+
+        void dcmDataGridView_local_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (dcmDataGridView_local.Rows[e.RowIndex].Tag != null && dcmDataGridView_local.Rows[e.RowIndex].Tag.GetType().Equals(typeof(bool)))
+            {
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X + 1, e.RowBounds.Location.Y + 1, e.RowBounds.Height - 2, e.RowBounds.Height - 2);
+                // Draw the Tag 
+                bool linked = Convert.ToBoolean(dcmDataGridView_local.Rows[e.RowIndex].Tag);
+                e.Graphics.DrawImage(linked ? global::IDCM.Properties.Resources.clip : global::IDCM.Properties.Resources.broken, rect);
+            }
+        }
+        
         private void colConfiger_ColConfigChanged(int cursor, CustomColDef ccd)
         {
             if (cursor > -1 && ccd!=null)
             {
-                ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
+                DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
+                if (dgvc != null && dgvc.Visible)
                 {
-                    DataGridViewColumn dgvc = dcmDataGridView_local.Columns[cursor];
-                    if (dgvc != null && dgvc.Visible)
-                    {
-                        CustomColDefGetter.updateCustomColCond(ccd);
-                        MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
-                    }
-                }));
+                    ctcache.updateCustomColCond(cursor, ccd);
+                    MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Column restrictions updated."));
+                }
             }
         }
 
@@ -610,7 +726,16 @@ namespace IDCM.VModule.GCM
         {
             if (gcmServManager.Signed)
             {
-                showGCMDataDlg();
+                if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+                {
+                    ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                        gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                    }));
+                }else
+                    showGCMDataDlg();
+                ///////////////////////////////////////////////
                 if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
                 {
                     ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
@@ -648,6 +773,13 @@ namespace IDCM.VModule.GCM
                     if (msgTag.GetType().Equals(typeof(bool)))
                     {
                         GCMProgressInvoke((bool)msgTag);
+                        if (gcmTabControl_GCM.TabIndex == tabPageEx_Local.TabIndex)
+                        {
+                            if ((bool)msgTag)
+                                notifyOpConditions(OpConditionType.Local_Processing);
+                            else
+                                notifyOpConditions(OpConditionType.Local_View);
+                        }
                     }
                 }
             }));
@@ -757,6 +889,26 @@ namespace IDCM.VModule.GCM
             Point reNewPoint = new Point(this.splitContainer_GCM.Panel1.Width / 2 - this.panel_GCM_start.Width / 2, (int)(this.splitContainer_GCM.Panel1.Height * 0.82 - this.panel_GCM_start.Height));
             this.panel_GCM_start.Location = reNewPoint;
         }
+        private void servInvoker_OnGCMDataLoaded(object msgTag, params object[] vals)
+        {
+            ComponentUtil.ControlAsyncUtil.SyncInvoke(gcmTabControl_GCM, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_Local.TabIndex))
+                {
+                    gcmServManager.SyncStrainLinksCompare(dcmDataGridView_local, localServManager.KeyColIndex);
+                    ComponentUtil.ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()
+                    {
+                        this.dcmDataGridView_local.Invalidate();
+                        this.dcmDataGridView_local.Update();
+                    }));
+                }
+                else if (this.gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_GCM.TabIndex))
+                {
+               
+                }
+           }));
+        }
+
         #endregion
 
         #region Property
@@ -768,6 +920,20 @@ namespace IDCM.VModule.GCM
                     return RunningHandlerNoter.checkForIdle() ? opCond : OpConditionType.Local_Processing;
                 else
                     return opCond;
+            }
+        }
+        public int LocalRowCount
+        {
+            get
+            {
+                return localServManager.RowCount;
+            }
+        }
+        public int GCMRowCount
+        {
+            get
+            {
+                return gcmServManager.RowCount;
             }
         }
         #endregion
@@ -786,6 +952,7 @@ namespace IDCM.VModule.GCM
         private LocalServManager localServManager = null;
         private ABCServManager abcServManager = null;
         private OpConditionType opCond = OpConditionType.UnKnown;
+
         
         //异步消息事件委托形式化声明
         public delegate void GCMOpConditionHandler(OpConditionType opType);

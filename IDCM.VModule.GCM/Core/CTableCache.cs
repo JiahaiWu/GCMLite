@@ -58,6 +58,22 @@ namespace IDCM.Core
 
         #region Methods
 
+        internal void updateCustomColCond(int cursor,CustomColDef ccd)
+        {
+            ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
+            {
+                DCMTextDGVColumn dgvc = dgv.Columns[cursor] as DCMTextDGVColumn;
+                if (dgvc != null)
+                {
+                    CustomColDefGetter.updateCustomColCond(ccd);
+                    dgvc.Name = ccd.Attr;
+                    dgvc.HeaderText = ccd.Alias;
+                    dgvc.Visible = ccd.IsEnable;
+                    dgvc.Tag = ccd.IsUnique;
+                }
+            }));
+        }
+
         internal void addRow(Dictionary<string, string> mapvalues)
         {
             string value = null;
@@ -189,6 +205,5 @@ namespace IDCM.Core
         /// </summary>
         private DataGridView dgv;
         #endregion
-
     }
 }

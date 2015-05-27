@@ -26,6 +26,18 @@ namespace IDCM.Forms
             wtimer.Start();
         }
         #endregion
+        #region methods
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int WS_EX_NOACTIVATE = 0x08000000;
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= WS_EX_NOACTIVATE;
+                return cp;
+            }
+        }
+        #endregion
 
         #region Events&Handlings
         private void MessageDlg_VisibleChanged(object sender, EventArgs e)
@@ -38,10 +50,10 @@ namespace IDCM.Forms
                     this.Location = new Point(x, y);//设置窗体在屏幕右下角显示
                     AnimateWinAPI.AnimateWindow(this.Handle, wtick, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_ACTIVATE | AnimateWinAPI.AW_HOR_NEGATIVE);
                 }
-                else
-                {
-                    AnimateWinAPI.AnimateWindow(this.Handle, wtick*4, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_HIDE | AnimateWinAPI.AW_HOR_POSITIVE);
-                }
+                //else
+                //{
+                //    AnimateWinAPI.AnimateWindow(this.Handle, wtick*4, AnimateWinAPI.AW_SLIDE | AnimateWinAPI.AW_HIDE | AnimateWinAPI.AW_HOR_POSITIVE);
+                //}
             }
             catch (Exception ex)
             {

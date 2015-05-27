@@ -118,480 +118,306 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABC Browser" xml:space="preserve">
-    <value>ABC 引用查询</value>
+    <value>ABC Browser</value>
+  </data>
+  <data name="About GCMLite" xml:space="preserve">
+    <value>About GCMLite</value>
   </data>
   <data name="About GCMLite(Alt+A)" xml:space="preserve">
-    <value>关于 GCMLite(Alt+A)</value>
+    <value>About GCMLite(Alt+A)</value>
+  </data>
+  <data name="Address NO.1 Beichen West Road, Chaoyang District, Beijing 100101" xml:space="preserve">
+    <value>Address: NO.1 Beichen West Road, Chaoyang District, Beijing 100101</value>
   </data>
   <data name="Application View Initialize Failed" xml:space="preserve">
-    <value>应用视图启动失败</value>
+    <value>Application View Initialize Failed</value>
   </data>
   <data name="AttrMappingOptionDlg" xml:space="preserve">
-    <value>属性映射对话框</value>
+    <value>AttrMappingOptionDlg</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Cancel</value>
   </data>
   <data name="CCInfo ID" xml:space="preserve">
-    <value>CCInfo 账号</value>
+    <value>CCInfo ID</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check</value>
   </data>
   <data name="Clear All(Alt+C)" xml:space="preserve">
-    <value>清空所有(Alt+C)</value>
-  </data>
-  <data name="Configuration" xml:space="preserve">
-    <value>配置</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>确认</value>
-  </data>
-  <data name="Confirm Message" xml:space="preserve">
-    <value>确认信息</value>
-  </data>
-  <data name="Connect GCM failed" xml:space="preserve">
-    <value>连接到GCM失败。</value>
-  </data>
-  <data name="Connected" xml:space="preserve">
-    <value>已建立连接</value>
-  </data>
-  <data name="Custom Mapping" xml:space="preserve">
-    <value>自定义映射匹配</value>
-  </data>
-  <data name="Data Check failed" xml:space="preserve">
-    <value>数据校验失败</value>
-  </data>
-  <data name="Data Check success" xml:space="preserve">
-    <value>数据校验完成</value>
-  </data>
-  <data name="Data export failed" xml:space="preserve">
-    <value>数据导出失败。</value>
-  </data>
-  <data name="Data export failed with error info" xml:space="preserve">
-    <value>数据导出失败，错误信息</value>
-  </data>
-  <data name="Data publish failed" xml:space="preserve">
-    <value>数据提交发布失败</value>
-  </data>
-  <data name="Data publish success" xml:space="preserve">
-    <value>数据提交发布成功</value>
-  </data>
-  <data name="Disconnected" xml:space="preserve">
-    <value>未连接</value>
-  </data>
-  <data name="Exact Match" xml:space="preserve">
-    <value>精确匹配</value>
-  </data>
-  <data name="Exit operation execute failed" xml:space="preserve">
-    <value>退出操作执行失败</value>
-  </data>
-  <data name="Export failed" xml:space="preserve">
-    <value>导出失败</value>
-  </data>
-  <data name="export strain tree" xml:space="preserve">
-    <value>导出菌树</value>
-  </data>
-  <data name="Export success" xml:space="preserve">
-    <value>导出完成</value>
-  </data>
-  <data name="Export(Alt+E)" xml:space="preserve">
-    <value>导出(Alt+E)</value>
-  </data>
-  <data name="Failed to export and publish the XML document for GCM" xml:space="preserve">
-    <value>GCMXML文件导出及上传失败</value>
-  </data>
-  <data name="Failed to Export excel file" xml:space="preserve">
-    <value>Excel文件导入失败</value>
-  </data>
-  <data name="Failed to export JSON File" xml:space="preserve">
-    <value>JSON文件导出失败</value>
-  </data>
-  <data name="Failed to export text file" xml:space="preserve">
-    <value>文本文件导出失败</value>
-  </data>
-  <data name="Failed to export XML document" xml:space="preserve">
-    <value>XML文件导出失败</value>
-  </data>
-  <data name="Failed to import dump file" xml:space="preserve">
-    <value>导入存档文件失败</value>
-  </data>
-  <data name="Failed to import excel file" xml:space="preserve">
-    <value>Excel文件导入失败</value>
-  </data>
-  <data name="Failed to import XML document" xml:space="preserve">
-    <value>XML文件导入失败</value>
-  </data>
-  <data name="Failed to query the detail of GCM data" xml:space="preserve">
-    <value>GCM细览数据查询失败</value>
-  </data>
-  <data name="Failed to query the overview of GCM data" xml:space="preserve">
-    <value>GCM 概览数据查询失败</value>
-  </data>
-  <data name="FATAL" xml:space="preserve">
-    <value>严重错误</value>
-  </data>
-  <data name="File" xml:space="preserve">
-    <value>文件</value>
-  </data>
-  <data name="Filter(Alt+R)" xml:space="preserve">
-    <value>过滤式修复(Alt+R)</value>
-  </data>
-  <data name="Find Down" xml:space="preserve">
-    <value>向下查询</value>
-  </data>
-  <data name="Find Up" xml:space="preserve">
-    <value>向上查询</value>
-  </data>
-  <data name="Front Find" xml:space="preserve">
-    <value>前端查找</value>
-  </data>
-  <data name="GCM Password" xml:space="preserve">
-    <value>GCM 密码</value>
-  </data>
-  <data name="GCM Publish" xml:space="preserve">
-    <value>GCM 发布数据</value>
-  </data>
-  <data name="Help" xml:space="preserve">
-    <value>帮助</value>
-  </data>
-  <data name="It's Crash" xml:space="preserve">
-    <value>异常退出</value>
-  </data>
-  <data name="It's reached the end, and traverse over." xml:space="preserve">
-    <value>已达结尾，遍历结束。</value>
-  </data>
-  <data name="Local data validation did not pass" xml:space="preserve">
-    <value>本地数据验证失败</value>
-  </data>
-  <data name="Local DataSet" xml:space="preserve">
-    <value>本地数据管理</value>
-  </data>
-  <data name="Match Case" xml:space="preserve">
-    <value>匹配大小写</value>
-  </data>
-  <data name="Match Fully" xml:space="preserve">
-    <value>完整匹配</value>
-  </data>
-  <data name="Notice" xml:space="preserve">
-    <value>提醒</value>
-  </data>
-  <data name="On GCMLite application exiting." xml:space="preserve">
-    <value>GCMLite 应用程序退出。</value>
-  </data>
-  <data name="On Main Manager exited." xml:space="preserve">
-    <value>主程序已退出。</value>
-  </data>
-  <data name="Open (Alt+O)" xml:space="preserve">
-    <value>打开 (Alt+O)</value>
-  </data>
-  <data name="Please Login before submitting to GCM." xml:space="preserve">
-    <value>请登录GCM后再提交。</value>
-  </data>
-  <data name="Quit(Alt+Q)" xml:space="preserve">
-    <value>退出(Alt+Q)</value>
-  </data>
-  <data name="Ready" xml:space="preserve">
-    <value>就绪</value>
-  </data>
-  <data name="Remember" xml:space="preserve">
-    <value>记住密码</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>重置</value>
-  </data>
-  <data name="Save (Alt+S)" xml:space="preserve">
-    <value>存档 (Alt+S)</value>
-  </data>
-  <data name="SavePath" xml:space="preserve">
-    <value>保存路径</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>查找</value>
-  </data>
-  <data name="Search(Alt+F)" xml:space="preserve">
-    <value>查找(Alt+F)</value>
-  </data>
-  <data name="Select File Type For Export" xml:space="preserve">
-    <value>选择导出文件类型</value>
-  </data>
-  <data name="Similarity Match" xml:space="preserve">
-    <value>模糊匹配</value>
-  </data>
-  <data name="The 'CCInfo Id' and 'GCM Password' should not be empty." xml:space="preserve">
-    <value>用户名和密码值不能为空</value>
-  </data>
-  <data name="The data you pasted is in the wrong format for the cell" xml:space="preserve">
-    <value>粘贴到表格单元的数据格式错误</value>
-  </data>
-  <data name="The save file path should be available." xml:space="preserve">
-    <value>保存文件路径有误</value>
-  </data>
-  <data name="There are background tasks are executing, force quit or not" xml:space="preserve">
-    <value>仍有后台任务正在执行中，是否强制退出？</value>
-  </data>
-  <data name="Tool" xml:space="preserve">
-    <value>工具</value>
-  </data>
-  <data name="Unsupport export type" xml:space="preserve">
-    <value>不支持的导出格式</value>
-  </data>
-  <data name="Validation(Alt+V)" xml:space="preserve">
-    <value>验证(Alt+V)</value>
-  </data>
-  <data name="Web Support(Alt+H)" xml:space="preserve">
-    <value>在线技术支持(Alt+H)</value>
-  </data>
-  <data name="Work process existing under this work space. Choose confirm and exit this instance." xml:space="preserve">
-    <value>当前工作空间下工作进程已存在，选择确认退出当前实例。</value>
-  </data>
-  <data name="ABC Browser1" xml:space="preserve">
-    <value>ABC 引用查询</value>
-  </data>
-  <data name="About GCMLite(Alt+A)1" xml:space="preserve">
-    <value>关于 GCMLite(Alt+A)</value>
-  </data>
-  <data name="Application View Initialize Failed1" xml:space="preserve">
-    <value>应用视图启动失败</value>
-  </data>
-  <data name="AttrMappingOptionDlg1" xml:space="preserve">
-    <value>属性映射对话框</value>
-  </data>
-  <data name="Cancel1" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="CCInfo ID1" xml:space="preserve">
-    <value>CCInfo 账号</value>
-  </data>
-  <data name="Clear All(Alt+C)1" xml:space="preserve">
-    <value>清空所有(Alt+C)</value>
+    <value>Clear All(Alt+C)</value>
   </data>
   <data name="Column Config Dialog" xml:space="preserve">
-    <value>字段属性配置对话框</value>
+    <value>Column Config Dialog</value>
   </data>
   <data name="Column Name" xml:space="preserve">
-    <value>字段名称</value>
+    <value>Column Name</value>
   </data>
   <data name="Column restrictions updated" xml:space="preserve">
-    <value>字段约束条件属性更新成功</value>
+    <value>Column restrictions updated</value>
   </data>
-  <data name="Configuration1" xml:space="preserve">
-    <value>配置</value>
+  <data name="ConfigColumnsDlg" xml:space="preserve">
+    <value>ConfigColumnsDlg</value>
   </data>
-  <data name="Confirm Message1" xml:space="preserve">
-    <value>确认信息</value>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
   </data>
-  <data name="Confirm1" xml:space="preserve">
-    <value>确认</value>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
   </data>
-  <data name="Connect GCM failed1" xml:space="preserve">
-    <value>连接到GCM失败。</value>
+  <data name="Confirm Message" xml:space="preserve">
+    <value>Confirm Message</value>
   </data>
-  <data name="Connected1" xml:space="preserve">
-    <value>已建立连接</value>
+  <data name="Connect GCM failed" xml:space="preserve">
+    <value>Connect GCM failed</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connected</value>
   </data>
   <data name="Connecting to GCM" xml:space="preserve">
-    <value>正在连接GCM</value>
+    <value>Connecting to GCM</value>
   </data>
-  <data name="Custom Mapping1" xml:space="preserve">
-    <value>自定义映射匹配</value>
+  <data name="Contact (+86)010-64807462" xml:space="preserve">
+    <value>Contact: (+86)010-64807462</value>
   </data>
-  <data name="Data Check failed1" xml:space="preserve">
-    <value>数据校验失败</value>
+  <data name="Custom Mapping" xml:space="preserve">
+    <value>Custom Mapping</value>
   </data>
-  <data name="Data Check success1" xml:space="preserve">
-    <value>数据校验完成</value>
+  <data name="Data Check failed" xml:space="preserve">
+    <value>Data Check failed</value>
   </data>
-  <data name="Data export failed with error info1" xml:space="preserve">
-    <value>数据导出失败，错误信息</value>
+  <data name="Data Check success" xml:space="preserve">
+    <value>Data Check success</value>
   </data>
-  <data name="Data export failed1" xml:space="preserve">
-    <value>数据导出失败。</value>
+  <data name="Data export failed" xml:space="preserve">
+    <value>Data export failed</value>
   </data>
-  <data name="Data publish failed1" xml:space="preserve">
-    <value>数据提交发布失败</value>
+  <data name="Data export failed with error info" xml:space="preserve">
+    <value>Data export failed with error info</value>
   </data>
-  <data name="Data publish success1" xml:space="preserve">
-    <value>数据提交发布成功</value>
+  <data name="Data publish failed" xml:space="preserve">
+    <value>Data publish failed</value>
   </data>
-  <data name="Disconnected1" xml:space="preserve">
-    <value>未连接</value>
+  <data name="Data publish success" xml:space="preserve">
+    <value>Data publish success</value>
   </data>
-  <data name="Exact Match1" xml:space="preserve">
-    <value>精确匹配</value>
+  <data name="Default Value" xml:space="preserve">
+    <value>Default Value</value>
   </data>
-  <data name="Exit operation execute failed1" xml:space="preserve">
-    <value>退出操作执行失败</value>
+  <data name="Disconnected" xml:space="preserve">
+    <value>Disconnected</value>
   </data>
-  <data name="Export failed1" xml:space="preserve">
-    <value>导出失败</value>
+  <data name="Email office@im.ac.cn" xml:space="preserve">
+    <value>Email: office@im.ac.cn</value>
   </data>
-  <data name="export strain tree1" xml:space="preserve">
-    <value>导出菌树</value>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
   </data>
-  <data name="Export success1" xml:space="preserve">
-    <value>导出完成</value>
+  <data name="Exact Match" xml:space="preserve">
+    <value>Exact Match</value>
   </data>
-  <data name="Export(Alt+E)1" xml:space="preserve">
-    <value>导出(Alt+E)</value>
+  <data name="Exit operation execute failed" xml:space="preserve">
+    <value>Exit operation execute failed</value>
   </data>
-  <data name="Failed to export and publish the XML document for GCM1" xml:space="preserve">
-    <value>GCMXML文件导出及上传失败</value>
+  <data name="Export failed" xml:space="preserve">
+    <value>Export failed</value>
   </data>
-  <data name="Failed to Export excel file1" xml:space="preserve">
-    <value>Excel文件导入失败</value>
+  <data name="export strain tree" xml:space="preserve">
+    <value>export strain tree</value>
   </data>
-  <data name="Failed to export JSON File1" xml:space="preserve">
-    <value>JSON文件导出失败</value>
+  <data name="Export success" xml:space="preserve">
+    <value>Export success</value>
   </data>
-  <data name="Failed to export text file1" xml:space="preserve">
-    <value>文本文件导出失败</value>
+  <data name="Export(Alt+E)" xml:space="preserve">
+    <value>Export(Alt+E)</value>
   </data>
-  <data name="Failed to export XML document1" xml:space="preserve">
-    <value>XML文件导出失败</value>
+  <data name="Failed to export and publish the XML document for GCM" xml:space="preserve">
+    <value>Failed to export and publish the XML document for GCM</value>
   </data>
-  <data name="Failed to import dump file1" xml:space="preserve">
-    <value>导入存档文件失败</value>
+  <data name="Failed to Export excel file" xml:space="preserve">
+    <value>Failed to Export excel file</value>
   </data>
-  <data name="Failed to import excel file1" xml:space="preserve">
-    <value>Excel文件导入失败</value>
+  <data name="Failed to export JSON File" xml:space="preserve">
+    <value>Failed to export JSON File</value>
   </data>
-  <data name="Failed to import XML document1" xml:space="preserve">
-    <value>XML文件导入失败</value>
+  <data name="Failed to export text file" xml:space="preserve">
+    <value>Failed to export text file</value>
   </data>
-  <data name="Failed to query the detail of GCM data1" xml:space="preserve">
-    <value>GCM细览数据查询失败</value>
+  <data name="Failed to export XML document" xml:space="preserve">
+    <value>Failed to export XML document</value>
   </data>
-  <data name="Failed to query the overview of GCM data1" xml:space="preserve">
-    <value>GCM 概览数据查询失败</value>
+  <data name="Failed to import dump file" xml:space="preserve">
+    <value>Failed to import dump file</value>
   </data>
-  <data name="FATAL1" xml:space="preserve">
-    <value>严重错误</value>
+  <data name="Failed to import excel file" xml:space="preserve">
+    <value>Failed to import excel file</value>
   </data>
-  <data name="File1" xml:space="preserve">
-    <value>文件</value>
+  <data name="Failed to import XML document" xml:space="preserve">
+    <value>Failed to import XML document</value>
   </data>
-  <data name="Filter(Alt+R)1" xml:space="preserve">
-    <value>过滤式修复(Alt+R)</value>
+  <data name="Failed to query the detail of GCM data" xml:space="preserve">
+    <value>Failed to query the detail of GCM data</value>
   </data>
-  <data name="Find Down1" xml:space="preserve">
-    <value>向下查询</value>
+  <data name="Failed to query the overview of GCM data" xml:space="preserve">
+    <value>Failed to query the overview of GCM data</value>
   </data>
-  <data name="Find Up1" xml:space="preserve">
-    <value>向上查询</value>
+  <data name="FATAL" xml:space="preserve">
+    <value>FATAL</value>
   </data>
-  <data name="Front Find1" xml:space="preserve">
-    <value>前端查找</value>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
   </data>
-  <data name="GCM Password1" xml:space="preserve">
-    <value>GCM 密码</value>
+  <data name="Filter(Alt+R)" xml:space="preserve">
+    <value>Filter(Alt+R)</value>
   </data>
-  <data name="GCM Publish1" xml:space="preserve">
-    <value>GCM 发布数据</value>
+  <data name="Find Down" xml:space="preserve">
+    <value>Find Down</value>
   </data>
-  <data name="Help1" xml:space="preserve">
-    <value>帮助</value>
+  <data name="Find Up" xml:space="preserve">
+    <value>Find Up</value>
   </data>
-  <data name="It's Crash1" xml:space="preserve">
-    <value>异常退出</value>
+  <data name="Front Find" xml:space="preserve">
+    <value>Front Find</value>
   </data>
-  <data name="It's reached the end, and traverse over.1" xml:space="preserve">
-    <value>已达结尾，遍历结束。</value>
+  <data name="GCM Password" xml:space="preserve">
+    <value>GCM Password</value>
+  </data>
+  <data name="GCM Publish" xml:space="preserve">
+    <value>GCM Publish</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="IDCM Copyright All Rights Reserved" xml:space="preserve">
+    <value>IDCM v1.0(110)\n Copyright © All Rights Reserved</value>
+  </data>
+  <data name="It's Crash" xml:space="preserve">
+    <value>It's Crash</value>
+  </data>
+  <data name="It's reached the end, and traverse over." xml:space="preserve">
+    <value>It's reached the end, and traverse over.</value>
+  </data>
+  <data name="Key Name" xml:space="preserve">
+    <value>Key Name</value>
+  </data>
+  <data name="Language(Alt+L)" xml:space="preserve">
+    <value>Language(Alt+L)</value>
   </data>
   <data name="Local data exported success" xml:space="preserve">
-    <value>本地数据导出完成</value>
+    <value>Local data exported success</value>
   </data>
   <data name="Local data import success" xml:space="preserve">
-    <value>本地数据导入完成</value>
+    <value>Local data import success</value>
   </data>
-  <data name="Local data validation did not pass1" xml:space="preserve">
-    <value>本地数据验证失败</value>
+  <data name="Local data validation did not pass" xml:space="preserve">
+    <value>Local data validation did not pass</value>
   </data>
-  <data name="Local DataSet1" xml:space="preserve">
-    <value>本地数据管理</value>
+  <data name="Local DataSet" xml:space="preserve">
+    <value>Local DataSet</value>
   </data>
-  <data name="Match Case1" xml:space="preserve">
-    <value>匹配大小写</value>
+  <data name="Login GCM(Alt+G)" xml:space="preserve">
+    <value>Login GCM(Alt+G)</value>
   </data>
-  <data name="Match Fully1" xml:space="preserve">
-    <value>完整匹配</value>
+  <data name="Match Case" xml:space="preserve">
+    <value>Match Case</value>
+  </data>
+  <data name="Match Fully" xml:space="preserve">
+    <value>Match Fully</value>
   </data>
   <data name="Not Empty" xml:space="preserve">
-    <value>非空值</value>
+    <value>Not Empty</value>
   </data>
-  <data name="Notice1" xml:space="preserve">
-    <value>提醒</value>
+  <data name="Notice" xml:space="preserve">
+    <value>Notice</value>
   </data>
-  <data name="On GCMLite application exiting.1" xml:space="preserve">
-    <value>GCMLite 应用程序退出。</value>
+  <data name="Offline Document(Alt+D)" xml:space="preserve">
+    <value>Offline Document(Alt+D)</value>
   </data>
-  <data name="On Main Manager exited.1" xml:space="preserve">
-    <value>主程序已退出。</value>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
-  <data name="Open (Alt+O)1" xml:space="preserve">
-    <value>打开 (Alt+O)</value>
+  <data name="On GCMLite application exiting." xml:space="preserve">
+    <value>On GCMLite application exiting.</value>
   </data>
-  <data name="Please Login before submitting to GCM.1" xml:space="preserve">
-    <value>请登录GCM后再提交。</value>
+  <data name="On Main Manager exited." xml:space="preserve">
+    <value>On Main Manager exited.</value>
   </data>
-  <data name="Quit(Alt+Q)1" xml:space="preserve">
-    <value>退出(Alt+Q)</value>
+  <data name="Open (Alt+O)" xml:space="preserve">
+    <value>Open (Alt+O)</value>
   </data>
-  <data name="Ready1" xml:space="preserve">
-    <value>就绪</value>
+  <data name="Please Login before submitting to GCM." xml:space="preserve">
+    <value>Please Login before submitting to GCM.</value>
   </data>
-  <data name="Remember1" xml:space="preserve">
-    <value>记住密码</value>
+  <data name="Quit(Alt+Q)" xml:space="preserve">
+    <value>Quit(Alt+Q)</value>
   </data>
-  <data name="Reset1" xml:space="preserve">
-    <value>重置</value>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="records in total." xml:space="preserve">
+    <value>records in total.</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Remember</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
   </data>
   <data name="Restrict Expression" xml:space="preserve">
-    <value>检验表达式</value>
+    <value>Restrict Expression</value>
   </data>
-  <data name="Save (Alt+S)1" xml:space="preserve">
-    <value>存档 (Alt+S)</value>
+  <data name="Save (Alt+S)" xml:space="preserve">
+    <value>Save (Alt+S)</value>
   </data>
-  <data name="SavePath1" xml:space="preserve">
-    <value>保存路径</value>
+  <data name="SavePath" xml:space="preserve">
+    <value>SavePath</value>
   </data>
-  <data name="Search(Alt+F)1" xml:space="preserve">
-    <value>查找(Alt+F)</value>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
   </data>
-  <data name="Search1" xml:space="preserve">
-    <value>查找</value>
+  <data name="Search(Alt+F)" xml:space="preserve">
+    <value>Search(Alt+F)</value>
   </data>
-  <data name="Select File Type For Export1" xml:space="preserve">
-    <value>选择导出文件类型</value>
+  <data name="Select File Type For Export" xml:space="preserve">
+    <value>Select File Type For Export</value>
   </data>
-  <data name="Similarity Match1" xml:space="preserve">
-    <value>模糊匹配</value>
+  <data name="Similarity Match" xml:space="preserve">
+    <value>Similarity Match</value>
   </data>
-  <data name="The 'CCInfo Id' and 'GCM Password' should not be empty.1" xml:space="preserve">
-    <value>用户名和密码值不能为空</value>
+  <data name="Simplified Chinese" xml:space="preserve">
+    <value>Simplified Chinese</value>
   </data>
-  <data name="The data you pasted is in the wrong format for the cell1" xml:space="preserve">
-    <value>粘贴到表格单元的数据格式错误</value>
+  <data name="The 'CCInfo Id' and 'GCM Password' should not be empty." xml:space="preserve">
+    <value>The 'CCInfo Id' and 'GCM Password' should not be empty.</value>
   </data>
-  <data name="The save file path should be available.1" xml:space="preserve">
-    <value>保存文件路径有误</value>
+  <data name="The data you pasted is in the wrong format for the cell" xml:space="preserve">
+    <value>The data you pasted is in the wrong format for the cell</value>
   </data>
-  <data name="There are background tasks are executing, force quit or not1" xml:space="preserve">
-    <value>仍有后台任务正在执行中，是否强制退出？</value>
+  <data name="The save file path should be available." xml:space="preserve">
+    <value>The save file path should be available.</value>
   </data>
-  <data name="Tool1" xml:space="preserve">
-    <value>工具</value>
+  <data name="There are background tasks are executing, force quit or not" xml:space="preserve">
+    <value>There are background tasks are executing, force quit or not</value>
+  </data>
+  <data name="Tool" xml:space="preserve">
+    <value>Tool</value>
   </data>
   <data name="Unique" xml:space="preserve">
-    <value>值唯一</value>
+    <value>Unique</value>
   </data>
-  <data name="Unsupport export type1" xml:space="preserve">
-    <value>不支持的导出格式</value>
+  <data name="Unsupport export type" xml:space="preserve">
+    <value>Unsupport export type</value>
   </data>
-  <data name="Validation(Alt+V)1" xml:space="preserve">
-    <value>验证(Alt+V)</value>
+  <data name="Validation(Alt+V)" xml:space="preserve">
+    <value>Validation(Alt+V)</value>
   </data>
-  <data name="Web Support(Alt+H)1" xml:space="preserve">
-    <value>在线技术支持(Alt+H)</value>
+  <data name="Web Support(Alt+H)" xml:space="preserve">
+    <value>Web Support(Alt+H)</value>
   </data>
-  <data name="Work process existing under this work space. Choose confirm and exit this instance.1" xml:space="preserve">
-    <value>当前工作空间下工作进程已存在，选择确认退出当前实例。</value>
+  <data name="Work process existing under this work space. Choose confirm and exit this instance." xml:space="preserve">
+    <value>Work process existing under this work space. Choose confirm and exit this instance.</value>
+  </data>
+  <data name="Reset Local Columns" xml:space="preserve">
+    <value>Reset Local Columns</value>
   </data>
 </root>

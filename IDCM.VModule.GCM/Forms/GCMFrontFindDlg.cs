@@ -64,7 +64,8 @@ namespace IDCM.Forms
         }
         private void button_searchDown_Click(object sender, EventArgs e)
         {
-            findDown();
+            string findTerm = this.comboBox_find.Text.Trim();
+            beginFind(findTerm);
         }
 
         private void button_findRev_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace IDCM.Forms
         }
         private void GCMFrontFindDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason.Equals(CloseReason.UserClosing) && e.CloseReason.Equals(CloseReason.None))
+            if (e.CloseReason.Equals(CloseReason.UserClosing) || e.CloseReason.Equals(CloseReason.None))
             {
                 e.Cancel = true;
                 this.Hide();
@@ -87,13 +88,11 @@ namespace IDCM.Forms
         #endregion
 
         #region Methods
-
-        public void findDown()
+        public void beginFind(string findTerm)
         {
             if (foundCell != null)
                 cancelCellHit(foundCell);
             foundCell = null;
-            string findTerm = this.comboBox_find.Text.Trim();
             if (findTerm.Length > 0)
             {
                 if (!findTerm.Equals(lastFindTerm))
@@ -123,22 +122,50 @@ namespace IDCM.Forms
                 this.comboBox_find.Focus();
             }
         }
+
+        public void findDown()
+        {
+            if (foundCell != null)
+                cancelCellHit(foundCell);
+            foundCell = null;
+            if (lastFindTerm!=null && lastFindTerm.Length > 0)
+            {
+                DataGridViewCell ncell = null;
+                while ((ncell = nextCell()) != null)
+                {
+                    string cellval = DGVUtil.getCellValue(ncell);
+                    if (checkItemMatch(lastFindTerm, cellval, checkBox_matchCase.Checked, checkBox_matchAll.Checked))
+                    {
+                        foundCell = ncell;//查找成功
+                        setCellHit(ncell);
+                        this.Hide();
+                        break;
+                    }
+                }
+                if (ncell == null)
+                {
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("It's reached the end, and traverse over."));
+                    this.Hide();
+                }
+            }
+            else
+            {
+                this.comboBox_find.FormatString = "";
+                this.comboBox_find.Focus();
+            }
+        }
         public void findRev()
         {
             if (foundCell != null)
                 cancelCellHit(foundCell);
             foundCell = null;
-            string findTerm = this.comboBox_find.Text.Trim();
-            if (findTerm.Length > 0)
+            if (lastFindTerm != null && lastFindTerm.Length > 0)
             {
-                if (!findTerm.Equals(lastFindTerm))
-                    resetIndex();
-                lastFindTerm = findTerm;
                 DataGridViewCell ncell = null;
                 while ((ncell = nextCell(true)) != null)
                 {
                     string cellval = DGVUtil.getCellValue(ncell);
-                    if (checkItemMatch(findTerm, cellval, checkBox_matchCase.Checked, checkBox_matchAll.Checked))
+                    if (checkItemMatch(lastFindTerm, cellval, checkBox_matchCase.Checked, checkBox_matchAll.Checked))
                     {
                         foundCell = ncell;//查找成功
                         setCellHit(ncell);

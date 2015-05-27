@@ -38,12 +38,16 @@ namespace IDCM.ViewManager
         {
             authInfo.Username = gtcache.UserName;
             authInfo.Password = gtcache.Password;
-            //authInfo.autoLogin = gtcache.RememberLogin;//@depercated
             authInfo.autoLogin = true;
             authInfo.Timestamp = 0;
             new System.Threading.Thread(delegate() { OnSignInHold(null, null); }).Start();
         }
-
+        internal void logout()
+        {
+            if(authInfo!=null)
+                GCMSignExecutor.SignOff(authInfo);
+            authInfo.LoginFlag=false;
+        }
         /// <summary>
         /// 登录状态验证与保持
         /// </summary>
@@ -83,10 +87,20 @@ namespace IDCM.ViewManager
         {
             return this.authInfo;
         }
-        internal void refreshGCMDataset()
+        internal void refreshGCMDataset(bool force=false)
         {
-            GCMDataLoadHandler gdlh = new GCMDataLoadHandler(gtcache,authInfo);
-            BGWorkerInvoker.pushHandler(gdlh);
+            long elapsedTicks = DateTime.Now.Ticks - lastUpdateTimeStamp;
+            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+            if (elapsedSpan.TotalMilliseconds > SysConstants.SessionValidMilliSeconds / 2 || force)
+            {
+                GCMDataLoadHandler gdlh = new GCMDataLoadHandler(gtcache, authInfo);
+                BGWorkerInvoker.pushHandler(gdlh);
+                lastUpdateTimeStamp = System.DateTime.Now.Ticks;
+            }
+            else
+            {
+                DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
+            }
         }
         internal void showGCMDataDetail(int ridx=0)
         {
@@ -155,6 +169,18 @@ namespace IDCM.ViewManager
             }
             return null;
         }
+
+        internal void SyncStrainLinksCompare(DCMControlLib.DCMDataGridView dcmDataGridView_local,int keyIndex)
+        {
+            foreach(DataGridViewRow dgvr in dcmDataGridView_local.Rows)
+            {
+                DataGridViewCell dgvc=dgvr.Cells[keyIndex];
+                if(dgvc!=null && dgvc.Value!=null)
+                {
+                    dgvr.Tag = gtcache.containsStrainNumber(dgvc.FormattedValue.ToString());
+                }
+            }
+        }
         #endregion
 
         #region Property
@@ -167,6 +193,13 @@ namespace IDCM.ViewManager
                 long elapsedTicks = DateTime.Now.Ticks - authInfo.Timestamp;
                 TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
                 return elapsedSpan.TotalMilliseconds < SysConstants.SessionValidMilliSeconds;
+            }
+        }
+        public int RowCount
+        {
+            get
+            {
+                return gtcache.getRowCount();
             }
         }
         public string UserName
@@ -188,6 +221,7 @@ namespace IDCM.ViewManager
 
         #region Members
         private GCMTableCache gtcache;
+        private long lastUpdateTimeStamp=0;
         /// <summary>
         /// SignIn hold Monitor
         /// </summary>
@@ -198,5 +232,6 @@ namespace IDCM.ViewManager
         private readonly AuthInfo authInfo;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         #endregion
+
     }
 }

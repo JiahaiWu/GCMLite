@@ -22,31 +22,27 @@ namespace IDCM.DataTransfer
         /// 说明:
         /// 1.具体请求的Url为三段式组成，表示为{helpBase}/{requestCatalog}#{requestTag}
         /// </summary>
+        /// <param name="requestBase"></param>
         /// <param name="requestTag">页面锚标记(null able)</param>
         /// <param name="requestCatalog">页面分类目录设定(null able)</param>
-        public static void requestHelpDoc(string requestTag = null, string requestCatalog = null)
+        public static void requestHelpDoc(string requestBase=null,string requestTag = null, string requestCatalog = null)
         {
-            string helpBase = ConfigurationManager.AppSettings.Get(SysConstants.HelpBase);
+            string helpBase = (requestBase != null && requestBase.Length > 0)?requestBase:ConfigurationManager.AppSettings.Get(SysConstants.HelpBase);
             string appTag = (requestTag != null && requestTag.Length > 0) ? "#" + requestTag : "";
             string appCat = (requestCatalog != null && requestCatalog.Length > 0) ? "/" + requestCatalog : "";
             tryToOpenLinkUrl(helpBase + appCat + appTag);
         }
 
-        private static void tryToOpenLinkUrl(string gotoUrl)
+        public static void tryToOpenLinkUrl(string gotoUrl)
         {
             string BrowserPath = GetDefaultWebBrowserFilePath();
             if (BrowserPath == null)
                 BrowserPath = getIEFilePath();
             if (BrowserPath != null)
             {
-                if (!gotoUrl.StartsWith("http://"))
+                if (gotoUrl.StartsWith("www"))
                 {
                     gotoUrl = "http://" + gotoUrl;
-                }
-                //如果输入的url地址为空，则清空url地址，浏览器默认跳转到默认页面
-                if (gotoUrl == "http://")
-                {
-                    gotoUrl = "";
                 }
                 System.Diagnostics.Process.Start(BrowserPath, gotoUrl);
             }

@@ -156,9 +156,6 @@
   <data name="Confirm Message" xml:space="preserve">
     <value>Confirm Message</value>
   </data>
-  <data name="Confirm1" xml:space="preserve">
-    <value>Confirm1</value>
-  </data>
   <data name="Connect GCM failed" xml:space="preserve">
     <value>Connect GCM failed</value>
   </data>
@@ -371,5 +368,56 @@
   </data>
   <data name="Work process existing under this work space. Choose confirm and exit this instance." xml:space="preserve">
     <value>Work process existing under this work space. Choose confirm and exit this instance.</value>
+  </data>
+  <data name="About GCMLite" xml:space="preserve">
+    <value>About GCMLite</value>
+  </data>
+  <data name="Address NO.1 Beichen West Road, Chaoyang District, Beijing 100101" xml:space="preserve">
+    <value>Address: NO.1 Beichen West Road, Chaoyang District, Beijing 100101</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="ConfigColumnsDlg" xml:space="preserve">
+    <value>ConfigColumnsDlg</value>
+  </data>
+  <data name="Contact (+86)010-64807462" xml:space="preserve">
+    <value>Contact: (+86)010-64807462</value>
+  </data>
+  <data name="Default Value" xml:space="preserve">
+    <value>Default Value</value>
+  </data>
+  <data name="Email office@im.ac.cn" xml:space="preserve">
+    <value>Email: office@im.ac.cn</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="IDCM Copyright All Rights Reserved" xml:space="preserve">
+    <value>IDCM v1.0(110)\n Copyright © All Rights Reserved</value>
+  </data>
+  <data name="Key Name" xml:space="preserve">
+    <value>Key Name</value>
+  </data>
+  <data name="Language(Alt+L)" xml:space="preserve">
+    <value>Language(Alt+L)</value>
+  </data>
+  <data name="Login GCM(Alt+G)" xml:space="preserve">
+    <value>Login GCM(Alt+G)</value>
+  </data>
+  <data name="Offline Document(Alt+D)" xml:space="preserve">
+    <value>Offline Document(Alt+D)</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="records in total." xml:space="preserve">
+    <value>records in total.</value>
+  </data>
+  <data name="Simplified Chinese" xml:space="preserve">
+    <value>Simplified Chinese</value>
+  </data>
+  <data name="Reset Local Columns" xml:space="preserve">
+    <value>Reset Local Columns</value>
   </data>
 </root>

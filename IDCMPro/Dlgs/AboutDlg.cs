@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using IDCM.Base;
 
 namespace IDCM.Dlgs
 {
@@ -30,10 +31,12 @@ namespace IDCM.Dlgs
         #region Methods
         public void setAboutText()
         {
-            this.version.Text = "IDCM v1.0(110)\n\nCopyright © All Rights Reserved";
-            this.contact.Text = "Contact: jiahaiWu \n\n ";
-            this.email.Text = "Email:jiahaiwu@im.ac.cn\n\n";
-            this.address.Text = "Address:Beijing Chaoyang District";
+            this.version.Text = GlobalTextRes.Text("IDCM Copyright All Rights Reserved");
+            this.contact.Text = GlobalTextRes.Text("Contact (+86)010-64807462");
+            this.email.Text = GlobalTextRes.Text("Email office@im.ac.cn");
+            this.address.Text = GlobalTextRes.Text("Address NO.1 Beichen West Road, Chaoyang District, Beijing 100101");
+            this.button1.Text = GlobalTextRes.Text("Ok");
+            this.Text = GlobalTextRes.Text("About GCMLite");
         }
         #endregion
     }
