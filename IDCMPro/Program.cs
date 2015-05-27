@@ -51,13 +51,12 @@ namespace IDCM
         {
             
             bool isapprunning = false;
-            System.Threading.Mutex mutex = new System.Threading.Mutex(true, System.Diagnostics.Process.GetCurrentProcess().ProcessName,
-            out isapprunning);
+            System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out isapprunning);
             if (!isapprunning)
             {
                 MessageBox.Show(GlobalTextRes.Text("Work process existing under this work space. Choose confirm and exit this instance."),
                     GlobalTextRes.Text("Notice"), MessageBoxButtons.OK);
-                Application.Exit();
+                Environment.Exit(1);
             }
             else
             {
@@ -96,6 +95,7 @@ namespace IDCM
 #endif
                     log.Info(IDCM.Base.GlobalTextRes.Text("FATAL") + "!", ex);
                 }
+                mutex.ReleaseMutex();
             }
         }
 

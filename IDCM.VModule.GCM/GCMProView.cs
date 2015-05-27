@@ -429,6 +429,10 @@ namespace IDCM.VModule.GCM
 
         public void initComponenent()
         {
+            if (!Directory.Exists(SysConstants.initEnvDir + SysConstants.cacheDir))
+            {
+                Directory.CreateDirectory(SysConstants.initEnvDir + SysConstants.cacheDir);
+            }
             if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
             {
                 gcmTabControl_GCM.HideTab(tabPageEx_GCM);
