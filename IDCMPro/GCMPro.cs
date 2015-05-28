@@ -51,6 +51,16 @@ namespace IDCM
             this.aboutGCMLiteAltAToolStripMenuItem.Text = GlobalTextRes.Text("About GCMLite(Alt+A)");
             this.offlineDocumentAltDToolStripMenuItem.Text = GlobalTextRes.Text("Offline Document(Alt+D)");
             this.resetColumnsToolStripMenuItem.Text = GlobalTextRes.Text("Reset Local Columns");
+            this.toolStripButton_help.ToolTipText = GlobalTextRes.Text("Help");
+            this.toolStripButton_search.ToolTipText = GlobalTextRes.Text("Search");
+            this.toolStripTextBox_search.ToolTipText = GlobalTextRes.Text("Quick Search");
+            this.toolStripButton_down.ToolTipText = GlobalTextRes.Text("DownLoad from GCM");
+            this.toolStripButton_pub.ToolTipText = GlobalTextRes.Text("Publish to GCM");
+            this.toolStripButton_compare.ToolTipText = GlobalTextRes.Text("Compare with GCM");
+            this.toolStripButton_export.ToolTipText = GlobalTextRes.Text("Export");
+            this.toolStripButton_import.ToolTipText = GlobalTextRes.Text("Import");
+            this.toolStripButton_del.ToolTipText = GlobalTextRes.Text("Delete");
+            this.toolStripButton_add.ToolTipText = GlobalTextRes.Text("Add Row");
             viewMonitor = new Timer();
             viewMonitor.Interval = 500;
             viewMonitor.Tick+=viewMonitor_Tick;
@@ -341,7 +351,11 @@ namespace IDCM
         {
 
             string findTerm = this.toolStripTextBox_search.Text.Trim();
-            if (findTerm.Length > 0)
+            if(this.toolStripTextBox_search.ForeColor.Equals(Color.DarkGray))
+            {
+                this.toolStripTextBox_search.Text="";
+                this.toolStripTextBox_search.Focus();
+            }else if (findTerm.Length > 0)
             {
                 gcmProView_lite.quickFindData(findTerm);
             }

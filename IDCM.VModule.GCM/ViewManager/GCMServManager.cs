@@ -72,7 +72,8 @@ namespace IDCM.ViewManager
                 }
                 string tip = authInfo.LoginFlag ? GlobalTextRes.Text("Connected") + ". [" + authInfo.Username + "]" : GlobalTextRes.Text("Disconnected");
                 DCMPublisher.noteSimpleMsg(tip, DCMMsgType.Status);
-                DCMPublisher.noteSimpleMsg(tip);
+                if(sender==null)
+                    DCMPublisher.noteSimpleMsg(tip);
                 DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMUserSigned);
             }
             catch (Exception ex)

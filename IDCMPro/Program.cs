@@ -68,6 +68,7 @@ namespace IDCM
                         if (lan != null && lan.Length > 0)
                         {
                             Application.CurrentCulture = new System.Globalization.CultureInfo(lan);
+                            GlobalTextRes.noteApplicationCulture(Application.CurrentCulture);
                         }
                     }
                     catch (Exception ex)

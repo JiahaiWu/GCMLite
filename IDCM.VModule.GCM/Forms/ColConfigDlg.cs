@@ -17,7 +17,8 @@ namespace IDCM.Forms
         public ColConfigDlg(int cursor, CustomColDef ccd)
         {
             InitializeComponent();
-            this.label_alias.Text = IDCM.Base.GlobalTextRes.Text("Column Name")+":";
+            this.label_name.Text = IDCM.Base.GlobalTextRes.Text("Column Name")+":";
+            this.label_alias.Text = IDCM.Base.GlobalTextRes.Text("Column Alias") + ":";
             this.label4.Text = IDCM.Base.GlobalTextRes.Text("Restrict Expression")+":";
             this.checkBox_NotEmpty.Text = IDCM.Base.GlobalTextRes.Text("Not Empty");
             this.checkBox_unique.Text = IDCM.Base.GlobalTextRes.Text("Unique");

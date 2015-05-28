@@ -741,6 +741,7 @@ namespace IDCM.VModule.GCM
                         gcmTabControl_GCM.HideTab(tabPageEx_GCM);
                         gcmTabControl_GCM.ShowTab(tabPageEx_Local);
                     }));
+                    notifyOpConditions(OpConditionType.Local_View);
                 }else
                     showGCMDataDlg();
                 ///////////////////////////////////////////////

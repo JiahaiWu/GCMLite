@@ -88,6 +88,15 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Add Row 的本地化字符串。
+        /// </summary>
+        internal static string Add_Row {
+            get {
+                return ResourceManager.GetString("Add Row", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Address: NO.1 Beichen West Road, Chaoyang District, Beijing 100101 的本地化字符串。
         /// </summary>
         internal static string Address_NO_1_Beichen_West_Road__Chaoyang_District__Beijing_100101 {
@@ -151,6 +160,15 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Column Alias 的本地化字符串。
+        /// </summary>
+        internal static string Column_Alias {
+            get {
+                return ResourceManager.GetString("Column Alias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Column Config Dialog 的本地化字符串。
         /// </summary>
         internal static string Column_Config_Dialog {
@@ -174,6 +192,15 @@ namespace IDCM.Base {
         internal static string Column_restrictions_updated {
             get {
                 return ResourceManager.GetString("Column restrictions updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Compare with GCM 的本地化字符串。
+        /// </summary>
+        internal static string Compare_with_GCM {
+            get {
+                return ResourceManager.GetString("Compare with GCM", resourceCulture);
             }
         }
         
@@ -250,6 +277,15 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Copyright © All Rights Reserved 的本地化字符串。
+        /// </summary>
+        internal static string Copyright_All_Rights_Reserved {
+            get {
+                return ResourceManager.GetString("Copyright All Rights Reserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Custom Mapping 的本地化字符串。
         /// </summary>
         internal static string Custom_Mapping {
@@ -322,11 +358,29 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Delete 的本地化字符串。
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Disconnected 的本地化字符串。
         /// </summary>
         internal static string Disconnected {
             get {
                 return ResourceManager.GetString("Disconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 DownLoad from GCM 的本地化字符串。
+        /// </summary>
+        internal static string DownLoad_from_GCM {
+            get {
+                return ResourceManager.GetString("DownLoad from GCM", resourceCulture);
             }
         }
         
@@ -363,6 +417,15 @@ namespace IDCM.Base {
         internal static string Exit_operation_execute_failed {
             get {
                 return ResourceManager.GetString("Exit operation execute failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export 的本地化字符串。
+        /// </summary>
+        internal static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
             }
         }
         
@@ -574,11 +637,20 @@ namespace IDCM.Base {
         }
         
         /// <summary>
-        ///   查找类似 IDCM v1.0(110)\n Copyright © All Rights Reserved 的本地化字符串。
+        ///   查找类似 IDCM v1.0(110) 的本地化字符串。
         /// </summary>
-        internal static string IDCM_Copyright_All_Rights_Reserved {
+        internal static string IDCM_v1_0_110_ {
             get {
-                return ResourceManager.GetString("IDCM Copyright All Rights Reserved", resourceCulture);
+                return ResourceManager.GetString("IDCM v1.0(110)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Import 的本地化字符串。
+        /// </summary>
+        internal static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
             }
         }
         
@@ -750,6 +822,24 @@ namespace IDCM.Base {
         internal static string Please_Login_before_submitting_to_GCM_ {
             get {
                 return ResourceManager.GetString("Please Login before submitting to GCM.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Publish to GCM 的本地化字符串。
+        /// </summary>
+        internal static string Publish_to_GCM {
+            get {
+                return ResourceManager.GetString("Publish to GCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Quick Search 的本地化字符串。
+        /// </summary>
+        internal static string Quick_Search {
+            get {
+                return ResourceManager.GetString("Quick Search", resourceCulture);
             }
         }
         

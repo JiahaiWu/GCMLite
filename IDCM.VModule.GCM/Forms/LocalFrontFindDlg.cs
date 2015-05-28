@@ -34,6 +34,13 @@ namespace IDCM.Forms
             InitializeComponent();
             if (lastFindTerm != null && lastFindTerm.Length > 0)
                 this.comboBox_find.FormatString = lastFindTerm;
+            this.label_search.Text = IDCM.Base.GlobalTextRes.Text("Search") + ":";
+            this.button_searchDown.Text = IDCM.Base.GlobalTextRes.Text("Find Down");
+            this.button_findRev.Text = IDCM.Base.GlobalTextRes.Text("Find Up");
+            this.checkBox_matchCase.Text = IDCM.Base.GlobalTextRes.Text("Match Case");
+            this.checkBox_matchAll.Text = IDCM.Base.GlobalTextRes.Text("Match Fully");
+            this.button_reset.Text = IDCM.Base.GlobalTextRes.Text("Reset");
+            this.Text = IDCM.Base.GlobalTextRes.Text("Front Find");
         }
         ~LocalFrontFindDlg()
         {

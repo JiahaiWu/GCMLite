@@ -15,15 +15,21 @@ namespace IDCM.Base
     {
         public static string Text(string text)
         {
-            CultureInfo ci = Thread.CurrentThread.CurrentCulture;
+            CultureInfo ci = (appCI != null ? appCI : Thread.CurrentThread.CurrentCulture);
             string itext= rm.GetString(text, ci);
             return itext==null || itext.Length <1 ? text:itext;
         }
         public static string getLanguageName()
         {
-            return Thread.CurrentThread.CurrentCulture.Name;
+            return (appCI!=null?appCI:Thread.CurrentThread.CurrentCulture).Name;
         }
+        public static void noteApplicationCulture(CultureInfo cultureInfo)
+        {
+            appCI = cultureInfo;
+        }
+
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        private static CultureInfo appCI = null;
         private static ResourceManager rm = new ResourceManager("IDCM.Base.TextResources", Assembly.GetExecutingAssembly());
     }
 }

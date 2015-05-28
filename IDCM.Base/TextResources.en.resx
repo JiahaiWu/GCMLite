@@ -393,9 +393,6 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="IDCM Copyright All Rights Reserved" xml:space="preserve">
-    <value>IDCM v1.0(110)\n Copyright © All Rights Reserved</value>
-  </data>
   <data name="Key Name" xml:space="preserve">
     <value>Key Name</value>
   </data>
@@ -419,5 +416,38 @@
   </data>
   <data name="Reset Local Columns" xml:space="preserve">
     <value>Reset Local Columns</value>
+  </data>
+  <data name="Copyright All Rights Reserved" xml:space="preserve">
+    <value>Copyright © All Rights Reserved</value>
+  </data>
+  <data name="IDCM v1.0(110)" xml:space="preserve">
+    <value>IDCM v1.0(110)</value>
+  </data>
+  <data name="Column Alias" xml:space="preserve">
+    <value>Column Alias</value>
+  </data>
+  <data name="Add Row" xml:space="preserve">
+    <value>Add Row</value>
+  </data>
+  <data name="Compare with GCM" xml:space="preserve">
+    <value>Compare with GCM</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DownLoad from GCM" xml:space="preserve">
+    <value>DownLoad from GCM</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Publish to GCM" xml:space="preserve">
+    <value>Publish to GCM</value>
+  </data>
+  <data name="Quick Search" xml:space="preserve">
+    <value>Quick Search</value>
   </data>
 </root>

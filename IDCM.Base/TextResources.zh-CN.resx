@@ -288,9 +288,6 @@
   <data name="Help" xml:space="preserve">
     <value>帮助</value>
   </data>
-  <data name="IDCM Copyright All Rights Reserved" xml:space="preserve">
-    <value>IDCM v1.0(110)\n © 版权所有</value>
-  </data>
   <data name="It's Crash" xml:space="preserve">
     <value>异常退出</value>
   </data>
@@ -422,5 +419,38 @@
   </data>
   <data name="Reset Local Columns" xml:space="preserve">
     <value>重设本地数据列</value>
+  </data>
+  <data name="Copyright All Rights Reserved" xml:space="preserve">
+    <value>© 版权所有</value>
+  </data>
+  <data name="IDCM v1.0(110)" xml:space="preserve">
+    <value>IDCM v1.0(110)</value>
+  </data>
+  <data name="Column Alias" xml:space="preserve">
+    <value>字段别名</value>
+  </data>
+  <data name="Add Row" xml:space="preserve">
+    <value>添加记录行</value>
+  </data>
+  <data name="Compare with GCM" xml:space="preserve">
+    <value>和GCM菌种目录比对</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除记录行</value>
+  </data>
+  <data name="DownLoad from GCM" xml:space="preserve">
+    <value>从GCM下载菌种目录</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="Publish to GCM" xml:space="preserve">
+    <value>提交本地数据至GCM</value>
+  </data>
+  <data name="Quick Search" xml:space="preserve">
+    <value>快捷查询框</value>
   </data>
 </root>
