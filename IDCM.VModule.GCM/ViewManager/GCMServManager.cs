@@ -68,19 +68,20 @@ namespace IDCM.ViewManager
                         authInfo.LoginFlag = auth.LoginFlag;
                         authInfo.Jsessionid = auth.Jsessionid;
                         authInfo.Timestamp = auth.Timestamp;
+
+                        string tip = authInfo.LoginFlag ? GlobalTextRes.Text("Connected") + ". [" + authInfo.Username + "]" : GlobalTextRes.Text("Disconnected");
+                        DCMPublisher.noteSimpleMsg(tip, DCMMsgType.Status);
+                        if (sender == null)
+                            DCMPublisher.noteSimpleMsg(tip);
+                        DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMUserSigned);
                     }
                 }
-                string tip = authInfo.LoginFlag ? GlobalTextRes.Text("Connected") + ". [" + authInfo.Username + "]" : GlobalTextRes.Text("Disconnected");
-                DCMPublisher.noteSimpleMsg(tip, DCMMsgType.Status);
-                if(sender==null)
-                    DCMPublisher.noteSimpleMsg(tip);
-                DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMUserSigned);
             }
             catch (Exception ex)
             {
                 log.Error(GlobalTextRes.Text("Connect GCM failed"), ex);
                 DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"), DCMMsgType.Status);
-                DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"));
+                DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Connect GCM failed"),DCMMsgType.Alert);
             }
         }
 

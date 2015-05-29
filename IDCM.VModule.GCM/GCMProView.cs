@@ -240,7 +240,8 @@ namespace IDCM.VModule.GCM
                 else
                     textBox_pwd.Focus();
             }));
-            notifyOpConditions(OpConditionType.GCM_Login);
+            if(gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_GCM.TabIndex))
+                notifyOpConditions(OpConditionType.GCM_Login);
         }
 
         private void showGCMDataDlg()
@@ -251,7 +252,8 @@ namespace IDCM.VModule.GCM
                 splitContainer_GCM.Panel1Collapsed = true;
                 splitContainer_GCM.Panel2Collapsed = false;
             }));
-            notifyOpConditions(OpConditionType.GCM_View);
+            if (gcmTabControl_GCM.SelectedIndex.Equals(tabPageEx_GCM.TabIndex))
+                notifyOpConditions(OpConditionType.GCM_View);
         }
         
 
@@ -757,10 +759,6 @@ namespace IDCM.VModule.GCM
                         ConfigurationHelper.SetAppConfig(SysConstants.LPWD, "", SysConstants.defaultCfgPath);
                     }
                 }
-            }
-            else
-            {
-                showLoginDlg();
             }
         }
         private void OnBottomSatusChange(object msgTag, params object[] vals)
