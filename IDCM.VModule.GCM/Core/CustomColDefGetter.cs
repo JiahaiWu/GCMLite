@@ -52,21 +52,11 @@ namespace IDCM.Core
                 }
                 if(ccds==null)
                 {
-#if DEBUG
-                    if (!userCfg.Contains("IDE"))
-                    {
-                        if (!File.Exists(userCfg))
-                            throw new IDCMException("缺少数据表配置文件！ @path=" + userCfg);
-                        ccds = CustomColDef.getCustomTableDef(userCfg);
-                        setKeyColDef(userCfg,ccds);
-                        lastSrcHashCode = srcHashCode;
-                    }
-#else
                     if (!File.Exists(userCfg))
                         throw new IDCMException("缺少数据表配置文件！ @path="+ userCfg);
                     ccds = CustomColDef.getCustomTableDef(userCfg);
+                    setKeyColDef(userCfg,ccds);
                     lastSrcHashCode = srcHashCode;
-#endif
                 }
             }
             catch (IOException ex)

@@ -205,7 +205,10 @@ namespace IDCM.Core
         internal void removeRow(DataGridViewRow dgvr)
         {
             DataGridViewRow row = null;
-            keyIndexs.TryRemove(dgvr.Cells[KeyName].FormattedValue.ToString(),out row);
+            foreach (KeyValuePair<string, DataGridViewRow> pair in keyIndexs.Where(rs => rs.Value == dgvr))
+            {
+                keyIndexs.TryRemove(pair.Key, out row);
+            }
             ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
             {
                 this.dgv.Rows.Remove(dgvr);
