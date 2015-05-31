@@ -24,7 +24,11 @@ namespace IDCM.Forms
             this.radioButton_similarity.Text = IDCM.Base.GlobalTextRes.Text("Similarity Match");
             this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
             this.Text = IDCM.Base.GlobalTextRes.Text("AttrMappingOptionDlg");
+
+            mapAttrMenu = new DCMControlLib.Pop.SingleOptionalContextMenu();
+            mapAttrMenu.OptionMenuChanged += mapAttrMenu_OptionMenuChanged;
         }
+
         #endregion
 
         #region Methods
@@ -41,6 +45,10 @@ namespace IDCM.Forms
             this.destCols = dbList.ToList();
             this.mapping = mapping;
             computeSimilarMapping();
+            foreach (string dcol in this.destCols)
+            {
+                mapAttrMenu.addMenu(dcol);
+            }
         }
         /// <summary>
         /// 根据字符串源和目标集合，使用编辑距离的计算方法计算相似度，并以一定的阈值通过筛选相似的映射对
@@ -106,16 +114,24 @@ namespace IDCM.Forms
         /// 获取未匹配的目标字符串集合
         /// </summary>
         /// <returns></returns>
-        private string[] unboundDestCols()
+        private HashSet<string> bindedDestCols()
         {
-            List<string> res = new List<string>();
-            HashSet<string> dests = new HashSet<string>(mapping.Values);
-            foreach (string col in destCols)
+            HashSet<string> dests = new HashSet<string>();
+            foreach (DataGridViewRow dgvr in dataGridView_map.Rows)
             {
-                if (!dests.Contains(col))
-                    res.Add(col);
+                if (dgvr.IsNewRow)
+                    continue;
+                DataGridViewCell dgvc = dgvr.Cells[2];
+                if (dgvc != null)
+                {
+                    string col = DGVUtil.getCellValue(dgvc);
+                    if (col != null && col.Length > 0)
+                    {
+                        dests.Add(col);
+                    }
+                }
             }
-            return res.ToArray();
+            return dests;
         }
         #endregion
 
@@ -198,31 +214,30 @@ namespace IDCM.Forms
                 }
                 else if (dataGridView_map.Columns[e.ColumnIndex].HeaderText.Equals("Rebind"))
                 {
-                    toolStripComboBox_dest.Items.AddRange(unboundDestCols());
-                    toolStripComboBox_dest.SelectedIndex = 0;
-                    ControlUtil.ClearEvent(toolStripComboBox_dest, "SelectedIndexChanged");
-                    toolStripComboBox_dest.SelectedIndexChanged += delegate(object tsender, EventArgs te) { toolStripComboBox_dest_Changed(tsender, te, e.ColumnIndex, e.RowIndex); };
-                    contextMenuStrip_destList.Show(MousePosition);
+                    mapAttrMenu.checkAndResetOthers(DGVUtil.getCellValue(dataGridView_map.Rows[e.RowIndex].Cells[2]));
+                    mapAttrMenu.Tag = e.RowIndex;
+                    Point plocation = this.PointToScreen(this.Location);
+                    mapAttrMenu.Show(this, new Point(MousePosition.X - plocation.X, MousePosition.Y - plocation.Y));
                 }
             }
         }
-        /// <summary>
-        /// 追加映射对配置
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <param name="columnIndex"></param>
-        /// <param name="rowIndex"></param>
-        private void toolStripComboBox_dest_Changed(object sender, EventArgs e, int columnIndex, int rowIndex)
+        private void mapAttrMenu_OptionMenuChanged(object sender, DCMControlLib.Pop.MenuItemEventArgs e)
         {
-            string stext=toolStripComboBox_dest.Text;
-            if (stext!=null)
+            if (mapAttrMenu != null && mapAttrMenu.Tag != null)
             {
-                dataGridView_map.Rows[rowIndex].Cells[2].Value =stext;
-                mapping[dataGridView_map.Rows[rowIndex].Cells[0].Value.ToString()] = stext;
-                radioButton_custom.Checked = true;
+                int rowIndex = Convert.ToInt32(mapAttrMenu.Tag);
+                if (rowIndex > -1 && rowIndex < dataGridView_map.RowCount)
+                {
+                    ///////////////////////////////////////////////////////////
+                    //dataGridView_map.Rows[rowIndex].Cells[2].Value = e.MenuItem.Checked?e.MenuItem.Text:null;
+                    ///////////////////////////////////////////////////////////
+                    dataGridView_map.Rows[rowIndex].Cells[2].Value =e.MenuItem.Text;
+                    radioButton_custom.Checked = true;
+                }
+                mapAttrMenu.Tag = null;
             }
         }
+
         #endregion
 
         #region Members
@@ -230,6 +245,7 @@ namespace IDCM.Forms
         private List<string> srcCols = null;
         private List<string> destCols = null;
         private Dictionary<string, string> mapping = null;
+        private DCMControlLib.Pop.SingleOptionalContextMenu mapAttrMenu = null;
         #endregion
     }
 }

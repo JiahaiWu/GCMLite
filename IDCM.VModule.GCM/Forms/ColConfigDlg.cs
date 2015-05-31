@@ -68,7 +68,7 @@ namespace IDCM.Forms
 
         private void checkBox_NotEmpty_CheckedChanged(object sender, EventArgs e)
         {
-            customCol.IsUnique = this.checkBox_NotEmpty.Checked;
+            customCol.IsRequire = this.checkBox_NotEmpty.Checked;
             dirtyStatus = true;
         }
 

@@ -8,14 +8,37 @@ using System.ComponentModel;
 
 namespace DCMControlLib.Pop
 {
-    class OptionalContextMenu:ContextMenu
+    public class SingleOptionalContextMenu:ContextMenu
     {
-        public OptionalContextMenu()
+        public SingleOptionalContextMenu()
             : base()
         {
             this.Popup += OnPopUpNote;
             this.Collapse += OnCollapseNote;
         }
+
+        public SingleOptionalContextMenu(Dictionary<string, bool> nameMaps)
+            : base()
+        {
+            if (nameMaps != null)
+            {
+                foreach (KeyValuePair<string, bool> pair in nameMaps)
+                {
+                    if (pair.Key != null)
+                    {
+                        MenuItem mi = new MenuItem(pair.Key, OnContextMenuClick);
+                        mi.RadioCheck =true;
+                        mi.Checked = pair.Value;
+                        if (pair.Value)
+                            checkAndResetOthers(mi);
+                        this.MenuItems.Add(mi);
+                    }
+                }
+            }
+            this.Popup += OnPopUpNote;
+            this.Collapse += OnCollapseNote;
+        }
+
 
         private void OnCollapseNote(object sender, EventArgs e)
         {
@@ -26,48 +49,69 @@ namespace DCMControlLib.Pop
         {
             this.isShown = true;
         }
-        public OptionalContextMenu(Dictionary<string,bool> nameMaps)
-            : base()
-        {
-            if (nameMaps != null)
-            {
-                foreach (KeyValuePair<string, bool> pair in nameMaps)
-                {
-                    if (pair.Key != null)
-                    {
-                        MenuItem mi = new MenuItem(pair.Key, OnContextMenuClick);
-                        mi.Checked = pair.Value;
-                        this.MenuItems.Add(mi);
-                    }
-                }
-            }
-        }
         private void OnContextMenuClick(object sender, EventArgs e)
         {
             if (sender != null)
             {
                 MenuItem mi = sender as MenuItem;
                 mi.Checked = !mi.Checked;
+                if (mi.Checked)
+                {
+                    checkAndResetOthers(mi);
+                }
                 if(OptionMenuChanged!=null)
                     OptionMenuChanged(mi, new MenuItemEventArgs(mi));
             }
         }
-        public void addMenu(string name,bool isChoosed)
+        public void addMenu(string name,bool isChoosed=false)
         {
             MenuItem mi = new MenuItem(name, OnContextMenuClick);
+            mi.RadioCheck = true;
             mi.Checked = isChoosed;
+            if (mi.Checked)
+            {
+                checkAndResetOthers(mi);
+            }
             this.MenuItems.Add(mi);
         }
-        public Dictionary<string, bool> getOptionNameMaps()
+        public string getSelectedNameMap()
         {
-            Dictionary<string, bool> nameMaps = new Dictionary<string, bool>();
             foreach (MenuItem mi in this.MenuItems)
             {
-                nameMaps[mi.Text] = mi.Checked;
+                if (mi.Checked)
+                    return mi.Text;
             }
-            return nameMaps;
+            return null;
         }
 
+        private void checkAndResetOthers(MenuItem specificItem)
+        {
+            foreach (MenuItem mi in this.MenuItems)
+            {
+                if (mi != specificItem)
+                {
+                    mi.Checked = false;
+                }
+                else
+                {
+                    mi.Checked = true;
+                }
+            }
+        }
+        public void checkAndResetOthers(string specificItem)
+        {
+            foreach (MenuItem mi in this.MenuItems)
+            {
+                if (!mi.Text.Equals(specificItem))
+                {
+                    mi.Checked = false;
+                }
+                else
+                {
+                    mi.Checked = true;
+                }
+            }
+        }
         internal void clear()
         {
             this.MenuItems.Clear();
@@ -93,4 +137,5 @@ namespace DCMControlLib.Pop
         private volatile bool isShown = false;
 
     }
+    
 }

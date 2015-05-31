@@ -65,10 +65,14 @@
     <Compile Include="BaseItem\DCMTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Pop\MenuItemEventArgs.cs" />
     <Compile Include="Pop\OptionalContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Pop\PoperContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pop\SingleOptionalContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="refer\DCMComboBox.cs">
