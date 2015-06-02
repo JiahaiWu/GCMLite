@@ -890,9 +890,37 @@ namespace IDCM.VModule.GCM
                 }
             }
         }
+        /// <summary>
+        /// 登录取消事件处理方法
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_cancel_Click(object sender, EventArgs e)
         {
-            this.Select(true, false);
+            //if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+            //{
+            //    ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+            //    {
+            //        gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+            //        gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+            //    }));
+            //    notifyOpConditions(OpConditionType.Local_View);
+            //}
+            //else
+            //    showGCMDataDlg();
+            /////////////////////////////////////////////////
+            //if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
+            //{
+            //    ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
+            //    if (gtcache.RememberLogin && gcmServManager.Password != null)
+            //    {
+            //        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, Base64DESEncrypt.CreateInstance(gcmServManager.UserName).Encrypt(gcmServManager.Password), SysConstants.defaultCfgPath);
+            //    }
+            //    else
+            //    {
+            //        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, "", SysConstants.defaultCfgPath);
+            //    }
+            //}
         }
 
         private void pictureBox_Signhelp_Click(object sender, EventArgs e)
