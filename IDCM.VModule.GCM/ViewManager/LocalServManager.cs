@@ -33,6 +33,19 @@ namespace IDCM.ViewManager
         #endregion
 
         #region Methods
+
+        internal void addNewRow()
+        {
+            Dictionary<string, string> mapvalues = new Dictionary<string, string>();
+            foreach (CustomColDef ccd in CustomColDefGetter.getCustomTableDef())
+            {
+                mapvalues[ccd.Attr] = ccd.DefaultVal;
+            }
+            lock (ctcache.GSyncRoot)
+            {
+                ctcache.addRow(mapvalues);
+            }
+        }
         /// <summary>
         /// 导入数据文档
         /// </summary>
@@ -140,7 +153,6 @@ namespace IDCM.ViewManager
         }
         internal void syncKeyCellValue(DataGridViewRow dgvr)
         {
-            ctcache.syncKeyCellValue(dgvr);
             dgvr.Tag = null;
         }
         /// <summary>
@@ -235,6 +247,7 @@ namespace IDCM.ViewManager
         private CTableCache ctcache = null;
         private string lastIOPath = null;
         #endregion
+
 
     }
 }

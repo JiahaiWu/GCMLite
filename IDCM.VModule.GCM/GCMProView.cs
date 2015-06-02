@@ -259,7 +259,7 @@ namespace IDCM.VModule.GCM
 
         public void addLocalDataRow()
         {
-            dcmDataGridView_local.Rows.Add();
+            localServManager.addNewRow();
         }
 
         public void delLocalDataRow()
@@ -270,10 +270,21 @@ namespace IDCM.VModule.GCM
                 {
                     localServManager.removeRow(dgvr);
                 }
-                
-            }else if (dcmDataGridView_local.CurrentRow != null)
+
+            }
+            else if (dcmDataGridView_local.CurrentRow != null)
             {
                 localServManager.removeRow(dcmDataGridView_local.CurrentRow);
+            }
+            else
+            {
+                if (this.dcmDataGridView_local.SelectedCells != null)
+                {
+                    foreach (DataGridViewCell dgvc in this.dcmDataGridView_local.SelectedCells)
+                    {
+                        dgvc.Value = dgvc.DefaultNewRowValue;
+                    }
+                }
             }
         }
 
@@ -600,43 +611,47 @@ namespace IDCM.VModule.GCM
             try
             {
                 string s = Clipboard.GetText();
-                string[] lines = s.Split('\n');
-                int iFail = 0, iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
+                string[] lines = s.Split(new char[] { '\n','\r'});
+                int iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
                 int iCol = this.dcmDataGridView_local.CurrentCell.ColumnIndex;
                 DataGridViewCell oCell;
                 foreach (string line in lines)
                 {
-                    if (iRow < this.dcmDataGridView_local.RowCount && line.Length > 0)
+                    if (line.Length > 0)
                     {
-                        string[] sCells = line.Split('\t');
-                        for (int i = 0; i < sCells.GetLength(0); ++i)
+                        if (iRow == dcmDataGridView_local.RowCount)
                         {
-                            if (iCol + i < this.dcmDataGridView_local.ColumnCount)
+                            if ("true".Equals(ConfigurationManager.AppSettings[SysConstants.AutoRowForPaste], StringComparison.CurrentCultureIgnoreCase))
                             {
-                                oCell = this.dcmDataGridView_local[iCol + i, iRow];
-                                if (!oCell.ReadOnly)
-                                {
-                                    if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
-                                    {
-                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
-                                        oCell.Style.BackColor = Color.Tomato;
-                                    }
-                                    else
-                                        iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
-                                }
+                                localServManager.addNewRow();
                             }
                             else
-                            { break; }
+                                break;
+                        }
+                        if (iRow < dcmDataGridView_local.RowCount)
+                        {
+                            string[] sCells = line.Split('\t');
+                            DataGridViewRow dgvr = this.dcmDataGridView_local.Rows[iRow];
+                            oCell = dgvr.Cells[iCol];
+                            for (int i = 0; i < sCells.Length; i++)
+                            {
+                                if (iCol + i < this.dcmDataGridView_local.ColumnCount)
+                                {
+                                    while (oCell.Visible == false && oCell.ColumnIndex + 1 < this.dcmDataGridView_local.ColumnCount)
+                                    {
+                                        oCell = dgvr.Cells[oCell.ColumnIndex + 1];
+                                    }
+                                    if (oCell!=null && !oCell.ReadOnly)
+                                    {
+                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
+                                        if (oCell.ColumnIndex + 1 < this.dcmDataGridView_local.ColumnCount)
+                                            oCell = dgvr.Cells[oCell.ColumnIndex + 1];
+                                    }
+                                }
+                            }
                         }
                         iRow++;
                     }
-                    else
-                    { break; }
-                    /////////////////////////////////////////////////////////////////////////////
-                    //if (iFail > 0)
-                    //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
-                    //@Deprecated
-                    /////////////////////////////////////////////////////////////////////////////
                 }
             }
             catch (FormatException)
@@ -655,7 +670,7 @@ namespace IDCM.VModule.GCM
             if (e.Control && e.KeyCode == Keys.Insert)
             {
                 int iRow = 0;
-                if (this.dcmDataGridView_local.CurrentCell != null)
+                if (this.dcmDataGridView_local.CurrentCell == null)
                 {
                     iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
                     if (iRow < 0)
@@ -665,9 +680,19 @@ namespace IDCM.VModule.GCM
                 }
                 else
                 {
-                    iRow = this.dcmDataGridView_local.RowCount;
+                    iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
                 }
                 this.dcmDataGridView_local.Rows.Insert(iRow, 1);
+            }
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (this.dcmDataGridView_local.SelectedCells != null)
+                {
+                    foreach (DataGridViewCell dgvc in this.dcmDataGridView_local.SelectedCells)
+                    {
+                        dgvc.Value = dgvc.DefaultNewRowValue;
+                    }
+                }
             }
         }
 
@@ -724,13 +749,10 @@ namespace IDCM.VModule.GCM
         }
         private void OnGCMItemDetailRender(object msgTag, params object[] vals)
         {
-            ControlAsyncUtil.SyncInvoke(dcmDataGridView_gcm, new ControlAsyncUtil.InvokeHandler(delegate()
-            {
-                int index = 0;
-                if (vals != null && vals.Length > 0 && vals[0].GetType().Equals(typeof(int)))
-                    index = (int)vals[0];
-                gcmServManager.showGCMDataDetail(index);
-            }));
+            int index = 0;
+            if (vals != null && vals.Length > 0 && vals[0].GetType().Equals(typeof(int)))
+                index = (int)vals[0];
+            gcmServManager.showGCMDataDetail(index);
         }
         private void OnGCMUserSigned(object msgTag, params object[] vals)
         {

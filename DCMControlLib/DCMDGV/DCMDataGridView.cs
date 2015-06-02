@@ -116,52 +116,55 @@ namespace DCMControlLib
         /// </summary>
         private void OnPasteClick(object sender, EventArgs e)
         {
-            try
+            if (_pasteAble)
             {
-                string s = Clipboard.GetText();
-                string[] lines = s.Split('\n');
-                int iFail = 0, iRow = this.CurrentCell.RowIndex;
-                int iCol = this.CurrentCell.ColumnIndex;
-                DataGridViewCell oCell;
-                foreach (string line in lines)
+                try
                 {
-                    if (iRow < this.RowCount && line.Length > 0)
+                    string s = Clipboard.GetText();
+                    string[] lines = s.Split('\n');
+                    int iFail = 0, iRow = this.CurrentCell.RowIndex;
+                    int iCol = this.CurrentCell.ColumnIndex;
+                    DataGridViewCell oCell;
+                    foreach (string line in lines)
                     {
-                        string[] sCells = line.Split('\t');
-                        for (int i = 0; i < sCells.GetLength(0); ++i)
+                        if (iRow < this.RowCount && line.Length > 0)
                         {
-                            if (iCol + i < this.ColumnCount)
+                            string[] sCells = line.Split('\t');
+                            for (int i = 0; i < sCells.GetLength(0); i++)
                             {
-                                oCell = this[iCol + i, iRow];
-                                if (!oCell.ReadOnly)
+                                if (iCol + i < this.ColumnCount)
                                 {
-                                    if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
+                                    oCell = this[iCol + i, iRow];
+                                    if (!oCell.ReadOnly)
                                     {
-                                        oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
-                                        oCell.Style.BackColor = Color.Tomato;
+                                        if (oCell.Value == null || oCell.Value.ToString() != sCells[i])
+                                        {
+                                            oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
+                                            oCell.Style.BackColor = Color.Tomato;
+                                        }
+                                        else
+                                            iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
                                     }
-                                    else
-                                        iFail++;//only traps a fail if the data has changed and you are pasting into a read only cell
                                 }
+                                else
+                                { break; }
                             }
-                            else
-                            { break; }
+                            iRow++;
                         }
-                        iRow++;
+                        else
+                        { break; }
+                        //////////////////////////////////////////////////////////////////
+                        //if (iFail > 0)
+                        //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
+                        //@Deprecated
+                        ///////////////////////////////////////////////////////////////////
                     }
-                    else
-                    { break; }
-                    //////////////////////////////////////////////////////////////////
-                    //if (iFail > 0)
-                    //    MessageBox.Show(string.Format("{0} updates failed due to read only column setting", iFail));
-                    //@Deprecated
-                    ///////////////////////////////////////////////////////////////////
                 }
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("The data you pasted is in the wrong format for the cell");
-                return;
+                catch (FormatException)
+                {
+                    MessageBox.Show("The data you pasted is in the wrong format for the cell");
+                    return;
+                }
             }
         }
 
@@ -185,11 +188,13 @@ namespace DCMControlLib
             }
             if(e.KeyCode==Keys.Tab)
             {
-                trySwitchNextCell();
+                DataGridViewCell oCell = tryGetNextCell();
+                if(oCell!=null)
+                    this.CurrentCell = oCell;
             }
         }
 
-        private void trySwitchNextCell()
+        protected DataGridViewCell tryGetNextCell()
         {
             if (this.CurrentCell != null)
             {
@@ -204,8 +209,7 @@ namespace DCMControlLib
                         {
                             this.EndEdit();
                         }
-                        this.CurrentCell = oCell;
-                        break;
+                        return oCell;
                     }
                     else
                         iCol++;
@@ -223,14 +227,14 @@ namespace DCMControlLib
                             {
                                 this.EndEdit();
                             }
-                            this.CurrentCell = oCell;
-                            break;
+                            return oCell;
                         }
                         else
                             iCol++;
                     }
                 }
             }
+            return null;
         }
         private void OnColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -252,6 +256,8 @@ namespace DCMControlLib
         }
         private void OnCellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if(e.ColumnIndex>-1 && e.RowIndex>-1)
+                this.CurrentCell=this[e.ColumnIndex,e.RowIndex];
             if (e.Button == MouseButtons.Right)
             {
                 if (_pasteAble && cellCopyMenu!=null)
