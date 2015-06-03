@@ -762,8 +762,9 @@ namespace IDCM.VModule.GCM
                 {
                     ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
                     {
-                        gcmTabControl_GCM.HideTab(tabPageEx_GCM);
                         gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                        gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
+                        gcmTabControl_GCM.HideTab(tabPageEx_GCM);
                     }));
                     notifyOpConditions(OpConditionType.Local_View);
                 }else
@@ -897,30 +898,22 @@ namespace IDCM.VModule.GCM
         /// <param name="e"></param>
         private void button_cancel_Click(object sender, EventArgs e)
         {
-            //if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
-            //{
-            //    ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
-            //    {
-            //        gcmTabControl_GCM.HideTab(tabPageEx_GCM);
-            //        gcmTabControl_GCM.ShowTab(tabPageEx_Local);
-            //    }));
-            //    notifyOpConditions(OpConditionType.Local_View);
-            //}
-            //else
-            //    showGCMDataDlg();
-            /////////////////////////////////////////////////
-            //if (gcmServManager.UserName != null && gcmServManager.UserName.Length > 0)
-            //{
-            //    ConfigurationHelper.SetAppConfig(SysConstants.LUID, gcmServManager.UserName, SysConstants.defaultCfgPath);
-            //    if (gtcache.RememberLogin && gcmServManager.Password != null)
-            //    {
-            //        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, Base64DESEncrypt.CreateInstance(gcmServManager.UserName).Encrypt(gcmServManager.Password), SysConstants.defaultCfgPath);
-            //    }
-            //    else
-            //    {
-            //        ConfigurationHelper.SetAppConfig(SysConstants.LPWD, "", SysConstants.defaultCfgPath);
-            //    }
-            //}
+            if ("Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
+            {
+                ControlAsyncUtil.SyncInvoke(this, new ControlAsyncUtil.InvokeHandler(delegate()
+                {
+                    gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                    gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
+                    gcmTabControl_GCM.HideTab(tabPageEx_GCM);
+                }));
+                notifyOpConditions(OpConditionType.Local_View);
+            }
+            else
+            {
+                gcmTabControl_GCM.ShowTab(tabPageEx_Local);
+                gcmTabControl_GCM.SelectedIndex = tabPageEx_Local.TabIndex;
+                notifyOpConditions(OpConditionType.Local_View);
+            }
         }
 
         private void pictureBox_Signhelp_Click(object sender, EventArgs e)
