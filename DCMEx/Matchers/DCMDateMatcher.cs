@@ -9,7 +9,7 @@ namespace DCMEx.Matchers
     class DCMDateMatcher : IMatcher
     {
         private string formatPattern = null;
-
+        public string groupFetchTag = null;
         List<string> groups = new List<string>();
 
         public DCMDateMatcher(char[] expChars, int from, int end)
@@ -22,9 +22,14 @@ namespace DCMEx.Matchers
             this.groups.Add(chars);
             return DateTime.TryParse(chars, out dt);
         }
+        public void setGroupFetchTag(string groupFetchTag)
+        {
+            this.groupFetchTag = groupFetchTag;
+        }
         public string[] getGroups()
         {
             return groups.ToArray();
         }
+
     }
 }

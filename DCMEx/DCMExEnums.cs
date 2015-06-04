@@ -34,6 +34,8 @@ namespace DCMEx
         DATE = 2,
         NUMBER = 3,
         FILE = 4,
+        URI = 5,
+        SIZE = 6
     }
     /// <summary>
     /// 定界符
@@ -57,8 +59,8 @@ namespace DCMEx
     /// <summary>
     /// 分组获取符
     /// </summary>
-    enum GroupFetchTag
+    enum GroupTag
     {
-        GroupTag = '$'
+        FetchTag = '$'
     }
 }

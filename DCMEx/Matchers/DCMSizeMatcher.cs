@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace DCMEx.Matchers
 {
-    class DCMNumberMatcher : IMatcher
+    class DCMSizeMatcher : IMatcher
     {
         private string formatPattern = null;
         public string groupFetchTag = null;
         List<string> groups = new List<string>();
 
-        public DCMNumberMatcher(char[] expChars, int from, int end)
+        public DCMSizeMatcher(char[] expChars, int from, int end)
         {
             string formatPattern = new String(expChars, from, end - from);
         }
         public bool isMatch(string chars, params string[] groups)
         {
-            Decimal decial;
-            this.groups.Add(chars);
-            return Decimal.TryParse(chars, out decial);
+            return true;
         }
         public void setGroupFetchTag(string groupFetchTag)
         {
