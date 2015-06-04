@@ -348,6 +348,7 @@ namespace DCMEx.Matchers
                                 {
                                     beg = newBeg;
                                     symbol = LogicSymbol.OR;
+                                    return true;
                                 }
                             }
                         }
@@ -362,6 +363,7 @@ namespace DCMEx.Matchers
                                 {
                                     beg = newBeg;
                                     symbol = LogicSymbol.NOT;
+                                    return true;
                                 }
                             }
                         }

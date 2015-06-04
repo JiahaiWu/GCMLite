@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DCMEx
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class DCMEx
     {
         /// <summary>

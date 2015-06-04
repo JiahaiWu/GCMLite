@@ -144,7 +144,7 @@
   <data name="Column Name" xml:space="preserve">
     <value>Column Name</value>
   </data>
-  <data name="Column restrictions updated" xml:space="preserve">
+  <data name="Column restrictions updated." xml:space="preserve">
     <value>Column restrictions updated</value>
   </data>
   <data name="Configuration" xml:space="preserve">
@@ -448,6 +448,9 @@
     <value>Publish to GCM</value>
   </data>
   <data name="Quick Search" xml:space="preserve">
+    <value>Quick Search</value>
+  </data>
+  <data name="Quick_Search" xml:space="preserve">
     <value>Quick Search</value>
   </data>
 </root>

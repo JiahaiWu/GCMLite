@@ -484,7 +484,7 @@ namespace IDCM
         {
             if (this.toolStripTextBox_search.Text.Length < 1)
             {
-                this.toolStripTextBox_search.Text = "Quick Search";
+                this.toolStripTextBox_search.Text = GlobalTextRes.Text("Quick_Search");
                 this.toolStripTextBox_search.ForeColor = Color.DarkGray;
             }
         }
