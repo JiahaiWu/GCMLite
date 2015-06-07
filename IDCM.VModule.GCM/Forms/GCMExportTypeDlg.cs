@@ -18,9 +18,16 @@ namespace IDCM.Forms
         
         public GCMExportTypeDlg(string fpath = null)
         {
+            InitializeComponent();
             if (fpath != null)
                 lastFilePath = fpath;
-            InitializeComponent();
+            this.radioButton_excel.Checked = lastOptionValue.Equals(ExportType.Excel) ? radioButton_excel.Checked = true :
+                lastOptionValue.Equals(ExportType.JSONList) ? radioButton_json.Checked = true :
+                lastOptionValue.Equals(ExportType.XML) ? radioButton_xml.Checked = true :
+                lastOptionValue.Equals(ExportType.TSV) ? radioButton_tsv.Checked = true :
+                lastOptionValue.Equals(ExportType.CSV) ? radioButton_csv.Checked = true : radioButton_excel.Checked = true;
+            this.textBox_path.Text = LastFilePath;
+
             this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
             this.button_confirm.Text = IDCM.Base.GlobalTextRes.Text("Confirm");
             this.export_strain_tree_checkBox.Text = IDCM.Base.GlobalTextRes.Text("export strain tree");
@@ -46,17 +53,31 @@ namespace IDCM.Forms
                 string fpath = fi.FullName;
                 if (Directory.Exists(fpath))
                 {
-                    fpath = Path.GetDirectoryName(fpath) + "\\" + CUIDGenerator.getUID(CUIDGenerator.Radix_32) + suffix;
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available, can not be a directory."));
+                    //fpath = Path.GetDirectoryName(fpath) + "\\" + CUIDGenerator.getUID(CUIDGenerator.Radix_32) + suffix;
+                    return;
                 }
                 if (Path.GetExtension(fpath) == "")
                 {
                     fpath += suffix;
                 }
-                textBox_path.Text = fpath;
-                lastFilePath = fpath;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                this.Dispose();
+                if (FileUtil.isFileWriteAble(fpath))
+                {
+                    textBox_path.Text = fpath;
+                    lastFilePath = fpath;
+                    lastOptionValue = radioButton_excel.Checked ? ExportType.Excel :
+                        radioButton_json.Checked ? ExportType.JSONList :
+                        radioButton_tsv.Checked ? ExportType.TSV :
+                        radioButton_xml.Checked ? ExportType.XML :
+                        radioButton_csv.Checked ? ExportType.CSV : ExportType.Excel;
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    this.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be writeable."));
+                }
             }
             else
             {
@@ -140,7 +161,7 @@ namespace IDCM.Forms
         #region Methods
 
         private static ExportType lastOptionValue = ExportType.Excel;
-        private static string lastFilePath = "C:\\idcm_export";
+        private static string lastFilePath = "C:\\idcm_export.xlsx";
         private static bool exportStainTree = false;
         #endregion
 

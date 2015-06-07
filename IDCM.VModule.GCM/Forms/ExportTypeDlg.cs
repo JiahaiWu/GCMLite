@@ -18,9 +18,22 @@ namespace IDCM.Forms
 
         public ExportTypeDlg(string fpath=null)
         {
+            InitializeComponent();
             if (fpath != null)
                 lastFilePath = fpath;
-            InitializeComponent();
+            this.radioButton_excel.Checked = lastOptionValue.Equals(ExportType.Excel)?radioButton_excel.Checked=true:
+                lastOptionValue.Equals(ExportType.JSONList)?radioButton_json.Checked=true:
+                lastOptionValue.Equals(ExportType.XML)?radioButton_xml.Checked=true:
+                lastOptionValue.Equals(ExportType.TSV)?radioButton_tsv.Checked=true:
+                lastOptionValue.Equals(ExportType.CSV)?radioButton_csv.Checked=true:radioButton_excel.Checked=true;
+            this.textBox_path.Text = LastFilePath;
+
+            this.radioButton_excel.CheckedChanged+=radioButton_excel_CheckedChanged;
+            this.radioButton_json.CheckedChanged += radioButton_json_CheckedChanged;
+            this.radioButton_tsv.CheckedChanged+=radioButton_tsv_CheckedChanged;
+            this.radioButton_xml.CheckedChanged+=radioButton_xml_CheckedChanged;
+            this.radioButton_csv.CheckedChanged += radioButton_csv_CheckedChanged;
+            
             this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
             this.button_confirm.Text = IDCM.Base.GlobalTextRes.Text("Confirm");
             this.label1.Text = IDCM.Base.GlobalTextRes.Text("SavePath")+":";
@@ -36,6 +49,46 @@ namespace IDCM.Forms
             this.Close();
             this.Dispose();
         }
+
+        private void radioButton_tsv_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton_tsv.Checked)
+            {
+                this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+            }
+        }
+
+        private void radioButton_xml_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton_xml.Checked)
+            {
+                this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+            }
+        }
+
+        void radioButton_csv_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton_csv.Checked)
+            {
+                this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+            }
+        }
+
+        private void radioButton_excel_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton_excel.Checked)
+            {
+                this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+            }
+        }
+
+        void radioButton_json_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton_json.Checked)
+            {
+                this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+            }
+        }
         private void button_confirm_Click(object sender, EventArgs e)
         {
             string suffix = getDefaultSuffix();
@@ -45,17 +98,31 @@ namespace IDCM.Forms
                 string fpath = fi.FullName;
                 if (Directory.Exists(fpath))
                 {
-                    fpath = Path.GetDirectoryName(fpath) + "\\" + CUIDGenerator.getUID(CUIDGenerator.Radix_32) + suffix;
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available, can not be a directory."));
+                    //fpath = Path.GetDirectoryName(fpath) + "\\" + CUIDGenerator.getUID(CUIDGenerator.Radix_32) + suffix;
+                    return;
                 }
                 if (Path.GetExtension(fpath) == "")
                 {
                     fpath += suffix;
                 }
-                textBox_path.Text = fpath;
-                lastFilePath = fpath;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                this.Dispose();
+                if (FileUtil.isFileWriteAble(fpath))
+                {
+                    textBox_path.Text = fpath;
+                    lastFilePath = fpath;
+                    lastOptionValue = radioButton_excel.Checked ? ExportType.Excel :
+                        radioButton_json.Checked ? ExportType.JSONList :
+                        radioButton_tsv.Checked ? ExportType.TSV :
+                        radioButton_xml.Checked ? ExportType.XML :
+                        radioButton_csv.Checked ? ExportType.CSV : ExportType.Excel;
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    this.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be writeable."));
+                }
             }
             else
             {
@@ -102,22 +169,22 @@ namespace IDCM.Forms
                 lastOptionValue = ExportType.JSONList;
                 suffix = ".jso";
             }
-            if (radioButton_excel.Checked)
+            else if (radioButton_excel.Checked)
             {
                 lastOptionValue = ExportType.Excel;
                 suffix = ".xlsx";
             }
-            if (radioButton_csv.Checked)
+            else if (radioButton_csv.Checked)
             {
                 lastOptionValue = ExportType.CSV;
                 suffix = ".csv";
             }
-            if (radioButton_tsv.Checked)
+            else if (radioButton_tsv.Checked)
             {
                 lastOptionValue = ExportType.TSV;
                 suffix = ".tsv";
             }
-            if (radioButton_xml.Checked)
+            else if (radioButton_xml.Checked)
             {
                 lastOptionValue = ExportType.XML;
                 suffix = ".xml";
@@ -129,7 +196,7 @@ namespace IDCM.Forms
         #region Members
 
         private static ExportType lastOptionValue = ExportType.Excel;
-        private static string lastFilePath = "C:\\idcm_export";
+        private static string lastFilePath = "C:\\idcm_export.xlsx";
         #endregion
 
         #region Property

@@ -85,7 +85,7 @@ namespace IDCM.ViewManager
         public void exportData(DataGridView dgv)
         {
             int[] selectedRowIdxs = fetchSelectRowIdxs(dgv);
-            ExportTypeDlg exportDlg = new ExportTypeDlg();
+            ExportTypeDlg exportDlg = new ExportTypeDlg(lastIOPath);
             if (exportDlg.ShowDialog() == DialogResult.OK)
             {
                 try
