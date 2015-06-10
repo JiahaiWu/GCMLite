@@ -52,10 +52,13 @@ namespace IDCM.DataTransfer
                         foreach (XmlNode attrNode in strainNode.ChildNodes)//循环的是strain -> strainAttr
                         {
                             string xmlAttrName = attrNode.Name;
-                            string dbName = dataMapping[xmlAttrName];
-                            string xmlAttrValue = attrNode.InnerText;
-                            if (dbName != null && xmlAttrValue != null && xmlAttrValue.Length > 0)
-                                mapvalues[dbName] = xmlAttrValue;
+                            string dbName = null;
+                            if (dataMapping.TryGetValue(xmlAttrName, out dbName))
+                            {
+                                string xmlAttrValue = attrNode.InnerText;
+                                if (dbName != null && xmlAttrValue != null && xmlAttrValue.Length > 0)
+                                    mapvalues[dbName] = xmlAttrValue;
+                            }
                         }
                         ctcache.addRow(mapvalues);
                     }

@@ -148,17 +148,31 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataPublished);
+            
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
                 log.Info(IDCM.Base.GlobalTextRes.Text("Data publish failed")+"!");
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ " + error.Message, DCMMsgType.Alert);
             }
             else
             {
+                if (args.Count > 1)
+                {
+                    bool res = (bool)args[0];
+                    string errorInfo = args[1].ToString();
+                    if (!res)
+                    {
+                        log.Error(errorInfo);
+                        log.Info(IDCM.Base.GlobalTextRes.Text("Data publish failed") + "!");
+                        DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export and publish the XML document for GCM") + "！ " + errorInfo, DCMMsgType.Alert);
+                        return;
+                    }
+                }
                 log.Info(IDCM.Base.GlobalTextRes.Text("Data publish success") + ".");
+                DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataPublished);
             }
         }
     }

@@ -137,13 +137,17 @@ namespace IDCM.DataTransfer
         private static string convertToText(Dictionary<string, int> customAttrDBMapping, Dictionary<int,string> row, string spliter)
         {
             StringBuilder strbuilder = new StringBuilder();
+            int cursor=0;
             foreach (KeyValuePair<string, int> kvpair in customAttrDBMapping)
             {
                 string value = null;
                 if (row.TryGetValue(kvpair.Value, out value))
                 {
-                    strbuilder.Append(value).Append(spliter);
+                    strbuilder.Append(value);
                 }
+                ++cursor;
+                if(cursor<customAttrDBMapping.Count)
+                    strbuilder.Append(spliter);
             }
             return strbuilder.ToString();
         }

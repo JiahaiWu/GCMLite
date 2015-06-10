@@ -20,8 +20,6 @@ namespace IDCM.DataTransfer
 
         /// <summary>
         /// 解析指定的Excel文档，执行数据转换.
-        /// 本方法调用对类功能予以线程包装，用于异步调用如何方法。
-        /// 在本线程调用下的控件调用，需通过UI控件的Invoke/BegainInvoke方法更新。
         /// </summary>
         /// <param name="fpath"></param>
         /// <returns>返回请求流程是否执行完成</returns>

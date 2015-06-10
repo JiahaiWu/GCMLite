@@ -31,6 +31,10 @@ namespace IDCM.BGHandler
             {
                 DCMPublisher.noteJobProgress(0);
                 res = MDIDataImporter.parseMDIData(ctcache, mdiPath);
+                if (res)
+                {
+                    DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
+                }
             }
             catch (Exception ex)
             {
@@ -48,12 +52,12 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + error.Message, DCMMsgType.Alert);
                 return;
             }
         }

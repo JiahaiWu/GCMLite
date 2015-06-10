@@ -453,4 +453,7 @@
   <data name="Quick_Search" xml:space="preserve">
     <value>Quick Search</value>
   </data>
+  <data name="Data filter success" xml:space="preserve">
+    <value>Data filter success</value>
+  </data>
 </root>

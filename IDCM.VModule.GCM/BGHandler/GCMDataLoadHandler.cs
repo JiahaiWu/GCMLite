@@ -32,6 +32,10 @@ namespace IDCM.BGHandler
             {
                 DCMPublisher.noteJobProgress(0);
                 res = GCMItemsLoader.loadOverViewData(gtcache, authInfo);
+                if (res)
+                {
+                    DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
+                }
             }
             catch (Exception ex)
             {
@@ -48,7 +52,6 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
             if (canceled)
                 return;
             if (error != null)

@@ -47,6 +47,8 @@ namespace IDCM.BGHandler
                     res = LocalDataChecker.tryRecover(ctcache, selectedRows);
                 else
                     res = LocalDataChecker.tryRecover(ctcache);
+                if(res)
+                    DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataChecked);
             }
             catch (Exception ex)
             {
@@ -63,7 +65,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataChecked);
+            
             if (canceled)
                 return;
             if (error != null)

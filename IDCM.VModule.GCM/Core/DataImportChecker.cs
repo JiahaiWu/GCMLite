@@ -13,6 +13,7 @@ using IDCM.Base;
 using Newtonsoft.Json;
 using IDCM.Base.Utils;
 using IDCM.MsgDriver;
+using IDCM.Base.ComPO;
 
 namespace IDCM.Core
 {
@@ -101,15 +102,153 @@ namespace IDCM.Core
             }
             catch (Exception ex)
             {
-                log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ ", ex);
+                log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to check dump file") + "！ ", ex);
 #if DEBUG
-                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message + "\n" + ex.ToString(), DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to check dump file") + "！ " + ex.Message + "\n" + ex.ToString(), DCMMsgType.Alert);
 #else
-                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to import dump file") + "！ " + ex.Message, DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to check dump file") + "！ " + ex.Message, DCMMsgType.Alert);
 #endif
             }
             return false;
         }
+
+        internal static bool checkForTextImport(string fpath, ref Dictionary<string, string> dataMapping,ExportType txtType)
+        {
+            if (fpath == null || fpath.Length < 1)
+                return false;
+            string splitor="\t";
+            switch (txtType)
+            {
+                case ExportType.CSV:
+                    splitor = ",";
+                    break;
+                case ExportType.TSV:
+                    splitor = "\t";
+                    break;
+                default:
+                    DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Unspported file type for text import."), DCMMsgType.Alert);
+                    return false;
+            }
+            string fullPath = System.IO.Path.GetFullPath(fpath);
+            try
+            {
+                int cursor = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.Cursor));
+                int detectDepth = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.DetectDepth));
+                double GrowthFactor = Convert.ToDouble(ConfigurationManager.AppSettings.Get(SysConstants.GrowthFactor));
+                List<string> attrNameList = new List<string>();
+                using (FileStream fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader sr = new StreamReader(fs, SysConstants.defaultEncoding, true))
+                    {
+                        int attrListCount = 0;
+                        string line = sr.ReadLine();
+                        while (line != null)
+                        {
+                            if (line.Length > 1)
+                            {
+                                if (cursor > detectDepth)
+                                    break;
+                                string[] drow = line.Split(new string[] { splitor }, StringSplitOptions.None);
+                                if (attrListCount < 1)
+                                {
+                                    attrNameList.AddRange(drow);
+                                    attrListCount = drow.Length;
+                                    detectDepth = (int)(detectDepth * GrowthFactor);
+                                }
+                                else if (attrListCount < drow.Length)//如果这个节点下有新属性出现，使探测深度增加2倍
+                                {
+                                    detectDepth = (int)(detectDepth * GrowthFactor);
+                                }
+                                cursor++;
+                            }
+                            if (sr.EndOfStream)
+                                break;
+                            else
+                                line = sr.ReadLine();
+                        }
+                    }
+                }
+                using (AttrMapOptionDlg amoDlg = new AttrMapOptionDlg())
+                {
+                    amoDlg.BringToFront();
+                    amoDlg.setInitCols(attrNameList, Core.CustomColDefGetter.getCustomCols(), ref dataMapping);
+                    amoDlg.ShowDialog();
+                    ///////////////////////////////////////////
+                    if (amoDlg.DialogResult == DialogResult.OK)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to check text file") + "！ ", ex);
+#if DEBUG
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to check text file") + "！ " + ex.Message + "\n" + ex.ToString(), DCMMsgType.Alert);
+#else
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to check text file") + "！ " + ex.Message, DCMMsgType.Alert);
+#endif
+            }
+            return false;
+        }
+
+        internal static bool checkForJSOImport(string fpath, ref Dictionary<string, string> dataMapping)
+        {
+            if (fpath == null || fpath.Length < 1)
+                return false;
+            string fullPath = System.IO.Path.GetFullPath(fpath);
+            try
+            {
+                int cursor = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.Cursor));
+                int detectDepth = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.DetectDepth));
+                double GrowthFactor = Convert.ToDouble(ConfigurationManager.AppSettings.Get(SysConstants.GrowthFactor));
+                List<string> attrNameList = new List<string>();
+                using (FileStream fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader sr = new StreamReader(fs, SysConstants.defaultEncoding, true))
+                    {
+                        string line = sr.ReadLine();
+                        while (line != null)
+                        {
+                            if (line.Length > 1)
+                            {
+                                if (cursor > detectDepth)
+                                    break;
+                                Dictionary<string, string> drow = JsonConvert.DeserializeObject<Dictionary<string, string>>(line);
+                                if (mergeAttrList(attrNameList, drow))//如果这个节点下有新属性出现，使探测深度增加2倍
+                                    detectDepth = (int)(detectDepth * GrowthFactor);
+                                cursor++;
+                            }
+                            if (sr.EndOfStream)
+                                break;
+                            else
+                                line = sr.ReadLine();
+                        }
+                    }
+                }
+                using (AttrMapOptionDlg amoDlg = new AttrMapOptionDlg())
+                {
+                    amoDlg.BringToFront();
+                    amoDlg.setInitCols(attrNameList, Core.CustomColDefGetter.getCustomCols(), ref dataMapping);
+                    amoDlg.ShowDialog();
+                    ///////////////////////////////////////////
+                    if (amoDlg.DialogResult == DialogResult.OK)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.Error("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to check JSON list file") + "！ ", ex);
+#if DEBUG
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to check JSON list file") + "！ " + ex.Message + "\n" + ex.ToString(), DCMMsgType.Alert);
+#else
+                DCMPublisher.noteSimpleMsg("ERROR:" + IDCM.Base.GlobalTextRes.Text("Failed to check JSON list file") + "！ " + ex.Message, DCMMsgType.Alert);
+#endif
+            }
+            return false;
+        }
+
+
 
         private static bool fetchXMLMappingInfo(XmlDocument xDoc, ref Dictionary<string, string> dataMapping)
         {
@@ -197,8 +336,24 @@ namespace IDCM.Core
                 return true;
             return false;
         }
+        private static bool mergeAttrList(List<string> attrNameList, Dictionary<string, string> drow)
+        {
+            int startLeng = attrNameList.Count;
+            foreach (KeyValuePair<string, string> kv in drow)
+            {
+                if (!attrNameList.Contains(kv.Key))
+                    attrNameList.Add(kv.Key);
+            }
+            int endLeng = attrNameList.Count;
+            if (startLeng != endLeng)
+                return true;
+            return false;
+        }
+
         #endregion
 
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
+
     }
 }

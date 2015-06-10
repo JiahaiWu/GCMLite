@@ -75,6 +75,21 @@ namespace IDCM.ViewManager
                     eih = new MDIImportHandler(ctcache, fpath);
                 }
             }
+            if (fpath.ToLower().EndsWith(".tsv")|| fpath.ToLower().EndsWith(".csv"))
+            {
+                ExportType txtType=fpath.ToLower().EndsWith(".tsv") ? ExportType.TSV : ExportType.CSV;
+                if (DataImportChecker.checkForTextImport(fpath, ref dataMapping, txtType))
+                {
+                    eih = new TextImportHandler(ctcache, fpath, txtType, ref dataMapping);
+                }
+            }
+            if (fpath.ToLower().EndsWith(".jso"))
+            {
+                if (DataImportChecker.checkForJSOImport(fpath, ref dataMapping))
+                {
+                    eih = new JSONListImportHandler(ctcache, fpath, ref dataMapping);
+                }
+            }
             if(eih!=null)
                 BGWorkerInvoker.pushHandler(eih);
         }

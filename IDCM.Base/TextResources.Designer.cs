@@ -331,6 +331,15 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Data filter success 的本地化字符串。
+        /// </summary>
+        internal static string Data_filter_success {
+            get {
+                return ResourceManager.GetString("Data filter success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Data publish failed 的本地化字符串。
         /// </summary>
         internal static string Data_publish_failed {
