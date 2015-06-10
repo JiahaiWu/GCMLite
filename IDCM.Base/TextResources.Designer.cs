@@ -331,6 +331,15 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Data filter failed 的本地化字符串。
+        /// </summary>
+        internal static string Data_filter_failed {
+            get {
+                return ResourceManager.GetString("Data filter failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Data filter success 的本地化字符串。
         /// </summary>
         internal static string Data_filter_success {
@@ -475,11 +484,47 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Failed to check dump file 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_check_dump_file {
+            get {
+                return ResourceManager.GetString("Failed to check dump file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Failed to check JSON list file 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_check_JSON_list_file {
+            get {
+                return ResourceManager.GetString("Failed to check JSON list file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Failed to check text file 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_check_text_file {
+            get {
+                return ResourceManager.GetString("Failed to check text file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Failed to export and publish the XML document for GCM 的本地化字符串。
         /// </summary>
         internal static string Failed_to_export_and_publish_the_XML_document_for_GCM {
             get {
                 return ResourceManager.GetString("Failed to export and publish the XML document for GCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Failed to export Excel document 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_export_Excel_document {
+            get {
+                return ResourceManager.GetString("Failed to export Excel document", resourceCulture);
             }
         }
         
@@ -529,11 +574,38 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Failed to Import Excel document 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_Import_Excel_document {
+            get {
+                return ResourceManager.GetString("Failed to Import Excel document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Failed to import excel file 的本地化字符串。
         /// </summary>
         internal static string Failed_to_import_excel_file {
             get {
                 return ResourceManager.GetString("Failed to import excel file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Failed to import JSON list file 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_import_JSON_list_file {
+            get {
+                return ResourceManager.GetString("Failed to import JSON list file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Failed to import text file 的本地化字符串。
+        /// </summary>
+        internal static string Failed_to_import_text_file {
+            get {
+                return ResourceManager.GetString("Failed to import text file", resourceCulture);
             }
         }
         
@@ -619,6 +691,15 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 GCM Front Find 的本地化字符串。
+        /// </summary>
+        internal static string GCM_Front_Find {
+            get {
+                return ResourceManager.GetString("GCM Front Find", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 GCM Password 的本地化字符串。
         /// </summary>
         internal static string GCM_Password {
@@ -660,6 +741,24 @@ namespace IDCM.Base {
         internal static string Import {
             get {
                 return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Import failed 的本地化字符串。
+        /// </summary>
+        internal static string Import_failed {
+            get {
+                return ResourceManager.GetString("Import failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Import success 的本地化字符串。
+        /// </summary>
+        internal static string Import_success {
+            get {
+                return ResourceManager.GetString("Import success", resourceCulture);
             }
         }
         
@@ -822,6 +921,15 @@ namespace IDCM.Base {
         internal static string Open__Alt_O_ {
             get {
                 return ResourceManager.GetString("Open (Alt+O)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please Login before compare records to GCM. 的本地化字符串。
+        /// </summary>
+        internal static string Please_Login_before_compare_records_to_GCM_ {
+            get {
+                return ResourceManager.GetString("Please Login before compare records to GCM.", resourceCulture);
             }
         }
         
@@ -997,11 +1105,39 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 The save file path should be available, can not be a directory. 的本地化字符串。
+        /// </summary>
+        internal static string The_save_file_path_should_be_available__can_not_be_a_directory_ {
+            get {
+                return ResourceManager.GetString("The save file path should be available, can not be a directory.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The save file path should be writeable. 的本地化字符串。
+        /// </summary>
+        internal static string The_save_file_path_should_be_writeable_ {
+            get {
+                return ResourceManager.GetString("The save file path should be writeable.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 There are background tasks are executing, force quit or not 的本地化字符串。
         /// </summary>
         internal static string There_are_background_tasks_are_executing__force_quit_or_not {
             get {
                 return ResourceManager.GetString("There are background tasks are executing, force quit or not", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 There are background tasks are executing, the operation in this condition is unsafe, please retry the config later. 的本地化字符串。
+        /// </summary>
+        internal static string There_are_background_tasks_are_executing__the_operation_in_this_condition_is_unsafe__please_retry_the_config_later_ {
+            get {
+                return ResourceManager.GetString("There are background tasks are executing, the operation in this condition is unsa" +
+                        "fe, please retry the config later.", resourceCulture);
             }
         }
         
@@ -1024,11 +1160,30 @@ namespace IDCM.Base {
         }
         
         /// <summary>
+        ///   查找类似 Unspported file type for text import. 的本地化字符串。
+        /// </summary>
+        internal static string Unspported_file_type_for_text_import_ {
+            get {
+                return ResourceManager.GetString("Unspported file type for text import.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Unsupport export type 的本地化字符串。
         /// </summary>
         internal static string Unsupport_export_type {
             get {
                 return ResourceManager.GetString("Unsupport export type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Update local columns&apos; config, the application should restart, are you sure restart now? 的本地化字符串。
+        /// </summary>
+        internal static string Update_local_columns__config__the_application_should_restart__are_you_sure_restart_now_ {
+            get {
+                return ResourceManager.GetString("Update local columns\' config, the application should restart, are you sure restar" +
+                        "t now?", resourceCulture);
             }
         }
         

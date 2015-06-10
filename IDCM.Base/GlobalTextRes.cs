@@ -19,6 +19,11 @@ namespace IDCM.Base
             string itext= rm.GetString(text, ci);
             return itext==null || itext.Length <1 ? text:itext;
         }
+        public static string FindText(string text, CultureInfo ci)
+        {
+            string itext = rm.GetString(text, ci);
+            return itext == null || itext.Length < 1 ? null : itext;
+        }
         public static string getLanguageName()
         {
             return (appCI!=null?appCI:Thread.CurrentThread.CurrentCulture).Name;

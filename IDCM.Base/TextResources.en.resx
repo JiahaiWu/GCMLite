@@ -456,4 +456,55 @@
   <data name="Data filter success" xml:space="preserve">
     <value>Data filter success</value>
   </data>
+  <data name="Data filter failed" xml:space="preserve">
+    <value>Data filter failed</value>
+  </data>
+  <data name="Failed to check dump file" xml:space="preserve">
+    <value>Failed to check dump file</value>
+  </data>
+  <data name="Failed to check JSON list file" xml:space="preserve">
+    <value>Failed to check JSON list file</value>
+  </data>
+  <data name="Failed to check text file" xml:space="preserve">
+    <value>Failed to check text file</value>
+  </data>
+  <data name="Failed to export Excel document" xml:space="preserve">
+    <value>Failed to export Excel document</value>
+  </data>
+  <data name="Failed to Import Excel document" xml:space="preserve">
+    <value>Failed to Import Excel document</value>
+  </data>
+  <data name="Failed to import JSON list file" xml:space="preserve">
+    <value>Failed to import JSON list file</value>
+  </data>
+  <data name="Failed to import text file" xml:space="preserve">
+    <value>Failed to import text file</value>
+  </data>
+  <data name="GCM Front Find" xml:space="preserve">
+    <value>GCM Front Find</value>
+  </data>
+  <data name="Import failed" xml:space="preserve">
+    <value>Import failed</value>
+  </data>
+  <data name="Import success" xml:space="preserve">
+    <value>Import success</value>
+  </data>
+  <data name="Please Login before compare records to GCM." xml:space="preserve">
+    <value>Please Login before compare records to GCM.</value>
+  </data>
+  <data name="The save file path should be available, can not be a directory." xml:space="preserve">
+    <value>The save file path should be available, can not be a directory.</value>
+  </data>
+  <data name="The save file path should be writeable." xml:space="preserve">
+    <value>The save file path should be writeable.</value>
+  </data>
+  <data name="There are background tasks are executing, the operation in this condition is unsafe, please retry the config later." xml:space="preserve">
+    <value>There are background tasks are executing, the operation in this condition is unsafe, please retry the config later.</value>
+  </data>
+  <data name="Unspported file type for text import." xml:space="preserve">
+    <value>Unspported file type for text import.</value>
+  </data>
+  <data name="Update local columns' config, the application should restart, are you sure restart now?" xml:space="preserve">
+    <value>Update local columns' config, the application should restart, are you sure restart now?</value>
+  </data>
 </root>
