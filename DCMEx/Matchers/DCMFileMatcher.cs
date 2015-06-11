@@ -9,7 +9,7 @@ namespace DCMEx.Matchers
     class DCMFileMatcher : IMatcher
     {
         private string formatPattern = null;
-        public string groupFetchTag = null;
+        public GroupFetcher groupFetchTag = null;
         List<string> groups = new List<string>();
 
         public DCMFileMatcher(char[] expChars, int from, int end)
@@ -20,7 +20,7 @@ namespace DCMEx.Matchers
         {
             return true;
         }
-        public void setGroupFetchTag(string groupFetchTag)
+        public void setGroupFetchTag(GroupFetcher groupFetchTag)
         {
             this.groupFetchTag = groupFetchTag;
         }

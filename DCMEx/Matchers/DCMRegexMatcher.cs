@@ -11,7 +11,7 @@ namespace DCMEx.Matchers
     {
         private Regex regex = null;
         private Match match = null;
-        public string groupFetchTag = null;
+        public GroupFetcher groupFetchTag = null;
         List<string> groups = new List<string>();
 
 
@@ -25,7 +25,7 @@ namespace DCMEx.Matchers
             match = regex.Match(chars);
             return match.Success;
         }
-        public void setGroupFetchTag(string groupFetchTag)
+        public void setGroupFetchTag(GroupFetcher groupFetchTag)
         {
             this.groupFetchTag = groupFetchTag;
         }

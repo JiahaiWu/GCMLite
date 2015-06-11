@@ -16,7 +16,7 @@ namespace DCMEx.Matchers
         private int cursor;
         private readonly int expFrom;
         private readonly int expEnd;
-        public string _groupFetchTag = null;
+        public GroupFetcher _groupFetchTag = null;
         #endregion
 
         #region Methods
@@ -280,7 +280,7 @@ namespace DCMEx.Matchers
             if (matcher != null)
             {
                 if (groupFetchTag != null && groupFetchTag.Length > 0)
-                    matcher.setGroupFetchTag(groupFetchTag);
+                    matcher.setGroupFetchTag(new GroupFetcher(groupFetchTag));
                 logicMatchers.Add(new KeyValuePair<LogicSymbol, IMatcher>(lSymbol, matcher));
                 return true;
             }
@@ -601,11 +601,11 @@ namespace DCMEx.Matchers
         {
             if (newGroups != null && newGroups.Length > 0)
             {
-                groups = new List<string>();
+                groups.Clear();
                 groups.AddRange(newGroups);
             }
         }
-        public void setGroupFetchTag(string groupFetchTag)
+        public void setGroupFetchTag(GroupFetcher groupFetchTag)
         {
             this._groupFetchTag = groupFetchTag;
         }
