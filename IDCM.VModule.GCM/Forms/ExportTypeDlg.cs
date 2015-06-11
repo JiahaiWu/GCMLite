@@ -19,7 +19,7 @@ namespace IDCM.Forms
         public ExportTypeDlg(string fpath=null)
         {
             InitializeComponent();
-            if (fpath != null)
+            if (fpath != null && fpath.Length>0)
                 lastFilePath = fpath;
             this.radioButton_excel.Checked = lastOptionValue.Equals(ExportType.Excel)?radioButton_excel.Checked=true:
                 lastOptionValue.Equals(ExportType.JSONList)?radioButton_json.Checked=true:
@@ -138,7 +138,8 @@ namespace IDCM.Forms
         {
             SaveFileDialog fbd = new SaveFileDialog();
             fbd.FileName = CUIDGenerator.getUID(CUIDGenerator.Radix_32) + getDefaultSuffix();
-            fbd.InitialDirectory = Path.GetDirectoryName(lastFilePath);
+            if(lastFilePath.Length>1)
+                fbd.InitialDirectory = Path.GetDirectoryName(lastFilePath);
             if (radioButton_excel.Checked)
                 fbd.Filter = "Excel File(*.xls,*.xlsx)|*.xls;*.xlsx;";
             if (radioButton_json.Checked)

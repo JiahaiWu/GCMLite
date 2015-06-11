@@ -84,7 +84,15 @@ namespace DCMControlLib
 
         private void OnOptionMenuChanged(object sender, DCMControlLib.Pop.MenuItemEventArgs e)
         {
-            this.Columns[e.MenuItem.Text].Visible = e.MenuItem.Checked;
+            if (this.Columns.Count < 2 && e.MenuItem.Checked==false)
+            {
+                MessageBox.Show("Hide all columns is improper.");
+                e.MenuItem.Checked = true;
+            }
+            else
+            {
+                this.Columns[e.MenuItem.Text].Visible = e.MenuItem.Checked;
+            }
         }
         /// <summary>
         /// 设置Datagridview显示编号

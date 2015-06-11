@@ -12,13 +12,13 @@ namespace DCMEx
             this.groupFetchTag = fetchTag.Trim();
             if (groupFetchTag.Length > 0)
             {
-                if (groupFetchTag.ElementAt(0).Equals(GroupTag.FetchTag))
+                if (groupFetchTag.ElementAt(0).Equals((char)GroupTag.FetchTag))
                 {
                     Int32.TryParse(groupFetchTag.Substring(1), out fetchIndex);
                 }
                 else
                 {
-                    throw new DCMExException("Synax error in indentify group tag.");
+                    throw new DCMExException("Synax error in identify group tag.");
                 }
             }
         }

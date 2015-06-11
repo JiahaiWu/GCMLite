@@ -11,7 +11,7 @@ namespace DCMEx.Matchers
         #region Members
 
         private List<KeyValuePair<LogicSymbol, IMatcher>> logicMatchers = new List<KeyValuePair<LogicSymbol, IMatcher>>();
-        List<string> groups = null;
+        List<string> groups = new List<string>();
         private readonly char[] expChars;
         private int cursor;
         private readonly int expFrom;
@@ -46,7 +46,7 @@ namespace DCMEx.Matchers
             char ch = (char)DelimitToken.WhiteSpace;
             LogicSymbol lSymbol = LogicSymbol.AND;
             PatternMode pMode = PatternMode.REGEX;
-            string groupFetchTag = GroupTag.FetchTag.ToString();
+            string groupFetchTag = ((char)GroupTag.FetchTag).ToString();
             //////////////////////////////////////////////////////////////////////////////////////////////
             //尝试获取初始的逻辑组合标记量
             if (!preDetectConnectiveLogicMatchers(ref lSymbol, ref pMode, ref groupFetchTag, ref head, ref beg))

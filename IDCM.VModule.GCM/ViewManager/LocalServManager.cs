@@ -29,6 +29,7 @@ namespace IDCM.ViewManager
         public LocalServManager(CTableCache ctcache)
         {
             this.ctcache = ctcache;
+            lastIOPath=ConfigurationManager.AppSettings[SysConstants.LastWorkSpace];
         }
         #endregion
 
@@ -214,6 +215,10 @@ namespace IDCM.ViewManager
 
         public string doDumpWork()
         {
+            if (lastIOPath != null && lastIOPath.Length > 0)
+            {
+                ConfigurationHelper.SetAppConfig(SysConstants.LastWorkSpace, lastIOPath, SysConstants.defaultCfgPath);
+            }
             LocalDataDumper dumper = new LocalDataDumper();
             string dumppath = dumper.build(ctcache).dump();
             return dumppath;
