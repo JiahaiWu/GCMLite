@@ -98,6 +98,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="tableDef.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\gcm_logo.png" />
     <EmbeddedResource Include="Dlgs\AboutDlg.resx">
       <DependentUpon>AboutDlg.cs</DependentUpon>
