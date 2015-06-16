@@ -100,14 +100,14 @@ namespace IDCM.Forms
             bool keyNameAvailable = true;
             if (checkFields(out keyNameAvailable))
             {
-                MessageBox.Show("It seems all right.");
+                MessageBox.Show(GlobalTextRes.Text("It seems all right."));
             }
             else
             {
                 if (keyNameAvailable)
-                    MessageBox.Show("Please notice the error tips shown in the data grid view, fix those errors and confirm again.");
+                    MessageBox.Show(GlobalTextRes.Text("Please notice the error tips shown in the data grid view, fix those errors and confirm again."));
                 else
-                    MessageBox.Show("Please choose a key name, it's not available.");
+                    MessageBox.Show(GlobalTextRes.Text("Please choose a key name, it's not available."));
             }
         }
 
@@ -123,9 +123,9 @@ namespace IDCM.Forms
             else
             {
                 if(keyNameAvailable)
-                    MessageBox.Show("Please notice the error tips shown in the data grid view, fix those errors and confirm again.");
+                    MessageBox.Show(GlobalTextRes.Text("Please notice the error tips shown in the data grid view, fix those errors and confirm again."));
                 else
-                    MessageBox.Show("Please choose a key name, it's not available.");
+                    MessageBox.Show(GlobalTextRes.Text("Please choose a key name, it's not available."));
             }
         }
         private void comboBox_keyField_Enter(object sender, EventArgs e)

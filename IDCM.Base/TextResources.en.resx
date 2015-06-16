@@ -507,4 +507,34 @@
   <data name="Update local columns' config, the application should restart, are you sure restart now?" xml:space="preserve">
     <value>Update local columns' config, the application should restart, are you sure restart now?</value>
   </data>
+  <data name="Excel,XML,TSV,CSV,JSON List,mdi" xml:space="preserve">
+    <value>Excel file,XML document,TSV file,CSV file,JSON List file,GCMLite archive file(*.xls,*.xlsx,*.xml,*.tsv,*csv,*.jso,*.gcms)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.jso,*.gcms</value>
+  </data>
+  <data name="GCMLite Archive file type" xml:space="preserve">
+    <value>GCMLite Archive file (*.gcms)|*.gcms</value>
+  </data>
+  <data name="Exported XML Validation Failed" xml:space="preserve">
+    <value>Exported XML Validation Failed</value>
+  </data>
+  <data name="It seems all right." xml:space="preserve">
+    <value>It seems all right.</value>
+  </data>
+  <data name="Local data check failed." xml:space="preserve">
+    <value>Local data check failed.</value>
+  </data>
+  <data name="Local data export to GCM XML failed." xml:space="preserve">
+    <value>Local data export to GCM XML failed.</value>
+  </data>
+  <data name="Local data mapping to export canceled." xml:space="preserve">
+    <value>Local data mapping to export canceled.</value>
+  </data>
+  <data name="Local data publish to GCM operation success." xml:space="preserve">
+    <value>Local data publish to GCM operation success.</value>
+  </data>
+  <data name="Please choose a key name, it's not available." xml:space="preserve">
+    <value>Please choose a key name, it's not available.</value>
+  </data>
+  <data name="Please notice the error tips shown in the data grid view, fix those errors and confirm again." xml:space="preserve">
+    <value>Please notice the error tips shown in the data grid view, fix those errors and confirm again.</value>
+  </data>
 </root>

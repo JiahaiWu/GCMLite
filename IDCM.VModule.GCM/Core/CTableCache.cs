@@ -154,7 +154,7 @@ namespace IDCM.Core
             }
             return null;
         }
-        internal Dictionary<string, string> getRow(int ridx)
+        internal Dictionary<string, string> getRow(int ridx,bool includeHide=false)
         {
             if (ridx > -1 && ridx < dgv.RowCount)
             {
@@ -166,8 +166,9 @@ namespace IDCM.Core
                     Dictionary<string, string> vals = new Dictionary<string, string>();
                     foreach (DataGridViewCell cell in dgvr.Cells)
                     {
-                        if (cell.Visible && cell.Value != null)
-                            vals[cell.OwningColumn.Name] = cell.FormattedValue.ToString();
+                        if (cell.Value != null)
+                            if(cell.Visible || includeHide)
+                                vals[cell.OwningColumn.Name] = cell.FormattedValue.ToString();
                     }
                     return vals;
                 }

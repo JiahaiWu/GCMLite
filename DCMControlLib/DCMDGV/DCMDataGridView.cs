@@ -61,7 +61,7 @@ namespace DCMControlLib
 
         private void OnOptionMenuChanged(object sender, DCMControlLib.Pop.MenuItemEventArgs e)
         {
-            if (this.Columns.Count < 2 && e.MenuItem.Checked==false)
+            if (this.DisplayedColumnCount(true) < 2 && e.MenuItem.Checked==false)
             {
                 MessageBox.Show("Hide all columns is improper.");
                 e.MenuItem.Checked = true;

@@ -69,7 +69,7 @@ namespace IDCM.ViewManager
                     eih = new XMLImportHandler(ctcache, fpath, ref dataMapping);
                 }
             }
-            if (fpath.ToLower().EndsWith(".mdi"))
+            if (fpath.ToLower().EndsWith(".gcms"))
             {
                 if (DataImportChecker.checkForMDIImport(fpath))
                 {

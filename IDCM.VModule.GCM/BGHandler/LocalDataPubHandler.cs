@@ -60,7 +60,7 @@ namespace IDCM.BGHandler
                     res = LocalDataChecker.checkForExport(ctcache);
                 if(!res)
                 {
-                    errorInfo="Local data check failed.";
+                    errorInfo=GlobalTextRes.Text("Local data check failed.");
                     DCMPublisher.noteSimpleMsg(errorInfo);
                     return new object[] { res,errorInfo };
                 }
@@ -90,7 +90,7 @@ namespace IDCM.BGHandler
                             res = exporter.exportGCMXML(ctcache, xmlStream, dataMapping);
                         if (!res)
                         {
-                            errorInfo = "Local data export to GCMPub XML failed.";
+                            errorInfo = GlobalTextRes.Text("Local data export to GCMPub XML failed.");
                             DCMPublisher.noteSimpleMsg(errorInfo);
                             return new object[] { res, errorInfo };
                         }
@@ -105,12 +105,12 @@ namespace IDCM.BGHandler
                             {
                                 res = true;
                                 //提交成功
-                                DCMPublisher.noteSimpleMsg("Local data publish to GCM operation success.");
+                                DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Local data publish to GCM operation success."));
                             }
                             else
                             {
                                 res = false;
-                                errorInfo = "Exported XML Validation Failed: " + errorInfo;
+                                errorInfo = GlobalTextRes.Text("Exported XML Validation Failed")+": " + errorInfo;
                                 DCMPublisher.noteSimpleMsg(errorInfo);
                                 return new object[] { res, errorInfo };
                             }
@@ -119,7 +119,7 @@ namespace IDCM.BGHandler
                         else
                         {
                             res = false;
-                            errorInfo = "Exported XML Validation Failed: "+errorInfo;
+                            errorInfo = GlobalTextRes.Text("Exported XML Validation Failed")+": "+errorInfo;
                             DCMPublisher.noteSimpleMsg(errorInfo);
                             return new object[] { res, errorInfo };
                         }
@@ -128,7 +128,7 @@ namespace IDCM.BGHandler
                 else
                 {
                     res = false;
-                    errorInfo = "Local data mapping to export canceled.";
+                    errorInfo = GlobalTextRes.Text("Local data mapping to export canceled.");
                     DCMPublisher.noteSimpleMsg(errorInfo);
                     return new object[] { res, errorInfo };
                 }

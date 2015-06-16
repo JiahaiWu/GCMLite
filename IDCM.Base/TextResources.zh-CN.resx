@@ -510,4 +510,34 @@
   <data name="Update local columns' config, the application should restart, are you sure restart now?" xml:space="preserve">
     <value>更新本地数据列配置，需要重启应用程序，您确认现在重启吗？</value>
   </data>
+  <data name="Excel,XML,TSV,CSV,JSON List,mdi" xml:space="preserve">
+    <value>Excel文件,XML文档,TSV文件,CSV文件,JSON List文件,GCMLite存档文件(*.xls,*.xlsx,*.xml,*.tsv,*csv,*.jso,*.gcms)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.jso,*.gcms</value>
+  </data>
+  <data name="GCMLite Archive file type" xml:space="preserve">
+    <value>GCMLite存档文件(*.gcms)|*.gcms</value>
+  </data>
+  <data name="Exported XML Validation Failed" xml:space="preserve">
+    <value>导出的用于发布到GCM的XML文档验证失败。</value>
+  </data>
+  <data name="It seems all right." xml:space="preserve">
+    <value>未检测到错误。</value>
+  </data>
+  <data name="Local data check failed." xml:space="preserve">
+    <value>本地数据校验失败。</value>
+  </data>
+  <data name="Local data export to GCM XML failed." xml:space="preserve">
+    <value>本地数据导出为发布到GCM的XML文档生成失败。</value>
+  </data>
+  <data name="Local data mapping to export canceled." xml:space="preserve">
+    <value>本地数据映射并提交至GCM操作取消。</value>
+  </data>
+  <data name="Local data publish to GCM operation success." xml:space="preserve">
+    <value>本地数据发布到GCM操作完成。</value>
+  </data>
+  <data name="Please choose a key name, it's not available." xml:space="preserve">
+    <value>请选择一个有效的主键名，当前主键名无效。</value>
+  </data>
+  <data name="Please notice the error tips shown in the data grid view, fix those errors and confirm again." xml:space="preserve">
+    <value>请注意在数据表单中的错误提示标记，修复相应的错误后再执行该操作。</value>
+  </data>
 </root>

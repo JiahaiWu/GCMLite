@@ -33,7 +33,7 @@ namespace IDCM.DataTransfer
             List<Dictionary<string,string>> dgvpo = new List<Dictionary<string,string>>();
             for (int i = 0; i < ctcache.getRowCount(); i++)
             {
-                Dictionary<string,string> rec=ctcache.getRow(i);
+                Dictionary<string,string> rec=ctcache.getRow(i,true);
                 dgvpo.Add(rec);
             }
             this.proInfo = dgvpo;

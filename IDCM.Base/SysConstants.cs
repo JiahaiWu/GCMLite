@@ -16,8 +16,8 @@ namespace IDCM.Base
         public const string exit_note = "exit.ini";
         public const string default_pack_version = "0.1";
         public const string default_dump_Note = "dumper.ini";
-        public const string default_dump_Suffix = ".mdi";
-        public const string default_output_name = "GCMOutput.mdi";
+        public const string default_dump_Suffix = ".gcms";
+        public const string default_output_name = "GCMOutput.gcms";
         /// <summary>
         /// GCM上传XML格式模板文档
         /// </summary>
