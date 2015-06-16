@@ -61,6 +61,7 @@ namespace IDCM
             this.toolStripButton_import.ToolTipText = GlobalTextRes.Text("Import");
             this.toolStripButton_del.ToolTipText = GlobalTextRes.Text("Delete");
             this.toolStripButton_add.ToolTipText = GlobalTextRes.Text("Add Row");
+
             viewMonitor = new Timer();
             viewMonitor.Interval = 500;
             viewMonitor.Tick+=viewMonitor_Tick;
@@ -488,6 +489,15 @@ namespace IDCM
                 this.toolStripTextBox_search.ForeColor = Color.DarkGray;
             }
         }
+
+        private void toolStrip_gcmlite_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                e.ClipRectangle,
+                Color.FromArgb(160, 175, 195), ButtonBorderStyle.Solid);
+
+        }
         #endregion
 
         #region Members
@@ -497,6 +507,7 @@ namespace IDCM
         /// </summary>
         private System.Windows.Forms.Timer viewMonitor = null;
         #endregion
+
 
     }
 }

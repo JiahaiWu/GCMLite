@@ -33,6 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GCMProView));
             this.gcmTabControl_GCM = new DCMControlLib.GCM.GCMTabControl();
             this.tabPageEx_Local = new DCMControlLib.GCM.TabPageEx();
@@ -97,12 +100,11 @@
             this.gcmTabControl_GCM.ItemSize = new System.Drawing.Size(150, 30);
             this.gcmTabControl_GCM.Location = new System.Drawing.Point(0, 0);
             this.gcmTabControl_GCM.Name = "gcmTabControl_GCM";
-            this.gcmTabControl_GCM.SelectedIndex = 1;
+            this.gcmTabControl_GCM.SelectedIndex = 0;
             this.gcmTabControl_GCM.Size = new System.Drawing.Size(716, 513);
-            this.gcmTabControl_GCM.TabGradient.ColorEnd = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(223)))), ((int)(((byte)(246)))));
-            this.gcmTabControl_GCM.TabGradient.ColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(67)))), ((int)(((byte)(164)))));
+            this.gcmTabControl_GCM.TabGradient.ColorEnd = System.Drawing.Color.AliceBlue;
+            this.gcmTabControl_GCM.TabGradient.ColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(231)))), ((int)(((byte)(248)))));
             this.gcmTabControl_GCM.TabGradient.GradientStyle = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            this.gcmTabControl_GCM.TabGradient.TabPageSelectedTextColor = System.Drawing.Color.White;
             this.gcmTabControl_GCM.TabGradient.TabPageTextColor = System.Drawing.Color.DimGray;
             this.gcmTabControl_GCM.TabIndex = 0;
             this.gcmTabControl_GCM.TabStyles = DCMControlLib.GCM.GCMTabControl.TabStyle.VS2010;
@@ -141,18 +143,27 @@
             this.dcmDataGridView_local.AllowDrop = true;
             this.dcmDataGridView_local.AllowUserToAddRows = false;
             this.dcmDataGridView_local.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_local.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(244)))));
+            this.dcmDataGridView_local.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dcmDataGridView_local.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dcmDataGridView_local.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dcmDataGridView_local.DefaultCellStyle = dataGridViewCellStyle2;
             this.dcmDataGridView_local.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dcmDataGridView_local.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dcmDataGridView_local.EnableHeadersVisualStyles = false;
+            this.dcmDataGridView_local.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
             this.dcmDataGridView_local.Location = new System.Drawing.Point(0, 0);
             this.dcmDataGridView_local.Margin = new System.Windows.Forms.Padding(0);
             this.dcmDataGridView_local.Name = "dcmDataGridView_local";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_local.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10F);
+            this.dcmDataGridView_local.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dcmDataGridView_local.RowTemplate.Height = 23;
             this.dcmDataGridView_local.Size = new System.Drawing.Size(714, 472);
             this.dcmDataGridView_local.TabIndex = 0;
@@ -331,8 +342,8 @@
             // splitContainer_GCMData.Panel2
             // 
             this.splitContainer_GCMData.Panel2.Controls.Add(this.dcmTreeView_gcm);
-            this.splitContainer_GCMData.Size = new System.Drawing.Size(482, 472);
-            this.splitContainer_GCMData.SplitterDistance = 316;
+            this.splitContainer_GCMData.Size = new System.Drawing.Size(96, 100);
+            this.splitContainer_GCMData.SplitterDistance = 62;
             this.splitContainer_GCMData.TabIndex = 0;
             // 
             // dcmDataGridView_gcm
@@ -340,20 +351,32 @@
             this.dcmDataGridView_gcm.AllowUserToAddRows = false;
             this.dcmDataGridView_gcm.AllowUserToDeleteRows = false;
             this.dcmDataGridView_gcm.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_gcm.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(244)))));
+            this.dcmDataGridView_gcm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dcmDataGridView_gcm.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10F);
+            this.dcmDataGridView_gcm.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dcmDataGridView_gcm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dcmDataGridView_gcm.DefaultCellStyle = dataGridViewCellStyle6;
             this.dcmDataGridView_gcm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dcmDataGridView_gcm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dcmDataGridView_gcm.EnableHeadersVisualStyles = false;
+            this.dcmDataGridView_gcm.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
             this.dcmDataGridView_gcm.Location = new System.Drawing.Point(0, 0);
             this.dcmDataGridView_gcm.Name = "dcmDataGridView_gcm";
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_gcm.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 10F);
+            this.dcmDataGridView_gcm.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dcmDataGridView_gcm.RowTemplate.Height = 23;
-            this.dcmDataGridView_gcm.Size = new System.Drawing.Size(316, 472);
+            this.dcmDataGridView_gcm.Size = new System.Drawing.Size(62, 100);
             this.dcmDataGridView_gcm.TabIndex = 0;
             // 
             // dcmTreeView_gcm
@@ -364,7 +387,7 @@
             this.dcmTreeView_gcm.Location = new System.Drawing.Point(0, 0);
             this.dcmTreeView_gcm.Name = "dcmTreeView_gcm";
             this.dcmTreeView_gcm.SelectedImageIndex = 0;
-            this.dcmTreeView_gcm.Size = new System.Drawing.Size(162, 472);
+            this.dcmTreeView_gcm.Size = new System.Drawing.Size(30, 100);
             this.dcmTreeView_gcm.TabIndex = 0;
             // 
             // imageList_gcmtree

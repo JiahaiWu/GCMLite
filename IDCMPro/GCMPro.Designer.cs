@@ -106,7 +106,7 @@
             // 
             // menuStrip_gcmlite
             // 
-            this.menuStrip_gcmlite.BackColor = System.Drawing.Color.LightCyan;
+            this.menuStrip_gcmlite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(238)))), ((int)(((byte)(248)))));
             this.menuStrip_gcmlite.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip_gcmlite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileFToolStripMenuItem,
@@ -279,10 +279,10 @@
             // 
             // toolStrip_gcmlite
             // 
-            this.toolStrip_gcmlite.BackColor = System.Drawing.Color.PowderBlue;
+            this.toolStrip_gcmlite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(238)))), ((int)(((byte)(248)))));
             this.toolStrip_gcmlite.Font = new System.Drawing.Font("微软雅黑", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))));
             this.toolStrip_gcmlite.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip_gcmlite.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip_gcmlite.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip_gcmlite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_help,
             this.toolStripSeparator2,
@@ -302,18 +302,19 @@
             this.toolStrip_gcmlite.Name = "toolStrip_gcmlite";
             this.toolStrip_gcmlite.Padding = new System.Windows.Forms.Padding(0, 0, 12, 0);
             this.toolStrip_gcmlite.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip_gcmlite.Size = new System.Drawing.Size(871, 31);
+            this.toolStrip_gcmlite.Size = new System.Drawing.Size(871, 39);
             this.toolStrip_gcmlite.TabIndex = 2;
             this.toolStrip_gcmlite.Text = "toolStrip1";
+            this.toolStrip_gcmlite.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStrip_gcmlite_Paint);
             // 
             // toolStripButton_help
             // 
             this.toolStripButton_help.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_help.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_help.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_help.Image")));
+            this.toolStripButton_help.Image = global::IDCM.Properties.Resources.help;
             this.toolStripButton_help.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_help.Name = "toolStripButton_help";
-            this.toolStripButton_help.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_help.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_help.Text = "toolStripButton7";
             this.toolStripButton_help.ToolTipText = "Help";
             this.toolStripButton_help.Click += new System.EventHandler(this.toolStripButton_help_Click);
@@ -323,16 +324,16 @@
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripButton_search
             // 
             this.toolStripButton_search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_search.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_search.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_search.Image")));
+            this.toolStripButton_search.Image = global::IDCM.Properties.Resources.fangdajing;
             this.toolStripButton_search.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_search.Name = "toolStripButton_search";
-            this.toolStripButton_search.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_search.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_search.Text = "toolStripButton6";
             this.toolStripButton_search.ToolTipText = "Search";
             this.toolStripButton_search.Click += new System.EventHandler(this.toolStripButton_search_Click);
@@ -342,7 +343,7 @@
             this.toolStripTextBox_search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripTextBox_search.ForeColor = System.Drawing.Color.DarkGray;
             this.toolStripTextBox_search.Name = "toolStripTextBox_search";
-            this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 31);
+            this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 39);
             this.toolStripTextBox_search.Text = "Quick Search";
             this.toolStripTextBox_search.ToolTipText = "Quick Search";
             this.toolStripTextBox_search.Enter += new System.EventHandler(this.toolStripTextBox_search_Enter);
@@ -354,7 +355,7 @@
             this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripButton_down
             // 
@@ -363,7 +364,7 @@
             this.toolStripButton_down.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_down.Image")));
             this.toolStripButton_down.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_down.Name = "toolStripButton_down";
-            this.toolStripButton_down.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_down.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_down.Text = "toolStripButton8";
             this.toolStripButton_down.ToolTipText = "DownLoad from GCM";
             this.toolStripButton_down.Click += new System.EventHandler(this.toolStripButton_down_Click);
@@ -372,10 +373,10 @@
             // 
             this.toolStripButton_pub.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_pub.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_pub.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_pub.Image")));
+            this.toolStripButton_pub.Image = global::IDCM.Properties.Resources.update;
             this.toolStripButton_pub.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_pub.Name = "toolStripButton_pub";
-            this.toolStripButton_pub.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_pub.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_pub.Text = "toolStripButton5";
             this.toolStripButton_pub.ToolTipText = "Publish to GCM";
             this.toolStripButton_pub.Click += new System.EventHandler(this.toolStripButton_pub_Click);
@@ -384,11 +385,11 @@
             // 
             this.toolStripButton_compare.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_compare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_compare.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_compare.Image")));
+            this.toolStripButton_compare.Image = global::IDCM.Properties.Resources.duibiu;
             this.toolStripButton_compare.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_compare.Name = "toolStripButton_compare";
             this.toolStripButton_compare.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.toolStripButton_compare.Size = new System.Drawing.Size(40, 28);
+            this.toolStripButton_compare.Size = new System.Drawing.Size(48, 36);
             this.toolStripButton_compare.Text = "toolStripButton1";
             this.toolStripButton_compare.ToolTipText = "Compare with GCM";
             this.toolStripButton_compare.Click += new System.EventHandler(this.toolStripButton_compare_Click);
@@ -397,10 +398,10 @@
             // 
             this.toolStripButton_export.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_export.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_export.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_export.Image")));
+            this.toolStripButton_export.Image = global::IDCM.Properties.Resources._out;
             this.toolStripButton_export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_export.Name = "toolStripButton_export";
-            this.toolStripButton_export.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_export.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_export.Text = "toolStripButton4";
             this.toolStripButton_export.ToolTipText = "Export";
             this.toolStripButton_export.Click += new System.EventHandler(this.toolStripButton_export_Click);
@@ -409,10 +410,10 @@
             // 
             this.toolStripButton_import.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_import.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_import.Image")));
+            this.toolStripButton_import.Image = global::IDCM.Properties.Resources._in;
             this.toolStripButton_import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_import.Name = "toolStripButton_import";
-            this.toolStripButton_import.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_import.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_import.Text = "toolStripButton3";
             this.toolStripButton_import.ToolTipText = "Import";
             this.toolStripButton_import.Click += new System.EventHandler(this.toolStripButton_import_Click);
@@ -421,10 +422,10 @@
             // 
             this.toolStripButton_del.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_del.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_del.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_del.Image")));
+            this.toolStripButton_del.Image = global::IDCM.Properties.Resources.del;
             this.toolStripButton_del.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_del.Name = "toolStripButton_del";
-            this.toolStripButton_del.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_del.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_del.Text = "toolStripButton2";
             this.toolStripButton_del.ToolTipText = "Delete";
             this.toolStripButton_del.Click += new System.EventHandler(this.toolStripButton_del_Click);
@@ -433,10 +434,10 @@
             // 
             this.toolStripButton_add.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_add.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_add.Image")));
+            this.toolStripButton_add.Image = global::IDCM.Properties.Resources.add;
             this.toolStripButton_add.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_add.Name = "toolStripButton_add";
-            this.toolStripButton_add.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton_add.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_add.Text = "toolStripButton1";
             this.toolStripButton_add.ToolTipText = "Add Row";
             this.toolStripButton_add.Click += new System.EventHandler(this.toolStripButton_add_Click);
@@ -447,15 +448,15 @@
             this.toolStripLabel_OfficialNotice.ForeColor = System.Drawing.Color.Blue;
             this.toolStripLabel_OfficialNotice.Name = "toolStripLabel_OfficialNotice";
             this.toolStripLabel_OfficialNotice.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.toolStripLabel_OfficialNotice.Size = new System.Drawing.Size(4, 28);
+            this.toolStripLabel_OfficialNotice.Size = new System.Drawing.Size(4, 36);
             // 
             // gcmProView_lite
             // 
             this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcmProView_lite.Enabled = false;
-            this.gcmProView_lite.Location = new System.Drawing.Point(0, 55);
+            this.gcmProView_lite.Location = new System.Drawing.Point(0, 63);
             this.gcmProView_lite.Name = "gcmProView_lite";
-            this.gcmProView_lite.Size = new System.Drawing.Size(871, 445);
+            this.gcmProView_lite.Size = new System.Drawing.Size(871, 437);
             this.gcmProView_lite.TabIndex = 3;
             this.gcmProView_lite.Visible = false;
             // 
@@ -463,6 +464,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(238)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(871, 522);
             this.Controls.Add(this.gcmProView_lite);
             this.Controls.Add(this.toolStrip_gcmlite);

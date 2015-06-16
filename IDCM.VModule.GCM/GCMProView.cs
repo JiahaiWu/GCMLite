@@ -924,6 +924,9 @@ namespace IDCM.VModule.GCM
         #endregion
 
         #region Property
+        [Description("OpConditions")]
+        [DefaultValue(false)]
+        [Browsable(false)]
         public OpConditionType OpConditions
         {
             get
@@ -934,18 +937,28 @@ namespace IDCM.VModule.GCM
                     return opCond;
             }
         }
+        [Description("LocalRowCount")]
+        [DefaultValue(false)]
+        [Browsable(false)]
         public int LocalRowCount
         {
             get
             {
-                return localServManager.RowCount;
+                if(localServManager!=null)
+                    return localServManager.RowCount;
+                return -1;
             }
         }
+        [Description("GCMRowCount")]
+        [DefaultValue(false)]
+        [Browsable(false)]
         public int GCMRowCount
         {
             get
             {
-                return gcmServManager.RowCount;
+                if(gcmServManager!=null)
+                    return gcmServManager.RowCount;
+                return -1;
             }
         }
         #endregion

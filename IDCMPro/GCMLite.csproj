@@ -92,6 +92,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Resources\help.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\update.png" />
+    <None Include="Resources\out.png" />
+    <None Include="Resources\in.png" />
+    <None Include="Resources\del.png" />
+    <None Include="Resources\fangdajing.png" />
+    <None Include="Resources\duibiu.png" />
     <None Include="Resources\gcm_logo.png" />
     <EmbeddedResource Include="Dlgs\AboutDlg.resx">
       <DependentUpon>AboutDlg.cs</DependentUpon>
