@@ -159,6 +159,7 @@
             this.Controls.Add(this.groupBox_filetype);
             this.Controls.Add(this.button_confirm);
             this.Controls.Add(this.button_cancel);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

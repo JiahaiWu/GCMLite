@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GCMProView));
             this.gcmTabControl_GCM = new DCMControlLib.GCM.GCMTabControl();
             this.tabPageEx_Local = new DCMControlLib.GCM.TabPageEx();
@@ -95,12 +96,13 @@
             this.gcmTabControl_GCM.Controls.Add(this.tabPageEx_GCM);
             this.gcmTabControl_GCM.Controls.Add(this.tabPage_ABC);
             this.gcmTabControl_GCM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcmTabControl_GCM.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gcmTabControl_GCM.ImageList = this.imageList_tab;
             this.gcmTabControl_GCM.IsCaptionVisible = false;
             this.gcmTabControl_GCM.ItemSize = new System.Drawing.Size(150, 30);
             this.gcmTabControl_GCM.Location = new System.Drawing.Point(0, 0);
             this.gcmTabControl_GCM.Name = "gcmTabControl_GCM";
-            this.gcmTabControl_GCM.SelectedIndex = 0;
+            this.gcmTabControl_GCM.SelectedIndex = 1;
             this.gcmTabControl_GCM.Size = new System.Drawing.Size(716, 513);
             this.gcmTabControl_GCM.TabGradient.ColorEnd = System.Drawing.Color.AliceBlue;
             this.gcmTabControl_GCM.TabGradient.ColorStart = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(231)))), ((int)(((byte)(248)))));
@@ -143,18 +145,26 @@
             this.dcmDataGridView_local.AllowDrop = true;
             this.dcmDataGridView_local.AllowUserToAddRows = false;
             this.dcmDataGridView_local.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(244)))));
-            this.dcmDataGridView_local.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(244)))));
+            this.dcmDataGridView_local.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dcmDataGridView_local.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Arial", 10F);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dcmDataGridView_local.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dcmDataGridView_local.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dcmDataGridView_local.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 10F);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dcmDataGridView_local.DefaultCellStyle = dataGridViewCellStyle23;
             this.dcmDataGridView_local.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dcmDataGridView_local.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dcmDataGridView_local.EnableHeadersVisualStyles = false;
@@ -162,8 +172,8 @@
             this.dcmDataGridView_local.Location = new System.Drawing.Point(0, 0);
             this.dcmDataGridView_local.Margin = new System.Windows.Forms.Padding(0);
             this.dcmDataGridView_local.Name = "dcmDataGridView_local";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_local.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 10F);
+            this.dcmDataGridView_local.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dcmDataGridView_local.RowTemplate.Height = 23;
             this.dcmDataGridView_local.Size = new System.Drawing.Size(714, 472);
             this.dcmDataGridView_local.TabIndex = 0;
@@ -190,10 +200,9 @@
             // splitContainer_GCM.Panel1
             // 
             this.splitContainer_GCM.Panel1.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer_GCM.Panel1.BackgroundImage = global::IDCM.Properties.Resources.initView;
+            this.splitContainer_GCM.Panel1.BackgroundImage = global::IDCM.Properties.Resources.loginbg;
             this.splitContainer_GCM.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.splitContainer_GCM.Panel1.Controls.Add(this.panel_GCM_start);
-            this.splitContainer_GCM.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_GCM_Panel1_Paint);
             // 
             // splitContainer_GCM.Panel2
             // 
@@ -206,7 +215,8 @@
             // panel_GCM_start
             // 
             this.panel_GCM_start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel_GCM_start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(255)))), ((int)(((byte)(212)))));
+            this.panel_GCM_start.BackgroundImage = global::IDCM.Properties.Resources.login_03;
+            this.panel_GCM_start.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel_GCM_start.ColumnCount = 4;
             this.panel_GCM_start.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.panel_GCM_start.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
@@ -222,16 +232,17 @@
             this.panel_GCM_start.Controls.Add(this.textBox_pwd, 1, 1);
             this.panel_GCM_start.Location = new System.Drawing.Point(92, 309);
             this.panel_GCM_start.Name = "panel_GCM_start";
+            this.panel_GCM_start.Padding = new System.Windows.Forms.Padding(12);
             this.panel_GCM_start.RowCount = 2;
             this.panel_GCM_start.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.panel_GCM_start.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.panel_GCM_start.Size = new System.Drawing.Size(500, 80);
+            this.panel_GCM_start.Size = new System.Drawing.Size(524, 104);
             this.panel_GCM_start.TabIndex = 4;
             // 
             // button_confirm
             // 
-            this.button_confirm.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_confirm.Location = new System.Drawing.Point(413, 47);
+            this.button_confirm.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_confirm.Location = new System.Drawing.Point(425, 59);
             this.button_confirm.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.button_confirm.Name = "button_confirm";
             this.button_confirm.Size = new System.Drawing.Size(75, 23);
@@ -246,7 +257,7 @@
             this.button_cancel.BackColor = System.Drawing.Color.Transparent;
             this.button_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button_cancel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button_cancel.Location = new System.Drawing.Point(413, 10);
+            this.button_cancel.Location = new System.Drawing.Point(425, 22);
             this.button_cancel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(75, 23);
@@ -259,7 +270,7 @@
             // 
             this.pictureBox_Signhelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox_Signhelp.Image = global::IDCM.Properties.Resources.help;
-            this.pictureBox_Signhelp.Location = new System.Drawing.Point(303, 12);
+            this.pictureBox_Signhelp.Location = new System.Drawing.Point(315, 24);
             this.pictureBox_Signhelp.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
             this.pictureBox_Signhelp.Name = "pictureBox_Signhelp";
             this.pictureBox_Signhelp.Size = new System.Drawing.Size(21, 21);
@@ -273,7 +284,7 @@
             this.checkBox_remember.AutoSize = true;
             this.checkBox_remember.Checked = true;
             this.checkBox_remember.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_remember.Location = new System.Drawing.Point(303, 47);
+            this.checkBox_remember.Location = new System.Drawing.Point(315, 59);
             this.checkBox_remember.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.checkBox_remember.Name = "checkBox_remember";
             this.checkBox_remember.Size = new System.Drawing.Size(96, 20);
@@ -285,7 +296,7 @@
             // 
             this.label_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_user.AutoSize = true;
-            this.label_user.Location = new System.Drawing.Point(50, 14);
+            this.label_user.Location = new System.Drawing.Point(62, 26);
             this.label_user.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
             this.label_user.Name = "label_user";
             this.label_user.Size = new System.Drawing.Size(72, 16);
@@ -296,7 +307,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 50);
+            this.label1.Location = new System.Drawing.Point(25, 62);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 16);
@@ -308,7 +319,7 @@
             this.textBox_ccinfoId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_ccinfoId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_ccinfoId.Location = new System.Drawing.Point(128, 10);
+            this.textBox_ccinfoId.Location = new System.Drawing.Point(140, 22);
             this.textBox_ccinfoId.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
             this.textBox_ccinfoId.Name = "textBox_ccinfoId";
             this.textBox_ccinfoId.Size = new System.Drawing.Size(169, 23);
@@ -320,7 +331,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_pwd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_pwd.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.textBox_pwd.Location = new System.Drawing.Point(128, 47);
+            this.textBox_pwd.Location = new System.Drawing.Point(140, 59);
             this.textBox_pwd.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.textBox_pwd.Name = "textBox_pwd";
             this.textBox_pwd.ShortcutsEnabled = false;
@@ -351,30 +362,30 @@
             this.dcmDataGridView_gcm.AllowUserToAddRows = false;
             this.dcmDataGridView_gcm.AllowUserToDeleteRows = false;
             this.dcmDataGridView_gcm.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(244)))));
-            this.dcmDataGridView_gcm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(244)))));
+            this.dcmDataGridView_gcm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dcmDataGridView_gcm.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_gcm.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 10F);
+            this.dcmDataGridView_gcm.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dcmDataGridView_gcm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 10F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dcmDataGridView_gcm.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 10F);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dcmDataGridView_gcm.DefaultCellStyle = dataGridViewCellStyle19;
             this.dcmDataGridView_gcm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dcmDataGridView_gcm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dcmDataGridView_gcm.EnableHeadersVisualStyles = false;
             this.dcmDataGridView_gcm.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
             this.dcmDataGridView_gcm.Location = new System.Drawing.Point(0, 0);
             this.dcmDataGridView_gcm.Name = "dcmDataGridView_gcm";
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 10F);
-            this.dcmDataGridView_gcm.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 10F);
+            this.dcmDataGridView_gcm.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dcmDataGridView_gcm.RowTemplate.Height = 23;
             this.dcmDataGridView_gcm.Size = new System.Drawing.Size(62, 100);
             this.dcmDataGridView_gcm.TabIndex = 0;

@@ -34,7 +34,6 @@ namespace IDCM.VModule.GCM
         public GCMProView()
         {
             InitializeComponent();
-
             this.button_cancel.Text = GlobalTextRes.Text("Cancel");
             this.checkBox_remember.Text = GlobalTextRes.Text("Remember");
             this.button_confirm.Text = GlobalTextRes.Text("Confirm");
@@ -43,7 +42,9 @@ namespace IDCM.VModule.GCM
             this.tabPage_ABC.Text = GlobalTextRes.Text("ABC Browser");
             this.tabPageEx_Local.Text = GlobalTextRes.Text("Local DataSet");
             this.tabPageEx_GCM.Text = GlobalTextRes.Text("GCM Publish");
+
         }
+
         #endregion
 
         #region Methods
@@ -125,6 +126,9 @@ namespace IDCM.VModule.GCM
                     gcmFrontFindDlg = new GCMFrontFindDlg(dcmDataGridView_gcm);
                     gcmFrontFindDlg.setCellHit += new GCMFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
                     gcmFrontFindDlg.cancelCellHit += new GCMFrontFindDlg.CancelHit<DataGridViewCell>(cancelDGVCellHit);
+
+                    this.splitContainer_GCM.Panel1.Resize += this.splitContainer_GCM_Panel1_ReSize;
+                    panel_GCM_start.BackgroundImage = ImageUtil.setAlphaImage(panel_GCM_start.BackgroundImage);
                     //加载ABC WebKit
                     abcServManager = new ABCServManager(abcBrowser_abc);
                     ////////////////////////////////////////////////////
@@ -944,11 +948,13 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        private void splitContainer_GCM_Panel1_Paint(object sender, PaintEventArgs e)
+        private void splitContainer_GCM_Panel1_ReSize(object sender, EventArgs e)
         {
             Point reNewPoint = new Point(this.splitContainer_GCM.Panel1.Width / 2 - this.panel_GCM_start.Width / 2, (int)(this.splitContainer_GCM.Panel1.Height * 0.82 - this.panel_GCM_start.Height));
-            this.panel_GCM_start.Location = reNewPoint;
+            if(Math.Abs(reNewPoint.X-this.panel_GCM_start.Location.X)+Math.Abs(reNewPoint.Y-this.panel_GCM_start.Location.Y)>4)
+                this.panel_GCM_start.Location = reNewPoint;
         }
+
         private void servInvoker_OnGCMDataLoaded(object msgTag, params object[] vals)
         {
             ComponentUtil.ControlAsyncUtil.SyncInvoke(gcmTabControl_GCM, new ComponentUtil.ControlAsyncUtil.InvokeHandler(delegate()

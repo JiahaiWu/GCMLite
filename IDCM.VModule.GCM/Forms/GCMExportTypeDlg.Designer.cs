@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportTypeDlg));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GCMExportTypeDlg));
             this.radioButton_excel = new System.Windows.Forms.RadioButton();
             this.radioButton_json = new System.Windows.Forms.RadioButton();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button_confirm = new System.Windows.Forms.Button();
             this.groupBox_filetype = new System.Windows.Forms.GroupBox();
-            this.export_strain_tree_checkBox = new System.Windows.Forms.CheckBox();
             this.radioButton_xml = new System.Windows.Forms.RadioButton();
             this.radioButton_tsv = new System.Windows.Forms.RadioButton();
             this.radioButton_csv = new System.Windows.Forms.RadioButton();
+            this.export_strain_tree_checkBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_path = new System.Windows.Forms.TextBox();
             this.groupbox_optional = new System.Windows.Forms.GroupBox();
@@ -100,17 +100,6 @@
             this.groupBox_filetype.TabIndex = 4;
             this.groupBox_filetype.TabStop = false;
             // 
-            // export_strain_tree_checkBox
-            // 
-            this.export_strain_tree_checkBox.AutoSize = true;
-            this.export_strain_tree_checkBox.Location = new System.Drawing.Point(22, 16);
-            this.export_strain_tree_checkBox.Name = "export_strain_tree_checkBox";
-            this.export_strain_tree_checkBox.Size = new System.Drawing.Size(132, 16);
-            this.export_strain_tree_checkBox.TabIndex = 5;
-            this.export_strain_tree_checkBox.Text = "export strain tree";
-            this.export_strain_tree_checkBox.UseVisualStyleBackColor = true;
-            this.export_strain_tree_checkBox.Visible = false;
-            // 
             // radioButton_xml
             // 
             this.radioButton_xml.AutoSize = true;
@@ -144,6 +133,17 @@
             this.radioButton_csv.Text = "CSV (.csv)";
             this.radioButton_csv.UseVisualStyleBackColor = true;
             // 
+            // export_strain_tree_checkBox
+            // 
+            this.export_strain_tree_checkBox.AutoSize = true;
+            this.export_strain_tree_checkBox.Location = new System.Drawing.Point(22, 16);
+            this.export_strain_tree_checkBox.Name = "export_strain_tree_checkBox";
+            this.export_strain_tree_checkBox.Size = new System.Drawing.Size(132, 16);
+            this.export_strain_tree_checkBox.TabIndex = 5;
+            this.export_strain_tree_checkBox.Text = "export strain tree";
+            this.export_strain_tree_checkBox.UseVisualStyleBackColor = true;
+            this.export_strain_tree_checkBox.Visible = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -172,7 +172,7 @@
             this.groupbox_optional.TabStop = false;
             this.groupbox_optional.Visible = false;
             // 
-            // ExportTypeDlg
+            // GCMExportTypeDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -184,10 +184,11 @@
             this.Controls.Add(this.groupBox_filetype);
             this.Controls.Add(this.button_confirm);
             this.Controls.Add(this.button_cancel);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ExportTypeDlg";
+            this.Name = "GCMExportTypeDlg";
             this.ShowInTaskbar = false;
             this.Text = "Select File Type For Export";
             this.groupBox_filetype.ResumeLayout(false);

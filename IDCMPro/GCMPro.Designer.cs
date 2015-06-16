@@ -76,6 +76,7 @@
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.statusStrip1.Font = new System.Drawing.Font("Arial", 10F);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_status,
             this.toolStripProgressBar_progress});
@@ -91,7 +92,7 @@
             // 
             this.toolStripStatusLabel_status.Margin = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.toolStripStatusLabel_status.Name = "toolStripStatusLabel_status";
-            this.toolStripStatusLabel_status.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel_status.Size = new System.Drawing.Size(49, 17);
             this.toolStripStatusLabel_status.Text = "Ready";
             // 
             // toolStripProgressBar_progress
@@ -107,7 +108,7 @@
             // menuStrip_gcmlite
             // 
             this.menuStrip_gcmlite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(238)))), ((int)(((byte)(248)))));
-            this.menuStrip_gcmlite.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip_gcmlite.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip_gcmlite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileFToolStripMenuItem,
             this.toolStripMenuItem_tool,
@@ -127,27 +128,27 @@
             this.saveAltSToolStripMenuItem,
             this.quitAltQToolStripMenuItem});
             this.fileFToolStripMenuItem.Name = "fileFToolStripMenuItem";
-            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.fileFToolStripMenuItem.Text = "File";
             // 
             // openAltOToolStripMenuItem
             // 
             this.openAltOToolStripMenuItem.Name = "openAltOToolStripMenuItem";
-            this.openAltOToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.openAltOToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.openAltOToolStripMenuItem.Text = "Open (Alt+O)";
             this.openAltOToolStripMenuItem.Click += new System.EventHandler(this.openAltOToolStripMenuItem_Click);
             // 
             // saveAltSToolStripMenuItem
             // 
             this.saveAltSToolStripMenuItem.Name = "saveAltSToolStripMenuItem";
-            this.saveAltSToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.saveAltSToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.saveAltSToolStripMenuItem.Text = "Save (Alt+S)";
             this.saveAltSToolStripMenuItem.Click += new System.EventHandler(this.saveAltSToolStripMenuItem_Click);
             // 
             // quitAltQToolStripMenuItem
             // 
             this.quitAltQToolStripMenuItem.Name = "quitAltQToolStripMenuItem";
-            this.quitAltQToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.quitAltQToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.quitAltQToolStripMenuItem.Text = "Quit(Alt+Q)";
             this.quitAltQToolStripMenuItem.Click += new System.EventHandler(this.quitAltQToolStripMenuItem_Click);
             // 
@@ -160,41 +161,41 @@
             this.searchAltFToolStripMenuItem,
             this.clearAllAltCToolStripMenuItem});
             this.toolStripMenuItem_tool.Name = "toolStripMenuItem_tool";
-            this.toolStripMenuItem_tool.Size = new System.Drawing.Size(45, 20);
+            this.toolStripMenuItem_tool.Size = new System.Drawing.Size(46, 20);
             this.toolStripMenuItem_tool.Text = "Tool";
             // 
             // validationAltVToolStripMenuItem
             // 
             this.validationAltVToolStripMenuItem.Name = "validationAltVToolStripMenuItem";
-            this.validationAltVToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.validationAltVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.validationAltVToolStripMenuItem.Text = "Validation(Alt+V)";
             this.validationAltVToolStripMenuItem.Click += new System.EventHandler(this.validationAltVToolStripMenuItem_Click);
             // 
             // filterAltRToolStripMenuItem
             // 
             this.filterAltRToolStripMenuItem.Name = "filterAltRToolStripMenuItem";
-            this.filterAltRToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.filterAltRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.filterAltRToolStripMenuItem.Text = "Filter(Alt+R)";
             this.filterAltRToolStripMenuItem.Click += new System.EventHandler(this.filterAltRToolStripMenuItem_Click);
             // 
             // exportAltEToolStripMenuItem
             // 
             this.exportAltEToolStripMenuItem.Name = "exportAltEToolStripMenuItem";
-            this.exportAltEToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.exportAltEToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportAltEToolStripMenuItem.Text = "Export(Alt+E)";
             this.exportAltEToolStripMenuItem.Click += new System.EventHandler(this.exportAltEToolStripMenuItem_Click);
             // 
             // searchAltFToolStripMenuItem
             // 
             this.searchAltFToolStripMenuItem.Name = "searchAltFToolStripMenuItem";
-            this.searchAltFToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.searchAltFToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.searchAltFToolStripMenuItem.Text = "Search(Alt+F)";
             this.searchAltFToolStripMenuItem.Click += new System.EventHandler(this.searchAltFToolStripMenuItem_Click);
             // 
             // clearAllAltCToolStripMenuItem
             // 
             this.clearAllAltCToolStripMenuItem.Name = "clearAllAltCToolStripMenuItem";
-            this.clearAllAltCToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.clearAllAltCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearAllAltCToolStripMenuItem.Text = "Clear All(Alt+C)";
             this.clearAllAltCToolStripMenuItem.Click += new System.EventHandler(this.clearAllAltCToolStripMenuItem_Click);
             // 
@@ -205,13 +206,13 @@
             this.languageAltLToolStripMenuItem,
             this.resetColumnsToolStripMenuItem});
             this.configurationCToolStripMenuItem.Name = "configurationCToolStripMenuItem";
-            this.configurationCToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
+            this.configurationCToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
             this.configurationCToolStripMenuItem.Text = "Configuration";
             // 
             // loginGCMToolStripMenuItem
             // 
             this.loginGCMToolStripMenuItem.Name = "loginGCMToolStripMenuItem";
-            this.loginGCMToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.loginGCMToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.loginGCMToolStripMenuItem.Text = "Login GCM(Alt+G)";
             this.loginGCMToolStripMenuItem.Click += new System.EventHandler(this.loginGCMToolStripMenuItem_Click);
             // 
@@ -221,28 +222,28 @@
             this.englishToolStripMenuItem,
             this.simplifiedChineseToolStripMenuItem});
             this.languageAltLToolStripMenuItem.Name = "languageAltLToolStripMenuItem";
-            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.languageAltLToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.languageAltLToolStripMenuItem.Text = "Language(Alt+L)";
             this.languageAltLToolStripMenuItem.DropDownOpening += new System.EventHandler(this.languageAltLToolStripMenuItem_DropDownOpening);
             // 
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
             // simplifiedChineseToolStripMenuItem
             // 
             this.simplifiedChineseToolStripMenuItem.Name = "simplifiedChineseToolStripMenuItem";
-            this.simplifiedChineseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.simplifiedChineseToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.simplifiedChineseToolStripMenuItem.Text = "Simplified Chinese";
             this.simplifiedChineseToolStripMenuItem.Click += new System.EventHandler(this.simplifiedChineseToolStripMenuItem_Click);
             // 
             // resetColumnsToolStripMenuItem
             // 
             this.resetColumnsToolStripMenuItem.Name = "resetColumnsToolStripMenuItem";
-            this.resetColumnsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.resetColumnsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.resetColumnsToolStripMenuItem.Text = "Reset Local Columns";
             this.resetColumnsToolStripMenuItem.Click += new System.EventHandler(this.resetColumnsToolStripMenuItem_Click);
             // 
@@ -253,34 +254,34 @@
             this.offlineDocumentAltDToolStripMenuItem,
             this.aboutGCMLiteAltAToolStripMenuItem});
             this.helpHToolStripMenuItem.Name = "helpHToolStripMenuItem";
-            this.helpHToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.helpHToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.helpHToolStripMenuItem.Text = "Help";
             // 
             // webSupportAltHToolStripMenuItem
             // 
             this.webSupportAltHToolStripMenuItem.Name = "webSupportAltHToolStripMenuItem";
-            this.webSupportAltHToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.webSupportAltHToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.webSupportAltHToolStripMenuItem.Text = "Web Support(Alt+H)";
             this.webSupportAltHToolStripMenuItem.Click += new System.EventHandler(this.webSupportAltHToolStripMenuItem_Click);
             // 
             // offlineDocumentAltDToolStripMenuItem
             // 
             this.offlineDocumentAltDToolStripMenuItem.Name = "offlineDocumentAltDToolStripMenuItem";
-            this.offlineDocumentAltDToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.offlineDocumentAltDToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.offlineDocumentAltDToolStripMenuItem.Text = "Offline Document(Alt+D)";
             this.offlineDocumentAltDToolStripMenuItem.Click += new System.EventHandler(this.offlineDocumentAltDToolStripMenuItem_Click);
             // 
             // aboutGCMLiteAltAToolStripMenuItem
             // 
             this.aboutGCMLiteAltAToolStripMenuItem.Name = "aboutGCMLiteAltAToolStripMenuItem";
-            this.aboutGCMLiteAltAToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.aboutGCMLiteAltAToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.aboutGCMLiteAltAToolStripMenuItem.Text = "About GCMLite(Alt+A)";
             this.aboutGCMLiteAltAToolStripMenuItem.Click += new System.EventHandler(this.aboutGCMLiteAltAToolStripMenuItem_Click);
             // 
             // toolStrip_gcmlite
             // 
             this.toolStrip_gcmlite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(238)))), ((int)(((byte)(248)))));
-            this.toolStrip_gcmlite.Font = new System.Drawing.Font("微软雅黑", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))));
+            this.toolStrip_gcmlite.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))));
             this.toolStrip_gcmlite.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip_gcmlite.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip_gcmlite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -341,6 +342,7 @@
             // toolStripTextBox_search
             // 
             this.toolStripTextBox_search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripTextBox_search.Font = new System.Drawing.Font("Arial", 10F);
             this.toolStripTextBox_search.ForeColor = System.Drawing.Color.DarkGray;
             this.toolStripTextBox_search.Name = "toolStripTextBox_search";
             this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 39);
@@ -470,6 +472,7 @@
             this.Controls.Add(this.toolStrip_gcmlite);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip_gcmlite);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip_gcmlite;
             this.Name = "GCMPro";

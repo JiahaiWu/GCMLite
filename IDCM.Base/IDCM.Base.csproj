@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TextResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ImageUtil.cs" />
     <Compile Include="Utils\ProcessUtil.cs" />
     <Compile Include="Utils\Base64CShared.cs" />
     <Compile Include="Utils\Base64DESEncrypt.cs" />
