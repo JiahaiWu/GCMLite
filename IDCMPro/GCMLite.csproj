@@ -52,7 +52,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>003_05.ico</ApplicationIcon>
+    <ApplicationIcon>tubiao.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog">
@@ -98,6 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="tubiao.ico" />
     <None Include="Resources\help.png" />
     <None Include="Resources\add.png" />
     <None Include="Resources\update.png" />
