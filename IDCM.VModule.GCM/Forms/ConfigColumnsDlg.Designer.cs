@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigColumnsDlg));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView_colCfg = new System.Windows.Forms.DataGridView();
             this.Attr = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -225,6 +226,7 @@
             this.ClientSize = new System.Drawing.Size(932, 437);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConfigColumnsDlg";
             this.Text = "ConfigColumnsDlg";
             this.Load += new System.EventHandler(this.ConfigColumnsDlg_Load);

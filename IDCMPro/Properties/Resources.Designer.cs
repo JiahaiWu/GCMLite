@@ -123,6 +123,16 @@ namespace IDCM.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap fangdajing1 {
+            get {
+                object obj = ResourceManager.GetObject("fangdajing1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap gcm_logo {
             get {
                 object obj = ResourceManager.GetObject("gcm_logo", resourceCulture);
@@ -136,6 +146,16 @@ namespace IDCM.Properties {
         internal static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap help1 {
+            get {
+                object obj = ResourceManager.GetObject("help1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

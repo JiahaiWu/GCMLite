@@ -2476,7 +2476,7 @@ namespace DCMControlLib.GCM
                     {
                         X = currentTab.X + 5,
                         Y = currentTab.Y,
-                        Width = currentTab.Width - 5,
+                        Width = currentTab.Width ,
                         Height = currentTab.Height
                     };
                 }
@@ -2486,7 +2486,7 @@ namespace DCMControlLib.GCM
                     {
                         X = currentTab.X + 5,
                         Y = currentTab.Y + 5,
-                        Width = currentTab.Width - 5,
+                        Width = currentTab.Width ,
                         Height = currentTab.Height - 5
                     };
                 }
