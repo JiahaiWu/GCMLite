@@ -34,6 +34,15 @@ namespace IDCM.BGHandler
             try{
                 DCMPublisher.noteJobProgress(0);
                 res = ExcelDataImporter.parseExcelData(ctcache, xlsPath, ref dataMapping);
+                if (!res)
+                {
+                    log.Info(IDCM.Base.GlobalTextRes.Text("Import failed") + ". @filepath=" + xlsPath);
+                }
+                else
+                {
+                    log.Info(IDCM.Base.GlobalTextRes.Text("Import success") + ". @filepath=" + xlsPath);
+                    DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
+                }
             }
             catch (Exception ex)
             {
@@ -50,12 +59,14 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
+            
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
+                log.Info(IDCM.Base.GlobalTextRes.Text("Import failed") + "! @filepath=" + xlsPath);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to Import Excel document") + "！ " + error.Message, DCMMsgType.Alert);
                 return;
             }
         }

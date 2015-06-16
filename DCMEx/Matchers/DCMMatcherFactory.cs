@@ -21,7 +21,11 @@ namespace DCMEx.Matchers
                 case PatternMode.NUMBER:
                     return new DCMNumberMatcher(expChars, from, end);
                 case PatternMode.FILE:
-
+                    return new DCMFileMatcher(expChars, from, end);
+                case PatternMode.SIZE:
+                    return new DCMSizeMatcher(expChars, from, end);
+                case PatternMode.URI:
+                    return new DCMURIMatcher(expChars, from, end);
                 default:
                     throw new DCMExException("unsupported mode!");
             }

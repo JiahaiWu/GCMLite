@@ -37,6 +37,10 @@ namespace IDCM.BGHandler
                     if (sid != null && sid.Length > 0)
                     {
                         res = GCMItemsLoader.loadDetailViewData(gtcache, sid,authInfo);
+                        if (res)
+                        {
+                            DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
+                        }
                     }
                 }
             }
@@ -55,7 +59,7 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.GCMDataLoaded);
+            
             if (canceled)
                 return;
             if (error != null)

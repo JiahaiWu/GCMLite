@@ -34,6 +34,8 @@ namespace DCMEx
         DATE = 2,
         NUMBER = 3,
         FILE = 4,
+        URI = 5,
+        SIZE = 6
     }
     /// <summary>
     /// 定界符
@@ -57,8 +59,50 @@ namespace DCMEx
     /// <summary>
     /// 分组获取符
     /// </summary>
-    enum GroupFetchTag
+    enum GroupTag
     {
-        GroupTag = '$'
+        FetchTag = '$'
+    }
+    /// <summary>
+    /// 变换符
+    /// </summary>
+    enum DCMTranformToken
+    {
+        TransTag='>'
+    }
+    /// <summary>
+    /// 数值部分的模式符
+    /// </summary>
+    enum DCMNumberPatternToken
+    {
+        Float='F',
+        Integer='I'
+    }
+    /// <summary>
+    /// 数值部分的定界符
+    /// </summary>
+    enum DCMNumberDelimitToken
+    {
+        leftOpen='(',
+        rightOpen=')',
+        leftClosed='[',
+        rightClosed=']',
+        separator=','
+    }
+    /// <summary>
+    /// 日期部分的模式符
+    /// </summary>
+    enum DCMDatePatternToken
+    {
+        Fuzzy='F',
+        Strict='S'
+    }
+    /// <summary>
+    /// 日期部分的定界符
+    /// </summary>
+    enum DCMDateDelimitToken
+    {
+        leftBrace = '(',
+        rightBrace = ')'
     }
 }

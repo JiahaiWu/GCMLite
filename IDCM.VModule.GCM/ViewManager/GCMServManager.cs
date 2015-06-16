@@ -116,7 +116,7 @@ namespace IDCM.ViewManager
         internal void downGCMData(DataGridView dgv)
         {
             int[] selectedRowIdxs = fetchSelectRowIdxs(dgv);
-            GCMExportTypeDlg exportDlg = new GCMExportTypeDlg();
+            GCMExportTypeDlg exportDlg = new GCMExportTypeDlg(lastIOPath);
             if (exportDlg.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -147,7 +147,10 @@ namespace IDCM.ViewManager
                             break;
                     }
                     if (handler != null)
+                    {
+                        lastIOPath = epath;
                         BGWorkerInvoker.pushHandler(handler);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -223,6 +226,7 @@ namespace IDCM.ViewManager
 
         #region Members
         private GCMTableCache gtcache;
+        private string lastIOPath = null;
         private long lastUpdateTimeStamp=0;
         /// <summary>
         /// SignIn hold Monitor

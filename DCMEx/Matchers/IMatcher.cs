@@ -9,6 +9,8 @@ namespace DCMEx.Matchers
     interface IMatcher
     {
         bool isMatch(string chars, params string[] groups);
+        void setGroupFetchTag(GroupFetcher fetchTag);
         string[] getGroups();
     }
+
 }

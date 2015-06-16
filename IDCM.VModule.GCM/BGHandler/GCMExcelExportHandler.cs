@@ -39,11 +39,15 @@ namespace IDCM.BGHandler
                     res = exporter.exportExcel(gtcache, xlsPath, selectedRows,exportDetail);
                 else
                     res = exporter.exportExcel(gtcache, xlsPath, exportDetail);
+                if (res)
+                {
+                    DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
+                }
             }
             catch (Exception ex)
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to export XML document")+"！ ", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export XML document") + "！ " + ex.Message, DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export Excel document") + "！ " + ex.Message, DCMMsgType.Alert);
             }
             return new object[] { res };
         }
@@ -55,13 +59,14 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
+           
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
                 log.Info(IDCM.Base.GlobalTextRes.Text("Export failed")+"! @filepath=" + xlsPath);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export Excel document") + "！ " + error.Message, DCMMsgType.Alert);
             }
             else
             {

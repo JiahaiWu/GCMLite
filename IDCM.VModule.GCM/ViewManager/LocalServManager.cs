@@ -29,10 +29,24 @@ namespace IDCM.ViewManager
         public LocalServManager(CTableCache ctcache)
         {
             this.ctcache = ctcache;
+            lastIOPath=ConfigurationManager.AppSettings[SysConstants.LastWorkSpace];
         }
         #endregion
 
         #region Methods
+
+        internal void addNewRow()
+        {
+            Dictionary<string, string> mapvalues = new Dictionary<string, string>();
+            foreach (CustomColDef ccd in CustomColDefGetter.getCustomTableDef())
+            {
+                mapvalues[ccd.Attr] = ccd.DefaultVal;
+            }
+            lock (ctcache.GSyncRoot)
+            {
+                ctcache.addRow(mapvalues);
+            }
+        }
         /// <summary>
         /// 导入数据文档
         /// </summary>
@@ -62,6 +76,21 @@ namespace IDCM.ViewManager
                     eih = new MDIImportHandler(ctcache, fpath);
                 }
             }
+            if (fpath.ToLower().EndsWith(".tsv")|| fpath.ToLower().EndsWith(".csv"))
+            {
+                ExportType txtType=fpath.ToLower().EndsWith(".tsv") ? ExportType.TSV : ExportType.CSV;
+                if (DataImportChecker.checkForTextImport(fpath, ref dataMapping, txtType))
+                {
+                    eih = new TextImportHandler(ctcache, fpath, txtType, ref dataMapping);
+                }
+            }
+            if (fpath.ToLower().EndsWith(".jso"))
+            {
+                if (DataImportChecker.checkForJSOImport(fpath, ref dataMapping))
+                {
+                    eih = new JSONListImportHandler(ctcache, fpath, ref dataMapping);
+                }
+            }
             if(eih!=null)
                 BGWorkerInvoker.pushHandler(eih);
         }
@@ -72,7 +101,7 @@ namespace IDCM.ViewManager
         public void exportData(DataGridView dgv)
         {
             int[] selectedRowIdxs = fetchSelectRowIdxs(dgv);
-            ExportTypeDlg exportDlg = new ExportTypeDlg();
+            ExportTypeDlg exportDlg = new ExportTypeDlg(lastIOPath);
             if (exportDlg.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -140,7 +169,6 @@ namespace IDCM.ViewManager
         }
         internal void syncKeyCellValue(DataGridViewRow dgvr)
         {
-            ctcache.syncKeyCellValue(dgvr);
             dgvr.Tag = null;
         }
         /// <summary>
@@ -187,6 +215,10 @@ namespace IDCM.ViewManager
 
         public string doDumpWork()
         {
+            if (lastIOPath != null && lastIOPath.Length > 0)
+            {
+                ConfigurationHelper.SetAppConfig(SysConstants.LastWorkSpace, lastIOPath, SysConstants.defaultCfgPath);
+            }
             LocalDataDumper dumper = new LocalDataDumper();
             string dumppath = dumper.build(ctcache).dump();
             return dumppath;
@@ -235,6 +267,7 @@ namespace IDCM.ViewManager
         private CTableCache ctcache = null;
         private string lastIOPath = null;
         #endregion
+
 
     }
 }

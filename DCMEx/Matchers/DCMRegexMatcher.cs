@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace DCMEx.Matchers
 {
@@ -11,6 +11,7 @@ namespace DCMEx.Matchers
     {
         private Regex regex = null;
         private Match match = null;
+        public GroupFetcher groupFetchTag = null;
         List<string> groups = new List<string>();
 
 
@@ -23,6 +24,10 @@ namespace DCMEx.Matchers
         {
             match = regex.Match(chars);
             return match.Success;
+        }
+        public void setGroupFetchTag(GroupFetcher groupFetchTag)
+        {
+            this.groupFetchTag = groupFetchTag;
         }
         public string[] getGroups()
         {

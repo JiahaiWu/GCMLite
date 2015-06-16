@@ -1,24 +1,23 @@
-﻿using IDCM.BGHandlerManager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using IDCM.Core;
-using IDCM.DataTransfer;
 using IDCM.MsgDriver;
-using System.Data;
+using IDCM.BGHandlerManager;
+using IDCM.DataTransfer;
+using IDCM.Base.ComPO;
 
 namespace IDCM.BGHandler
 {
-    public class XMLImportHandler : AbsBGHandler
+    class TextImportHandler: AbsBGHandler
     {
-        public XMLImportHandler(CTableCache ctcache, string fpath, ref Dictionary<string, string> dataMapping)
+        public TextImportHandler(CTableCache ctcache, string fpath, ExportType etype, ref Dictionary<string, string> dataMapping)
         {
-            this.xlsPath = System.IO.Path.GetFullPath(fpath);
-            this.dataMapping = dataMapping;
             this.ctcache = ctcache;
-            
+            this.txtPath = System.IO.Path.GetFullPath(fpath);
+            this.dataMapping = dataMapping;
+            this.txtType = etype;
         }
         /// <summary>
         /// 后台任务执行方法的主体部分，异步执行代码段！
@@ -31,7 +30,18 @@ namespace IDCM.BGHandler
             try
             {
                 DCMPublisher.noteJobProgress(0);
-                res = XMLDataImporter.parseXMLData(ctcache, xlsPath, ref dataMapping);
+                switch (txtType)
+                {
+                    case ExportType.CSV:
+                        res = TextDataImporter.parseCSVData(ctcache, txtPath, ref dataMapping);
+                        break;
+                    case ExportType.TSV:
+                        res = TextDataImporter.parseTSVData(ctcache, txtPath, ref dataMapping);
+                        break;
+                    default:
+                        res = false;
+                        break;
+                }
                 if (res)
                 {
                     DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
@@ -39,10 +49,10 @@ namespace IDCM.BGHandler
             }
             catch (Exception ex)
             {
-                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import XML document")+"！", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + ex.Message, DCMMsgType.Alert);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import text file") + "！", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import text file") + "！ " + ex.Message, DCMMsgType.Alert);
             }
-            return new object[] { res, xlsPath };
+            return new object[] { res, txtPath };
         }
 
         /// <summary>
@@ -59,8 +69,7 @@ namespace IDCM.BGHandler
             if (error != null)
             {
                 log.Error(error);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + error.Message, DCMMsgType.Alert);
-
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import text file") + "！ " + error.Message, DCMMsgType.Alert);
                 return;
             }
         }
@@ -68,8 +77,9 @@ namespace IDCM.BGHandler
         {
             base.addHandler(nextHandler);
         }
-        private string xlsPath = null;
-        private Dictionary<string, string> dataMapping = null;
         private CTableCache ctcache;
+        private ExportType txtType;
+        private string txtPath = null;
+        private Dictionary<string, string> dataMapping = null;
     }
 }

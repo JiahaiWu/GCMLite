@@ -1,24 +1,21 @@
-﻿using IDCM.BGHandlerManager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using IDCM.Core;
-using IDCM.DataTransfer;
 using IDCM.MsgDriver;
-using System.Data;
+using IDCM.BGHandlerManager;
+using IDCM.DataTransfer;
 
 namespace IDCM.BGHandler
 {
-    public class XMLImportHandler : AbsBGHandler
+    class JSONListImportHandler: AbsBGHandler
     {
-        public XMLImportHandler(CTableCache ctcache, string fpath, ref Dictionary<string, string> dataMapping)
+        public JSONListImportHandler(CTableCache ctcache, string fpath, ref Dictionary<string, string> dataMapping)
         {
-            this.xlsPath = System.IO.Path.GetFullPath(fpath);
-            this.dataMapping = dataMapping;
             this.ctcache = ctcache;
-            
+            this.dataMapping = dataMapping;
+            this.jsoPath = System.IO.Path.GetFullPath(fpath);
         }
         /// <summary>
         /// 后台任务执行方法的主体部分，异步执行代码段！
@@ -31,18 +28,16 @@ namespace IDCM.BGHandler
             try
             {
                 DCMPublisher.noteJobProgress(0);
-                res = XMLDataImporter.parseXMLData(ctcache, xlsPath, ref dataMapping);
-                if (res)
-                {
+                res = JSONListDataImporter.parseJSONListData(ctcache, jsoPath,ref dataMapping);
+                if(res)
                     DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
-                }
             }
             catch (Exception ex)
             {
-                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import XML document")+"！", ex);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + ex.Message, DCMMsgType.Alert);
+                log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import JSON list file") + "！", ex);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import JSON list file") + "！ " + ex.Message, DCMMsgType.Alert);
             }
-            return new object[] { res, xlsPath };
+            return new object[] { res, jsoPath };
         }
 
         /// <summary>
@@ -53,14 +48,12 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
-                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import XML document") + "！" + error.Message, DCMMsgType.Alert);
-
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to import JSON list file") + "！ " + error.Message, DCMMsgType.Alert);
                 return;
             }
         }
@@ -68,8 +61,9 @@ namespace IDCM.BGHandler
         {
             base.addHandler(nextHandler);
         }
-        private string xlsPath = null;
-        private Dictionary<string, string> dataMapping = null;
         private CTableCache ctcache;
+        
+        private string jsoPath = null;
+        private Dictionary<string, string> dataMapping = null;
     }
 }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.AccessControl;
 
 namespace IDCM.Base.Utils
 {
@@ -119,7 +122,23 @@ namespace IDCM.Base.Utils
             }
             return false;
         }
+        public static bool isFileWriteAble(string filepath)
+        {
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(filepath));
+            DirectorySecurity ds = new DirectorySecurity(di.FullName, AccessControlSections.Access);
+            if (!ds.AreAccessRulesProtected)
+            {
+                var permissionSet = new PermissionSet(PermissionState.None);
+                var writePermission = new FileIOPermission(FileIOPermissionAccess.Write, filepath);
+                permissionSet.AddPermission(writePermission);
 
+                if (permissionSet.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
     }
 }

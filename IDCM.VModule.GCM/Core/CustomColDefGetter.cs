@@ -23,10 +23,7 @@ namespace IDCM.Core
             try
             {
                 string srcHashCode = null;
-                string cacheDir = SysConstants.initEnvDir + SysConstants.cacheDir;
-                if (!File.Exists(cacheDir))
-                    Directory.CreateDirectory(cacheDir);
-                string hisCfg = cacheDir + SysConstants.tableDefNote;
+                string hisCfg = Path.GetDirectoryName(SysConstants.exePath) + Path.DirectorySeparatorChar + SysConstants.tableDefNote;
                 string userCfg = Path.GetDirectoryName(SysConstants.exePath) + Path.DirectorySeparatorChar + ConfigurationManager.AppSettings[SysConstants.CTableDef];
                 if (File.Exists(userCfg))
                 {
@@ -34,19 +31,26 @@ namespace IDCM.Core
                     srcHashCode = HashUtil.md5HexCode(fs);
                     fs.Close();
                 }
-                if (File.Exists(hisCfg))
+                if (File.Exists(hisCfg) && new FileInfo(hisCfg).Length>0)
                 {
                     XmlDocument xmlDoc = new XmlDocument();
                     using (FileStream xfs = new FileStream(hisCfg, FileMode.Open, FileAccess.Read))
                     {
-                        xmlDoc.Load(xfs);
-                        XmlNode lastSrcNode = xmlDoc.SelectSingleNode("/CTableConfig/lastHashCode");
-                        XmlNode sxnode = xmlDoc.SelectSingleNode("/CTableConfig/fields");
-                        lastSrcHashCode = lastSrcNode != null && lastSrcNode.InnerText.Length > 0 ? lastSrcNode.InnerText.Trim() : null;
-                        if (sxnode!=null && srcHashCode == null || srcHashCode.Equals(lastSrcHashCode))
+                        try
                         {
-                            ccds = CustomColDef.getCustomTableDef(sxnode);
-                            setKeyColDef(xmlDoc,ccds);
+                            xmlDoc.Load(xfs);
+                            XmlNode lastSrcNode = xmlDoc.SelectSingleNode("/CTableConfig/lastHashCode");
+                            XmlNode sxnode = xmlDoc.SelectSingleNode("/CTableConfig/fields");
+                            lastSrcHashCode = lastSrcNode != null && lastSrcNode.InnerText.Length > 0 ? lastSrcNode.InnerText.Trim() : null;
+                            if (sxnode != null && srcHashCode == null || srcHashCode.Equals(lastSrcHashCode))
+                            {
+                                ccds = CustomColDef.getCustomTableDef(sxnode);
+                                setKeyColDef(xmlDoc, ccds);
+                            }
+                        }
+                        catch (System.Xml.XmlException)
+                        {
+                            ccds = null;
                         }
                     }
                 }
@@ -106,10 +110,7 @@ namespace IDCM.Core
             if(dirtyStatus)
             {
                 dirtyStatus=false;
-                string cacheDir = SysConstants.initEnvDir + SysConstants.cacheDir;
-                if (!File.Exists(cacheDir))
-                    Directory.CreateDirectory(cacheDir);
-                string hisCfg = cacheDir + SysConstants.tableDefNote;
+                string hisCfg = Path.GetDirectoryName(SysConstants.exePath) + Path.DirectorySeparatorChar + SysConstants.tableDefNote;
                 StringBuilder sb = new StringBuilder();
                 XmlDocument xmlDoc = new XmlDocument();
                 sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

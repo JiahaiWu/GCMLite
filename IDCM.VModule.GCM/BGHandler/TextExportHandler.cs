@@ -44,6 +44,11 @@ namespace IDCM.BGHandler
                         res = exporter.exportText(ctableCache, textPath, selectedRows, spliter);
                     else
                         res = exporter.exportText(ctableCache, textPath, spliter);
+                    if (res)
+                    {
+                        DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
+                        log.Info(IDCM.Base.GlobalTextRes.Text("Export success") + ". @filepath=" + textPath);
+                    }
                 }
                 else
                 {
@@ -66,17 +71,14 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
+            
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
                 log.Info(IDCM.Base.GlobalTextRes.Text("Export failed")+"! @filepath=" + textPath);
-            }
-            else
-            {
-                log.Info(IDCM.Base.GlobalTextRes.Text("Export success") + ". @filepath=" + textPath);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export text file") + "！ " + error.Message, DCMMsgType.Alert);
             }
         }
 

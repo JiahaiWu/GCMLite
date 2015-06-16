@@ -42,6 +42,8 @@ namespace IDCM.BGHandler
                         res = exporter.exportJSONList(ctableCache, xlsPath, selectedRows);
                     else
                         res = exporter.exportJSONList(ctableCache, xlsPath);
+                    if(res)
+                        DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
                 }
                 else
                 {
@@ -64,13 +66,15 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
+            
             if (canceled)
                 return;
             if (error != null)
             {
                 log.Error(error);
                 log.Info(IDCM.Base.GlobalTextRes.Text("Export failed")+"! @filepath=" + xlsPath);
+                DCMPublisher.noteSimpleMsg("ERROR: " + IDCM.Base.GlobalTextRes.Text("Failed to export JSON File") + "！ " + error.Message, DCMMsgType.Alert);
+
             }
             else
             {

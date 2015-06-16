@@ -44,10 +44,14 @@
     <Compile Include="DCMExEnums.cs" />
     <Compile Include="DCMExException.cs" />
     <Compile Include="DCMExPattern.cs" />
+    <Compile Include="GroupFetcher.cs" />
     <Compile Include="Matchers\DCMDateMatcher.cs" />
+    <Compile Include="Matchers\DCMFileMatcher.cs" />
     <Compile Include="Matchers\DCMMatcherFactory.cs" />
     <Compile Include="Matchers\DCMNumberMatcher.cs" />
     <Compile Include="Matchers\DCMRegexMatcher.cs" />
+    <Compile Include="Matchers\DCMSizeMatcher.cs" />
+    <Compile Include="Matchers\DCMURIMatcher.cs" />
     <Compile Include="Matchers\IMatcher.cs" />
     <Compile Include="Matchers\DCMMatcherGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

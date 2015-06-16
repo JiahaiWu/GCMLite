@@ -50,9 +50,18 @@ namespace IDCM.AppContext
                 Application.ApplicationExit +=this.OnApplicationExit;
                 // Create main application form and active the initForm method
                 prepareGCMPro(preSetttings);
+                ///////////////////////////////////////////////////////////////
+#if DEBUG
+                //脚手架程序执行部分,仅限于开发阶段的辅助性工程代码
+                //Dlgs.GCMLiteScaffold scaffold = new Dlgs.GCMLiteScaffold();
+                //scaffold.Show(mainManger);
+#endif
+                //////////////////////////////////////////////////////////////
+
                 mainManger = new GCMPro();
                 mainManger.FormClosed+=this.OnMainManagerExit;
                 mainManger.Show();
+
                 //Run HandleInstanceMonitor
                 handleMonitor.Interval = 500;
                 handleMonitor.Elapsed += OnHMHeartBreak;

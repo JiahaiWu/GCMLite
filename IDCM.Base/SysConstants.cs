@@ -95,6 +95,10 @@ namespace IDCM.Base
         /// 运行模式标记
         /// </summary>
         public const string RunningMode = "RunningMode";
+        /// <summary>
+        /// 粘贴数据时根据需要自动创建新行
+        /// </summary>
+        public const string AutoRowForPaste = "AutoRowForPaste";
         #endregion
         /// <summary>
         /// Session 保持失效时间30分钟

@@ -81,6 +81,7 @@
     <Compile Include="BGHandler\LocalDataCheckHandler.cs" />
     <Compile Include="BGHandler\LocalDataPubHandler.cs" />
     <Compile Include="BGHandler\TextExportHandler.cs" />
+    <Compile Include="BGHandler\TextImportHandler.cs" />
     <Compile Include="BGHandler\XMLExportHandler.cs" />
     <Compile Include="BGHandler\XMLImportHandler.cs" />
     <Compile Include="ComponentUtil\ControlAsyncUtil.cs" />
@@ -109,7 +110,9 @@
     <Compile Include="DataTransfer\GCMTextExporter.cs" />
     <Compile Include="DataTransfer\GCMXMLExporter.cs" />
     <Compile Include="DataTransfer\HelpDocRequester.cs" />
+    <Compile Include="DataTransfer\JSONListDataImporter.cs" />
     <Compile Include="DataTransfer\JSONListExporter.cs" />
+    <Compile Include="BGHandler\JSONListImportHandler.cs" />
     <Compile Include="DataTransfer\LocalDataDumper.cs" />
     <Compile Include="Core\GCMTableCache.cs" />
     <Compile Include="DataTransfer\ExcelDataImporter.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="DataTransfer\MDIDataImporter.cs" />
     <Compile Include="DataTransfer\StrainListQueryExecutor.cs" />
     <Compile Include="DataTransfer\StrainViewQueryExecutor.cs" />
+    <Compile Include="DataTransfer\TextDataImporter.cs" />
     <Compile Include="DataTransfer\TextExporter.cs" />
     <Compile Include="DataTransfer\XMLDataImporter.cs" />
     <Compile Include="DataTransfer\XMLExporter.cs" />
