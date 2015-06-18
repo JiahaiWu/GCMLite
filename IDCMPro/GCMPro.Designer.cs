@@ -54,13 +54,11 @@
             this.offlineDocumentAltDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutGCMLiteAltAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip_gcmlite = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_help = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_search = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBox_search = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
-            this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
-            this.toolStripButton_help = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_search = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_down = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_pub = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_compare = new System.Windows.Forms.ToolStripButton();
@@ -68,6 +66,8 @@
             this.toolStripButton_import = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_add = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel_OfficialNotice = new System.Windows.Forms.ToolStripLabel();
+            this.gcmProView_lite = new IDCM.VModule.GCM.GCMProView();
             this.statusStrip1.SuspendLayout();
             this.menuStrip_gcmlite.SuspendLayout();
             this.toolStrip_gcmlite.SuspendLayout();
@@ -308,12 +308,36 @@
             this.toolStrip_gcmlite.Text = "toolStrip1";
             this.toolStrip_gcmlite.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStrip_gcmlite_Paint);
             // 
+            // toolStripButton_help
+            // 
+            this.toolStripButton_help.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton_help.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_help.Image = global::IDCM.Properties.Resources.help1;
+            this.toolStripButton_help.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_help.Name = "toolStripButton_help";
+            this.toolStripButton_help.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_help.Text = "toolStripButton7";
+            this.toolStripButton_help.ToolTipText = "Help";
+            this.toolStripButton_help.Click += new System.EventHandler(this.toolStripButton_help_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripButton_search
+            // 
+            this.toolStripButton_search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton_search.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_search.Image = global::IDCM.Properties.Resources.fangdajing1;
+            this.toolStripButton_search.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_search.Name = "toolStripButton_search";
+            this.toolStripButton_search.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_search.Text = "toolStripButton6";
+            this.toolStripButton_search.ToolTipText = "Search";
+            this.toolStripButton_search.Click += new System.EventHandler(this.toolStripButton_search_Click);
             // 
             // toolStripTextBox_search
             // 
@@ -334,48 +358,6 @@
             this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
-            // 
-            // toolStripLabel_OfficialNotice
-            // 
-            this.toolStripLabel_OfficialNotice.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Italic);
-            this.toolStripLabel_OfficialNotice.ForeColor = System.Drawing.Color.Blue;
-            this.toolStripLabel_OfficialNotice.Name = "toolStripLabel_OfficialNotice";
-            this.toolStripLabel_OfficialNotice.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.toolStripLabel_OfficialNotice.Size = new System.Drawing.Size(4, 36);
-            // 
-            // gcmProView_lite
-            // 
-            this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcmProView_lite.Enabled = false;
-            this.gcmProView_lite.Location = new System.Drawing.Point(0, 63);
-            this.gcmProView_lite.Name = "gcmProView_lite";
-            this.gcmProView_lite.Size = new System.Drawing.Size(871, 437);
-            this.gcmProView_lite.TabIndex = 3;
-            this.gcmProView_lite.Visible = false;
-            // 
-            // toolStripButton_help
-            // 
-            this.toolStripButton_help.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton_help.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_help.Image = global::IDCM.Properties.Resources.help1;
-            this.toolStripButton_help.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_help.Name = "toolStripButton_help";
-            this.toolStripButton_help.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton_help.Text = "toolStripButton7";
-            this.toolStripButton_help.ToolTipText = "Help";
-            this.toolStripButton_help.Click += new System.EventHandler(this.toolStripButton_help_Click);
-            // 
-            // toolStripButton_search
-            // 
-            this.toolStripButton_search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton_search.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_search.Image = global::IDCM.Properties.Resources.fangdajing1;
-            this.toolStripButton_search.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_search.Name = "toolStripButton_search";
-            this.toolStripButton_search.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton_search.Text = "toolStripButton6";
-            this.toolStripButton_search.ToolTipText = "Search";
-            this.toolStripButton_search.Click += new System.EventHandler(this.toolStripButton_search_Click);
             // 
             // toolStripButton_down
             // 
@@ -462,6 +444,24 @@
             this.toolStripButton_add.ToolTipText = "Add Row";
             this.toolStripButton_add.Click += new System.EventHandler(this.toolStripButton_add_Click);
             // 
+            // toolStripLabel_OfficialNotice
+            // 
+            this.toolStripLabel_OfficialNotice.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Italic);
+            this.toolStripLabel_OfficialNotice.ForeColor = System.Drawing.Color.Blue;
+            this.toolStripLabel_OfficialNotice.Name = "toolStripLabel_OfficialNotice";
+            this.toolStripLabel_OfficialNotice.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.toolStripLabel_OfficialNotice.Size = new System.Drawing.Size(4, 36);
+            // 
+            // gcmProView_lite
+            // 
+            this.gcmProView_lite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcmProView_lite.Enabled = false;
+            this.gcmProView_lite.Location = new System.Drawing.Point(0, 63);
+            this.gcmProView_lite.Name = "gcmProView_lite";
+            this.gcmProView_lite.Size = new System.Drawing.Size(871, 437);
+            this.gcmProView_lite.TabIndex = 3;
+            this.gcmProView_lite.Visible = false;
+            // 
             // GCMPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -476,7 +476,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip_gcmlite;
             this.Name = "GCMPro";
-            this.Text = "GCMLite";
+            this.Text = "Global Catalogue of Microorganisms (GCMLite)";
             this.Load += new System.EventHandler(this.GCMPro_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
