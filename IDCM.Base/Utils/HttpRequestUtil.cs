@@ -220,7 +220,7 @@ namespace IDCM.Base.Utils
             memStream.Position = 0;
             memStream.CopyTo(requestStream);
             memStream.Close();
-            log.Debug("@@memStream=" + SysConstants.defaultEncoding.GetString(memStream.ToArray()));
+            log.Debug("@@memStream=" + GlobalTextRes.DataEncoding.GetString(memStream.ToArray()));
             requestStream.Close();
             WebResponse webResponse = httpWebRequest.GetResponse();
             Stream stream = webResponse.GetResponseStream();

@@ -33,6 +33,36 @@ namespace IDCM.Base
             appCI = cultureInfo;
         }
 
+        /// <summary>
+        /// 内部默认的字符编码
+        /// </summary>
+        public static Encoding DataEncoding
+        {
+            get
+            {
+                if (dataEncoding != null)
+                    return dataEncoding;
+                else
+                {
+                    try
+                    {
+                        dataEncoding = Encoding.GetEncoding(ConfigurationManager.AppSettings[SysConstants.DataEncoding]);
+                    }
+                    catch (Exception)
+                    {
+                        dataEncoding = null;
+                    }
+                    dataEncoding = SysConstants.defaultEncoding;
+                }
+                return dataEncoding;
+            }
+            set
+            {
+                dataEncoding = value;
+            }
+        }
+
+        private static Encoding dataEncoding =null;
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private static CultureInfo appCI = null;
         private static ResourceManager rm = new ResourceManager("IDCM.Base.TextResources", Assembly.GetExecutingAssembly());

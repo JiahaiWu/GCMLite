@@ -18,7 +18,7 @@ namespace IDCM.DataTransfer
                 return false;
             using (FileStream fs = new FileStream(jsoPath, FileMode.Open, FileAccess.Read))
             {
-                StreamReader sr = new StreamReader(fs, SysConstants.defaultEncoding, true);
+                StreamReader sr = new StreamReader(fs, GlobalTextRes.DataEncoding, true);
                 string line = sr.ReadLine();
                 while (line != null)
                 {

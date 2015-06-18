@@ -105,4 +105,16 @@ namespace DCMEx
         leftBrace = '(',
         rightBrace = ')'
     }
+
+    /// <summary>
+    /// 长度部分的定界符
+    /// </summary>
+    enum DCMSizeDelimitToken
+    {
+        leftOpen = '(',
+        rightOpen = ')',
+        leftClosed = '[',
+        rightClosed = ']',
+        separator = ','
+    }
 }

@@ -24,6 +24,7 @@ namespace IDCM.Forms
             this.checkBox_unique.Text = IDCM.Base.GlobalTextRes.Text("Unique");
             this.Text = IDCM.Base.GlobalTextRes.Text("Column Config Dialog");
             this.label_defaultVal.Text = IDCM.Base.GlobalTextRes.Text("Default Value")+":";
+            this.label_comments.Text = IDCM.Base.GlobalTextRes.Text("Comments") + ":";
             //////////////////////////////////////////////
             this.cursor = cursor;
             this.customCol = ccd;
@@ -33,6 +34,7 @@ namespace IDCM.Forms
             this.checkBox_unique.Checked = ccd.IsUnique;
             this.textBox_defaultVal.Text = ccd.DefaultVal;
             this.textBox_restrict.Text = ccd.Restrict;
+            this.textBox_comments.Text = ccd.Comments;
             this.textBox_restrict.BackColor = Color.White;
             dirtyStatus = false;
             this.FormClosing+=ColConfigDlg_FormClosing;
@@ -55,6 +57,7 @@ namespace IDCM.Forms
                         this.customCol.Restrict = this.textBox_restrict.Text;
                         this.customCol.Alias = this.textBox_ColAlias.Text;
                         this.customCol.DefaultVal = this.textBox_defaultVal.Text;
+                        this.customCol.Comments = this.textBox_comments.Text;
                         ColConfigChanged(cursor, customCol);
                     }
                 }
@@ -86,6 +89,12 @@ namespace IDCM.Forms
         private void textBox_ColAlias_TextChanged(object sender, EventArgs e)
         {
             customCol.Alias = this.textBox_ColAlias.Text;
+            dirtyStatus = true;
+        }
+
+        private void textBox_comments_TextChanged(object sender, EventArgs e)
+        {
+            customCol.Comments = this.textBox_ColAlias.Text;
             dirtyStatus = true;
         }
         private void textBox_restrict_TextChanged(object sender, EventArgs e)
@@ -122,5 +131,6 @@ namespace IDCM.Forms
         private bool dirtyStatus = false;
         public delegate void ColConfigChangedHandler(int cursor,CustomColDef ccd);
         #endregion
+
     }
 }

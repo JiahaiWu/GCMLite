@@ -21,7 +21,7 @@
     # 1.未正确设置keyNode的情况下，请注意第一个字段默认为主键字段名称，且必须为非空值。
     # 2.Enable为可选的附加属性，默认值为True。
     # 3.配置文档使用UTF-8字符集编码。
-    # @see http://gcm.wfcc.info/GCtextBox_ColAliashelp
+    # @see http://124.16.144.193:81/IDCM.ACServer/GCMLiteHelp
     ###############################################################
     ]]>
   </description>
@@ -31,6 +31,7 @@
       <Unique>true</Unique>
       <Restrict>REGEX:(\w+)(.*)</Restrict>
       <DefaultVal></DefaultVal>
+      <Comments></Comments>
       <Enable>true</Enable>
     </strain_number>
     <other_collection_numbers>

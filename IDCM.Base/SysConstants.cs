@@ -99,15 +99,20 @@ namespace IDCM.Base
         /// 粘贴数据时根据需要自动创建新行
         /// </summary>
         public const string AutoRowForPaste = "AutoRowForPaste";
+        /// <summary>
+        /// 数据交互使用的默认字符集
+        /// </summary>
+        public const string DataEncoding = "DataEncoding";
         #endregion
         /// <summary>
         /// Session 保持失效时间30分钟
         /// </summary>
         public static int SessionValidMilliSeconds = 30*60000;
+
         /// <summary>
         /// 内部默认的字符编码
         /// </summary>
-        public static Encoding defaultEncoding = new UTF8Encoding(true);
+        internal static Encoding defaultEncoding = new UTF8Encoding(true);
         public static string initEnvDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         public static string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
         public static string defaultCfgPath = Path.GetDirectoryName(exePath) + Path.DirectorySeparatorChar + Path.GetFileName(exePath).Replace(".vshost.exe", ".exe") + ".config";

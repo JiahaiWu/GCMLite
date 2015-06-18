@@ -540,4 +540,7 @@
   <data name="Please notice the error tips shown in the data grid view, fix those errors and confirm again." xml:space="preserve">
     <value>请注意在数据表单中的错误提示标记，修复相应的错误后再执行该操作。</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>解释说明</value>
+  </data>
 </root>

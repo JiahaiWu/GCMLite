@@ -65,6 +65,10 @@ namespace IDCM.Core
         /// 默认的排序标记值
         /// </summary>
         public int Corder { get; set; }
+        /// <summary>
+        /// 解释说明
+        /// </summary>
+        public string Comments { get; set; }
         #endregion
 
         #region Methods
@@ -146,6 +150,11 @@ namespace IDCM.Core
                         ccd.DefaultVal = subNode.InnerText;
                         continue;
                     }
+                    if (subNode.Name.Equals("Comments"))
+                    {
+                        ccd.Comments = subNode.InnerText;
+                        continue;
+                    }
                 }
                 return ccd;
             }
@@ -178,6 +187,12 @@ namespace IDCM.Core
                 defaultVal.InnerText = DefaultVal;
                 field.AppendChild(defaultVal);
             }
+            if (Comments != null)
+            {
+                XmlElement defaultVal = xmlDoc.CreateElement("Comments");
+                defaultVal.InnerText = DefaultVal;
+                field.AppendChild(defaultVal);
+            }
             XmlElement enable = xmlDoc.CreateElement("Enable");
             enable.InnerText = IsEnable.ToString();
             field.AppendChild(enable);
@@ -200,6 +215,7 @@ namespace IDCM.Core
             copyccd.IsEnable=IsEnable;
             copyccd.DefaultVal=DefaultVal;
             copyccd.Corder=Corder;
+            copyccd.Comments = Comments;
             return copyccd;
 
         }

@@ -40,16 +40,19 @@ namespace DCMEx.Matchers
                 {
                     case (char)DCMNumberDelimitToken.leftClosed:
                     case (char)DCMNumberDelimitToken.leftOpen:
+                        numberPattern = DCMNumberPatternToken.Float;
+                        break;
                     case (char)DCMNumberPatternToken.Float:
+                        head++;
                         numberPattern = DCMNumberPatternToken.Float;
                         break;
                     case (char)DCMNumberPatternToken.Integer:
+                        head++;
                         numberPattern = DCMNumberPatternToken.Integer;
                         break;
                     default:
                         throw new DCMExException("Synax error in identify number pattern tag.");
                 }
-                head++;
                 head = filterWhiteSpace(head);
                 detectNumberInterval(ref head);
                 head = filterWhiteSpace(head);

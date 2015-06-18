@@ -62,6 +62,9 @@ namespace IDCM
             this.toolStripButton_del.ToolTipText = GlobalTextRes.Text("Delete");
             this.toolStripButton_add.ToolTipText = GlobalTextRes.Text("Add Row");
 
+            this.toolStripTextBox_search.Text = GlobalTextRes.Text("Quick_Search");
+            this.toolStripTextBox_search.ForeColor = Color.DarkGray;
+
             viewMonitor = new Timer();
             viewMonitor.Interval = 500;
             viewMonitor.Tick+=viewMonitor_Tick;

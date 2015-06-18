@@ -10,6 +10,10 @@ namespace IDCM.Core
         #region Constructor&Destructor
         internal CustomColValidator(CustomColDef ccd)
         {
+            if (ccd.Comments != null && ccd.Comments.Trim().Length > 0)
+            {
+                validDesc += ccd.Comments + "\n";
+            }
             isRequire = ccd.IsRequire;
             if (isRequire)
             {

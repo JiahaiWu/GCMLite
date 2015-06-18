@@ -47,9 +47,9 @@ namespace IDCM.Core
             {
                 log.Error(IDCM.Base.GlobalTextRes.Text("Failed to import excel file")+"！ ", ex);
 #if DEBUG
-                DCMPublisher.noteSimpleMsg("Excel: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString(),DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("Error: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message + "\n" + ex.ToString(),DCMMsgType.Alert);
 #else
-                DCMPublisher.noteSimpleMsg("Excel: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message,DCMMsgType.Alert);
+                DCMPublisher.noteSimpleMsg("Error: " + IDCM.Base.GlobalTextRes.Text("Failed to import excel file") + "！ " + ex.Message,DCMMsgType.Alert);
 #endif
             }
             return false;
@@ -138,7 +138,7 @@ namespace IDCM.Core
                 List<string> attrNameList = new List<string>();
                 using (FileStream fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
                 {
-                    using (StreamReader sr = new StreamReader(fs, SysConstants.defaultEncoding, true))
+                    using (StreamReader sr = new StreamReader(fs, GlobalTextRes.DataEncoding, true))
                     {
                         int attrListCount = 0;
                         string line = sr.ReadLine();
@@ -204,7 +204,7 @@ namespace IDCM.Core
                 List<string> attrNameList = new List<string>();
                 using (FileStream fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
                 {
-                    using (StreamReader sr = new StreamReader(fs, SysConstants.defaultEncoding, true))
+                    using (StreamReader sr = new StreamReader(fs, GlobalTextRes.DataEncoding, true))
                     {
                         string line = sr.ReadLine();
                         while (line != null)

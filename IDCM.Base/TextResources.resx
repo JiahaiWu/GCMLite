@@ -537,4 +537,7 @@
   <data name="Please notice the error tips shown in the data grid view, fix those errors and confirm again." xml:space="preserve">
     <value>Please notice the error tips shown in the data grid view, fix those errors and confirm again.</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
 </root>

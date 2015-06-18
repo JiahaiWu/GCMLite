@@ -30,23 +30,26 @@ namespace DCMEx.Matchers
                 switch (ch)
                 {
                     case (char)DCMDateDelimitToken.leftBrace:
+                        datePattern = DCMDatePatternToken.Fuzzy;
+                        break;
                     case (char)DCMDatePatternToken.Fuzzy:
+                        head++;
                         datePattern = DCMDatePatternToken.Fuzzy;
                         break;
                     case (char)DCMDatePatternToken.Strict:
+                        head++;
                         datePattern = DCMDatePatternToken.Strict;
                         break;
                     default:
                         throw new DCMExException("Synax error in identify date pattern tag.");
                 }
-                head++;
+                
                 head = filterWhiteSpace(head);
                 detectDateFormation(ref head);
                 head = filterWhiteSpace(head);
                 detectDateTransFormat(ref head);
             }
         }
-
         private void detectDateFormation(ref int head)
         {
             int newHead = head;
