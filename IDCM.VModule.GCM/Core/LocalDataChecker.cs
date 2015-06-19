@@ -105,7 +105,7 @@ namespace IDCM.Core
                 {
                     lock (ctcache.GSyncRoot)
                     {
-                        if (checkForValid(dgvr, checkers))
+                        if (!checkForValid(dgvr, checkers))
                             ctcache.removeRow(dgvr);
                     }
                 }
@@ -126,7 +126,7 @@ namespace IDCM.Core
                 lock (ctcache.GSyncRoot)
                 {
                     DataGridViewRow dgvr = ctcache.getDGVRow(ridx);
-                    if (checkForValid(dgvr, checkers))
+                    if (!checkForValid(dgvr, checkers))
                         ctcache.removeRow(dgvr);
                     else
                         ridx++;
