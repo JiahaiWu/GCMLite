@@ -83,6 +83,16 @@ namespace IDCM.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap asc {
+            get {
+                object obj = ResourceManager.GetObject("asc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap bg2 {
             get {
                 object obj = ResourceManager.GetObject("bg2", resourceCulture);
@@ -136,6 +146,16 @@ namespace IDCM.Properties {
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap des {
+            get {
+                object obj = ResourceManager.GetObject("des", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

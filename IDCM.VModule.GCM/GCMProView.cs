@@ -92,7 +92,7 @@ namespace IDCM.VModule.GCM
                     this.dcmDataGridView_local.ColumnStateChanged += dataGridView_local_columns_StateChanged;
                     this.dcmDataGridView_local.CellMouseClick += dataGridView_local_CustomContextMenuDetect;
                     this.dcmDataGridView_local.IsDefaultPasteAble = false;
-                    this.dcmDataGridView_local.AllowUserToOrderColumns = true;
+                    this.dcmDataGridView_local.AllowUserToOrderColumns = false;
 
                     this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
                     this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
@@ -106,7 +106,6 @@ namespace IDCM.VModule.GCM
                     this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
                     this.dcmDataGridView_local.RowPostPaint += dcmDataGridView_local_RowPostPaint;
                     this.dcmDataGridView_local.RowsAdded+=dcmDataGridView_local_RowsAdded;
-                    this.dcmDataGridView_local.RowsRemoved+=dcmDataGridView_local_RowsRemoved;
                     this.dcmDataGridView_local.CellValueChanged+=dcmDataGridView_local_CellValueChanged;
                     localFrontFindDlg = new LocalFrontFindDlg(dcmDataGridView_local);
                     localFrontFindDlg.setCellHit += new LocalFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
@@ -474,6 +473,7 @@ namespace IDCM.VModule.GCM
                 gcmServManager.logout();
             gcmTabControl_GCM.ShowTab(tabPageEx_GCM);
             gcmTabControl_GCM.SelectedIndex = tabPageEx_GCM.TabIndex;
+            showLoginDlg();
         }
         public void CompareGCMRecords()
         {
@@ -521,16 +521,6 @@ namespace IDCM.VModule.GCM
             }
         }
 
-        private void dcmDataGridView_local_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
-            SizeF size = TextRenderer.MeasureText(dcmDataGridView_local.RowCount.ToString(), dcmDataGridView_local.Font);
-            if (width < size.Width + 4)
-            {
-                this.dcmDataGridView_local.RowHeadersWidth = dcmDataGridView_local.ColumnHeadersHeight + 4 + Convert.ToInt32(Math.Ceiling(size.Width));
-            }
-        }
-
         private void dcmDataGridView_local_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             int width = dcmDataGridView_local.RowHeadersWidth - dcmDataGridView_local.ColumnHeadersHeight;
@@ -543,7 +533,7 @@ namespace IDCM.VModule.GCM
 
         void dcmDataGridView_local_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (dcmDataGridView_local.Rows[e.RowIndex].Tag != null && dcmDataGridView_local.Rows[e.RowIndex].Tag.GetType().Equals(typeof(bool)))
+            if (e.RowIndex>-1 &&  dcmDataGridView_local.Rows[e.RowIndex].Tag != null && dcmDataGridView_local.Rows[e.RowIndex].Tag.GetType().Equals(typeof(bool)))
             {
                 System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.RowBounds.Location.X + 1, e.RowBounds.Location.Y + 1, e.RowBounds.Height - 2, e.RowBounds.Height - 2);
                 // Draw the Tag 
@@ -567,16 +557,30 @@ namespace IDCM.VModule.GCM
 
         private void dcmDataGridView_local_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
+            if (e.Button == MouseButtons.Left)
             {
                 if (e.ColumnIndex > -1)
                 {
-                    CustomColDef ccd = CustomColDefGetter.getCustomColDef(dcmDataGridView_local.Columns[e.ColumnIndex].Name);
-                    if (ccd != null && ccd.IsEnable)
+                    DataGridViewColumn dgvc=dcmDataGridView_local.Columns[e.ColumnIndex];
+                    if (Control.ModifierKeys == Keys.Control)
                     {
-                        ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd);
-                        colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
-                        colConfiger.Show(this.FindForm(), new Point(MousePosition.X, MousePosition.Y));
+                        CustomColDef ccd = CustomColDefGetter.getCustomColDef(dgvc.Name);
+                        if (ccd != null && ccd.IsEnable)
+                        {
+                            ColConfigDlg colConfiger = new ColConfigDlg(e.ColumnIndex, ccd);
+                            colConfiger.ColConfigChanged += colConfiger_ColConfigChanged;
+                            colConfiger.Show(this.FindForm(), new Point(MousePosition.X, MousePosition.Y));
+                        }
+                    }
+                    else
+                    {
+                        ListSortDirection sortDirection = ListSortDirection.Ascending;
+                        if (dgvc.Equals(dcmDataGridView_local.SortedColumn))
+                        {
+                            sortDirection = dcmDataGridView_local.SortOrder.Equals(SortOrder.Ascending) ?
+                                ListSortDirection.Descending : ListSortDirection.Ascending;
+                        }
+                        dcmDataGridView_local.Sort(dgvc, sortDirection);
                     }
                 }
             }
@@ -842,7 +846,24 @@ namespace IDCM.VModule.GCM
             else
                 notifyOpConditions(OpConditionType.Local_View);
         }
-
+        private void gcmTabControl_GCM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gcmTabControl_GCM.SelectedIndex == tabPageEx_GCM.TabIndex)
+            {
+                if (gcmServManager.Signed && splitContainer_GCM.Panel1Collapsed)
+                {
+                    notifyOpConditions(OpConditionType.GCM_View);
+                }
+                else
+                {
+                    notifyOpConditions(OpConditionType.GCM_Login);
+                }
+            }
+            else if (gcmTabControl_GCM.SelectedIndex == tabPage_ABC.TabIndex)
+                notifyOpConditions(OpConditionType.ABC_View);
+            else
+                notifyOpConditions(OpConditionType.Local_View);
+        }
 
         private void OnLocalDataExported(object msgTag, params object[] vals)
         {
@@ -1050,5 +1071,9 @@ namespace IDCM.VModule.GCM
             UnKnown=5
         }
         #endregion
+
+
+
+
     }
 }

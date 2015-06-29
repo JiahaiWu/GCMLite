@@ -24,11 +24,10 @@ namespace DCMControlLib
 
             this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            this.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithAutoHeaderText;
+            this.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             this.RowPostPaint += OnRowPostPaint;
             
-
             this.ColumnAdded += OnColumnsUpdated;
             this.ColumnRemoved += OnColumnsUpdated;
             this.ColumnDisplayIndexChanged += OnColumnsUpdated;
@@ -36,7 +35,7 @@ namespace DCMControlLib
             this.ColumnHeaderCellChanged += OnColumnsUpdated;
             this.ColumnDataPropertyNameChanged += OnColumnsUpdated;
             this.ColumnStateChanged += OnColumnStateChanged;
-            
+            this.CellPainting+=DCMDataGridView_CellPainting;
             
             this._customHeaderView = true;
             this.ocMenu = new Pop.OptionalContextMenu();
@@ -49,14 +48,6 @@ namespace DCMControlLib
             this.cellCopyMenu.MenuItems.Add(new MenuItem("Paste", OnPasteClick));
             this.KeyDown += OnKeyDownDetect;
             this.CellMouseClick += OnCellMouseClick;
-        }
-
- 
-
-        private void OnColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
-        {
-            if (ocMenu != null && !ocMenu.Visible)
-                ocMenu.clear();
         }
 
         private void OnOptionMenuChanged(object sender, DCMControlLib.Pop.MenuItemEventArgs e)
@@ -78,17 +69,51 @@ namespace DCMControlLib
         /// <param name="e"></param>
         private void OnRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics,
-                (e.RowIndex + 1).ToString(),
-                this.RowHeadersDefaultCellStyle.Font, rectangle,
-                this.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            if (e.RowIndex > -1)
+            {
+                System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.RowHeadersWidth - 4, e.RowBounds.Height);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    this.RowHeadersDefaultCellStyle.Font, rectangle,
+                    this.RowHeadersDefaultCellStyle.ForeColor,
+                    TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            }
             
         }
 
 
+        private void DCMDataGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            /////////////////////////////////////////////////////////////////////////////////////
+            //对表头部分自定义排序标志绘图实现
+            if (e.RowIndex == -1 && e.ColumnIndex > -1)
+            {
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(e.CellBounds.Location.X + e.CellBounds.Width - e.CellBounds.Height + 2,
+                    e.CellBounds.Location.Y + 2, e.CellBounds.Height - 4, e.CellBounds.Height - 4);
+                if (this.SortedColumn != null && this.SortedColumn.Index.Equals(e.ColumnIndex))
+                {
+                    SolidBrush brush = new SolidBrush(e.CellStyle.BackColor);
+                    e.Graphics.FillRectangle(brush, rect);
+                    if (SortOrder.Descending.Equals(this.SortOrder))
+                    {
+                        e.Graphics.DrawImage(global::DCMControlLib.Properties.Resources.des, rect);
+                    }
+                    else if (SortOrder.Ascending.Equals(this.SortOrder))
+                    {
+                        e.Graphics.DrawImage(global::DCMControlLib.Properties.Resources.asc, rect);
+                    }
+                    e.PaintContent(e.CellBounds);
+                    e.Handled = true;
+                }
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////
+        }
 
+        private void OnColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (ocMenu != null && !ocMenu.Visible)
+                ocMenu.clear();
+        }
         private void OnColumnsUpdated(object sender, DataGridViewColumnEventArgs e)
         {
             if(ocMenu!=null && !ocMenu.Visible)
@@ -96,8 +121,8 @@ namespace DCMControlLib
             if (e.Column != null)
             {
                 SizeF size = TextRenderer.MeasureText(e.Column.HeaderText, e.Column.DefaultCellStyle.Font);
-                if (size.Width+24 > e.Column.Width)
-                    e.Column.Width =size.Width<200?(int)Math.Ceiling(size.Width+e.Column.DefaultCellStyle.Padding.Horizontal+24):224;
+                if (size.Width+32 > e.Column.Width)
+                    e.Column.Width =size.Width<200?(int)Math.Ceiling(size.Width+e.Column.DefaultCellStyle.Padding.Horizontal+32):232;
             }
         }
         private void OnCopyClick(object sender, EventArgs e)

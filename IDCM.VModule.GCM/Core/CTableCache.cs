@@ -33,7 +33,7 @@ namespace IDCM.Core
                 dgvc.HeaderText = ccd.Alias;
                 dgvc.Visible = ccd.IsEnable;
                 dgvc.Tag = ccd.IsUnique;
-                dgvc.SortMode = DataGridViewColumnSortMode.Automatic;
+                dgvc.SortMode = DataGridViewColumnSortMode.Programmatic;
                 dgv.Columns.Add(dgvc);
             }
             dgv.AllowUserToOrderColumns = true;
