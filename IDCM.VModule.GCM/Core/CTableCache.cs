@@ -72,15 +72,16 @@ namespace IDCM.Core
             }));
         }
 
-        internal void addRow(Dictionary<string, string> mapvalues)
+        internal int addRow(Dictionary<string, string> mapvalues)
         {
+            int idx = -1;
             string value = null;
             if (mapvalues.TryGetValue(KeyName, out value))
             {
                 DataGridViewRow dgvr = null;
                 ControlAsyncUtil.SyncInvoke(dgv, new ControlAsyncUtil.InvokeHandler(delegate()
                 {
-                    int idx = dgv.Rows.Add();
+                    idx = dgv.Rows.Add();
                     dgvr=dgv.Rows[idx];
                     foreach (KeyValuePair<string, string> kvpair in mapvalues)
                     {
@@ -88,6 +89,7 @@ namespace IDCM.Core
                     }
                 }));
             }
+            return idx;
         }
         internal void addRow(Dictionary<int, string> mapvalues)
         {

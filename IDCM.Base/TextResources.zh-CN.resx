@@ -543,4 +543,13 @@
   <data name="Comments" xml:space="preserve">
     <value>解释说明</value>
   </data>
+  <data name="Default" xml:space="preserve">
+    <value>默认的</value>
+  </data>
+  <data name="Designate Scope" xml:space="preserve">
+    <value>选取范围</value>
+  </data>
+  <data name="The tab sheet named 'Core Datasets' not exist, use the first tab sheet as default data source." xml:space="preserve">
+    <value>未找到名为Core Datasets的标签页，使用第一个页签作为默认的数据源。</value>
+  </data>
 </root>

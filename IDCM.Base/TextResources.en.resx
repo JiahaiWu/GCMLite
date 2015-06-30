@@ -540,4 +540,13 @@
   <data name="Comments" xml:space="preserve">
     <value>Comments</value>
   </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Designate Scope" xml:space="preserve">
+    <value>Designate Scope</value>
+  </data>
+  <data name="The tab sheet named 'Core Datasets' not exist, use the first tab sheet as default data source." xml:space="preserve">
+    <value>The tab sheet named 'Core Datasets' not exist, use the first tab sheet as default data source.</value>
+  </data>
 </root>

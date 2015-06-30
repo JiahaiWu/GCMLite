@@ -84,7 +84,6 @@
     <EmbeddedResource Include="TextResources.en.resx" />
     <EmbeddedResource Include="TextResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TextResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TextResources.zh-CN.resx" />
   </ItemGroup>

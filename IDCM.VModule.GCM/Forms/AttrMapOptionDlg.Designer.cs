@@ -49,6 +49,8 @@
             this.button_cancel = new System.Windows.Forms.Button();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.label_designateScope = new System.Windows.Forms.Label();
+            this.comboBox_designateScope = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_map)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -159,6 +161,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox_designateScope);
+            this.groupBox1.Controls.Add(this.label_designateScope);
             this.groupBox1.Controls.Add(this.button_confirm);
             this.groupBox1.Controls.Add(this.radioButton_custom);
             this.groupBox1.Controls.Add(this.radioButton_exact);
@@ -173,7 +177,7 @@
             // 
             // button_confirm
             // 
-            this.button_confirm.Location = new System.Drawing.Point(581, 30);
+            this.button_confirm.Location = new System.Drawing.Point(592, 41);
             this.button_confirm.Name = "button_confirm";
             this.button_confirm.Size = new System.Drawing.Size(75, 23);
             this.button_confirm.TabIndex = 4;
@@ -184,7 +188,7 @@
             // radioButton_custom
             // 
             this.radioButton_custom.AutoSize = true;
-            this.radioButton_custom.Location = new System.Drawing.Point(269, 33);
+            this.radioButton_custom.Location = new System.Drawing.Point(280, 44);
             this.radioButton_custom.Name = "radioButton_custom";
             this.radioButton_custom.Size = new System.Drawing.Size(107, 16);
             this.radioButton_custom.TabIndex = 3;
@@ -194,7 +198,7 @@
             // radioButton_exact
             // 
             this.radioButton_exact.AutoSize = true;
-            this.radioButton_exact.Location = new System.Drawing.Point(163, 33);
+            this.radioButton_exact.Location = new System.Drawing.Point(174, 44);
             this.radioButton_exact.Name = "radioButton_exact";
             this.radioButton_exact.Size = new System.Drawing.Size(89, 16);
             this.radioButton_exact.TabIndex = 2;
@@ -205,7 +209,7 @@
             // radioButton_similarity
             // 
             this.radioButton_similarity.AutoSize = true;
-            this.radioButton_similarity.Location = new System.Drawing.Point(27, 33);
+            this.radioButton_similarity.Location = new System.Drawing.Point(38, 44);
             this.radioButton_similarity.Name = "radioButton_similarity";
             this.radioButton_similarity.Size = new System.Drawing.Size(119, 16);
             this.radioButton_similarity.TabIndex = 1;
@@ -215,7 +219,7 @@
             // 
             // button_cancel
             // 
-            this.button_cancel.Location = new System.Drawing.Point(471, 30);
+            this.button_cancel.Location = new System.Drawing.Point(482, 41);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(75, 23);
             this.button_cancel.TabIndex = 0;
@@ -235,6 +239,29 @@
             this.dataGridViewImageColumn2.HeaderText = "Unbound";
             this.dataGridViewImageColumn2.Image = global::IDCM.Properties.Resources.broken;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            // 
+            // label_designateScope
+            // 
+            this.label_designateScope.AutoSize = true;
+            this.label_designateScope.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_designateScope.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label_designateScope.Location = new System.Drawing.Point(38, 19);
+            this.label_designateScope.Name = "label_designateScope";
+            this.label_designateScope.Size = new System.Drawing.Size(104, 15);
+            this.label_designateScope.TabIndex = 5;
+            this.label_designateScope.Text = "Designate Scope:";
+            // 
+            // comboBox_designateScope
+            // 
+            this.comboBox_designateScope.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBox_designateScope.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox_designateScope.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_designateScope.FormattingEnabled = true;
+            this.comboBox_designateScope.Location = new System.Drawing.Point(146, 16);
+            this.comboBox_designateScope.Name = "comboBox_designateScope";
+            this.comboBox_designateScope.Size = new System.Drawing.Size(238, 23);
+            this.comboBox_designateScope.TabIndex = 6;
+            this.comboBox_designateScope.Text = "Default";
             // 
             // AttrMapOptionDlg
             // 
@@ -275,6 +302,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_dest;
         private System.Windows.Forms.DataGridViewImageColumn Column_UnBind;
         private System.Windows.Forms.DataGridViewButtonColumn Column_rebind;
+        private System.Windows.Forms.Label label_designateScope;
+        private System.Windows.Forms.ComboBox comboBox_designateScope;
 
     }
 }

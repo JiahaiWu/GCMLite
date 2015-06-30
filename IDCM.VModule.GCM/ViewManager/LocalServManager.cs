@@ -35,17 +35,19 @@ namespace IDCM.ViewManager
 
         #region Methods
 
-        internal void addNewRow()
+        internal int addNewRow()
         {
             Dictionary<string, string> mapvalues = new Dictionary<string, string>();
             foreach (CustomColDef ccd in CustomColDefGetter.getCustomTableDef())
             {
                 mapvalues[ccd.Attr] = ccd.DefaultVal;
             }
+            int ridx = -1;
             lock (ctcache.GSyncRoot)
             {
-                ctcache.addRow(mapvalues);
+                ridx=ctcache.addRow(mapvalues);
             }
+            return ridx;
         }
         /// <summary>
         /// 导入数据文档

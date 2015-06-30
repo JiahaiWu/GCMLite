@@ -38,6 +38,7 @@ namespace IDCM.Core
                 {
                     workbook = WorkbookFactory.Create(fs);
                     ISheet dataSheet = workbook.GetSheet("Core Datasets");
+                    DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("The tab sheet named 'Core Datasets' not exist, use the first tab sheet as default data source."));
                     if (dataSheet == null)
                         dataSheet = workbook.GetSheetAt(0);
                     return fetchSheetMappingInfo(dataSheet, ref dataMapping) && dataMapping.Count > 0;

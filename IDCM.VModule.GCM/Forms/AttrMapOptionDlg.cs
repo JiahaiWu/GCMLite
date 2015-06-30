@@ -23,6 +23,8 @@ namespace IDCM.Forms
             this.radioButton_exact.Text = IDCM.Base.GlobalTextRes.Text("Exact Match");
             this.radioButton_similarity.Text = IDCM.Base.GlobalTextRes.Text("Similarity Match");
             this.button_cancel.Text = IDCM.Base.GlobalTextRes.Text("Cancel");
+            this.label_designateScope.Text = GlobalTextRes.Text("Designate Scope");
+            this.comboBox_designateScope.Text = GlobalTextRes.Text("Default");
             this.Text = IDCM.Base.GlobalTextRes.Text("AttrMappingOptionDlg");
 
             mapAttrMenu = new DCMControlLib.Pop.SingleOptionalContextMenu();
@@ -228,10 +230,16 @@ namespace IDCM.Forms
                 int rowIndex = Convert.ToInt32(mapAttrMenu.Tag);
                 if (rowIndex > -1 && rowIndex < dataGridView_map.RowCount)
                 {
-                    ///////////////////////////////////////////////////////////
-                    //dataGridView_map.Rows[rowIndex].Cells[2].Value = e.MenuItem.Checked?e.MenuItem.Text:null;
-                    ///////////////////////////////////////////////////////////
-                    dataGridView_map.Rows[rowIndex].Cells[2].Value =e.MenuItem.Text;
+                    if (e.MenuItem.Checked)
+                    {
+                        dataGridView_map.Rows[rowIndex].Cells[2].Value = e.MenuItem.Text;
+                        mapping[dataGridView_map.Rows[rowIndex].Cells[0].FormattedValue.ToString()] = e.MenuItem.Text;
+                    }
+                    else
+                    {
+                        dataGridView_map.Rows[rowIndex].Cells[2].Value = null;
+                        mapping.Remove(dataGridView_map.Rows[rowIndex].Cells[0].FormattedValue.ToString());
+                    }
                     radioButton_custom.Checked = true;
                 }
                 mapAttrMenu.Tag = null;

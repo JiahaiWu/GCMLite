@@ -267,7 +267,7 @@ namespace IDCM.VModule.GCM
 
         public void addLocalDataRow()
         {
-            localServManager.addNewRow();
+            int ridx = localServManager.addNewRow(); 
         }
 
         public void delLocalDataRow()
@@ -1071,9 +1071,6 @@ namespace IDCM.VModule.GCM
             UnKnown=5
         }
         #endregion
-
-
-
 
     }
 }
