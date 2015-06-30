@@ -425,6 +425,7 @@ namespace IDCM.VModule.GCM
                         {
                             FileInfo dumpfile = new FileInfo(dumppath);
                             dumpfile.CopyTo(System.IO.Path.GetFullPath(renameFilePath), true);
+                            IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Save dump file success."));
                         }
                     }
                 }

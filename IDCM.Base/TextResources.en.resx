@@ -552,4 +552,7 @@
   <data name="Identifying the content from the file failed." xml:space="preserve">
     <value>Identifying the content from the file failed.</value>
   </data>
+  <data name="Save dump file success." xml:space="preserve">
+    <value>Save dump file success.</value>
+  </data>
 </root>

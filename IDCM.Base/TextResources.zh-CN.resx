@@ -555,4 +555,7 @@
   <data name="Identifying the content from the file failed." xml:space="preserve">
     <value>从目标文件识别内容失败。</value>
   </data>
+  <data name="Save dump file success." xml:space="preserve">
+    <value>存档文件保存成功。</value>
+  </data>
 </root>
