@@ -207,7 +207,7 @@ namespace IDCM.VModule.GCM
         public void openImportDocument()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = GlobalTextRes.Text("Excel,XML,TSV,CSV,JSON List,mdi");
+            ofd.Filter = GlobalTextRes.Text("Excel,XML,TSV,CSV,JSON List,gcms");
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 string fpath = ofd.FileName;
@@ -413,8 +413,8 @@ namespace IDCM.VModule.GCM
                 if (useDefaultPath == false)
                 {
                     SaveFileDialog sfd = new SaveFileDialog();
-                    sfd.FileName = System.IO.Path.GetFileName(dumppath);
-                    sfd.InitialDirectory = localServManager.LastIOPath;
+                    sfd.FileName = CUIDGenerator.getUID(CUIDGenerator.Radix_32) + ".gcms" ;
+                    sfd.InitialDirectory = System.IO.Directory.Exists(localServManager.LastIOPath)?localServManager.LastIOPath:Path.GetDirectoryName(localServManager.LastIOPath);
                     sfd.Filter = GlobalTextRes.Text("GCMLite Archive file type");
                     String renameFilePath = "";
                     if (sfd.ShowDialog() == DialogResult.OK)
@@ -872,11 +872,14 @@ namespace IDCM.VModule.GCM
         private void OnLocalDataImported(object msgTag, params object[] vals)
         {
             MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data import success"));
-            ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
-            {
-                dcmDataGridView_local.Invalidate();
-                dcmDataGridView_local.Update();
-            }));
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //ControlAsyncUtil.SyncInvoke(dcmDataGridView_local, new ControlAsyncUtil.InvokeHandler(delegate()
+            //{
+            //    dcmDataGridView_local.Invalidate();
+            //    dcmDataGridView_local.Update();
+            //}));
+            //@Deprecated
+            /////////////////////////////////////////////////////////////////////////////////////////
         }
 
         private void dataGridView_gcm_CellClicked(object sender, DataGridViewCellEventArgs e)

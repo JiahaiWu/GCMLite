@@ -459,9 +459,9 @@ namespace IDCM.Base {
         /// <summary>
         ///   查找类似 Excel file,XML document,TSV file,CSV file,JSON List file,GCMLite archive file(*.xls,*.xlsx,*.xml,*.tsv,*csv,*.jso,*.gcms)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.jso,*.gcms 的本地化字符串。
         /// </summary>
-        internal static string Excel_XML_TSV_CSV_JSON_List_mdi {
+        internal static string Excel_XML_TSV_CSV_JSON_List_gcms {
             get {
-                return ResourceManager.GetString("Excel,XML,TSV,CSV,JSON List,mdi", resourceCulture);
+                return ResourceManager.GetString("Excel,XML,TSV,CSV,JSON List,gcms", resourceCulture);
             }
         }
         
@@ -1223,11 +1223,11 @@ namespace IDCM.Base {
         }
         
         /// <summary>
-        ///   查找类似 The save file path should be available, can not be a directory. 的本地化字符串。
+        ///   查找类似 The save file path should be available, and can not be a directory. 的本地化字符串。
         /// </summary>
-        internal static string The_save_file_path_should_be_available__can_not_be_a_directory_ {
+        internal static string The_save_file_path_should_be_available__and_can_not_be_a_directory_ {
             get {
-                return ResourceManager.GetString("The save file path should be available, can not be a directory.", resourceCulture);
+                return ResourceManager.GetString("The save file path should be available, and can not be a directory.", resourceCulture);
             }
         }
         

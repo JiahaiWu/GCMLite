@@ -92,13 +92,23 @@ namespace IDCM.Forms
         private void button_confirm_Click(object sender, EventArgs e)
         {
             string suffix = getDefaultSuffix();
-            FileInfo fi = new FileInfo(textBox_path.Text.Trim());
+            FileInfo fi = null;
+            try
+            {
+                fi = new FileInfo(textBox_path.Text.Trim());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available.")+"\n"+ex.Message);
+                textBox_path.Focus();
+                return;
+            }
             if (fi.Exists || (fi.Directory != null && fi.Directory.Exists))
             {
                 string fpath = fi.FullName;
                 if (Directory.Exists(fpath))
                 {
-                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available, can not be a directory."));
+                    MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available, and can not be a directory."));
                     //fpath = Path.GetDirectoryName(fpath) + "\\" + CUIDGenerator.getUID(CUIDGenerator.Radix_32) + suffix;
                     return;
                 }

@@ -63,35 +63,59 @@ namespace IDCM.ViewManager
                 {
                     eih = new ExcelImportHandler(ctcache, fpath, ref dataMapping);
                 }
+                else
+                {
+                    IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Identifying the content from the file failed."));
+                }
             }
-            if (fpath.ToLower().EndsWith(".xml"))
+            else if (fpath.ToLower().EndsWith(".xml"))
             {
                 if (DataImportChecker.checkForXMLImport(fpath, ref dataMapping))
                 {
                     eih = new XMLImportHandler(ctcache, fpath, ref dataMapping);
                 }
+                else
+                {
+                    IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Identifying the content from the file failed."));
+                }
             }
-            if (fpath.ToLower().EndsWith(".gcms"))
+            else if (fpath.ToLower().EndsWith(".gcms"))
             {
                 if (DataImportChecker.checkForMDIImport(fpath))
                 {
                     eih = new MDIImportHandler(ctcache, fpath);
                 }
+                else
+                {
+                    IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Identifying the content from the file failed."));
+                }
             }
-            if (fpath.ToLower().EndsWith(".tsv")|| fpath.ToLower().EndsWith(".csv"))
+            else if (fpath.ToLower().EndsWith(".tsv") || fpath.ToLower().EndsWith(".csv"))
             {
                 ExportType txtType=fpath.ToLower().EndsWith(".tsv") ? ExportType.TSV : ExportType.CSV;
                 if (DataImportChecker.checkForTextImport(fpath, ref dataMapping, txtType))
                 {
                     eih = new TextImportHandler(ctcache, fpath, txtType, ref dataMapping);
                 }
+                else
+                {
+                    IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Identifying the content from the file failed."));
+                }
             }
-            if (fpath.ToLower().EndsWith(".jso"))
+            else if (fpath.ToLower().EndsWith(".jso"))
             {
                 if (DataImportChecker.checkForJSOImport(fpath, ref dataMapping))
                 {
                     eih = new JSONListImportHandler(ctcache, fpath, ref dataMapping);
                 }
+                else
+                {
+                    IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text(GlobalTextRes.Text("Identifying the content from the file failed.")));
+                }
+            }
+            else
+            {
+                IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Unspported file type for text import."));
             }
             if(eih!=null)
                 BGWorkerInvoker.pushHandler(eih);
@@ -252,9 +276,7 @@ namespace IDCM.ViewManager
                     lastIOPath = System.IO.Directory.GetCurrentDirectory();
                 }
                 else
-                    lastIOPath = Path.GetDirectoryName(lastIOPath);
-                if (!Directory.Exists(lastIOPath))
-                    lastIOPath = System.IO.Directory.GetCurrentDirectory();
+                    lastIOPath = Directory.Exists(lastIOPath)?lastIOPath:Path.GetDirectoryName(lastIOPath);
                 return lastIOPath;
             }
             set

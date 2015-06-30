@@ -53,7 +53,6 @@ namespace IDCM.BGHandler
         public override void complete(bool canceled, Exception error, List<Object> args)
         {
             DCMPublisher.noteJobProgress(100);
-            DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataImported);
             if (canceled)
                 return;
             if (error != null)

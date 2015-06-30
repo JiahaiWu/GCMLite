@@ -47,7 +47,17 @@ namespace IDCM.Forms
         {
             string suffix = getDefaultSuffix();
             updatOptionalStatus();
-            FileInfo fi = new FileInfo(textBox_path.Text.Trim());
+            FileInfo fi = null;
+            try
+            {
+                fi = new FileInfo(textBox_path.Text.Trim());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(IDCM.Base.GlobalTextRes.Text("The save file path should be available.") + "\n" + ex.Message);
+                textBox_path.Focus();
+                return;
+            }
             if (fi.Exists || (fi.Directory != null && fi.Directory.Exists))
             {
                 string fpath = fi.FullName;
@@ -93,7 +103,7 @@ namespace IDCM.Forms
         {
             SaveFileDialog fbd = new SaveFileDialog();
             fbd.FileName = CUIDGenerator.getUID(CUIDGenerator.Radix_32) + getDefaultSuffix();
-            fbd.InitialDirectory = Path.GetDirectoryName(lastFilePath);
+            fbd.InitialDirectory = Directory.Exists(lastFilePath)?lastFilePath: Path.GetDirectoryName(lastFilePath);
             if (radioButton_excel.Checked)
                 fbd.Filter = "Excel File(*.xls,*.xlsx)|*.xls;*.xlsx;";
             if (radioButton_json.Checked)

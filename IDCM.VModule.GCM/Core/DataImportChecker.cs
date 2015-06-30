@@ -255,31 +255,36 @@ namespace IDCM.Core
         {
             XmlNodeList strainChildNodes = xDoc.DocumentElement.ChildNodes;
             //一直向下探索，直到某个节点下没有子节点，说明这个节点是个attrNode,
-
-            //节点探测代码
-            XmlNode strainNode = strainChildNodes[0];//获取第一个strainNode
-            List<string> attrNameList = new List<string>(strainChildNodes.Count);
-            int cursor = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.Cursor));
-            int detectDepth = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.DetectDepth));
-            double GrowthFactor = Convert.ToDouble(ConfigurationManager.AppSettings.Get(SysConstants.GrowthFactor));
-            while (!(strainNode == null))
+            if (strainChildNodes.Count > 0)
             {
-                if (cursor > detectDepth)
-                    break;
-                if (mergeAttrList(attrNameList, strainNode.ChildNodes))//如果这个节点下有新属性出现，使探测深度增加2倍
-                    detectDepth = (int)(detectDepth * GrowthFactor);
-                strainNode = strainNode.NextSibling;
-                cursor++;
-            }
-            ///////////////////////////////////////////////////////////////
-            using (AttrMapOptionDlg amoDlg = new AttrMapOptionDlg())
-            {
-                amoDlg.BringToFront();
-                amoDlg.setInitCols(attrNameList, Core.CustomColDefGetter.getCustomCols(), ref dataMapping);
-                amoDlg.ShowDialog();
-                ///////////////////////////////////////////
-                if (amoDlg.DialogResult == DialogResult.OK)
-                    return true;
+                //节点探测代码
+                XmlNode strainNode = strainChildNodes[0];//获取第一个strainNode
+                List<string> attrNameList = new List<string>(strainChildNodes.Count);
+                int cursor = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.Cursor));
+                int detectDepth = Convert.ToInt32(ConfigurationManager.AppSettings.Get(SysConstants.DetectDepth));
+                double GrowthFactor = Convert.ToDouble(ConfigurationManager.AppSettings.Get(SysConstants.GrowthFactor));
+                while (!(strainNode == null))
+                {
+                    if (strainNode.Name.Equals("strain", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        if (cursor > detectDepth)
+                            break;
+                        if (mergeAttrList(attrNameList, strainNode.ChildNodes))//如果这个节点下有新属性出现，使探测深度增加2倍
+                            detectDepth = (int)(detectDepth * GrowthFactor);
+                        cursor++;
+                    }
+                    strainNode = strainNode.NextSibling;
+                }
+                ///////////////////////////////////////////////////////////////
+                using (AttrMapOptionDlg amoDlg = new AttrMapOptionDlg())
+                {
+                    amoDlg.BringToFront();
+                    amoDlg.setInitCols(attrNameList, Core.CustomColDefGetter.getCustomCols(), ref dataMapping);
+                    amoDlg.ShowDialog();
+                    ///////////////////////////////////////////
+                    if (amoDlg.DialogResult == DialogResult.OK)
+                        return true;
+                }
             }
             return false;
         }

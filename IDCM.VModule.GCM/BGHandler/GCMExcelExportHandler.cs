@@ -71,6 +71,7 @@ namespace IDCM.BGHandler
             else
             {
                 log.Info(IDCM.Base.GlobalTextRes.Text("Export success") + ". @filepath=" + xlsPath);
+                MsgDriver.DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Local data exported success"));
             }
         }
 

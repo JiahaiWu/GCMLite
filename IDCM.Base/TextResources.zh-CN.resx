@@ -394,7 +394,7 @@
     <value>粘贴到表格单元的数据格式错误</value>
   </data>
   <data name="The save file path should be available." xml:space="preserve">
-    <value>保存文件路径有误</value>
+    <value>保存文件路径有误。</value>
   </data>
   <data name="There are background tasks are executing, force quit or not" xml:space="preserve">
     <value>仍有后台任务正在执行中，是否强制退出？</value>
@@ -495,7 +495,7 @@
   <data name="Please Login before compare records to GCM." xml:space="preserve">
     <value>在对比记录之前，请先联机登录GCM</value>
   </data>
-  <data name="The save file path should be available, can not be a directory." xml:space="preserve">
+  <data name="The save file path should be available, and can not be a directory." xml:space="preserve">
     <value>保存文件路径无效，不能使用目录路径。</value>
   </data>
   <data name="The save file path should be writeable." xml:space="preserve">
@@ -510,8 +510,8 @@
   <data name="Update local columns' config, the application should restart, are you sure restart now?" xml:space="preserve">
     <value>更新本地数据列配置，需要重启应用程序，您确认现在重启吗？</value>
   </data>
-  <data name="Excel,XML,TSV,CSV,JSON List,mdi" xml:space="preserve">
-    <value>Excel文件,XML文档,TSV文件,CSV文件,JSON List文件,GCMLite存档文件(*.xls,*.xlsx,*.xml,*.tsv,*csv,*.jso,*.gcms)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.jso,*.gcms</value>
+  <data name="Excel,XML,TSV,CSV,JSON List,gcms" xml:space="preserve">
+    <value>Excel文件,XML文档,TSV文件,CSV文件,JSON List文件,GCMLite存档文件(*.xls,*.xlsx,*.xml,*.tsv,*.csv,*.jso,*.gcms)|*.xls;*.xlsx;*.xml;*.tsv;*.csv;*.jso;*.gcms</value>
   </data>
   <data name="GCMLite Archive file type" xml:space="preserve">
     <value>GCMLite存档文件(*.gcms)|*.gcms</value>
@@ -551,5 +551,8 @@
   </data>
   <data name="The tab sheet named 'Core Datasets' not exist, use the first tab sheet as default data source." xml:space="preserve">
     <value>未找到名为Core Datasets的标签页，使用第一个页签作为默认的数据源。</value>
+  </data>
+  <data name="Identifying the content from the file failed." xml:space="preserve">
+    <value>从目标文件识别内容失败。</value>
   </data>
 </root>

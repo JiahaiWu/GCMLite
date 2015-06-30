@@ -37,6 +37,7 @@ namespace IDCM.BGHandler
                 if (!res)
                 {
                     log.Info(IDCM.Base.GlobalTextRes.Text("Import failed") + ". @filepath=" + xlsPath);
+                    DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Import failed") + ". @filepath=" + xlsPath, DCMMsgType.Alert);
                 }
                 else
                 {

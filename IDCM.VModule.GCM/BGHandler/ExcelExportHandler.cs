@@ -46,11 +46,11 @@ namespace IDCM.BGHandler
                     if (!res)
                     {
                         log.Info(IDCM.Base.GlobalTextRes.Text("Export failed") + ". @filepath=" + xlsPath);
+                        DCMPublisher.noteSimpleMsg(IDCM.Base.GlobalTextRes.Text("Export failed") + ". @filepath=" + xlsPath, DCMMsgType.Alert);
                     }
                     else
                     {
                         log.Info(IDCM.Base.GlobalTextRes.Text("Export success") + ". @filepath=" + xlsPath);
-                        DCMPublisher.noteJobFeedback(AsyncMsgNotice.LocalDataExported);
                     }
                 }
                 else
