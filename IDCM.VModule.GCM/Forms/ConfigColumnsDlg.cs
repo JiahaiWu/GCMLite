@@ -32,7 +32,7 @@ namespace IDCM.Forms
 
         void dataGridView_colCfg_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || dataGridView_colCfg.Rows[e.RowIndex].IsNewRow)
                 return;
             if (dataGridView_colCfg.Columns[e.ColumnIndex].HeaderText.Equals("Down"))
             {

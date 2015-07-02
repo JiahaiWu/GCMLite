@@ -30,9 +30,17 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigColumnsDlg));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView_colCfg = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox_keyField = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Btn_Cancel = new System.Windows.Forms.Button();
+            this.Btn_Check = new System.Windows.Forms.Button();
+            this.Btn_Confirm = new System.Windows.Forms.Button();
             this.Attr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Require = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -43,12 +51,6 @@
             this.Up = new System.Windows.Forms.DataGridViewImageColumn();
             this.Down = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox_keyField = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Btn_Cancel = new System.Windows.Forms.Button();
-            this.Btn_Check = new System.Windows.Forms.Button();
-            this.Btn_Confirm = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_colCfg)).BeginInit();
             this.panel1.SuspendLayout();
@@ -89,72 +91,6 @@
             this.dataGridView_colCfg.RowTemplate.Height = 23;
             this.dataGridView_colCfg.Size = new System.Drawing.Size(926, 381);
             this.dataGridView_colCfg.TabIndex = 0;
-            // 
-            // Attr
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Attr.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Attr.HeaderText = "Name";
-            this.Attr.Name = "Attr";
-            // 
-            // Unique
-            // 
-            this.Unique.HeaderText = "Unique";
-            this.Unique.Name = "Unique";
-            // 
-            // Require
-            // 
-            this.Require.HeaderText = "Require";
-            this.Require.Name = "Require";
-            // 
-            // Restrict
-            // 
-            this.Restrict.HeaderText = "Restrict";
-            this.Restrict.Name = "Restrict";
-            // 
-            // Alias
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Alias.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Alias.HeaderText = "Alias";
-            this.Alias.Name = "Alias";
-            // 
-            // DefaultVal
-            // 
-            this.DefaultVal.HeaderText = "Default Value";
-            this.DefaultVal.Name = "DefaultVal";
-            // 
-            // Enable
-            // 
-            this.Enable.HeaderText = "Enable";
-            this.Enable.Name = "Enable";
-            // 
-            // Up
-            // 
-            this.Up.HeaderText = "Up";
-            this.Up.Image = global::IDCM.Properties.Resources.up;
-            this.Up.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Up.Name = "Up";
-            this.Up.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Up.Width = 40;
-            // 
-            // Down
-            // 
-            this.Down.HeaderText = "Down";
-            this.Down.Image = global::IDCM.Properties.Resources.down;
-            this.Down.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Down.Name = "Down";
-            this.Down.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Down.Width = 40;
-            // 
-            // Delete
-            // 
-            this.Delete.HeaderText = "Delete";
-            this.Delete.Image = global::IDCM.Properties.Resources.del_note;
-            this.Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Delete.Name = "Delete";
-            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Delete.Width = 50;
             // 
             // panel1
             // 
@@ -219,6 +155,78 @@
             this.Btn_Confirm.UseVisualStyleBackColor = true;
             this.Btn_Confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
+            // Attr
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Attr.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Attr.HeaderText = "Name";
+            this.Attr.Name = "Attr";
+            // 
+            // Unique
+            // 
+            this.Unique.HeaderText = "Unique";
+            this.Unique.Name = "Unique";
+            // 
+            // Require
+            // 
+            this.Require.HeaderText = "Require";
+            this.Require.Name = "Require";
+            // 
+            // Restrict
+            // 
+            this.Restrict.HeaderText = "Restrict";
+            this.Restrict.Name = "Restrict";
+            // 
+            // Alias
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Alias.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Alias.HeaderText = "Alias";
+            this.Alias.Name = "Alias";
+            // 
+            // DefaultVal
+            // 
+            this.DefaultVal.HeaderText = "Default Value";
+            this.DefaultVal.Name = "DefaultVal";
+            // 
+            // Enable
+            // 
+            this.Enable.HeaderText = "Enable";
+            this.Enable.Name = "Enable";
+            // 
+            // Up
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = "System.Drawing.Bitmap";
+            this.Up.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Up.HeaderText = "Up";
+            this.Up.Image = global::IDCM.Properties.Resources.up;
+            this.Up.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Up.Name = "Up";
+            this.Up.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Up.Width = 40;
+            // 
+            // Down
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = "System.Drawing.Bitmap";
+            this.Down.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Down.HeaderText = "Down";
+            this.Down.Image = global::IDCM.Properties.Resources.down;
+            this.Down.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Down.Name = "Down";
+            this.Down.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Down.Width = 40;
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "Delete";
+            this.Delete.Image = global::IDCM.Properties.Resources.del_note;
+            this.Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Delete.Name = "Delete";
+            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Delete.Width = 50;
+            // 
             // ConfigColumnsDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -246,6 +254,8 @@
         private System.Windows.Forms.Button Btn_Cancel;
         private System.Windows.Forms.Button Btn_Check;
         private System.Windows.Forms.Button Btn_Confirm;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_keyField;
         private System.Windows.Forms.DataGridViewTextBoxColumn Attr;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Unique;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Require;
@@ -256,7 +266,5 @@
         private System.Windows.Forms.DataGridViewImageColumn Up;
         private System.Windows.Forms.DataGridViewImageColumn Down;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox_keyField;
     }
 }

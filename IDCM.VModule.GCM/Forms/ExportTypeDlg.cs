@@ -21,13 +21,17 @@ namespace IDCM.Forms
             InitializeComponent();
             if (fpath != null && fpath.Length>0)
                 lastFilePath = fpath;
-            this.radioButton_excel.Checked = lastOptionValue.Equals(ExportType.Excel)?radioButton_excel.Checked=true:
-                lastOptionValue.Equals(ExportType.JSONList)?radioButton_json.Checked=true:
-                lastOptionValue.Equals(ExportType.XML)?radioButton_xml.Checked=true:
-                lastOptionValue.Equals(ExportType.TSV)?radioButton_tsv.Checked=true:
-                lastOptionValue.Equals(ExportType.CSV)?radioButton_csv.Checked=true:radioButton_excel.Checked=true;
-            this.textBox_path.Text = LastFilePath;
+            this.radioButton_excel.Checked = lastOptionValue.Equals(ExportType.Excel) ;
+            this.radioButton_json.Checked = lastOptionValue.Equals(ExportType.JSONList);
+            this.radioButton_xml.Checked = lastOptionValue.Equals(ExportType.XML);
+            this.radioButton_tsv.Checked = lastOptionValue.Equals(ExportType.TSV);
+            this.radioButton_csv.Checked = lastOptionValue.Equals(ExportType.CSV);
 
+            this.textBox_path.Text = System.Text.RegularExpressions.Regex.Replace(LastFilePath, @"(\.[A-Za-z]{1,4})$", getDefaultSuffix()); ;
+            if (Path.GetExtension(this.textBox_path.Text) == "")
+            {
+                this.textBox_path.Text += getDefaultSuffix();
+            }
             this.radioButton_excel.CheckedChanged+=radioButton_excel_CheckedChanged;
             this.radioButton_json.CheckedChanged += radioButton_json_CheckedChanged;
             this.radioButton_tsv.CheckedChanged+=radioButton_tsv_CheckedChanged;
@@ -55,6 +59,10 @@ namespace IDCM.Forms
             if(radioButton_tsv.Checked)
             {
                 this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+                if (Path.GetExtension(this.textBox_path.Text) == "")
+                {
+                    this.textBox_path.Text += getDefaultSuffix();
+                }
             }
         }
 
@@ -63,6 +71,10 @@ namespace IDCM.Forms
             if(radioButton_xml.Checked)
             {
                 this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+                if (Path.GetExtension(this.textBox_path.Text) == "")
+                {
+                    this.textBox_path.Text += getDefaultSuffix();
+                }
             }
         }
 
@@ -71,6 +83,10 @@ namespace IDCM.Forms
             if(radioButton_csv.Checked)
             {
                 this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+                if (Path.GetExtension(this.textBox_path.Text) == "")
+                {
+                    this.textBox_path.Text += getDefaultSuffix();
+                }
             }
         }
 
@@ -79,6 +95,10 @@ namespace IDCM.Forms
             if(radioButton_excel.Checked)
             {
                 this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+                if (Path.GetExtension(this.textBox_path.Text) == "")
+                {
+                    this.textBox_path.Text += getDefaultSuffix();
+                }
             }
         }
 
@@ -87,6 +107,10 @@ namespace IDCM.Forms
             if(radioButton_json.Checked)
             {
                 this.textBox_path.Text=System.Text.RegularExpressions.Regex.Replace(this.textBox_path.Text,@"(\.[A-Za-z]{1,4})$",getDefaultSuffix());
+                if (Path.GetExtension(this.textBox_path.Text) == "")
+                {
+                    this.textBox_path.Text += getDefaultSuffix();
+                }
             }
         }
         private void button_confirm_Click(object sender, EventArgs e)

@@ -95,12 +95,12 @@ namespace IDCM.VModule.GCM
                     this.dcmDataGridView_local.AllowUserToOrderColumns = false;
 
                     this.cellContextMenu_local = new System.Windows.Forms.ContextMenu();
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Copy", OnLocalCopyClick));
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Paste", OnLocalPasteClick));
-                    this.cellContextMenu_local.MenuItems.Add(new MenuItem("Submit record", OnLocalSubmitClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem(GlobalTextRes.Text("Copy"), OnLocalCopyClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem(GlobalTextRes.Text("Paste"), OnLocalPasteClick));
+                    this.cellContextMenu_local.MenuItems.Add(new MenuItem(GlobalTextRes.Text("Submit record"), OnLocalSubmitClick));
                     if (!"Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
                     {
-                        this.cellContextMenu_local.MenuItems.Add(new MenuItem("Search record", OnLocalSearchClick));
+                        this.cellContextMenu_local.MenuItems.Add(new MenuItem(GlobalTextRes.Text("Search record"), OnLocalSearchClick));
                     }
                     this.dcmDataGridView_local.KeyDown += OnLocalKeyDownDetect;
                     this.dcmDataGridView_local.ColumnHeaderMouseClick+=dcmDataGridView_local_ColumnHeaderMouseClick;
@@ -120,7 +120,7 @@ namespace IDCM.VModule.GCM
                     this.cellContextMenu_gcm = new System.Windows.Forms.ContextMenu();
                     if (!"Reduce".Equals(ConfigurationManager.AppSettings[SysConstants.RunningMode]))
                     {
-                        this.cellContextMenu_gcm.MenuItems.Add(new MenuItem("Search record", OnGCMSearchClick));
+                        this.cellContextMenu_gcm.MenuItems.Add(new MenuItem(GlobalTextRes.Text("Search record"), OnGCMSearchClick));
                     }
                     gcmFrontFindDlg = new GCMFrontFindDlg(dcmDataGridView_gcm);
                     gcmFrontFindDlg.setCellHit += new GCMFrontFindDlg.SetHit<DataGridViewCell>(setDGVCellHit);
@@ -413,8 +413,8 @@ namespace IDCM.VModule.GCM
                 if (useDefaultPath == false)
                 {
                     SaveFileDialog sfd = new SaveFileDialog();
-                    sfd.FileName = CUIDGenerator.getUID(CUIDGenerator.Radix_32) + ".gcms" ;
-                    sfd.InitialDirectory = System.IO.Directory.Exists(localServManager.LastIOPath)?localServManager.LastIOPath:Path.GetDirectoryName(localServManager.LastIOPath);
+                    sfd.FileName = CUIDGenerator.getUID(CUIDGenerator.Radix_32) + ".gcms";
+                    sfd.InitialDirectory = System.IO.Directory.Exists(localServManager.LastIOPath) ? localServManager.LastIOPath : Path.GetDirectoryName(localServManager.LastIOPath);
                     sfd.Filter = GlobalTextRes.Text("GCMLite Archive file type");
                     String renameFilePath = "";
                     if (sfd.ShowDialog() == DialogResult.OK)
@@ -428,6 +428,10 @@ namespace IDCM.VModule.GCM
                             IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Save dump file success."));
                         }
                     }
+                }
+                else
+                {
+                    IDCM.MsgDriver.DCMPublisher.noteSimpleMsg(GlobalTextRes.Text("Save dump file success."));
                 }
             }
             catch (Exception ex)

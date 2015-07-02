@@ -85,7 +85,9 @@ namespace IDCM.Core
                     dgvr=dgv.Rows[idx];
                     foreach (KeyValuePair<string, string> kvpair in mapvalues)
                     {
-                        dgvr.Cells[dgv.Columns[kvpair.Key].Index].Value = kvpair.Value;
+                        DataGridViewColumn dgvc = dgv.Columns[kvpair.Key];
+                        if(dgvc!=null)
+                            dgvr.Cells[dgvc.Index].Value = kvpair.Value;
                     }
                 }));
             }

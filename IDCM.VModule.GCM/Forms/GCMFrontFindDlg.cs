@@ -251,14 +251,13 @@ namespace IDCM.Forms
                         ncell = dgvPool[arrayIndex].Rows[rowIndex].Cells[colIndex];
                         if (ncell.Visible == false || !(ncell is DataGridViewTextBoxCell))
                         {
-                            found_colIndex = colIndex + 1;
+                            found_colIndex = colIndex;
                             return nextCell(reverse);
                         }
                         found_arrayIndex = arrayIndex;
                         found_rowIndex = rowIndex;
                         found_colIndex = colIndex;
                     }
-                    Console.WriteLine("第："+rowIndex+"行，第"+colIndex+"列");
                 }
                 
             }
@@ -286,7 +285,7 @@ namespace IDCM.Forms
                         ncell = dgvPool[arrayIndex].Rows[rowIndex].Cells[colIndex];
                         if (ncell.Visible == false || !(ncell is DataGridViewTextBoxCell))
                         {
-                            found_colIndex = colIndex - 1;
+                            found_colIndex = colIndex;
                             return nextCell(reverse);
                         }
                         found_arrayIndex = arrayIndex;

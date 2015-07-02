@@ -251,7 +251,7 @@ namespace IDCM.Forms
                         ncell = dgvPool[arrayIndex].Rows[rowIndex].Cells[colIndex];
                         if (ncell.Visible == false || !(ncell is DataGridViewTextBoxCell))
                         {
-                            found_colIndex = colIndex+1;
+                            found_colIndex = colIndex;
                             return nextCell(reverse);
                         }
                         found_arrayIndex = arrayIndex;
@@ -284,7 +284,7 @@ namespace IDCM.Forms
                         ncell = dgvPool[arrayIndex].Rows[rowIndex].Cells[colIndex];
                         if (ncell.Visible == false || !(ncell is DataGridViewTextBoxCell))
                         {
-                            found_colIndex = colIndex - 1;
+                            found_colIndex = colIndex;
                             return nextCell(reverse);
                         }
                         found_arrayIndex = arrayIndex;
