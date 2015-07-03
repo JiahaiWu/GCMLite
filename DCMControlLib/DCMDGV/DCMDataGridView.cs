@@ -128,6 +128,8 @@ namespace DCMControlLib
         private void OnCopyClick(object sender, EventArgs e)
         {
             DataObject d = this.GetClipboardContent();
+            if (d == null)
+                return;
             Clipboard.SetDataObject(d);
         }
         /// <summary>
@@ -141,6 +143,8 @@ namespace DCMControlLib
                 try
                 {
                     string s = Clipboard.GetText();
+                    if (s == null || this.CurrentCell == null)
+                        return;
                     string[] lines = s.Split('\n');
                     int iFail = 0, iRow = this.CurrentCell.RowIndex;
                     int iCol = this.CurrentCell.ColumnIndex;

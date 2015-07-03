@@ -621,6 +621,8 @@ namespace IDCM.VModule.GCM
         private void OnLocalCopyClick(object sender, EventArgs e)
         {
             DataObject d = this.dcmDataGridView_local.GetClipboardContent();
+            if (d == null)
+                return;
             Clipboard.SetDataObject(d);
         }
 
@@ -629,6 +631,8 @@ namespace IDCM.VModule.GCM
             try
             {
                 string s = Clipboard.GetText();
+                if (s == null || this.dcmDataGridView_local.CurrentCell==null)
+                    return;
                 string[] lines = s.Split(new char[] { '\n','\r'});
                 int iRow = this.dcmDataGridView_local.CurrentCell.RowIndex;
                 int iCol = this.dcmDataGridView_local.CurrentCell.ColumnIndex;
